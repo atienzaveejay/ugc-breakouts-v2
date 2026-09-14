@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>UGC Breakouts v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --ground:#DCE4E3; --surface:#EEF3F2; --wink:#12201F; --wmuted:#4F5E5C; --wline:#C2CECC; --hover:#E3EBEA;
+  --acc:#0B6F73; --t-slack:#0B6F73; --t-slack-bg:#CFE6E5; --t-new:#7A4E00; --t-new-bg:#F1E3C4;
+  --t-ask:#A8243A; --t-ask-bg:#F5D9DD;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1616; --surface:#172121; --wink:#E3ECEB; --wmuted:#98A8A6; --wline:#2B3A39; --hover:#1F2B2B;
+    --acc:#5ED6D9; --t-slack:#7FE0E2; --t-slack-bg:#163536; --t-new:#E8BE62; --t-new-bg:#3A2E14;
+    --t-ask:#FF97A2; --t-ask-bg:#40202A;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1616; --surface:#172121; --wink:#E3ECEB; --wmuted:#98A8A6; --wline:#2B3A39; --hover:#1F2B2B;
+  --acc:#5ED6D9; --t-slack:#7FE0E2; --t-slack-bg:#163536; --t-new:#E8BE62; --t-new-bg:#3A2E14;
+  --t-ask:#FF97A2; --t-ask-bg:#40202A;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;margin:0}
+.i{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+.rail{background:var(--surface);border-right:1px solid var(--wline);height:100vh;position:sticky;top:0;overflow-y:auto;padding:24px 14px 28px;display:flex;flex-direction:column;gap:18px}
+.brand{padding:0 8px}
+.kicker{font-family:var(--mono);font-size:11.5px;color:var(--acc);margin:0 0 6px}
+.brand h1{margin:0;font-size:26px;line-height:1;letter-spacing:-.045em;font-weight:800}
+.brand h1 b{color:var(--acc)}
+.brand p{margin:8px 0 0;font-size:12.5px;color:var(--wmuted);line-height:1.45}
+#rail-groups{display:flex;flex-direction:column;gap:18px}
+.grp{display:flex;flex-direction:column;gap:2px}
+.grp h2{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--wmuted);margin:0 0 4px;padding:0 10px}
+.grp button{display:flex;gap:10px;align-items:baseline;text-align:left;border:1px solid transparent;background:transparent;border-radius:9px;padding:7px 10px;font:600 13.5px/1.3 var(--sans);color:var(--wink);cursor:pointer}
+.grp button span{font-family:var(--mono);font-size:11px;color:var(--wmuted);min-width:26px;font-weight:500}
+.grp button:hover{background:var(--hover)}
+.grp button.on{background:var(--wink);color:var(--ground)}
+.grp button.on span{color:var(--ground);opacity:.75}
+.grp button:focus-visible,.mnav select:focus-visible,.stagebar button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+.main{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:32px 40px;padding:20px clamp(16px,3vw,40px) 48px}
+.stage{position:sticky;top:20px;display:flex;flex-direction:column;align-items:center;gap:12px;width:min(390px,100%)}
+.stagebar{display:flex;gap:8px;align-items:center;justify-content:space-between;width:100%;min-height:32px}
+.stagebar .where{font-family:var(--mono);font-size:12px;color:var(--wmuted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stagebar .ctl{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.stagebar button{font:600 12px var(--sans);color:var(--wink);background:var(--surface);border:1px solid var(--wline);border-radius:7px;padding:5px 9px;cursor:pointer;white-space:nowrap}
+.stagebar button:hover{border-color:var(--acc)}
+
+.notes{width:min(400px,100%);display:flex;flex-direction:column;gap:14px;padding-top:44px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--wmuted);padding-bottom:14px;border-bottom:1px solid var(--wline)}
+.tag{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.03em;padding:2px 6px;border-radius:5px;white-space:nowrap}
+.tag.s{color:var(--t-slack);background:var(--t-slack-bg)}
+.tag.n{color:var(--t-new);background:var(--t-new-bg)}
+.tag.a{color:var(--t-ask);background:var(--t-ask-bg)}
+.sid{font-family:var(--mono);font-size:12.5px;color:var(--acc);margin:0}
+.notes h2{margin:0;font-size:28px;line-height:1.05;letter-spacing:-.035em;text-wrap:balance}
+.notes .why{margin:0;color:var(--wmuted);font-size:14.5px}
+.try{margin:0;font-size:13.5px;background:var(--surface);border:1px solid var(--wline);border-radius:10px;padding:10px 12px}
+.try b{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--acc);margin-right:6px}
+.notes ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.notes li{display:grid;grid-template-columns:50px 1fr;gap:10px;font-size:14px;line-height:1.5;align-items:baseline}
+.notes li .tag{justify-self:start}
+.notes ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.notes ol li{display:list-item}
+.notes ol li::marker{font-family:var(--mono);color:var(--acc);font-size:12px}
+
+.mnav{display:none}
+@media (max-width:820px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--wline);padding:16px}
+  .grp{display:none}
+  .mnav{display:block}
+  .mnav label{font-size:12px;color:var(--wmuted);display:block;margin-bottom:4px}
+  .mnav select{width:100%;font:600 15px var(--sans);padding:10px;border-radius:10px;border:1px solid var(--wline);background:var(--ground);color:var(--wink)}
+  .stage{position:static}
+  .notes{padding-top:0}
+}
+
+/* ---------- app (fixed light world, per product locks) ---------- */
+.phone{
+  --coral:#FF4F5E; --coral-d:#D8304A; --cyan:#2DD4D8; --gold:#C9A227; --gold-soft:#F7F1DE;
+  --teal:#0B7B7F; --teal-soft:#E4F4F4; --paper:#F4F0EC; --ink:#171312; --mid:#766C67; --hair:#E4DCD5; --pill:#EAE3DD;
+  width:100%;height:min(844px,calc(100dvh - 72px));min-height:620px;border-radius:26px;overflow:hidden;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.4;position:relative;
+  box-shadow:0 0 0 1px rgba(18,32,31,.08),0 40px 70px -40px rgba(18,32,31,.55);
+}
+@media (max-width:820px){.phone{height:760px}}
+.scr{height:100%;overflow-y:auto;display:flex;flex-direction:column;overscroll-behavior:contain;scrollbar-width:thin;position:relative}
+.phone a{color:inherit}
+.phone button{font-family:var(--sans)}
+.phone a:focus-visible,.phone button:focus-visible,.phone input:focus-visible,.phone textarea:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.pb{padding:4px 16px 24px;display:flex;flex-direction:column;gap:18px;flex:1}
+.tb{display:flex;align-items:center;gap:8px;padding:14px 16px 10px;position:sticky;top:0;background:var(--paper);z-index:4}
+.logo{font-weight:800;letter-spacing:-.04em;font-size:18px;white-space:nowrap;text-decoration:none;background:none;border:0;padding:0;cursor:pointer;color:var(--ink)}
+.logo b{color:var(--cyan);font-weight:800}
+.tt{font-weight:800;font-size:17px;letter-spacing:-.02em}
+.sp{flex:1}
+.ib{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--ink);background:transparent;border:0;flex:none;cursor:pointer;padding:0}
+.ib svg{width:22px;height:22px}
+.ib.ghost{visibility:hidden}
+.qp{flex:1;min-width:0;height:38px;border-radius:999px;background:#fff;border:1px solid var(--hair);display:flex;align-items:center;gap:8px;padding:0 14px;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink)}
+.qp svg{width:16px;height:16px;color:var(--mid);flex:none}
+.qp span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cp{height:30px;padding:0 11px;border-radius:999px;background:var(--pill);color:#4C433F;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;flex:none;border:0;cursor:pointer}
+.cp.zero{background:#FCE3E7;color:var(--coral-d)}
+.cp.pro{background:var(--gold-soft);color:#8A6D10}
+
+.b{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:14px;font:700 16px/1.1 var(--sans);text-decoration:none;border:0;cursor:pointer;padding:0 18px;text-align:center}
+.b svg{width:19px;height:19px;flex:none}
+.b1{background:var(--coral);color:#fff;box-shadow:0 10px 22px -12px rgba(255,79,94,.75)}
+.b1:active{transform:translateY(1px)}
+.b2{background:#fff;color:var(--ink);border:1.5px solid var(--hair)}
+.b2.on{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
+.b3{background:transparent;color:var(--mid);min-height:44px;font-weight:600;font-size:15px}
+.btt{background:#010101;color:#fff}
+.bi{width:52px;padding:0;flex:none}
+.full-w{width:100%}
+.row{display:flex;gap:10px}
+.row>.grow{flex:1}
+.busy{opacity:.75;pointer-events:none}
+
+.sf{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--hair);border-radius:18px;padding:6px 6px 6px 16px;box-shadow:0 12px 30px -20px rgba(23,19,18,.45)}
+.sf>svg{width:20px;height:20px;color:var(--mid);flex:none}
+.sf input{flex:1;min-width:0;border:0;background:transparent;font:500 16px var(--sans);color:var(--ink);outline:none;padding:12px 0}
+.sf input::placeholder{color:#9A908B}
+.sf .go{width:46px;height:46px;border-radius:13px;background:var(--coral);color:#fff;display:grid;place-items:center;border:0;flex:none;cursor:pointer;padding:0}
+.sf .go svg{width:20px;height:20px}
+.sr{position:absolute;left:-9999px}
+.lbl{font-size:13px;font-weight:600;color:var(--mid);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:36px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--hair);font:600 14px var(--sans);display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--ink)}
+.chip.ghost{background:transparent}
+.chip:hover{border-color:#CFC4BB}
+.stack{display:flex;flex-direction:column;gap:10px}
+
+.vt{position:relative;border-radius:14px;overflow:hidden;background:#d9d2cc center/cover no-repeat;flex:none;border:0;padding:0;display:block;cursor:pointer;width:100%}
+.vt .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.93);display:grid;place-items:center;color:var(--ink)}
+.vt .pl svg{width:18px;height:18px;margin-left:3px}
+.vt.sm .pl{width:34px;height:34px}.vt.sm .pl svg{width:13px;height:13px;margin-left:2px}
+.vt.playing::after{content:"";position:absolute;left:0;bottom:0;height:4px;background:var(--cyan);animation:play 18s linear forwards}
+.vt.playing .pl{opacity:0}
+@keyframes play{from{width:0}to{width:100%}}
+.br{position:absolute;left:10px;top:10px;background:rgba(255,255,255,.93);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;white-space:nowrap;color:var(--ink)}
+.br i{font-style:normal;color:var(--mid);font-weight:600}
+.du{position:absolute;right:10px;top:10px;background:rgba(23,19,18,.62);color:#fff;border-radius:999px;padding:4px 8px;font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.sb{position:absolute;left:10px;bottom:10px;background:#fff;border-radius:12px;padding:5px 11px 6px;display:flex;align-items:baseline;gap:6px;box-shadow:0 8px 20px -10px rgba(0,0,0,.4)}
+.sb b{color:var(--gold);font-size:24px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.sb span{font-size:11.5px;color:var(--mid);font-weight:600}
+.vt .ex{position:absolute;left:6px;bottom:6px;background:rgba(23,19,18,.62);color:#fff;border-radius:6px;padding:2px 6px;font-size:10.5px;font-weight:700}
+
+.st{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--mid);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.st span{display:inline-flex;gap:5px;align-items:center}
+.st svg{width:15px;height:15px}
+.cd{background:#fff;border-radius:22px;padding:10px;display:flex;flex-direction:column;gap:12px;box-shadow:0 12px 30px -24px rgba(23,19,18,.5);border:1px solid rgba(23,19,18,.05)}
+.cd .meta{padding:0 6px;display:flex;flex-direction:column;gap:6px}
+.hd{font-weight:700;font-size:15.5px}
+.hd small{color:var(--mid);font-weight:500;font-size:13px}
+.useone{font-size:12px;color:var(--mid);text-align:center;margin:-4px 0 2px}
+
+.box{border-radius:20px;padding:18px 16px;display:flex;flex-direction:column;gap:12px}
+.box h3{margin:0;font-size:18px;letter-spacing:-.025em;line-height:1.2}
+.box.teal{background:var(--teal-soft)}
+.box.white{background:#fff;border:1px solid rgba(23,19,18,.05)}
+.eb{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0}
+.eb.c{color:var(--coral-d)} .eb.m{color:var(--mid)}
+.q{background:#fff;border-radius:14px;padding:12px 14px;font-weight:700;font-size:16px;line-height:1.35;margin:0}
+.ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;counter-reset:n}
+.ol li{display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:14.5px;line-height:1.45;counter-increment:n}
+.ol li::before{content:counter(n);width:26px;height:26px;border-radius:8px;background:#FCE6EA;color:var(--coral-d);font-weight:800;font-size:13px;display:grid;place-items:center}
+.teal .ol li::before{background:#C9E9E9;color:var(--teal)}
+.hk{display:flex;flex-direction:column;gap:6px}
+.hk button{align-self:flex-start;border:0;background:transparent;color:var(--teal);font:700 12.5px var(--sans);padding:0;cursor:pointer;display:inline-flex;gap:5px;align-items:center}
+.hk button svg{width:14px;height:14px}
+.chk{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.chk li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:15px;line-height:1.4}
+.chk li svg{width:22px;height:22px;color:var(--teal);margin-top:-1px}
+.chk li small{display:block;color:var(--mid);font-size:13.5px;margin-top:2px}
+.shots{display:flex;flex-direction:column}
+.shot{display:grid;grid-template-columns:84px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--hair);font-size:14.5px;line-height:1.45}
+.shot:first-child{border-top:0;padding-top:0}
+.tc{font-family:var(--mono);font-size:11.5px;color:var(--coral-d);font-weight:600;padding-top:3px;font-variant-numeric:tabular-nums}
+.shotnote{font-size:13.5px;color:var(--mid);background:var(--paper);border-radius:12px;padding:10px 12px;margin:0}
+
+.dock{position:sticky;bottom:0;margin-top:auto;padding:14px 16px 18px;background:linear-gradient(rgba(244,240,236,0),var(--paper) 26%);display:flex;flex-direction:column;gap:10px;z-index:4}
+.dock.bar{background:#fff;border-top:1px solid var(--hair);padding-top:12px}
+
+/* overlays */
+.toast{position:absolute;left:16px;right:16px;bottom:24px;background:var(--ink);color:#fff;border-radius:14px;padding:12px 14px;font-size:13.5px;display:flex;gap:10px;align-items:flex-start;z-index:30;box-shadow:0 18px 40px -18px rgba(0,0,0,.6)}
+.toast svg{width:18px;height:18px;color:var(--cyan);flex:none;margin-top:1px}
+.toast button{margin-left:auto;background:none;border:0;color:var(--cyan);font:700 13.5px var(--sans);cursor:pointer;padding:0 0 0 8px;white-space:nowrap}
+@media (prefers-reduced-motion: no-preference){.toast{animation:up .22s ease-out}@keyframes up{from{transform:translateY(12px);opacity:0}}}
+.scrim{position:absolute;inset:0;background:rgba(23,19,18,.38);z-index:20;border:0;padding:0;cursor:pointer;width:100%}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--paper);border-radius:24px 24px 0 0;padding:10px 16px 22px;z-index:21;display:flex;flex-direction:column;gap:6px}
+@media (prefers-reduced-motion: no-preference){.sheet{animation:sheet .22s ease-out}@keyframes sheet{from{transform:translateY(40%);opacity:.4}}}
+.sheet .grab{width:40px;height:5px;border-radius:9px;background:#D6CDC6;align-self:center;margin-bottom:8px}
+.sheet .mi{display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 14px;background:#fff;border:0;border-radius:14px;font:600 16px var(--sans);cursor:pointer;color:var(--ink);text-align:left}
+.sheet .mi small{color:var(--mid);font-weight:600;font-size:13px}
+.sheet .mi.up{background:var(--coral);color:#fff}
+.sheet .mi.up small{color:#FFE3E6}
+
+/* home out */
+.mos{position:absolute;inset:0 0 auto 0;height:330px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px;opacity:.7}
+.mos div{border-radius:12px;background:center/cover no-repeat}
+.mos::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(244,240,236,.15) 0%,rgba(244,240,236,.75) 55%,var(--paper) 100%)}
+.hero{position:relative;z-index:1;padding:190px 16px 24px;display:flex;flex-direction:column;gap:18px}
+.wm{font-size:30px;font-weight:800;letter-spacing:-.05em;display:flex;align-items:center;gap:8px;margin:0}
+.wm::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px rgba(45,212,216,.25)}
+.wm b{color:var(--cyan)}
+.tag1{font-size:25px;font-weight:800;letter-spacing:-.035em;line-height:1.18;margin:0}
+.tag1 span{display:block}
+.aud{margin:-8px 0 0;color:var(--mid);font-weight:600;font-size:14px}
+
+/* teaser */
+.h1{font-size:28px;font-weight:800;letter-spacing:-.04em;line-height:1.1;margin:0;text-wrap:balance}
+.h1 em{font-style:normal;color:var(--coral)}
+.sub{margin:0;color:var(--mid);font-size:16px;line-height:1.45}
+.fine{font-size:12.5px;color:var(--mid);text-align:center;margin:0}
+.lnk{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+.sample{background:#fff;border-radius:22px;overflow:hidden;border:1px solid rgba(23,19,18,.06);position:relative}
+.sample .band{background:linear-gradient(90deg,#DDF5F5,#FBEFF1);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;color:var(--teal)}
+.sample .band span{color:var(--mid);font-weight:600}
+.sample .in{padding:14px;display:flex;flex-direction:column;gap:12px}
+.mini{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:center}
+.bigs{display:flex;align-items:baseline;gap:8px}
+.bigs b{font-size:40px;color:var(--gold);font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.bigs span{color:var(--mid);font-weight:600;font-size:13.5px}
+.locked{position:relative}
+.locked .blur{filter:blur(5px);opacity:.6;user-select:none;pointer-events:none}
+.locked .lk{position:absolute;inset:0;display:grid;place-items:center}
+.lk button{background:#fff;border:0;border-radius:999px;padding:9px 14px;display:flex;align-items:center;gap:8px;font:700 13.5px var(--sans);box-shadow:0 10px 24px -12px rgba(0,0,0,.35);cursor:pointer;color:var(--ink)}
+.lk svg{width:16px;height:16px}
+
+/* processing */
+.proc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:12px 20px 48px;text-align:center;flex:1;position:relative}
+.ring{width:108px;height:108px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle.p{transition:stroke-dashoffset .9s linear}
+.ring .t{position:absolute;inset:0;display:grid;place-content:center;font-weight:800;font-size:24px;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1}
+.ring .t small{font-size:10px;letter-spacing:.1em;color:var(--mid);font-weight:700;margin-top:4px}
+.steps{list-style:none;padding:0;margin:0 auto;display:flex;flex-direction:column;gap:10px;text-align:left;width:100%;max-width:260px}
+.steps li{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.steps li i{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;border:1.5px solid var(--hair);background:#fff;flex:none}
+.steps li i svg{width:14px;height:14px}
+.steps .done i{background:var(--teal-soft);border-color:#B8E3E3;color:var(--teal)}
+.steps .now i{border-color:var(--cyan)}
+.steps .now i::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan)}
+.steps .todo{color:#A39A95}
+.exrow{display:flex;gap:8px;justify-content:center}
+.exrow .vt{width:96px;aspect-ratio:9/15}
+.slow{background:#fff;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px;text-align:left;align-self:stretch;border:1px solid var(--hair)}
+.slow p{margin:0;font-size:14px}
+.conf{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.conf i{position:absolute;top:-12px;width:9px;height:9px;border-radius:2px}
+@media (prefers-reduced-motion: no-preference){.conf i{animation:fall 1.6s ease-in forwards}@keyframes fall{to{transform:translateY(420px) rotate(260deg);opacity:0}}}
+@media (prefers-reduced-motion: reduce){.conf{display:none}}
+.star{width:84px;height:84px;border-radius:24px;background:linear-gradient(#fff,var(--gold-soft));border:1px solid #EAD9A4;display:grid;place-items:center;color:var(--gold)}
+.star svg{width:38px;height:38px}
+
+/* home in */
+.bn{display:flex;gap:12px;align-items:center;background:var(--teal-soft);border:1px solid #BDE4E5;border-radius:16px;padding:12px 14px;width:100%;text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink)}
+.bn.ready{background:#FBF5E3;border-color:#EBDDAA}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px rgba(45,212,216,.25);flex:none}
+@media (prefers-reduced-motion: no-preference){.dot{animation:pulse 1.8s ease-in-out infinite}@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(45,212,216,.08)}}}
+.bn .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.bn .tx b{font-size:15px}
+.bn .tx small{font-size:12.5px;color:var(--mid)}
+.bn .go2{font-weight:700;color:var(--coral-d);font-size:14.5px}
+.bn .stg{color:var(--gold);display:grid}
+.bn .stg svg{width:22px;height:22px}
+.peek{background:#fff;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.peek .hdr{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.peek .hdr button{color:var(--coral-d);background:none;border:0;font:700 14px var(--sans);cursor:pointer;padding:0}
+.pk{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pki{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center;font-size:13px;line-height:1.3;background:none;border:0;padding:0;text-align:left;cursor:pointer;color:var(--ink);font-family:var(--sans)}
+.pki .th{width:44px;height:62px;border-radius:10px;background:center/cover}
+.pki b.s{color:var(--gold);font-size:15px}
+.pki small{color:var(--mid)}
+
+/* results */
+.rh{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.rh h1{font-size:22px;letter-spacing:-.035em;margin:0;line-height:1.15}
+.rh h1 em{font-style:normal;color:var(--coral)}
+.sort{font-size:13px;color:var(--mid);font-weight:600;white-space:nowrap}
+.endnote{text-align:center;font-size:13px;color:var(--mid);padding:6px 0 10px}
+
+/* detail */
+.dh{display:grid;grid-template-columns:138px 1fr;gap:14px;align-items:start}
+.facts{display:flex;flex-direction:column;gap:10px;position:relative}
+.scorerow{display:flex;align-items:center;gap:6px}
+.scorerow b{font-size:46px;line-height:.95;color:var(--gold);font-weight:800;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.scorerow span{font-size:12.5px;color:var(--mid);font-weight:600;line-height:1.15}
+.infob{width:26px;height:26px;border-radius:50%;border:1.5px solid #E2CF8F;background:var(--gold-soft);color:#8A6D10;display:grid;place-items:center;cursor:pointer;padding:0;flex:none}
+.infob svg{width:14px;height:14px}
+.pop{position:absolute;left:-150px;right:-4px;top:54px;background:var(--ink);color:#fff;border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.4;z-index:5}
+.pop b{color:var(--cyan)}
+.dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:0;font-size:13px}
+.dl dt{color:var(--mid)}
+.dl dd{margin:0;font-weight:600}
+.tiklink{display:inline-flex;align-items:center;gap:6px;font:700 13.5px var(--sans);color:var(--coral-d);background:none;border:0;padding:0;cursor:pointer}
+.tiklink svg{width:15px;height:15px}
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-radius:16px;padding:10px 4px}
+.statbar div{display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:700;font-variant-numeric:tabular-nums;font-size:15px}
+.statbar small{font-size:11.5px;color:var(--mid);font-weight:600}
+
+/* share */
+.shc{display:grid;grid-template-columns:96px 1fr;gap:14px;background:#fff;border-radius:20px;padding:10px;align-items:center}
+.shc .bigs b{font-size:32px}
+.fld{display:flex;flex-direction:column;gap:8px}
+.fld label{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px}
+.rec{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);background:var(--teal-soft);padding:3px 8px;border-radius:999px}
+.fld textarea{width:100%;min-height:84px;resize:vertical;border:1.5px solid var(--hair);border-radius:14px;padding:12px 14px;font:500 15px/1.4 var(--sans);color:var(--ink);background:#fff}
+.fld textarea::placeholder{color:#9A908B}
+.linkbox{display:flex;gap:8px;align-items:stretch}
+.linkbox code{flex:1;min-width:0;background:#fff;border:1px solid var(--hair);border-radius:14px;padding:0 14px;display:flex;align-items:center;font-family:var(--mono);font-size:13px;overflow:hidden;white-space:nowrap}
+.nudge{font-size:12.5px;color:var(--mid);margin:0}
+
+/* shared */
+.msg{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#FFD3D8,#CFF1F2);display:grid;place-items:center;font-weight:800;color:var(--ink)}
+.bubble{display:flex;flex-direction:column;gap:6px}
+.bubble .who{font-size:14px}
+.bubble .who b{color:var(--coral-d)}
+.bubble p{margin:0;background:#fff;border-radius:4px 18px 18px 18px;padding:12px 14px;font-weight:700;font-size:16.5px;line-height:1.35;box-shadow:0 10px 24px -20px rgba(0,0,0,.5)}
+.authbar{display:flex;flex-direction:column;gap:10px}
+.authbar .ttl{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.authbar .ttl b{font-size:15.5px}
+.authbar .ttl small{color:var(--mid);font-size:12.5px;white-space:nowrap}
+
+/* paid / success / affiliate */
+.center{text-align:center;align-items:center}
+.price{background:#fff;border-radius:24px;padding:20px 18px 16px;display:flex;flex-direction:column;gap:12px;text-align:center;box-shadow:0 18px 40px -30px rgba(23,19,18,.55)}
+.amt{font-size:58px;font-weight:800;letter-spacing:-.06em;line-height:1;font-variant-numeric:tabular-nums}
+.amt small{font-size:18px;color:var(--mid);font-weight:600;letter-spacing:0}
+.amt.gold{color:var(--gold)}
+.tile{width:84px;height:84px;border-radius:24px;display:grid;place-items:center}
+.tile svg{width:38px;height:38px}
+.tile.g{background:linear-gradient(#fff,var(--gold-soft));border:1px solid #EAD9A4;color:var(--gold)}
+.tile.t{background:var(--teal-soft);border:1px solid #BDE4E5;color:var(--teal)}
+
+/* library */
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--pill);border-radius:14px;padding:4px;gap:4px}
+.tabs button{border:0;background:transparent;border-radius:10px;min-height:40px;font:700 14px var(--sans);color:var(--mid);cursor:pointer}
+.tabs button small{font-weight:600;opacity:.75;margin-left:3px}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 8px -4px rgba(0,0,0,.2)}
+.tog{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600}
+.sw{width:44px;height:26px;border-radius:999px;background:#D9D1CA;position:relative;border:0;cursor:pointer;padding:0}
+.sw::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s}
+.sw[aria-checked="true"]{background:var(--teal)}
+.sw[aria-checked="true"]::after{left:21px}
+.li{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;background:#fff;border-radius:18px;padding:8px 12px 8px 8px;border:0;text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink);width:100%}
+.li .th{width:64px;height:84px;border-radius:12px;background:center/cover}
+.li .t{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:13px;color:var(--mid)}
+.li .t b{color:var(--ink);font-size:15px}
+.li .t b.s{color:var(--gold)}
+.badge{font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 8px;border-radius:999px;background:var(--teal-soft);color:var(--teal);align-self:flex-start}
+.li svg.chev{width:18px;height:18px;color:var(--mid)}
+.srow{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:18px;padding:14px 14px 14px 16px;border:0;gap:10px;width:100%;text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink)}
+.srow .t{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--mid)}
+.srow .t b{color:var(--ink);font-size:16px}
+.srow svg{width:18px;height:18px;color:var(--mid)}
+.emptyl{text-align:center;color:var(--mid);font-size:14px;padding:30px 10px}
+
+/* account */
+.prof{display:flex;gap:14px;align-items:center;padding:4px 2px}
+.prof .av{width:52px;height:52px;font-size:18px}
+.prof b{font-size:17px;display:block}
+.prof small{color:var(--mid);font-size:14px}
+.plan{background:#fff;border-radius:22px;padding:18px 16px 16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 40px -32px rgba(23,19,18,.55)}
+.meter{height:8px;border-radius:9px;background:var(--pill);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--teal);border-radius:9px}
+.mrow{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;gap:8px}
+.mrow span{color:var(--mid)}
+.list{background:#fff;border-radius:20px;overflow:hidden}
+.list button{display:flex;justify-content:space-between;align-items:center;padding:15px 16px;border:0;border-top:1px solid #F0EAE5;background:#fff;width:100%;font:600 15px var(--sans);cursor:pointer;color:var(--ink);text-align:left}
+.list button:first-child{border-top:0}
+.list button svg{width:18px;height:18px;color:var(--mid)}
+.list button small{color:var(--mid);font-weight:500;font-size:13px}
+</style>
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle class="i" cx="11" cy="11" r="7"/><path class="i" d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path class="i" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path class="i" d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path class="i" d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path class="i" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15L20 12z" fill="currentColor"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path class="i" d="M7 4h10v16l-5-3.6L7 20z"/></symbol>
+  <symbol id="i-saved" viewBox="0 0 24 24"><path d="M7 4h10v16l-5-3.6L7 20z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path class="i" d="M12 15V4M8 8l4-4 4 4M5 13v7h14v-7"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect class="i" x="5" y="11" width="14" height="9" rx="2"/><path class="i" d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path class="i" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-checkc" viewBox="0 0 24 24"><circle class="i" cx="12" cy="12" r="9"/><path class="i" d="M8 12.3l2.8 2.7L16 9.5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path class="i" d="M12 11v6M12 7.5h.01" stroke-width="2.6"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path class="i" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle class="i" cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path class="i" d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="i-comment" viewBox="0 0 24 24"><path class="i" d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path class="i" d="M21 3 3 10.5l7.5 3L14 21z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect class="i" x="8" y="8" width="12" height="12" rx="2"/><path class="i" d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path class="i" d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.8 5.8 0 1 0 5 5.7V9.1a7.3 7.3 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.3-1.6z"/></symbol>
+  <symbol id="i-g" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.2C.9 16.5 0 20.1 0 24s.9 7.5 2.6 10.8l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.2C6.6 42.6 14.6 48 24 48z"/></symbol>
+</svg>
+
+<div class="shell">
+  <aside class="rail" aria-label="Screens">
+    <div class="brand">
+      <p class="kicker">Veejay's pass on production v3</p>
+      <h1>UGC Breakouts <b>v2</b></h1>
+      <p>A clickable prototype. Tap through it like the real app, or jump to any screen here.</p>
+    </div>
+    <div class="mnav">
+      <label for="jump-sel">Jump to screen</label>
+      <select id="jump-sel"></select>
+    </div>
+    <div id="rail-groups"></div>
+  </aside>
+
+  <main class="main">
+    <div class="stage">
+      <div class="stagebar"><span class="where" id="where"></span><span class="ctl" id="ctl"></span></div>
+      <div class="phone" id="phone"><div class="scr" id="scr"></div><div id="ovl"></div></div>
+    </div>
+    <section class="notes" id="notes" aria-live="polite"></section>
+  </main>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- data ---------------- */
+var IMG = {flatlay:"img/flatlay.jpg",palette:"img/palette.jpg",oil:"img/oil.jpg",brushes:"img/brushes.jpg",mask:"img/mask.jpg",face:"img/face.jpg",neon:"img/neon.jpg"};
+var VIDEOS = [
+  {id:"v1",handle:"softfocus.kai",followers:"84K",score:86,img:"flatlay",brand:"rhode",len:"0:18",views:"1.4M",likes:"188K",comments:"6.2K",shares:"22K",posted:"Sep 6, 2026",sound:"Original sound"},
+  {id:"v2",handle:"cyriln32",followers:"1.2M",score:72,img:"palette",brand:"tower 28",len:"0:31",views:"8.9M",likes:"1.7M",comments:"21.4K",shares:"96K",posted:"Sep 2, 2026",sound:"Original sound"},
+  {id:"v3",handle:"glowlab",followers:"31K",score:64,img:"oil",brand:"Summer Fridays",len:"0:24",views:"612K",likes:"71K",comments:"2.1K",shares:"9.4K",posted:"Aug 29, 2026",sound:"soft piano loop"},
+  {id:"v4",handle:"mirror.ritual",followers:"212K",score:61,img:"brushes",brand:"Glossier",len:"0:15",views:"2.2M",likes:"240K",comments:"4.8K",shares:"18K",posted:"Sep 1, 2026",sound:"Original sound"}
+];
+var AN = {
+  v1:{hook:"Your lip oil is fine. Your technique is causing the dry patch.",
+    tries:[["Side by side","Same lip oil. Two ways to put it on. Watch the second."],["Question","Why does lip oil leave you with dry patches?"],["Stop doing this","Stop pressing your lips together after lip oil."]],
+    why:["Opens on a lip mistake viewers already have, not the product name. The first two seconds sell the problem.","The product lands at 0:11, once the problem is clear, so people stay through the middle.","One take, bathroom light, no music. It reads as proof, not an ad."],
+    shots:[["0:00 to 0:02","Close up on the dry patch. On screen text names the mistake."],["0:02 to 0:11","Show the wrong way to apply, then the right way. Keep the product out of frame."],["0:11 to 0:18","Bring in the lip oil. One swipe, tight close up, end on the finished lips."]],
+    note:"Shoot it in one take, in soft bathroom light, with no music."},
+  v2:{hook:"I tested every viral lip oil so you don't have to.",
+    tries:[["Ranking","Ranked from sticky to glassy. Number one surprised me."],["Test","Only one of these survived my morning coffee."],["Question","Which one would you keep?"]],
+    why:["A ranking promise keeps people watching to the end to see the winner.","A swatch on the hand every three seconds gives the video a steady visual beat.","It ends on one winner, which pulls comments from people defending their pick."],
+    shots:[["0:00 to 0:03","Hold up every oil and say the ranking promise to camera."],["0:03 to 0:25","One swatch per product, with a three word verdict on screen."],["0:25 to 0:31","Reveal the winner and ask which one they'd keep."]],
+    note:"Film on a plain surface in daylight. Keep each verdict to three words."},
+  v3:{hook:"My lips were peeling until I changed one step.",
+    tries:[["Before and after","Day 1 lips vs day 7 lips. Same oil."],["Confession","I was putting lip oil on wrong for a year."],["Direct","If your lips peel, watch this before bed."]],
+    why:["A personal before state makes the payoff feel earned.","The one step is held back until 0:14, so viewers wait for it.","Texture close ups do the convincing without a voiceover."],
+    shots:[["0:00 to 0:03","Peeling lips close up, with the hook as on screen text."],["0:03 to 0:14","Night routine without the step, then pause on “the one change.”"],["0:14 to 0:24","Apply the oil and cut to the smooth result."]],
+    note:"Use the same light and angle for the before and after shots."},
+  v4:{hook:"Lip oil at 7am vs lip oil at 7pm.",
+    tries:[["Wear test","I wore one lip oil all day. Here's what's left."],["Routine","Where lip oil fits in a two minute morning."],["Question","Lip oil before or after lipstick?"]],
+    why:["A time contrast sets up a before and after in one line.","Real life cuts (coffee, lunch, a mask) make the wear test believable.","The final mirror check invites “mine never lasts” comments."],
+    shots:[["0:00 to 0:02","Split screen: 7am and 7pm."],["0:02 to 0:12","Quick cuts through the day at the same mirror."],["0:12 to 0:15","Final close up with a one word verdict on screen."]],
+    note:"Keep a clock or the phone time visible in each cut."}
+};
+function vid(id){for(var k=0;k<VIDEOS.length;k++){if(VIDEOS[k].id===id)return VIDEOS[k];}return VIDEOS[0];}
+
+/* ---------------- state ---------------- */
+var S;
+function fresh(){
+  return {loggedIn:false,plan:"free",left:3,draft:"",query:"Lip oil",searches:[],nextId:1,
+    saved:{v1:true,v2:true},analyzed:{v1:true},notes:{},busy:null,
+    history:[{q:"Lip oil",when:"Today, 2:14 PM",n:12},{q:"Tinted moisturizer",when:"Yesterday, 8:02 PM",n:4},{q:"GRWM",when:"Sep 9, 11:40 AM",n:9},{q:"#momtok",when:"Sep 4, 9:05 AM",n:0}],
+    savedSearches:[{q:"Lip oil",n:12,when:"Sep 11"},{q:"GRWM",n:9,when:"Sep 9"},{q:"SPF routine",n:7,when:"Sep 8"},{q:"#cleangirl",n:5,when:"Sep 5"}],
+    libTab:"videos",anOnly:false,affLink:false,infoOpen:false,menu:false,toast:null,playing:null,
+    view:"home",params:{},stack:[],railKey:"home-out",focusSearch:false};
+}
+S = fresh();
+
+function isEmptyQ(q){return /night|momtok/i.test(q);}
+function countFor(q){if(/lip oil/i.test(q))return 12;var h=0;for(var k=0;k<q.length;k++)h=(h*31+q.charCodeAt(k))%97;return 5+(h%7);}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function ic(n,cls){return '<svg'+(cls?' class="'+cls+'"':'')+' aria-hidden="true"><use href="#i-'+n+'"/></svg>';}
+function bg(k){return 'background-image:url('+IMG[k]+')';}
+function pending(){return S.searches.filter(function(s){return !s.done;});}
+function readyUnseen(){return S.searches.filter(function(s){return s.done&&!s.seen&&!s.empty;});}
+
+/* ---------------- navigation ---------------- */
+function go(view,params,opt){
+  opt=opt||{};
+  if(!opt.replace && S.view) S.stack.push({view:S.view,params:S.params});
+  S.view=view;S.params=params||{};S.infoOpen=false;S.menu=false;S.playing=null;
+  render(true);
+}
+function back(){
+  var prev=S.stack.pop();
+  if(!prev){prev={view:S.loggedIn?"home":"home",params:{}};}
+  S.view=prev.view;S.params=prev.params;S.infoOpen=false;S.menu=false;S.playing=null;
+  render(true);
+}
+function toast(msg,undo){S.toast={msg:msg,undo:undo||null,t:Date.now()};renderOverlay();clearTimeout(toast.tm);toast.tm=setTimeout(function(){S.toast=null;renderOverlay();},3000);}
+
+function startSearch(q){
+  q=(q||"").trim()||"Lip oil";
+  S.query=q;S.draft="";
+  if(!S.loggedIn){go("teaser");return;}
+  if(S.plan==="free" && S.left-pending().length<=0){go("paid");return;}
+  var s={id:S.nextId++,q:q,el:0,need:9,done:false,seen:false,empty:isEmptyQ(q)};
+  S.searches.push(s);
+  go("proc",{id:s.id});
+}
+function finish(s){
+  if(s.done)return;
+  s.done=true;s.el=Math.max(s.el,s.need);
+  if(!s.empty){
+    if(S.plan==="free")S.left=Math.max(0,S.left-1);
+    S.history.unshift({q:s.q,when:"Just now",n:countFor(s.q)});
+  } else {
+    S.history.unshift({q:s.q,when:"Just now",n:0});
+  }
+}
+setInterval(function(){
+  var changed=false,justDone=[];
+  S.searches.forEach(function(s){
+    if(s.done)return;
+    s.el+=1;
+    if(s.el>=s.need){finish(s);justDone.push(s);}
+    changed=true;
+  });
+  if(!changed)return;
+  if(S.view==="proc"){
+    var cur=findSearch(S.params.id);
+    if(cur && cur.done && cur.empty && justDone.indexOf(cur)>-1){cur.seen=true;go("empty",{q:cur.q},{replace:true});return;}
+    if(cur && justDone.indexOf(cur)>-1){render(false,true);return;}
+    if(cur && !cur.done){updateProc(cur);}
+    justDone.forEach(function(s){if(s!==cur && !s.empty)toast("Your "+s.q+" breakouts are ready.");});
+    if(justDone.length)renderChrome();
+    return;
+  }
+  if(justDone.length){
+    justDone.forEach(function(s){if(!s.empty)toast("Your "+s.q+" breakouts are ready.");});
+    if(S.view==="home"||S.view==="library"||S.view==="account"||S.view==="results"||S.view==="detail")render(false);
+  }
+},1000);
+function findSearch(id){for(var k=0;k<S.searches.length;k++)if(S.searches[k].id===id)return S.searches[k];return null;}
+
+/* ---------------- shared pieces ---------------- */
+function countPill(){
+  if(!S.loggedIn)return "";
+  if(S.plan==="pro")return '<button class="cp pro" data-act="account">Pro</button>';
+  var n=S.left;
+  return '<button class="cp'+(n===0?' zero':'')+'" data-act="paid">'+(n===1?'1 search left':n+' searches left')+'</button>';
+}
+function countPillShort(){
+  if(!S.loggedIn)return "";
+  if(S.plan==="pro")return '<button class="cp pro" data-act="account">Pro</button>';
+  return '<button class="cp'+(S.left===0?' zero':'')+'" data-act="paid">'+S.left+' left</button>';
+}
+function menuBtn(){return '<button class="ib" data-act="menu" aria-label="Menu" aria-expanded="'+S.menu+'">'+ic("menu")+'</button>';}
+function backBtn(){return '<button class="ib" data-act="back" aria-label="Back">'+ic("back")+'</button>';}
+function searchPill(q){return '<button class="qp" data-act="edit-search" aria-label="Edit search: '+esc(q)+'">'+ic("search")+'<span>'+esc(q)+'</span></button>';}
+function banners(){
+  var h="";
+  var r=readyUnseen();
+  if(r.length){
+    var s=r[r.length-1];
+    h+='<button class="bn ready" data-act="open-ready" data-id="'+s.id+'"><span class="stg">'+ic("star")+'</span><span class="tx"><small>Ready</small><b>Your '+esc(s.q)+' breakouts are ready</b><small>'+countFor(s.q)+' videos ranked'+(r.length>1?' · '+(r.length-1)+' more ready':'')+'</small></span><span class="go2">Open</span></button>';
+  }
+  var p=pending();
+  if(p.length){
+    var last=p[p.length-1];
+    h+='<button class="bn" data-act="view-search" data-id="'+last.id+'"><span class="dot" aria-hidden="true"></span><span class="tx"><small>Searching</small><b>'+esc(last.q)+'</b><small>'+(p.length>1?(p.length-1)+' more search'+(p.length>2?'es':'')+' running':'Usually under a minute. Keep browsing.')+'</small></span><span class="go2">View</span></button>';
+  }
+  return h;
+}
+function stats(v){return '<div class="st"><span>'+ic("eye")+v.views+'</span><span>'+ic("heart")+v.likes+'</span><span>'+ic("comment")+v.comments+'</span><span>'+ic("send")+v.shares+'</span></div>';}
+function vtile(v,opts){
+  opts=opts||{};
+  var playing=S.playing===(opts.key||v.id);
+  return '<button class="vt'+(opts.sm?' sm':'')+(playing?' playing':'')+'" data-act="play" data-key="'+(opts.key||v.id)+'" aria-label="Play video by @'+v.handle+'" style="'+bg(v.img)+';'+(opts.style||'')+'">'+
+    (opts.brand?'<span class="br"'+(opts.brandStyle?' style="'+opts.brandStyle+'"':'')+'><i>Brand</i> '+esc(v.brand)+'</span>':'')+
+    (opts.len?'<span class="du">'+v.len+'</span>':'')+
+    '<span class="pl">'+ic("play")+'</span>'+
+    (opts.score?'<span class="sb"><b>'+v.score+'</b><span>Breakout Score</span></span>':'')+
+    (opts.ex?'<span class="ex">Example</span>':'')+'</button>';
+}
+
+/* ---------------- screens ---------------- */
+var V = {};
+
+V.home=function(){
+  if(!S.loggedIn){
+    return '<div class="mos" aria-hidden="true"><div style="'+bg("flatlay")+'"></div><div style="'+bg("neon")+'"></div><div style="'+bg("palette")+'"></div><div style="'+bg("oil")+'"></div><div style="'+bg("face")+'"></div><div style="'+bg("brushes")+'"></div></div>'+
+    '<div class="hero"><p class="wm">UGC <b>Breakouts</b></p>'+
+    '<h2 class="tag1"><span>Find Viral Breakouts.</span><span>Get the creative strategy to make your own.</span></h2>'+
+    '<p class="aud">Built for TikTok UGC creators</p>'+
+    searchField("q-out")+
+    '<p class="lbl">Try a product, format, or tag</p><div class="chips">'+
+    ["Lip oil","GRWM","SPF","Air fryer","OOTD","Hair mask","#momtok","#booktok"].map(function(c){return '<button class="chip" data-act="search" data-q="'+esc(c)+'">'+esc(c)+'</button>';}).join("")+
+    '</div></div>';
+  }
+  var recent=[];S.history.forEach(function(h){if(h.n>0&&recent.indexOf(h.q)<0&&recent.length<3)recent.push(h.q);});
+  var tries=["Hair mask","Air fryer","OOTD","#booktok","Retinol","POV"].filter(function(t){return recent.indexOf(t)<0;}).slice(0,4);
+  var lib=VIDEOS.filter(function(v){return S.saved[v.id]||S.analyzed[v.id];}).slice(0,2);
+  return '<div class="tb"><button class="logo" data-act="home">UGC <b>Breakouts</b></button><span class="sp"></span>'+countPill()+menuBtn()+'</div>'+
+  '<div class="pb">'+banners()+
+  '<div class="stack" style="gap:2px"><h1 class="h1" style="font-size:26px">Welcome back</h1><p class="sub" style="font-size:15px">Search a product or format to remake.</p></div>'+
+  searchField("q-in")+
+  '<div class="stack"><p class="lbl">Try</p><div class="chips">'+tries.map(function(c){return '<button class="chip" data-act="search" data-q="'+esc(c)+'">'+esc(c)+'</button>';}).join("")+'</div></div>'+
+  (recent.length?'<div class="stack"><p class="lbl">Recent searches</p><div class="chips">'+recent.map(function(c){return '<button class="chip ghost" data-act="results" data-q="'+esc(c)+'">'+esc(c)+'</button>';}).join("")+'</div></div>':'')+
+  (lib.length?'<div class="peek"><div class="hdr">Library <button data-act="library">See all</button></div><div class="pk">'+lib.map(function(v){return '<button class="pki" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span><b class="s">'+v.score+'</b> <b>Lip oil</b><br><small>@'+v.handle+'</small></span></button>';}).join("")+'</div></div>':'')+
+  '</div>';
+};
+function searchField(id){
+  return '<form class="sf" data-form="search" role="search">'+ic("search")+
+    '<label for="'+id+'" class="sr">Search a product or format</label>'+
+    '<input id="'+id+'" name="q" type="text" autocomplete="off" placeholder="Search a product or format" value="'+esc(S.draft)+'">'+
+    '<button class="go" type="submit" aria-label="Search">'+ic("arrow")+'</button></form>';
+}
+
+V.teaser=function(){
+  var v=vid("v1"),a=AN.v1;
+  return '<div class="tb"><button class="logo" data-act="logout-home">UGC <b>Breakouts</b></button><span class="sp"></span><button class="qp" data-act="edit-search" style="flex:0 1 auto">'+ic("search")+'<span>'+esc(S.query)+'</span></button></div>'+
+  '<div class="pb">'+
+  '<h1 class="h1">See the <em>'+esc(S.query)+'</em> videos worth remaking</h1>'+
+  '<p class="sub" style="margin-top:-8px">Sign in to run your search. Your first 3 searches are free.</p>'+
+  '<div class="stack"><button class="b btt full-w" data-act="auth">'+ic("tt")+'Continue with TikTok</button><button class="b b2 full-w" data-act="auth">'+ic("g")+'Continue with Google</button>'+
+  '<p class="fine">No card needed. By continuing you agree to the <button class="lnk" data-act="toast" data-msg="Terms open here.">Terms</button> and <button class="lnk" data-act="toast" data-msg="Privacy Policy opens here.">Privacy Policy</button>.</p></div>'+
+  '<div class="sample"><div class="band">What you get for every video <span>Example</span></div><div class="in">'+
+  '<div class="mini">'+vtile(v,{sm:true,key:"t1",style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px"><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div><div class="st"><span>'+ic("eye")+v.views+' views</span></div></div></div>'+
+  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+a.hook+'”</p>'+
+  '<p class="eb c">Why the video worked</p><ol class="ol"><li>'+a.why[0]+'</li></ol>'+
+  '<div class="locked"><div class="blur"><ol class="ol"><li>'+a.why[1]+'</li><li>'+a.why[2]+'</li></ol><p class="eb c" style="margin-top:12px">What to film next</p><p style="margin:6px 0 0">'+a.shots[0][1]+'</p></div>'+
+  '<div class="lk"><button data-act="auth">'+ic("lock")+'Unlocks when you sign in</button></div></div>'+
+  '</div></div></div>';
+};
+
+function ringSvg(frac){
+  var c=295,off=Math.round(c*(1-Math.min(frac,1)));
+  return '<svg viewBox="0 0 108 108"><circle cx="54" cy="54" r="47" fill="none" stroke="#E4DCD5" stroke-width="8"/><circle class="p" cx="54" cy="54" r="47" fill="none" stroke="#2DD4D8" stroke-width="8" stroke-linecap="round" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'"/></svg>';
+}
+function mmss(n){return Math.floor(n/60)+":"+("0"+(n%60)).slice(-2);}
+function stepsHtml(s){
+  var f=s.el/s.need, st=f<.34?0:(f<.67?1:2);
+  var names=["Searching TikTok","Calculating Breakout Score","Building strategy"];
+  return names.map(function(n,k){var c=k<st?"done":(k===st?"now":"todo");return '<li class="'+c+'"><i>'+(c==="done"?ic("check"):"")+'</i>'+n+'</li>';}).join("");
+}
+V.proc=function(){
+  var s=findSearch(S.params.id);
+  if(!s)return '<div class="pb"><p>Search not found.</p></div>';
+  if(s.done && !s.empty){
+    var top=VIDEOS[0];
+    var colors=["#FF4F5E","#2DD4D8","#C9A227","#0B7B7F"],conf="";
+    for(var k=0;k<18;k++)conf+='<i style="left:'+(6+(k*37)%88)+'%;background:'+colors[k%4]+';animation-delay:'+((k%6)*.07)+'s"></i>';
+    return '<div class="tb"><button class="logo" data-act="home">UGC <b>Breakouts</b></button><span class="sp"></span>'+countPill()+'</div>'+
+    '<div class="proc" style="gap:18px"><div class="conf" aria-hidden="true">'+conf+'</div>'+
+    '<div class="star">'+ic("star")+'</div>'+
+    '<h1 class="h1" style="font-size:26px">Your '+esc(s.q)+' breakouts are ready</h1>'+
+    '<p class="sub" style="margin-top:-8px">'+countFor(s.q)+' videos, ranked by Breakout Score.</p>'+
+    '<div class="cd" style="flex-direction:row;align-items:center;align-self:stretch;text-align:left;padding:8px">'+vtile(top,{sm:true,key:"r1",style:"width:64px;aspect-ratio:9/13"})+'<div class="stack" style="gap:2px"><span class="eb m">Top breakout</span><div class="bigs"><b style="font-size:28px">'+top.score+'</b><span>@'+top.handle+' · '+top.followers+' followers</span></div></div></div>'+
+    '<button class="b b1 full-w" data-act="open-ready" data-id="'+s.id+'">See breakouts</button></div>';
+  }
+  return '<div class="tb">'+backBtn()+'<span class="sp"></span><span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span>'+countPill()+'</div>'+
+  '<div class="proc">'+
+  '<div class="ring" id="ring">'+ringSvg(s.el/s.need)+'<div class="t"><span id="elapsed">'+mmss(s.el)+'</span><small>ELAPSED</small></div></div>'+
+  '<div class="stack" style="gap:4px"><p class="lbl">Searching <b style="color:var(--coral-d)">'+esc(s.q)+'</b></p><h1 class="h1" style="font-size:24px">Finding your Viral Breakouts</h1></div>'+
+  '<ul class="steps" id="steps">'+stepsHtml(s)+'</ul>'+
+  '<div id="slow-slot" data-slow="'+(s.el>=120?1:0)+'">'+slowHtml(s)+'</div>'+
+  '</div>';
+};
+function slowHtml(s){
+  if(s.el>=120){
+    return '<div class="slow"><p><b>This one\'s taking longer.</b> Look around the app and we\'ll show a banner the moment it\'s ready.</p><button class="b b2" data-act="back">Browse while you wait</button></div>'+
+    '<div class="exrow" style="margin-top:14px">'+["palette","brushes","mask"].map(function(k,n){return vtile({id:"e"+n,img:k,handle:"example"},{sm:true,key:"ex"+n,style:"width:72px;aspect-ratio:9/14"});}).join("")+'</div>';
+  }
+  return '<p class="eb m" style="margin:6px 0 12px">Examples while we search</p><div class="exrow">'+
+    ["palette","brushes","mask"].map(function(k,n){return vtile({id:"e"+n,img:k,handle:"example"},{sm:true,ex:true,key:"ex"+n});}).join("")+
+    '</div><p class="fine" style="margin-top:12px">Usually under a minute.</p>';
+}
+function updateProc(s){
+  var r=document.getElementById("ring"),e=document.getElementById("elapsed"),st=document.getElementById("steps"),sl=document.getElementById("slow-slot");
+  if(!r)return;
+  r.querySelector("circle.p").setAttribute("stroke-dashoffset",Math.round(295*(1-Math.min(s.el/s.need,1))));
+  e.textContent=mmss(s.el);
+  st.innerHTML=stepsHtml(s);
+  var wasSlow=sl.getAttribute("data-slow")==="1",isSlow=s.el>=120;
+  if(wasSlow!==isSlow){sl.innerHTML=slowHtml(s);sl.setAttribute("data-slow",isSlow?"1":"0");}
+  renderChrome();
+}
+
+V.results=function(){
+  var q=S.params.q||S.query;
+  var n=countFor(q);
+  return '<div class="tb"><button class="logo" data-act="home" aria-label="Home">UGC <b>B</b></button>'+searchPill(q)+countPillShort()+menuBtn()+'</div>'+
+  '<div class="pb" style="gap:14px"><div class="rh"><h1>'+n+' breakouts for <em>'+esc(q)+'</em></h1><span class="sort">Top score first</span></div>'+
+  VIDEOS.map(function(v){
+    var an=!!S.analyzed[v.id],busy=S.busy===v.id;
+    return '<article class="cd">'+vtile(v,{brand:true,len:true,score:true,style:"aspect-ratio:4/5"})+
+    '<div class="meta"><div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div>'+stats(v)+'</div>'+
+    '<div class="row"><button class="b b1 grow'+(busy?' busy':'')+'" data-act="'+(an?'detail':'analyze')+'" data-v="'+v.id+'">'+(busy?'Analyzing…':(an?'View analysis':'Analyze video'))+'</button>'+
+    '<button class="b b2 bi'+(S.saved[v.id]?' on':'')+'" data-act="save" data-v="'+v.id+'" aria-pressed="'+!!S.saved[v.id]+'" aria-label="'+(S.saved[v.id]?'Saved':'Save')+'">'+ic(S.saved[v.id]?"saved":"save")+'</button>'+
+    '<button class="b b2 bi" data-act="share" data-v="'+v.id+'" aria-label="Share">'+ic("share")+'</button></div>'+
+    (an?'':'<p class="useone">Uses 1 of your analyses</p>')+'</article>';
+  }).join("")+
+  '<p class="endnote">Showing 4 of '+n+' in this prototype</p></div>';
+};
+
+V.empty=function(){
+  var q=S.params.q||"LED mask night";
+  return '<div class="tb"><button class="logo" data-act="home" aria-label="Home">UGC <b>B</b></button>'+searchPill(q)+countPillShort()+menuBtn()+'</div>'+
+  '<div class="pb" style="justify-content:center;text-align:center;align-items:center;gap:16px;padding-bottom:110px">'+
+  '<div class="tile t" style="width:72px;height:72px;border-radius:20px">'+ic("search")+'</div>'+
+  '<h1 class="h1" style="font-size:24px">Not enough Viral Breakouts for “'+esc(q)+'” yet</h1>'+
+  '<p class="sub" style="font-size:15px;margin-top:-6px">This search didn\'t count toward your free searches.</p>'+
+  '<p class="lbl" style="margin-top:8px">Try something broader</p>'+
+  '<div class="chips" style="justify-content:center">'+["LED mask","Night routine","Red light therapy"].map(function(c){return '<button class="chip" data-act="search" data-q="'+c+'">'+c+'</button>';}).join("")+'</div></div>';
+};
+
+V.detail=function(){
+  var v=vid(S.params.v||"v1"),a=AN[v.id];
+  return '<div class="tb">'+backBtn()+searchPill(S.query)+countPillShort()+menuBtn()+'</div>'+
+  '<div class="pb" style="gap:14px">'+
+  '<div class="dh">'+vtile(v,{brand:true,brandStyle:"left:8px;top:8px;font-size:11px;padding:4px 8px",style:"aspect-ratio:9/16"})+
+  '<div class="facts"><div class="scorerow"><b>'+v.score+'</b><span>Breakout<br>Score</span><button class="infob" data-act="info" aria-expanded="'+S.infoOpen+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
+  (S.infoOpen?'<div class="pop" role="note"><b>Breakout Score</b><br>How hard this video punched above the creator\'s size. Weighs views against followers, engagement, and how recent it is.</div>':'')+
+  '<div class="hd">@'+v.handle+'</div><dl class="dl"><dt>Followers</dt><dd>'+v.followers+'</dd><dt>Posted</dt><dd>'+v.posted+'</dd><dt>Length</dt><dd>'+v.len+'</dd><dt>Sound</dt><dd>'+esc(v.sound)+'</dd></dl>'+
+  '<button class="tiklink" data-act="toast" data-msg="Opens the video on TikTok.">'+ic("ext")+'Watch on TikTok</button></div></div>'+
+  '<div class="statbar"><div>'+v.views+'<small>views</small></div><div>'+v.likes+'<small>likes</small></div><div>'+v.comments+'<small>comments</small></div><div>'+v.shares+'<small>shares</small></div></div>'+
+  '<div class="box teal"><h3>Hooks</h3><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+
+  a.tries.map(function(t,k){return '<li><span class="hk"><span><b>'+t[0]+':</b> “'+t[1]+'”</span><button data-act="copy-hook" data-k="'+k+'" data-v="'+v.id+'">'+ic("copy")+'Copy line</button></span></li>';}).join("")+'</ol></div>'+
+  '<div class="box white"><h3>Why the video worked</h3><ol class="ol">'+a.why.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
+  '<div class="box white"><h3>What to film next</h3><div class="shots">'+a.shots.map(function(s){return '<div class="shot"><span class="tc">'+s[0]+'</span><span>'+s[1]+'</span></div>';}).join("")+'</div><p class="shotnote">'+a.note+'</p></div>'+
+  '</div>'+
+  '<div class="dock"><div class="row"><button class="b b2 grow'+(S.saved[v.id]?' on':'')+'" data-act="save" data-v="'+v.id+'" aria-pressed="'+!!S.saved[v.id]+'">'+ic(S.saved[v.id]?"saved":"save")+(S.saved[v.id]?'Saved':'Save')+'</button><button class="b b1 grow" data-act="share" data-v="'+v.id+'">'+ic("share")+'Share</button></div></div>';
+};
+
+V.share=function(){
+  var v=vid(S.params.v||"v1"),note=S.notes[v.id]||"";
+  return '<div class="tb">'+backBtn()+'<span class="tt">Share breakout</span><span class="sp"></span>'+menuBtn()+'</div>'+
+  '<div class="pb">'+
+  '<div class="shc">'+vtile(v,{sm:true,style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:5px"><span class="eb m">'+esc(S.query)+'</span><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+'</div><div class="st" style="font-size:12.5px"><span>Brand: '+esc(v.brand)+'</span><span>'+ic("eye")+v.views+'</span></div></div></div>'+
+  '<div class="fld"><label for="note">Add a note <span class="rec">Recommended</span></label>'+
+  '<textarea id="note" data-v="'+v.id+'" placeholder="Tell them what to remake">'+esc(note)+'</textarea>'+
+  '<div class="chips">'+["Remake this tonight","Steal this hook","This is your niche"].map(function(c){return '<button class="chip" data-act="quick-note" data-v="'+v.id+'" data-t="'+c+'">'+c+'</button>';}).join("")+'</div>'+
+  '<p class="nudge" id="nudge">'+(note.trim()?'Your note shows at the top of the link.':'A note tells them what to remake. You can skip it.')+'</p></div>'+
+  '<div class="fld"><label for="link-code" style="font-size:14px">Your link</label><div class="linkbox"><code id="link-code">ugcbreakouts.com/b/k7Qm2'+v.id.slice(1)+'</code><button class="b b1" data-act="copy-link" data-v="'+v.id+'" style="padding:0 16px">'+ic("copy")+'Copy</button></div></div>'+
+  '<button class="b b2 full-w" data-act="native-share" data-v="'+v.id+'">'+ic("share")+'More ways to share</button>'+
+  '<button class="b b3" data-act="preview-shared" data-v="'+v.id+'">Preview what they see</button>'+
+  '</div>';
+};
+
+V.shared=function(){
+  var v=vid(S.params.v||"v1"),a=AN[v.id];
+  var note=S.params.note||"This wipe hook is gold. Remake tonight.";
+  var who=S.params.who||"maya.creates";
+  return '<div class="tb">'+(S.params.preview?backBtn():'')+'<span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span>'+(S.params.preview?'<span class="cp">Preview</span>':'<button class="b b3" data-act="auth-shared" style="min-height:36px;padding:0 6px;color:var(--ink)">Sign in</button>')+'</div>'+
+  '<div class="pb" style="gap:16px">'+
+  '<div class="msg"><div class="av" aria-hidden="true">'+who.charAt(0).toUpperCase()+'</div><div class="bubble"><span class="who"><b>@'+esc(who)+'</b> sent you a breakout</span>'+(note?'<p>“'+esc(note)+'”</p>':'')+'</div></div>'+
+  '<div class="shc" style="grid-template-columns:120px 1fr">'+vtile(v,{style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px"><span class="eb m">Viral Breakout · '+esc(S.query)+'</span><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>· '+v.followers+'</small></div><div class="st" style="font-size:12.5px"><span>'+ic("eye")+v.views+' views</span></div><span style="font-size:12.5px;color:var(--mid)">Brand: '+esc(v.brand)+'</span></div></div>'+
+  '<div class="box teal"><h3>Hooks</h3><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol"><li>“'+a.tries[0][1]+'”</li><li>“'+a.tries[1][1]+'”</li></ol></div>'+
+  '<div class="box white"><h3>Why the video worked</h3><ol class="ol">'+a.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol></div>'+
+  '<div class="box white"><h3>What to film next</h3><div class="shots">'+[a.shots[0],a.shots[2]].map(function(s){return '<div class="shot"><span class="tc">'+s[0]+'</span><span>'+s[1]+'</span></div>';}).join("")+'</div></div>'+
+  '</div>'+
+  '<div class="dock bar"><div class="authbar"><div class="ttl"><b>Find breakouts for what you film</b><small>3 free searches</small></div>'+
+  '<div class="row"><button class="b btt grow" data-act="auth-shared" style="font-size:15px">'+ic("tt")+'TikTok</button><button class="b b2 grow" data-act="auth-shared" style="font-size:15px">'+ic("g")+'Google</button></div></div></div>';
+};
+
+V.paid=function(){
+  var sub=S.left===0?"You used your 3 free searches.":"You have "+S.left+" free search"+(S.left===1?"":"es")+" left.";
+  return '<div class="tb">'+backBtn()+'<span class="sp"></span><span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span><span class="ib ghost"></span></div>'+
+  '<div class="pb" style="gap:18px">'+
+  '<div class="stack center" style="gap:6px"><h1 class="h1">Keep finding Viral Breakouts</h1><p class="sub" style="color:'+(S.left===0?'var(--coral-d)':'var(--mid)')+';font-weight:600">'+sub+'</p></div>'+
+  '<div class="price"><span class="eb c">UGC Breakouts Pro</span><div class="amt">$49<small>/mo</small></div><button class="b b1 full-w'+(S.busy==="pay"?' busy':'')+'" data-act="upgrade">'+(S.busy==="pay"?'Starting Pro…':'Upgrade to Pro')+'</button><p class="fine">Cancel anytime.</p></div>'+
+  '<ul class="chk"><li>'+ic("check")+'<span><b>100 searches a month</b><small>Any product, format, or tag.</small></span></li><li>'+ic("check")+'<span><b>100 video analyses a month</b><small>Hooks, why the video worked, and what to film next.</small></span></li><li>'+ic("check")+'<span><b>Every search ranked by Breakout Score</b><small>Save and share any breakout.</small></span></li></ul>'+
+  '<button class="b b3" data-act="affiliate">Not now</button></div>';
+};
+
+V.pro=function(){
+  return '<div class="tb"><button class="logo" data-act="home">UGC <b>Breakouts</b></button><span class="sp"></span>'+countPill()+'</div>'+
+  '<div class="pb" style="justify-content:center;gap:20px">'+
+  '<div class="stack center" style="gap:14px"><div class="tile g">'+ic("check")+'</div><h1 class="h1" style="font-size:32px">Congratulations</h1><p class="sub" style="margin-top:-8px;text-align:center">Pro is on. 100 searches and 100 analyses a month.</p></div>'+
+  '<div class="box white"><p class="eb m">Your first Pro session</p><ol class="ol"><li><span><b>Search a product you film</b><br><span style="color:var(--mid)">Or a format, like GRWM.</span></span></li><li><span><b>Analyze the top breakout</b><br><span style="color:var(--mid)">Get the hooks and a shot list to film.</span></span></li></ol></div>'+
+  '<button class="b b1 full-w" data-act="focus-search">Search a product</button><p class="fine">Receipt sent to ivan@ugcbreakouts.com</p></div>';
+};
+
+V.affiliate=function(){
+  if(S.affLink){
+    return '<div class="tb">'+backBtn()+'<span class="sp"></span><span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span><span class="ib ghost"></span></div>'+
+    '<div class="pb" style="justify-content:center;gap:18px;padding-bottom:60px"><div class="stack center" style="gap:14px"><div class="tile t">'+ic("check")+'</div><h1 class="h1" style="text-align:center">Your link is ready</h1><p class="sub" style="text-align:center;margin-top:-8px">Share it with creators who film UGC. You get $49 when each one goes Pro.</p></div>'+
+    '<div class="linkbox"><code>ugcbreakouts.com/r/ivanb</code><button class="b b1" data-act="copy-aff" style="padding:0 16px">'+ic("copy")+'Copy</button></div>'+
+    '<button class="b b2 full-w" data-act="toast" data-msg="The share menu opens here on a phone.">'+ic("share")+'More ways to share</button></div>';
+  }
+  return '<div class="tb">'+backBtn()+'<span class="sp"></span><span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span><span class="ib ghost"></span></div>'+
+  '<div class="pb" style="gap:18px"><div class="stack" style="gap:6px;text-align:center"><h1 class="h1">Earn when creators go Pro</h1><p class="sub">Share your link with TikTok UGC creators. Get paid when they upgrade.</p></div>'+
+  '<div class="price"><span class="eb m">You earn</span><div class="amt gold">$49<small> per creator</small></div><p class="fine" style="color:var(--ink)">Always equal to one month of Pro.</p><button class="b b1 full-w" data-act="aff-link">Get my affiliate link</button></div>'+
+  '<div class="box white"><p class="eb m">How it works</p><ol class="ol"><li>Share your link with creators you know.</li><li>They sign up and go Pro.</li><li>You get a one time $49 for each one.</li></ol></div>'+
+  '<p class="fine"><button class="lnk" data-act="toast" data-msg="Program terms open here.">Program terms</button></p></div>';
+};
+
+V.library=function(){
+  var vids=VIDEOS.filter(function(v){return S.saved[v.id]||S.analyzed[v.id];});
+  var shown=S.anOnly?vids.filter(function(v){return S.analyzed[v.id];}):vids;
+  var t=S.libTab;
+  function tab(k,label,n){return '<button role="tab" id="tab-'+k+'" data-act="tab" data-k="'+k+'" aria-selected="'+(t===k)+'">'+label+(n!=null?'<small>'+n+'</small>':'')+'</button>';}
+  var body="";
+  if(t==="videos"){
+    body='<div class="tog"><span id="an-lbl">Analyzed only</span><button class="sw" role="switch" data-act="an-only" aria-checked="'+S.anOnly+'" aria-labelledby="an-lbl"></button></div>'+
+    (shown.length?shown.map(function(v){return '<button class="li" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span class="t"><b><b class="s">'+v.score+'</b> · Lip oil</b>@'+v.handle+(S.analyzed[v.id]?'<span class="badge">ANALYZED</span>':'<span style="font-size:12px">Saved</span>')+'</span>'+ic("chev","chev")+'</button>';}).join(""):'<p class="emptyl">Nothing here yet. Save a video from Results or Detail.</p>');
+  } else if(t==="searches"){
+    body=S.savedSearches.map(function(s){return '<button class="srow" data-act="results" data-q="'+esc(s.q)+'"><span class="t"><b>'+esc(s.q)+'</b>'+s.n+' breakouts · saved '+s.when+'</span>'+ic("chev")+'</button>';}).join("");
+  } else {
+    body=S.history.map(function(h){return '<button class="srow" data-act="'+(h.n?'results':'empty')+'" data-q="'+esc(h.q)+'"><span class="t"><b>'+esc(h.q)+'</b>'+h.when+' · '+(h.n?h.n+' breakouts':'not enough breakouts')+'</span>'+ic("chev")+'</button>';}).join("");
+  }
+  return '<div class="tb">'+backBtn()+'<span class="tt">Library</span><span class="sp"></span>'+menuBtn()+'</div>'+
+  '<div class="pb" style="gap:14px">'+banners()+
+  '<div class="tabs" role="tablist" aria-label="Library">'+tab("searches","Searches",S.savedSearches.length)+tab("videos","Videos",vids.length)+tab("history","History",null)+'</div>'+
+  '<div class="stack" role="tabpanel" aria-labelledby="tab-'+t+'">'+body+'</div></div>';
+};
+
+V.account=function(){
+  var pro=S.plan==="pro",used=3-S.left;
+  return '<div class="tb">'+backBtn()+'<span class="tt">Account</span><span class="sp"></span></div>'+
+  '<div class="pb" style="gap:16px">'+
+  '<div class="prof"><div class="av" aria-hidden="true">I</div><div><b>Ivan B.</b><small>ivan@ugcbreakouts.com</small></div></div>'+
+  (pro?
+    '<div class="plan"><div class="mrow"><b style="font-size:17px">Pro · $49/mo</b><span>Renews Oct 14</span></div><div class="mrow"><span>Searches this month</span><b>3 of 100</b></div><div class="meter"><i style="width:3%"></i></div><div class="mrow"><span>Analyses this month</span><b>2 of 100</b></div><div class="meter"><i style="width:2%"></i></div>'+
+    '<button class="b b2 full-w" data-act="toast" data-msg="Opens the billing portal: card, invoices, cancel.">Manage billing</button><button class="b b3" data-act="cancel">Cancel Pro</button></div>'
+  :
+    '<div class="plan"><div class="mrow"><b style="font-size:17px">Free plan</b><span>'+used+' of 3 searches used</span></div><div class="meter" role="img" aria-label="'+used+' of 3 searches used"><i style="width:'+Math.round(used/3*100)+'%"></i></div>'+
+    '<button class="b b1 full-w" data-act="paid">Upgrade to Pro · $49/mo</button><p class="fine">100 searches and 100 analyses a month.</p></div>')+
+  '<nav class="list" aria-label="Account links"><button data-act="library">Library '+ic("chev")+'</button><button data-act="affiliate"><span>Affiliate program <small>· earn $49</small></span>'+ic("chev")+'</button><button data-act="toast" data-msg="Help center opens here.">Help '+ic("chev")+'</button><button data-act="toast" data-msg="Terms and Privacy open here.">Terms and Privacy '+ic("chev")+'</button></nav>'+
+  '<button class="b b2 full-w" data-act="logout">Log out</button></div>';
+};
+
+/* ---------------- rail + notes ---------------- */
+var RAIL=[
+  {g:"Logged out",items:[["home-out","01","Home"],["teaser","01b","Sign in"]]},
+  {g:"Search",items:[["proc","01c","Processing"],["proc-slow","01c","Processing after 2:00"],["proc-ready","01c","Ready"],["home-in","01","Home, signed in"],["home-searching","01","Home, 2 searches running"],["home-ready","01","Home, ready banner"]]},
+  {g:"Breakouts",items:[["results","02","Results"],["empty","02","No breakouts"],["detail","03","Detail"]]},
+  {g:"Sharing",items:[["share","04","Share video"],["shared","05","Shared with you"]]},
+  {g:"Money",items:[["paid","07","Paid, cap hit"],["pro","09","Pro success"],["affiliate","12","Affiliate"]]},
+  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-pro","11","Account, Pro"]]},
+  {g:"Review",items:[["rules","","Rules across screens"],["questions","","Questions for Ivan"]]}
+];
+function login(){S.loggedIn=true;}
+function jump(key){
+  var keep={hot:null};
+  S=fresh();
+  S.railKey=key;
+  var setups={
+    "home-out":function(){S.view="home";},
+    "teaser":function(){S.view="teaser";},
+    "proc":function(){login();S.left=3;S.stack=[{view:"home",params:{}}];var s=mk("Lip oil",0,9);S.view="proc";S.params={id:s.id};},
+    "proc-slow":function(){login();S.left=3;S.stack=[{view:"home",params:{}}];var s=mk("Lip oil",125,150);S.view="proc";S.params={id:s.id};},
+    "proc-ready":function(){login();S.left=3;S.stack=[{view:"home",params:{}}];var s=mk("Lip oil",0,9);finish(s);S.view="proc";S.params={id:s.id};},
+    "home-in":function(){login();S.left=2;S.view="home";},
+    "home-searching":function(){login();S.left=2;mk("Lip oil",3,40);mk("GRWM",1,45);S.view="home";},
+    "home-ready":function(){login();S.left=2;var s=mk("Lip oil",0,9);finish(s);S.left=2;S.view="home";},
+    "results":function(){login();S.left=2;S.stack=[{view:"home",params:{}}];S.view="results";S.params={q:"Lip oil"};},
+    "empty":function(){login();S.left=2;S.stack=[{view:"home",params:{}}];S.view="empty";S.params={q:"LED mask night"};},
+    "detail":function(){login();S.left=2;S.stack=[{view:"home",params:{}},{view:"results",params:{q:"Lip oil"}}];S.view="detail";S.params={v:"v1"};},
+    "share":function(){login();S.left=2;S.stack=[{view:"results",params:{q:"Lip oil"}},{view:"detail",params:{v:"v1"}}];S.view="share";S.params={v:"v1"};},
+    "shared":function(){S.view="shared";S.params={v:"v1"};},
+    "paid":function(){login();S.left=0;S.stack=[{view:"results",params:{q:"Lip oil"}}];S.view="paid";},
+    "pro":function(){login();S.plan="pro";S.view="pro";},
+    "affiliate":function(){login();S.left=0;S.stack=[{view:"paid",params:{}}];S.view="affiliate";},
+    "library":function(){login();S.left=2;S.stack=[{view:"home",params:{}}];S.view="library";},
+    "account":function(){login();S.left=2;S.stack=[{view:"home",params:{}}];S.view="account";},
+    "account-pro":function(){login();S.plan="pro";S.stack=[{view:"home",params:{}}];S.view="account";},
+    "rules":function(){login();S.left=2;S.view="home";},
+    "questions":function(){login();S.left=2;S.view="home";}
+  };
+  (setups[key]||setups["home-out"])();
+  S.railKey=key;
+  render(true);
+}
+function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q)};S.searches.push(s);return s;}
+
+function currentKey(){
+  if(S.railKey==="rules"||S.railKey==="questions")return S.railKey;
+  var v=S.view;
+  if(v==="home"){if(!S.loggedIn)return "home-out";if(readyUnseen().length)return "home-ready";if(pending().length)return "home-searching";return "home-in";}
+  if(v==="proc"){var s=findSearch(S.params.id);if(s&&s.done)return "proc-ready";if(s&&s.el>=120)return "proc-slow";return "proc";}
+  if(v==="account")return S.plan==="pro"?"account-pro":"account";
+  return v;
+}
+
+function li(t,txt){return '<li><span class="tag '+t+'">'+({s:"SLACK",n:"NEW",a:"ASK"})[t]+'</span><span>'+txt+'</span></li>';}
+var NOTES={
+  "home-out":{id:"01 · 01-home-search",h:"Home, logged out",why:"This screen does one thing: gets the first search typed. Nothing on it should give people a reason to stop.",
+    tryit:"Type anything and press the arrow or Enter, or tap a chip. Search “LED mask night” later to see No breakouts.",
+    li:[["s","Removed “3 free searches with email.” That line now sits on the sign in screen, where it's a perk and not a warning."],["s","One Search button: an arrow inside the bar. The docked Search button is gone."],["n","Chips start a search right away instead of just filling the bar. One tap to the aha moment."],["n","Swapped out the background photo that showed the Instagram logo."],["n","Removed the “get ready with me” chip, which was a second GRWM."],["n","Subline names the audience: “Built for TikTok UGC creators.”"]]},
+  "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in (was Teaser sales)",why:"The page's only job is a TikTok or Google sign in. The buttons come first, and one real example does the selling the list used to do.",
+    tryit:"Tap either sign in button to start the search. Tap the search pill to change the search.",
+    li:[["s","New layout. Sign in buttons sit right under the one headline and one subheadline, above the fold."],["s","The headline no longer repeats benefit 1."],["s","The hard to read 1 2 3 list is gone. One example card shows the score, the hook, and one reason the video worked, with the rest locked."],["s","The 3 free searches line lives here now, next to “No card needed.”"],["n","Removed the Maya quote. A made up testimonial on a US page is an FTC risk."],["n","Removed “Signing in uses 1 of your 3 free searches.” It read like a charge for signing up."],["a","As far as I know, TikTok Login Kit doesn't return an email. Is the TikTok account enough for the free tier?"]]},
+  "proc":{id:"01c · 01c-processing",h:"Processing",why:"Keep people here watching examples. Only give them a way out once the wait gets long.",
+    tryit:"The search really runs: about 9 seconds here. Tap Back to browse, and a banner and toast tell you when it's ready. Use the Jump buttons above the phone to see 2:00 or Ready.",
+    li:[["s","The counter shows searches left and only drops when results arrive, so it never looks like you used one before you got anything."],["s","Back returns to whatever page you were on."],["s","No browse option at first. After 2:00 a card offers “Browse while you wait” (Ivan's timing idea)."],["n","Examples are labeled “Examples while we search” instead of “These are not your results yet.”"],["n","Ready says how many videos were ranked and previews the top one. It no longer claims the strategy is built."],["n","Confetti only plays when the phone allows motion."],["a","Does a search count when it starts or when results arrive? This prototype counts on arrival, and empty results are free."],["a","How long does a slow search really take? That decides whether 2:00 is the right cutoff."]]},
+  "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",why:"Where people land after browsing away from Processing, so the banners do the heavy lifting.",
+    tryit:"Start two searches back to back and watch the banner show the latest one. Recent searches open results without using a search.",
+    li:[["s","One Search button, the arrow in the bar."],["s","With two searches running, the banner shows the most recent one and adds “1 more search running” (Ivan's call)."],["s","View on a running search opens Processing for that search."],["n","When a search finishes while you're away, a Ready banner appears here and in Library, plus a toast wherever you are."],["n","Recent searches are plain chips. Dropped the “Open ›” on each one."],["n","Library peek shows what each video was for, not only a handle and a score."],["a","Does starting a second search while one is running use up a free search right away?"]]},
+  "results":{id:"02 · 02-results",h:"Results",why:"The video fills the card and the score sits on the video. Each card gets one main button and two icons.",
+    tryit:"Tap a video to play it. Save a card, then check Library. Analyze video runs, then opens the analysis.",
+    li:[["s","Still one card per row, but the video fills the card width and is taller (4:5), so there's no empty space on either side."],["s","Each card keeps its own buttons (Ivan). View analysis is the only one with a label. Save and Share are icons."],["s","The docked “Search again” is gone. Search sits in the header on every signed in screen."],["n","View analysis and Analyze video use the same button style. Analyze video notes that it uses an analysis."],["n","Added a result count and the sort order."],["n","The chip on the video says “Brand · rhode,” so nobody mistakes it for the creator."],["n","Swapped the samples: the 84K creator with 1.4M views ranks first."],["a","Do free users get analyses, and how many?"]]},
+  "empty":{id:"02 · 02-results-empty",h:"No breakouts",why:"Turn a dead end into the next search.",
+    tryit:"Tap a broader search to run it. Any search with “night” or #momtok lands here, and none of them use a free search.",
+    li:[["n","Three broader searches to tap. They replace the docked “Search again.”"],["n","Removed the leftover “Feed” label."],["n","The headline quotes the search back."],["a","What's the minimum number of breakouts for a results page? History showed “Air fryer · 3 breakouts” as a normal result."]]},
+  "detail":{id:"03 · 03-detail",h:"Detail",why:"The money screen. Each section answers a different question: what it was, why it worked, what to film.",
+    tryit:"Tap the i next to the score. Copy a hook line. Save, then Share.",
+    li:[["s","Search moved into the header, so it's always there and not odd in the dock."],["s","“Why it worked” is now “Why the video worked.”"],["s","The Hooks box keeps its frame. The subtitle and the “Hook that worked” label are gone."],["s","The brand chip is labeled, so rhode and the creator don't get mixed up."],["n","Video on the left, facts on the right."],["n","Added sound, length, and Watch on TikTok. Removed “Network: TikTok.”"],["n","“What to film next” is a timed shot list, not a repeat of Why the video worked."],["n","Three hook ideas take three different angles, each with Copy line."],["n","The dock is Save and Share. Share is coral, since gold now only means the score."],["a","Which Breakout Score definition is final? The popover text is a placeholder, with “Formula B” removed."],["a","Are paid or Spark ad videos labeled? Paid reach would push the score up."]]},
+  "share":{id:"04 · 04-share",h:"Share video",why:"Adding a note is the easy path, but nothing stops people from sharing without one.",
+    tryit:"Tap a quick note, then Copy. Try “Preview what they see” to open the recipient's page with your note.",
+    li:[["s","Thumbnail on the left, details on the right."],["s","The note is optional but pushed: a Recommended badge and three quick notes."],["s","“Anyone with the link” moved into the toast after Copy."],["s","One back button, top left. “Back to analysis” is gone."],["n","No Save note step. Copy includes whatever note is in the box."],["n","“More ways to share” opens the phone's share menu."],["n","The link uses a unique ID instead of /b/lipoil-86."],["a","If someone edits the note after sending, do links they already sent change too?"]]},
+  "shared":{id:"05 · 05-shared",h:"Shared with you",why:"Who sent it matters most, then the video, then a way to sign up that stays on screen the whole time.",
+    tryit:"Scroll the page. The sign up bar stays pinned. Signing in takes you to Home.",
+    li:[["s","The sender comes first, with their note right under it as one message."],["s","Removed the repeated brand, handle, and score line."],["s","Removed “Maya shared this so you can remake the wipe hook tonight...”"],["s","Removed “Hook that worked.”"],["s","“Search your own products” sounded like BrandBeacon. It's now “Find breakouts for what you film.”"],["n","The sign up bar sticks to the bottom and names the 3 free searches."],["a","What does the sender line show for a Google user with no TikTok handle?"],["a","Does opening a shared link use one of the sender's analyses?"]]},
+  "paid":{id:"07 · 07-paid",h:"Paid (cap merged)",why:"People who already want it can buy right away. Everyone else scrolls the list.",
+    tryit:"Upgrade turns the account Pro everywhere. Not now goes to Affiliate. Open Paid from the counter pill with searches left to see the second subheadline.",
+    li:[["s","The Upgrade button moved into the price card, above the benefits."],["n","Removed “Your hero benefit. Not unlimited.” That was an internal note."],["n","Added “Cancel anytime.”"],["n","Benefits use checkmarks, not 1 2 3, since they aren't steps."],["n","The subheadline changes when people still have searches: “You have 2 free searches left.”"],["a","Should there be a yearly plan? $49 a month is a real cost for a UGC creator."]]},
+  "pro":{id:"09 · 09-pro-success",h:"Pro success",why:"Get new Pro users searching and analyzing, since that's the habit that keeps them paying.",
+    tryit:"Search a product takes you to Home with the search bar ready. The counter pill now says Pro.",
+    li:[["s","Removed the duplicate button. One action now."],["s","The next step is search, then analyze, instead of Share a breakout."],["n","This list is numbered because it really is a sequence."],["n","Receipt line added. The pill turns gold for Pro."]]},
+  "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",why:"A soft close for people who said no to Pro.",
+    tryit:"Get my affiliate link, then Copy.",
+    li:[["s","The button moved up into the earnings card."],["n","“Tracks if Pro price changes” became “Always equal to one month of Pro.”"],["n","The link ready screen drops the “Mock affiliate link” wording."],["n","Removed “Back to Pro.” The back arrow does that."],["a","Cash, or a free month of Pro? $49 cash against a $49 first payment loses money once card fees and refunds come out. Cash also needs a payout method, US tax forms, and a block on self referrals."]]},
+  "library":{id:"08 · 08-library",h:"Library",why:"One row of tabs. “Analyzed” is a filter on videos, not a separate place.",
+    tryit:"Switch tabs and flip “Analyzed only.” Anything you save or analyze in Results shows up here.",
+    li:[["s","Two rows of tabs became one: Searches, Videos, History."],["n","“Analyzed” is a badge on each video plus an “Analyzed only” switch."],["n","Opens on Videos, since that's what people come back to remake."],["n","Dropped “Pinned searches for remake day.”"],["a","Is a saved search a frozen snapshot, or can it refresh? If it refreshes, does that use a search?"]]},
+  "account":{id:"11 · 11-account",h:"Account",why:"On the free plan, Account is one more place to sell Pro.",
+    tryit:"Upgrade, then come back: the plan card switches to Pro with usage and billing. Log out resets the prototype.",
+    li:[["s","Upgrade is the loudest thing on the page: a coral button in the plan card, under a usage bar."],["n","“Affiliate apply” became “Affiliate program · earn $49.”"],["n","Added Help and Terms and Privacy. “Logout” became “Log out.”"],["n","On Pro, the plan card shows usage, Manage billing, and Cancel. US state auto-renewal laws expect online cancel."],["a","Do we need a Delete account option at launch?"]]}
+};
+NOTES["proc-slow"]=NOTES.proc;NOTES["proc-ready"]=NOTES.proc;
+NOTES["home-searching"]=NOTES["home-in"];NOTES["home-ready"]=NOTES["home-in"];
+NOTES["account-pro"]=NOTES.account;
+
+function notesHtml(key){
+  var legend='<div class="legend"><span><span class="tag s">SLACK</span> agreed in the thread</span><span><span class="tag n">NEW</span> my suggestion</span><span><span class="tag a">ASK</span> needs Ivan</span></div>';
+  if(key==="rules"){
+    return legend+'<p class="sid">Every screen</p><h2>Rules across screens</h2><ul>'+
+    li("s","<b>One button system.</b> Coral filled is the main action. White with an outline is second. Icon only is third. Gold now means Breakout Score and nothing else.")+
+    li("s","<b>Search is always in the header.</b> Every signed in screen has a search pill with the current search. It replaces the docked Search and Search again buttons.")+
+    li("s","<b>The counter says what's left.</b> “2 searches left” in a quiet pill, turning coral at zero.")+
+    li("s","<b>Back lives top left only.</b> No second “Back to” link at the bottom.")+
+    li("n","<b>No DEV notes in the screens.</b> They live in these notes.")+
+    li("n","<b>The sample data backs the pitch.</b> The 84K creator with 1.4M views ranks first.")+
+    li("n","<b>One connected prototype.</b> Searches really run and finish, counts drop, and saves show up in Library. No per-screen state toggles.")+
+    '</ul>';
+  }
+  if(key==="questions"){
+    return legend+'<p class="sid">Open</p><h2>Questions for Ivan</h2><ol>'+
+    ["Which Breakout Score definition is final: beat the creator's average, the three factor mix in DESIGN.md, or BrandBeacon's creator baseline? Both products should use the same one.",
+     "Does a search count when it starts or when results arrive? And does a second search running at the same time count right away?",
+     "Do free users get video analyses, and how many?",
+     "TikTok Login Kit doesn't seem to return an email. Is the TikTok account enough for the free tier?",
+     "Is the affiliate reward cash or a free month of Pro?",
+     "How long does a slow search really take? That sets the 2:00 browse cutoff.",
+     "What's the minimum number of breakouts before we show No breakouts instead of results?",
+     "Are saved searches snapshots, or can they refresh (and does refreshing use a search)?",
+     "On a shared link: what does the sender line show for Google users, and does opening it use the sender's analyses?",
+     "Are paid or Spark ad videos labeled, or left out of rankings?"].map(function(q){return '<li>'+q+'</li>';}).join("")+'</ol>';
+  }
+  var n=NOTES[key]||NOTES["home-out"];
+  return legend+'<p class="sid">'+n.id+'</p><h2>'+n.h+'</h2><p class="why">'+n.why+'</p><p class="try"><b>TRY IT</b>'+n.tryit+'</p><ul>'+n.li.map(function(x){return li(x[0],x[1]);}).join("")+'</ul>';
+}
+
+function buildRail(){
+  var g=document.getElementById("rail-groups"),sel=document.getElementById("jump-sel");
+  g.innerHTML=RAIL.map(function(grp){return '<div class="grp"><h2>'+grp.g+'</h2>'+grp.items.map(function(it){return '<button type="button" data-jump="'+it[0]+'"><span>'+it[1]+'</span>'+it[2]+'</button>';}).join("")+'</div>';}).join("");
+  sel.innerHTML=RAIL.map(function(grp){return '<optgroup label="'+grp.g+'">'+grp.items.map(function(it){return '<option value="'+it[0]+'">'+(it[1]?it[1]+' · ':'')+it[2]+'</option>';}).join("")+'</optgroup>';}).join("");
+  g.addEventListener("click",function(e){var b=e.target.closest("[data-jump]");if(b)jump(b.getAttribute("data-jump"));});
+  sel.addEventListener("change",function(){jump(sel.value);});
+}
+
+var lastNotesKey=null;
+function renderChrome(){
+  var key=currentKey();
+  document.querySelectorAll("#rail-groups [data-jump]").forEach(function(b){var on=b.getAttribute("data-jump")===key;b.classList.toggle("on",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
+  var sel=document.getElementById("jump-sel");if(sel.value!==key)sel.value=key;
+  if(key!==lastNotesKey){document.getElementById("notes").innerHTML=notesHtml(key);lastNotesKey=key;}
+  var nk=NOTES[key];
+  document.getElementById("where").textContent=nk?nk.id:(key==="rules"?"Rules":"Questions");
+  var ctl="";
+  if(S.view==="proc"){var s=findSearch(S.params.id);if(s&&!s.done){ctl='<button data-ctl="slow">Jump to 2:00</button><button data-ctl="ready">Jump to Ready</button>';}}
+  if(pending().length&&S.view!=="proc")ctl='<button data-ctl="finish-all">Finish running searches</button>';
+  ctl+='<button data-ctl="restart">Restart</button>';
+  document.getElementById("ctl").innerHTML=ctl;
+}
+document.getElementById("ctl").addEventListener("click",function(e){
+  var b=e.target.closest("[data-ctl]");if(!b)return;var c=b.getAttribute("data-ctl");
+  if(c==="restart"){jump("home-out");return;}
+  if(c==="slow"){var s=findSearch(S.params.id);if(s){s.el=Math.max(s.el,120);s.need=Math.max(s.need,s.el+20);updateProc(s);render(false);}return;}
+  if(c==="ready"){var s2=findSearch(S.params.id);if(s2){s2.el=s2.need-1;}return;}
+  if(c==="finish-all"){pending().forEach(function(s){s.el=s.need-1;});return;}
+});
+
+var scr=document.getElementById("scr"),ovl=document.getElementById("ovl");
+function render(nav,keepScroll){
+  var top=scr.scrollTop;
+  var fn=V[S.view]||V.home;
+  scr.innerHTML=fn();
+  if(nav&&!keepScroll)scr.scrollTop=0;else scr.scrollTop=top;
+  renderOverlay();
+  renderChrome();
+  if(S.focusSearch){S.focusSearch=false;var inp=scr.querySelector(".sf input");if(inp){inp.focus();var l=inp.value.length;try{inp.setSelectionRange(l,l);}catch(e){}}}
+}
+function renderOverlay(){
+  var h="";
+  if(S.menu){
+    h+='<button class="scrim" data-act="close-menu" aria-label="Close menu"></button><div class="sheet" role="dialog" aria-label="Menu"><span class="grab"></span>'+
+    (S.plan==="pro"?'<button class="mi" data-act="account">Plan <small>Pro · 100 searches a month</small></button>':'<button class="mi up" data-act="paid">Upgrade to Pro <small>$49/mo</small></button><button class="mi" data-act="paid">Searches left <small>'+S.left+' of 3</small></button>')+
+    '<button class="mi" data-act="home">Home <small></small></button><button class="mi" data-act="library">Library <small></small></button><button class="mi" data-act="account">Account <small></small></button></div>';
+  }
+  if(S.toast){h+='<div class="toast" role="status">'+ic("checkc")+'<span>'+S.toast.msg+'</span>'+(S.toast.undo?'<button data-act="undo">Undo</button>':'')+'</div>';}
+  ovl.innerHTML=h;
+}
+
+/* ---------------- actions ---------------- */
+function act(a,el){
+  var d=function(k){return el.getAttribute("data-"+k);};
+  switch(a){
+    case "back": back(); break;
+    case "home": if(!S.loggedIn){go("home");}else go("home"); break;
+    case "logout-home": S.draft=S.query;go("home"); break;
+    case "menu": S.menu=!S.menu; renderOverlay(); break;
+    case "close-menu": S.menu=false; renderOverlay(); break;
+    case "search": startSearch(d("q")); break;
+    case "edit-search": S.draft=S.query;S.focusSearch=true;go("home"); break;
+    case "focus-search": S.draft="";S.focusSearch=true;go("home"); break;
+    case "auth": S.loggedIn=true;S.left=3;S.stack=[];S.view="home";toast("Signed in with your account.");startSearch(S.query); break;
+    case "auth-shared": if(S.params.preview){toast("Recipients sign in here.");break;} S=Object.assign(fresh(),{loggedIn:true,left:3,railKey:"home-in"});go("home",{},{replace:true});toast("Signed in. You have 3 free searches."); break;
+    case "view-search": go("proc",{id:+d("id")}); break;
+    case "open-ready": var s=findSearch(+d("id"));if(s){s.seen=true;S.query=s.q;go("results",{q:s.q},{replace:S.view==="proc"});} break;
+    case "results": S.query=d("q");go("results",{q:d("q")}); break;
+    case "empty": go("empty",{q:d("q")}); break;
+    case "detail": go("detail",{v:d("v")}); break;
+    case "analyze":
+      var id=d("v");S.busy=id;render(false);
+      setTimeout(function(){S.busy=null;S.analyzed[id]=true;go("detail",{v:id});},1200); break;
+    case "save":
+      var sv=d("v"),was=!!S.saved[sv];
+      if(was)delete S.saved[sv];else S.saved[sv]=true;
+      render(false);
+      toast(was?"Removed from Library.":"Saved to Library.",function(){if(was)S.saved[sv]=true;else delete S.saved[sv];render(false);});
+      break;
+    case "undo": if(S.toast&&S.toast.undo){var u=S.toast.undo;S.toast=null;u();renderOverlay();} break;
+    case "share": go("share",{v:d("v")}); break;
+    case "play": var k=d("key");S.playing=S.playing===k?null:k;render(false); break;
+    case "info": S.infoOpen=!S.infoOpen;render(false); break;
+    case "copy-hook":
+      var hv=AN[d("v")].tries[+d("k")][1];
+      try{navigator.clipboard&&navigator.clipboard.writeText(hv).catch(function(){});}catch(e){}
+      toast("Hook copied."); break;
+    case "quick-note": S.notes[d("v")]=d("t")+".";render(false);var ta=document.getElementById("note");if(ta)ta.focus(); break;
+    case "copy-link":
+      var nv=d("v"),txt="https://"+document.getElementById("link-code").textContent+((S.notes[nv]||"").trim()?"\n\n"+S.notes[nv].trim():"");
+      try{navigator.clipboard&&navigator.clipboard.writeText(txt).catch(function(){});}catch(e){}
+      toast("<b>Link copied.</b> Anyone with the link can see this breakout"+((S.notes[nv]||"").trim()?" and your note.":".")); break;
+    case "native-share":
+      if(navigator.share){navigator.share({title:"A Viral Breakout",text:S.notes[d("v")]||"",url:"https://"+document.getElementById("link-code").textContent}).catch(function(){});}
+      else toast("The phone's share menu opens here.");
+      break;
+    case "preview-shared": go("shared",{v:d("v"),note:(S.notes[d("v")]||"").trim(),who:"ivanb",preview:true}); break;
+    case "paid": go("paid"); break;
+    case "upgrade": S.busy="pay";render(false);setTimeout(function(){S.busy=null;S.plan="pro";go("pro",{},{replace:true});},1100); break;
+    case "affiliate": S.affLink=false;go("affiliate"); break;
+    case "aff-link": S.affLink=true;render(false);toast("Your affiliate link is ready."); break;
+    case "copy-aff": try{navigator.clipboard&&navigator.clipboard.writeText("https://ugcbreakouts.com/r/ivanb").catch(function(){});}catch(e){} toast("Affiliate link copied."); break;
+    case "library": go("library"); break;
+    case "account": go("account"); break;
+    case "tab": S.libTab=d("k");render(false); break;
+    case "an-only": S.anOnly=!S.anOnly;render(false); break;
+    case "cancel": S.plan="free";S.left=2;render(false);toast("Pro canceled. You're back on the free plan."); break;
+    case "logout": jump("home-out"); break;
+    case "toast": toast(d("msg")); break;
+  }
+}
+var phone=document.getElementById("phone");
+phone.addEventListener("click",function(e){
+  var el=e.target.closest("[data-act]");
+  if(!el||!phone.contains(el))return;
+  e.preventDefault();
+  act(el.getAttribute("data-act"),el);
+});
+phone.addEventListener("submit",function(e){
+  var f=e.target.closest("[data-form='search']");if(!f)return;
+  e.preventDefault();
+  startSearch(f.querySelector("input").value);
+});
+phone.addEventListener("input",function(e){
+  if(e.target.matches(".sf input"))S.draft=e.target.value;
+  if(e.target.id==="note"){S.notes[e.target.getAttribute("data-v")]=e.target.value;var n=document.getElementById("nudge");if(n)n.textContent=e.target.value.trim()?"Your note shows at the top of the link.":"A note tells them what to remake. You can skip it.";}
+});
+
+buildRail();
+render(true);
+})();
+</script>
+
+</body>
+</html>
