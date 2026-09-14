@@ -808,7 +808,7 @@ V.home=function(){
     '<p class="aud">An app for TikTok creators</p>'+
     searchField("q-out")+
     chipBlock()+
-    '</div>'+landing();
+    '</div>';
 
   }
   var recent=[];S.history.forEach(function(h){if(h.n>0&&recent.indexOf(h.q)<0&&recent.length<3)recent.push(h.q);});
@@ -1308,8 +1308,8 @@ function currentKey(){
 
 function li(t,txt){return '<li><span class="tag '+t+'">'+({s:"SLACK",n:"NEW",a:"ASK",r:"IVAN"})[t]+'</span><span>'+txt+'</span></li>';}
 var NOTES={
-  "home-out":{id:"01 · 01-home-search",h:"Home, logged out",why:"Gets the first search typed.",tryit:"Tap a chip to fill the bar (the refresh button swaps the set), then press the arrow. Scroll down for the rest of the page.",
-    li:[["s","Removed “3 free searches with email” from this screen, so nothing stops people before they search. Ivan: “agreed, why have something stop them.”"],["s","One Search button, as an arrow inside the bar (Ivan already had it on other screens)."],["v","Below the search: how it works, Top Breakouts right now, and Free vs Pro pricing. From the missing list."],["f","Swapped the background photo that showed the Instagram logo. TikTok only lock."]]},
+  "home-out":{id:"01 · 01-home-search",h:"Home, logged out",why:"Ivan's locked Home. Only the two agreed changes.",tryit:"Tap a chip to fill the bar (the refresh button swaps the set), then press the arrow.",
+    li:[["s","Removed “3 free searches with email” from this screen, so nothing stops people before they search. Ivan: “agreed, why have something stop them.”"],["s","One Search button, as an arrow inside the bar (Ivan already had it on other screens)."],["f","Swapped the background photo that showed the Instagram logo. TikTok only lock."]]},
   "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in",why:"Ivan asked for a new version whose only job is the sign in.",tryit:"Tap Continue with Google, or Continue with email, then any email and any 6 digits.",
     li:[["s","New version of the page. Ivan: “the purpose of this page is to get them to oauth, maybe make a new version of that screen.”"],["s","Headline no longer repeats benefit 1, and the hard to read 1 2 3 list is replaced by one example card."],["s","The free searches line moved here from Home."],["r","No TikTok sign in. TikTok's API returns no email (checked the docs), so it's Google plus email, per Ivan."],["r","Free reads “3 searches and 3 video analyses.”"],["v","Email sign in uses a 6 digit code (applied suggestion)."],["d","Google and email sign in stay signed in (session persists)."]]},
   "onboard":{id:"01d · new screen",h:"First run",why:"From the missing list Ivan asked about (“what else are we missing”).",tryit:"Pick a few, then Continue. Your search starts, and Top Breakouts opens on the first category you picked.",
@@ -1366,7 +1366,8 @@ function notesHtml(key){
     '</ul>';
   }
   if(key==="missing"){
-    var M=[["Built this round",["<b>First run:</b> “What do you film?” after sign up.","<b>Edit profile:</b> display name and email.","<b>Empty Library</b> for new users.","<b>Checkout:</b> Confirm Pro, then Stripe.","<b>Pro monthly limit hit.</b>","<b>Cancel Pro</b> and <b>failed payment.</b>","<b>Affiliate dashboard.</b>","<b>Search failed.</b>","<b>Video removed from TikTok.</b>","<b>Dead shared link.</b>","<b>Email me when a search is ready</b> setting.","<b>Logged out Home below the fold.</b>","<b>Help</b> FAQ and a <b>Terms and Privacy</b> placeholder."]],
+    var M=[["Built this round",["<b>First run:</b> “What do you film?” after sign up.","<b>Edit profile:</b> display name and email.","<b>Empty Library</b> for new users.","<b>Checkout:</b> Confirm Pro, then Stripe.","<b>Pro monthly limit hit.</b>","<b>Cancel Pro</b> and <b>failed payment.</b>","<b>Affiliate dashboard.</b>","<b>Search failed.</b>","<b>Video removed from TikTok.</b>","<b>Dead shared link.</b>","<b>Email me when a search is ready</b> setting.","<b>Help</b> FAQ and a <b>Terms and Privacy</b> placeholder."]],
+      ["Suggested, not built",["<b>Logged out Home below the search</b> (how it works, Top Breakouts, pricing) for people arriving from X or ads. Not built because Ivan locked this screen visually."]],
       ["Not screens, still to do",["The search ready email itself (subject and body).","Real Terms of Service and Privacy Policy from counsel.","Stripe checkout branding and receipt emails."]]];
     return legend+'<p class="sid">Before desktop</p><h2>Added before desktop</h2><p class="why">Everything from the missing list now has a mobile screen or state. Each one is in the screen list on the left.</p>'+
       M.map(function(g){return '<p class="sid" style="margin-top:6px">'+g[0]+'</p><ul>'+g[1].map(function(t){return li("v",t);}).join("")+'</ul>';}).join("")+
