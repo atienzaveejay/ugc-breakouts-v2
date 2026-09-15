@@ -1085,13 +1085,18 @@ V.account=function(){
 };
 
 /* ---------------- desktop views ---------------- */
-function dtb(opts){
-  opts=opts||{};
-  var logo='<button class="logo" data-act="home" style="font-size:20px">UGC <b>Breakouts</b></button>';
-  if(!S.loggedIn)return '<div class="dtb">'+logo+'<span class="sp"></span>'+(opts.q?'<button class="qp" data-act="edit-search" style="flex:0 1 320px">'+ic("search")+'<span>'+esc(opts.q)+'</span></button>':'')+'</div>';
+function dtb(o){
+  o=o||{};
+  var logo=(S.view==="shared"||S.view==="affiliate"||S.view==="paid"||(S.view==="proc"&&!(findSearch(S.params.id)||{}).done))?'<span class="logo" style="font-size:20px">UGC <b>Breakouts</b></span>':'<button class="logo" data-act="home" style="font-size:20px">UGC <b>Breakouts</b></button>';
+  var search='';
+  if(o.search==="Search")search='<button class="qp" data-act="focus-search">'+ic("search")+'<span>Search</span></button>';
+  else if(o.search)search=searchPill(o.q||S.query);
+  else if(o.q)search='<button class="qp" data-act="edit-search" style="flex:0 1 320px">'+ic("search")+'<span>'+esc(o.q)+'</span></button>';
   function nav(a,l){return '<button class="'+(S.view===a?'on':'')+'" data-act="'+a+'">'+l+'</button>';}
-  return '<div class="dtb">'+logo+(opts.noSearch?'':searchPill(opts.q||S.query))+'<span class="sp"></span><nav class="dnav" aria-label="Main">'+nav("top","Top Breakouts")+nav("library","Library")+nav("account","Account")+'</nav>'+countPill()+(S.plan==="pro"?'':'<button class="b b1" data-act="paid" style="min-height:38px;font-size:14px;padding:0 16px">Upgrade</button>')+'</div>';
+  var navs=o.nav?'<nav class="dnav" aria-label="Main">'+(S.plan==="pro"?'':nav("paid","Upgrade"))+nav("top","Top Breakouts")+nav("library","Library")+nav("account","Account")+'</nav>':'';
+  return '<div class="dtb">'+logo+search+'<span class="sp"></span>'+navs+(o.pill?countPill():'')+'</div>';
 }
+var DTB={proc:{pill:1},paid:{},pro:{pill:1},affiliate:{},account:{},library:{nav:1},empty:{search:1,pill:1,nav:1}};
 function stripTb(h){return h.replace(/^<div class="tb">[\s\S]*?<\/div>/,'');}
 function between(h,a,b){var i=h.indexOf(a),j=b?h.indexOf(b,i+a.length):h.length;return h.slice(i,j);}
 var DV={};
@@ -1100,9 +1105,9 @@ DV.home=function(){
     return '<div class="mos" aria-hidden="true">'+["flatlay","neon","palette","oil","face","brushes"].map(function(k){return '<div style="'+bg(k)+'"></div>';}).join("")+'</div>'+
     '<div class="hero dhero"><p class="wm">UGC <b>Breakouts</b></p><h2 class="tag1"><span>Find Viral Breakouts.</span><span>Get the creative strategy to make your own.</span></h2><p class="aud">An app for TikTok creators</p>'+searchField("q-out")+chipBlock()+'</div>';
   }
-  var recent=[];S.history.forEach(function(h){if(h.n>0&&recent.indexOf(h.q)<0&&recent.length<6)recent.push(h.q);});
-  var lib=ALLV.filter(function(v){return S.saved[v.id];}).slice(0,4);
-  return dtb({noSearch:true})+'<div class="dpage" style="max-width:1000px">'+banners()+
+  var recent=[];S.history.forEach(function(h){if(h.n>0&&recent.indexOf(h.q)<0&&recent.length<4)recent.push(h.q);});
+  var lib=ALLV.filter(function(v){return S.saved[v.id];}).slice(0,2);
+  return dtb({pill:1,nav:1})+'<div class="dpage" style="max-width:1000px">'+banners()+
   '<div class="stack" style="gap:2px"><h1 class="h1 big">Welcome back</h1><p class="sub">Search a product or format to remake</p></div>'+
   '<div style="max-width:720px;width:100%">'+searchField("q-in")+'</div>'+chipBlock()+
   '<div class="dgrid2">'+
@@ -1130,7 +1135,7 @@ DV.results=function(){
   var ids=[];h.replace(/data-act="save" data-v="(v\d+)"/g,function(m,id){ids.push(id);});
   var cards=ids.length?'<div class="dgrid2">'+ids.map(function(id){return dcard(vid(id));}).join("")+'</div>':'<div class="nomatch"><b style="color:var(--ink)">No videos match these filters</b><button class="b b2" data-act="clear-filters">Clear filters</button></div>';
   var wall=h.indexOf('<div class="wall">')>-1?h.slice(h.indexOf('<div class="wall">'),h.length-6):'';
-  return dtb({q:q})+'<div class="dpage" style="max-width:1100px"><div class="rh"><h1 class="h1 big" style="margin:0">Breakouts for <em>'+esc(q)+'</em></h1></div>'+ctrls+cards+wall+'</div>';
+  return dtb({search:1,q:q,pill:1,nav:1})+'<div class="dpage" style="max-width:1100px"><div class="rh"><h1 class="h1 big" style="margin:0">Breakouts for <em>'+esc(q)+'</em></h1></div>'+ctrls+cards+wall+'</div>';
 };
 DV.detail=function(){
   var h=V.detail(),v=vid(S.params.v||"v1");
@@ -1138,7 +1143,7 @@ DV.detail=function(){
   var iD=h.indexOf('<div class="dock">');
   var boxes=h.slice(h.indexOf('<div class="box teal">'),iD-6);
   var actions=h.slice(iD).replace('class="dock"','class="drow"');
-  return dtb({q:S.query})+'<div class="dpage" style="max-width:1100px"><button class="dback" data-act="back">'+ic("back")+'Back</button><div class="dsplit" style="grid-template-columns:380px minmax(0,1fr)">'+
+  return dtb({search:1,pill:1,nav:1})+'<div class="dpage" style="max-width:1100px"><button class="dback" data-act="back">'+ic("back")+'Back</button><div class="dsplit" style="grid-template-columns:380px minmax(0,1fr)">'+
   '<div class="dsticky" style="top:84px"><div style="display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start"><div>'+vtile(v,{brand:true,style:"aspect-ratio:9/16"})+'</div>'+facts.replace('<div class="vit">','</div><div class="vit">')+actions+'</div>'+
   '<div class="stack" style="gap:14px">'+boxes+'</div></div></div>';
 };
@@ -1147,7 +1152,7 @@ DV.share=function(){
   var head=between(h,'<div class="stack" style="gap:4px">','<div class="shc">');
   var card=between(h,'<div class="shc">','<div class="fld">');
   var flds=h.slice(h.indexOf('<div class="fld">'),h.length-6);
-  return dtb({q:S.query})+'<div class="dpage" style="max-width:1000px"><button class="dback" data-act="back">'+ic("back")+'Back</button>'+head+'<div class="dsplit"><div>'+card+'</div><div class="stack" style="gap:18px">'+flds+'</div></div></div>';
+  return dtb({search:1,nav:1})+'<div class="dpage" style="max-width:1000px"><button class="dback" data-act="back">'+ic("back")+'Back</button>'+head+'<div class="dsplit"><div>'+card+'</div><div class="stack" style="gap:18px">'+flds+'</div></div></div>';
 };
 DV.shared=function(){
   var h=V.shared();
@@ -1160,13 +1165,15 @@ DV.top=function(){
   var h=V.top();
   var head=between(h,'<div class="stack" style="gap:4px">','<div class="tgrid">');
   var grid=h.slice(h.indexOf('<div class="tgrid">'),h.length-6).replace('class="tgrid"','class="dfeed"');
-  return dtb()+'<div class="dpage" style="max-width:1200px">'+head.replace('font-size:26px','font-size:40px')+grid+'</div>';
+  return dtb({search:"Search",pill:1,nav:1})+'<div class="dpage" style="max-width:1200px">'+head.replace('font-size:26px','font-size:40px')+grid+'</div>';
 };
 var DESK_WIDTH={proc:560,paid:560,pro:560,account:560,empty:640,library:760,affiliate:600};
 var DESK_BACK={proc:1,paid:1,affiliate:1,library:1,account:1};
 function deskGeneric(){
   var body=stripTb((V[S.view]||V.home)());
-  return dtb({noSearch:S.view==="proc"||S.view==="paid"||S.view==="pro"})+'<div class="dpage" style="max-width:'+(DESK_WIDTH[S.view]||640)+'px">'+(DESK_BACK[S.view]?'<button class="dback" data-act="back">'+ic("back")+'Back</button>':'')+body+'</div>';
+  var cfg=DTB[S.view]||{};if(S.view==="empty")cfg={search:1,q:S.params.q,pill:1,nav:1};
+  var back=DESK_BACK[S.view];if(S.view==="proc"){var ps=findSearch(S.params.id);back=ps&&!ps.done;}
+  return dtb(cfg)+'<div class="dpage" style="max-width:'+(DESK_WIDTH[S.view]||640)+'px">'+(back?'<button class="dback" data-act="back">'+ic("back")+'Back</button>':'')+({library:'Library',account:'Account'}[S.view]?'<h1 class="h1" style="font-size:32px">'+{library:'Library',account:'Account'}[S.view]+'</h1>':'')+body+'</div>';
 }
 function fitDesk(){
   if(DEVICE!=="desk")return;
@@ -1272,7 +1279,7 @@ function notesHtml(key){
     ["Breakout Score is a combo of a few variables, ranging 0 to 100.","A search counts when results arrive.","Free users get 3 video analyses.","No TikTok sign in (no email), so Google.","Searches take 15 seconds to a minute (round 3).","Share notes can be edited; each edit makes a new link (round 3).","Affiliate reward is $49 only for now (round 3).","Fewer than 25 breakouts shows No breakouts.","Saved searches are snapshots, and a refresh costs a search.","The sender line shows first name and email, and the recipient sees the sender's analysis.","Paid and Spark ad videos stay in rankings, unlabeled, for MVP."].map(function(q){return li("q",q);}).join("")+'</ul>';
   }
   var n=NOTES[key]||NOTES["home-out"];
-  if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens, copy, and flows as mobile. The layout follows Ivan\'s own notes in MAP.md: centered Home hero with a wide search, Home in with recent and Library side by side, Sign in in two columns, Results in two columns, Detail with the video left and analysis right. The hamburger menu becomes top links. No new features.</p>';
+  if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens, copy, and flows as mobile. The layout follows Ivan\'s own notes in MAP.md: centered Home hero with a wide search, Home in with recent and Library side by side, Sign in in two columns, Results in two columns, Detail with the video left and analysis right. Each top bar mirrors that screen\'s mobile header: where mobile has the menu, desktop shows its items (Upgrade, Top Breakouts, Library, Account) as links, and screens with no menu on mobile (Processing, Paid, Pro success, Affiliate, Account) have none on desktop. No new features.</p>';
   return legend+'<p class="sid">'+n.id+'</p><h2>'+n.h+'</h2><ul>'+n.li.map(function(x){return li(x[0],x[1]);}).join("")+'</ul>';
 }
 
