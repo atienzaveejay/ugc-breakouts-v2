@@ -589,6 +589,9 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .dfill{flex:1}
 .dfill{padding-top:16px;padding-bottom:16px}
 .dfill>.proc,.dfill>.pb{flex:1;justify-content:center;padding-top:0;padding-bottom:0}
+.browse{visibility:hidden;opacity:0}
+.browse.on{visibility:visible;opacity:1}
+@media (prefers-reduced-motion: no-preference){.browse.on{transition:opacity .25s ease}}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
 </head>
@@ -920,8 +923,8 @@ V.proc=function(){
 function slowHtml(s){
   var ex='<p class="eb m" style="margin:6px 0 12px">Example breakouts</p><div class="exrow">'+[["palette",86],["brushes",72]].map(function(k,n){return vtile({id:"e"+n,img:k[0],handle:"example"},{sm:true,exs:k[1],key:"ex"+n});}).join("")+'</div>'+
     '<p style="margin:12px 0 0;font-weight:600;font-size:14px">Watch examples while you wait. These are not your results yet.</p><p class="fine" style="margin-top:4px">Usually 15 seconds to a minute.</p>';
-  if(s.el>=60)return ex+'<button class="b b2 full-w" data-act="back" style="margin-top:14px">Browse while you wait</button>';
-  return ex;
+  var on=s.el>=60;
+  return ex+'<button class="b b2 full-w browse'+(on?' on':'')+'" data-act="back" style="margin-top:14px"'+(on?'':' tabindex="-1" aria-hidden="true" inert')+'>Browse while you wait</button>';
 }
 function updateProc(s){
   var r=document.getElementById("ring");if(!r)return;
