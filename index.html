@@ -872,7 +872,7 @@ V.home=function(){
   var lib=ALLV.filter(function(v){return S.saved[v.id];}).slice(0,2);
   return '<div class="tb"><button class="logo" data-act="home">UGC <b>Breakouts</b></button><span class="sp"></span>'+countPill()+menuBtn()+'</div>'+
   '<div class="pb">'+banners()+
-  '<div class="stack" style="gap:2px"><h1 class="h1" style="font-size:26px">Welcome back</h1><p class="sub" style="font-size:15px">Search a product or format to remake</p></div>'+
+  '<div class="stack" style="gap:2px"><h1 class="h1" style="font-size:26px">What are you filming next?</h1><p class="sub" style="font-size:15px">Search a product or format to remake</p></div>'+
   searchField("q-in")+chipBlock()+
   (recent.length?'<div class="stack"><p class="lbl">Recent · opens results</p><div class="chips">'+recent.map(function(c){return '<button class="chip ghost" data-act="results" data-q="'+esc(c)+'">'+esc(c)+' <b style="color:var(--coral-d);font-size:13px">Open ›</b></button>';}).join("")+'</div></div>':'')+
   (lib.length?'<div class="peek"><div class="hdr">Library <button data-act="library">See all</button></div><div class="pk">'+lib.map(function(v){return '<button class="pki" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span><b>@'+v.handle+'</b><br><b class="s">'+v.score+'</b></span></button>';}).join("")+'</div></div>':'')+
@@ -1124,7 +1124,7 @@ DV.home=function(){
   var recent=[];S.history.forEach(function(h){if(h.n>0&&recent.indexOf(h.q)<0&&recent.length<4)recent.push(h.q);});
   var lib=ALLV.filter(function(v){return S.saved[v.id];}).slice(0,2);
   return dtb({pill:1,nav:1})+'<div class="dpage" style="max-width:1000px">'+banners()+
-  '<div class="stack" style="gap:2px"><h1 class="h1 big">Welcome back</h1><p class="sub">Search a product or format to remake</p></div>'+
+  '<div class="stack" style="gap:2px"><h1 class="h1 big">What are you filming next?</h1><p class="sub">Search a product or format to remake</p></div>'+
   '<div style="max-width:720px;width:100%">'+searchField("q-in")+'</div>'+chipBlock()+
   '<div class="dgrid2">'+
   '<div class="peek"><div class="hdr">Recent · opens results</div><div class="chips">'+recent.map(function(c){return '<button class="chip ghost" data-act="results" data-q="'+esc(c)+'">'+esc(c)+' <b style="color:var(--coral-d);font-size:13px">Open ›</b></button>';}).join("")+'</div></div>'+
@@ -1268,7 +1268,7 @@ var NOTES={
   "home-out":{id:"01 · 01-home-search",h:"Home, logged out",li:[["f","No changes from this round. Earlier fix: the background photo with the Instagram logo was swapped out (TikTok only lock)."]]},
   "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in",li:[["q","No TikTok sign in. TikTok's API returns no email (checked the docs), so it's Google. Ivan: “if no, then we go google.”"],["q","Free is 3 searches and 3 video analyses. Ivan: “yes, 3?”"]]},
   "proc":{id:"01c · 01c-processing",h:"Processing",li:[["q","A search counts when results arrive. Ivan: “search counts when it arrives.”"],["r","Round 3: wait copy is “Usually 15 seconds to a minute.” Ivan: “will be between 15 seconds and 1min.” Browse while you wait now appears at 1:00, once the wait runs past the usual."],["a","When a video is played: does it play in the box, or open a popup with the analysis? The prototype plays it in the box."]]},
-  "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",li:[["c","The menu links to the Top Breakouts feed."]]},
+  "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",li:[["r","The headline is now “What are you filming next?” instead of “Welcome back.” Ivan: “welcome back, that can get old?”"],["c","The menu links to the Top Breakouts feed."]]},
   "results":{id:"02 · 02-results",h:"Results",li:[["r","Paywall after the top 10, saying there are dozens more with Pro. Ivan (follow up): “yeah, let's do 10.” Ivan: “showing only 8 or 10 videos and saying they can see dozens of videos (if they pay).”"],["r","Persistent search on top, unchanged. Ivan: “LOVE the persistent search on the top!”"],["r","Sort and filter. Ivan: “we'll probably need a sort/filter?”"],["r","Analyze, Save, and Share buttons unchanged. Ivan: “love the analyze, save, share buttons.”"],["r","View analysis and Analyze video look different: analyzed videos have a teal Analyzed badge and a solid button, the rest have an outlined Analyze video button."],["q","Free users get 3 analyses. Analyzing a fourth video opens Paid (analysis cap)."],["c","The paywall opens the video cap version of Paid. Ivan: “we need paid cap hit video.”"],["a","Which sort and filter options? Ivan asked whether to keep or remove Under 100K followers."]]},
   "empty":{id:"02 · 02-results-empty",h:"No breakouts",li:[["q","Shows when a search finds fewer than 25 breakouts, and doesn't use a search. Ivan: “25?” and “if they have a bad search… we tell them to search again.”"]]},
   "top":{id:"02b · new screen",h:"Top Breakouts feed",li:[["c","A feed of every video we've sourced, top scores first, with category chips to pick from. Ivan: “a menu that says top breakouts and then a list of all the breakouts across all categories… chip, you know, the little selector things.”"],["a","Which categories at launch, and how often does the feed update?"]]},
