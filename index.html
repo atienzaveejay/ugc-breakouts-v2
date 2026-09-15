@@ -532,6 +532,13 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .next .ol li::before{background:rgba(255,255,255,.25);color:#fff}
 .ol small{color:var(--mid);font-size:13.5px}
 .vt .exs{position:absolute;left:6px;bottom:6px;color:var(--gold);font-weight:800;font-size:13px;opacity:.85}
+.bigstats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;text-align:center}
+.bigstats b{display:block;font-size:20px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.15}
+.bigstats small{font-size:12px;color:var(--mid);font-weight:600}
+.vsmall{border-top:1px solid var(--hair);padding-top:10px;font-size:13px;color:var(--mid);text-align:center}
+.steps2 button{align-items:center;gap:12px}
+.steps2 button b{display:block;font-size:15.5px}
+.steps2 button small{display:block;margin-top:2px}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
 </head>
@@ -571,7 +578,7 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 <div class="shell">
   <aside class="rail" aria-label="Screens">
     <div class="brand">
-      <p class="kicker">Round 2 notes · only Ivan's feedback</p>
+      <p class="kicker">Round 3 notes · only Ivan's feedback</p>
       <h1>UGC Breakouts <b>v2</b></h1>
       <p>Clickable prototype. Round 1 Slack changes are in. The notes list only this round: Ivan's notes, his answers, and the call.</p>
     </div>
@@ -676,7 +683,7 @@ function anFor(v){
 var S;
 function fresh(){
   return {loggedIn:false,plan:"free",left:3,anLeft:2,draft:"",query:"Lip oil",searches:[],nextId:1,
-    saved:{v1:true,v2:true},analyzed:{v1:true},notes:{},links:{},
+    saved:{v1:true,v2:true},analyzed:{v1:true},notes:{},links:{},editing:{},
     history:[{q:"Lip oil",when:"Today, 2:14 PM",n:38,saved:true},{q:"Tinted moisturizer",when:"Yesterday, 8:02 PM",n:27,saved:false},{q:"GRWM",when:"Sep 9, 11:40 AM",n:29,saved:true},{q:"SPF routine",when:"Sep 8, 7:15 PM",n:24,saved:true},{q:"#cleangirl",when:"Sep 5, 10:22 AM",n:19,saved:true},{q:"#momtok",when:"Sep 4, 9:05 AM",n:0,saved:false}],
     libTab:"searches",chipSet:0,affLink:false,affReward:"cash",infoOpen:false,menu:false,toast:null,playing:null,
     view:"home",params:{},stack:[],railKey:"home-out",focusSearch:false,
@@ -762,7 +769,7 @@ function searchPill(q){return '<button class="qp" data-act="edit-search" aria-la
 function banners(){
   var h="",r=readyUnseen(),p=pending();
   if(r.length){var s=r[r.length-1];h+='<button class="bn ready" data-act="open-ready" data-id="'+s.id+'"><span class="stg">'+ic("star")+'</span><span class="tx"><small>UGC Breakouts</small><b>Your '+esc(s.q)+' breakouts are ready</b><small>Tap to see results</small></span><span class="go2">Open</span></button>';}
-  if(p.length){var last=p[p.length-1];h+='<button class="bn" data-act="view-search" data-id="'+last.id+'"><span class="dot" aria-hidden="true"></span><span class="tx"><small>In progress</small><b>Searching '+esc(last.q)+'…</b><small>'+(p.length>1?(p.length-1)+' more search'+(p.length>2?'es':'')+' running':'Usually about 30 seconds. Keep browsing.')+'</small></span><span class="go2">View</span></button>';}
+  if(p.length){var last=p[p.length-1];h+='<button class="bn" data-act="view-search" data-id="'+last.id+'"><span class="dot" aria-hidden="true"></span><span class="tx"><small>In progress</small><b>Searching '+esc(last.q)+'…</b><small>'+(p.length>1?(p.length-1)+' more search'+(p.length>2?'es':'')+' running':'Usually 15 seconds to a minute. Keep browsing.')+'</small></span><span class="go2">View</span></button>';}
   return h;
 }
 function gicon(){return '<span class="gw">'+ic("g")+'</span>';}
@@ -847,12 +854,12 @@ V.proc=function(){
   '<div class="ring" id="ring">'+ringSvg(s.el/s.need)+'<div class="t"><span id="elapsed">'+mmss(s.el)+'</span><small>ELAPSED</small></div></div>'+
   '<div class="stack" style="gap:4px"><p class="lbl">Searching <b style="color:var(--coral-d)">'+esc(s.q)+'</b></p><h1 class="h1" style="font-size:24px">Finding your Viral Breakouts</h1></div>'+
   '<ul class="steps" id="steps">'+stepsHtml(s)+'</ul>'+
-  '<div id="slow-slot" data-slow="'+(s.el>=30?1:0)+'">'+slowHtml(s)+'</div></div>';
+  '<div id="slow-slot" data-slow="'+(s.el>=60?1:0)+'">'+slowHtml(s)+'</div></div>';
 };
 function slowHtml(s){
   var ex='<p class="eb m" style="margin:6px 0 12px">Example breakouts</p><div class="exrow">'+[["palette",86],["brushes",72]].map(function(k,n){return vtile({id:"e"+n,img:k[0],handle:"example"},{sm:true,exs:k[1],key:"ex"+n});}).join("")+'</div>'+
-    '<p style="margin:12px 0 0;font-weight:600;font-size:14px">Watch examples while you wait. These are not your results yet.</p><p class="fine" style="margin-top:4px">Usually about 30 seconds.</p>';
-  if(s.el>=30)return ex+'<button class="b b2 full-w" data-act="back" style="margin-top:14px">Browse while you wait</button>';
+    '<p style="margin:12px 0 0;font-weight:600;font-size:14px">Watch examples while you wait. These are not your results yet.</p><p class="fine" style="margin-top:4px">Usually 15 seconds to a minute.</p>';
+  if(s.el>=60)return ex+'<button class="b b2 full-w" data-act="back" style="margin-top:14px">Browse while you wait</button>';
   return ex;
 }
 function updateProc(s){
@@ -860,7 +867,7 @@ function updateProc(s){
   r.querySelector("circle.p").setAttribute("stroke-dashoffset",Math.round(295*(1-Math.min(s.el/s.need,1))));
   document.getElementById("elapsed").textContent=mmss(s.el);
   document.getElementById("steps").innerHTML=stepsHtml(s);
-  var sl=document.getElementById("slow-slot"),isSlow=s.el>=30;
+  var sl=document.getElementById("slow-slot"),isSlow=s.el>=60;
   if((sl.getAttribute("data-slow")==="1")!==isSlow){sl.innerHTML=slowHtml(s);sl.setAttribute("data-slow",isSlow?"1":"0");}
 }
 
@@ -920,7 +927,7 @@ V.detail=function(){
   '<div class="facts"><div class="scorerow"><b>'+v.score+'</b><span>Breakout Score</span><button class="infob" data-act="info" aria-expanded="'+S.infoOpen+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
   (S.infoOpen?'<div class="pop" role="note"><b>Breakout Score</b><br>A score from 0 to 100. It shows how much this video beat what accounts this size usually get. More likes, comments, and shares, and a newer post, push it higher.</div>':'')+
   '<div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div></div>'+
-  '<div class="vit">'+stats(v)+'<div class="vg"><div><small>Followers</small><b>'+v.followers+'</b></div><div><small>Posted</small><b>'+v.posted+'</b></div><div><small>Duration</small><b>'+v.len+'</b></div><div><small>Network</small><b>TikTok</b></div></div></div>'+
+  '<div class="vit"><div class="bigstats"><div><b>'+v.views+'</b><small>Views</small></div><div><b>'+v.likes+'</b><small>Likes</small></div><div><b>'+v.comments+'</b><small>Comments</small></div><div><b>'+v.shares+'</b><small>Shares</small></div></div><div class="vsmall">Posted '+v.posted+' · '+v.len+' · TikTok</div></div>'+
   '<div class="box teal"><h3>Hooks</h3><p class="sub" style="font-size:14px;margin-top:-6px">What worked in this clip, plus lines you can try.</p><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(t){return '<li><span>'+t[0]+': “'+t[1]+'”</span></li>';}).join("")+'</ol></div>'+
   '<div class="box white"><h3>Why the video worked</h3><ol class="ol">'+a.why.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
   '<div class="box next"><h3>What you can do next</h3><ol class="ol">'+nx.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
@@ -928,18 +935,19 @@ V.detail=function(){
   '<div class="dock"><div class="row"><button class="b b2 grow'+(S.saved[v.id]?' on':'')+'" data-act="save" data-v="'+v.id+'" aria-pressed="'+!!S.saved[v.id]+'">'+ic(S.saved[v.id]?"saved":"save")+'Save</button><button class="b b1 grow" data-act="share" data-v="'+v.id+'">'+ic("share")+'Share</button></div></div>';
 };
 
-function linkFor(v){return "ugcbreakouts.com/b/"+v.product.toLowerCase().replace(/[^a-z]/g,"")+"-"+v.score;}
+function linkFor(v){var l=S.links[v.id];return "ugcbreakouts.com/b/"+v.product.toLowerCase().replace(/[^a-z]/g,"")+"-"+v.score+(l&&l.ver>1?"-"+l.ver:"");}
 V.share=function(){
-  var v=vid(S.params.v||"v1"),link=S.links[v.id],note=S.notes[v.id]||"";
-  var noteFld=link?
-    '<div class="fld"><div class="lockrow"><label for="note">Note</label><span class="lockb">'+ic("lock")+'Locked to this link</span></div><textarea id="note" readonly>'+esc(link.note)+'</textarea><p class="nudge">Recipients see this note.</p></div>':
-    '<div class="fld"><label for="note">Note <span class="rec">Recommended</span></label><textarea id="note" data-v="'+v.id+'" placeholder="Add a short note for your friend">'+esc(note)+'</textarea><p class="nudge">The note locks when you copy the link.</p></div>';
+  var v=vid(S.params.v||"v1"),link=S.links[v.id],editing=!!S.editing[v.id],note=S.notes[v.id]||"";
+  var locked=link&&!editing,changed=link&&editing&&note!==link.note;
+  var noteFld=locked?
+    '<div class="fld"><div class="lockrow"><label for="note">Note</label><span class="lockb">'+ic("lock")+'Locked to this link</span></div><textarea id="note" readonly>'+esc(link.note)+'</textarea><div class="lockrow"><p class="nudge">Recipients see this note.</p><button class="editb" data-act="edit-note" data-v="'+v.id+'">Edit note</button></div></div>':
+    '<div class="fld"><label for="note">Note <span class="rec">Recommended</span></label><textarea id="note" data-v="'+v.id+'" placeholder="Add a short note for your friend">'+esc(note)+'</textarea><p class="nudge" id="nudge">'+(link?'Copying makes a new link with this note. Your earlier link keeps its old note.':'The note locks when you copy the link.')+'</p></div>';
   return '<div class="tb">'+backBtn()+searchPill(S.query)+menuBtn()+'</div>'+
   '<div class="pb">'+
   '<div class="stack" style="gap:4px"><h1 class="h1" style="font-size:24px">Share this breakout</h1><p class="sub" style="font-size:14.5px">Send the link. Your friend sees the card, why it worked, and what to do next.</p></div>'+
   '<div class="shc">'+vtile(v,{sm:true,style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:5px"><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>· '+v.followers+'</small></div>'+stats(v)+'</div></div>'+
   noteFld+
-  '<div class="fld"><label for="link-code" style="font-size:14px">Your link</label><div class="linkbox"><code id="link-code">'+linkFor(v)+'</code><button class="b b1" data-act="copy-link" data-v="'+v.id+'" style="padding:0 16px">'+ic("copy")+'Copy</button></div></div>'+
+  '<div class="fld"><label for="link-code" style="font-size:14px">Your link</label><div class="linkbox"><code id="link-code">'+linkFor(v)+'</code><button class="b b1" data-act="copy-link" data-v="'+v.id+'" style="padding:0 16px;white-space:nowrap">'+ic("copy")+(link&&editing?'Copy new link':'Copy')+'</button></div></div>'+
   '</div>';
 };
 
@@ -952,7 +960,7 @@ V.shared=function(){
   '<div class="box teal"><h3>Hooks</h3><p class="sub" style="font-size:14px;margin-top:-6px">What worked, plus lines you can try.</p><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(t){return '<li>'+t[0]+': “'+t[1]+'”</li>';}).join("")+'</ol></div>'+
   '<div class="box white"><h3>Why the video worked</h3><ol class="ol">'+a.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol></div>'+
   '<div class="box next"><p class="eb">What you can do next</p><ol class="ol">'+nextFor(a).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
-  '<section class="ctabox" id="cta" aria-labelledby="cta-h"><h3 id="cta-h">Find breakouts for what you make</h3>'+
+  '<section class="ctabox" id="cta" aria-labelledby="cta-h"><h3 id="cta-h">Find Breakouts of your own!</h3>'+
   '<p>Try it on your own brand, product, or style. See what\'s breaking out on TikTok and how to remake it.</p>'+
   '<form class="sf" data-form="shared-q" role="search">'+ic("search")+'<label for="q-shared" class="sr">Search a brand, product, or style</label><input id="q-shared" type="text" autocomplete="off" placeholder="Search a brand, product, or style" value="'+esc(S.sharedQ)+'"></form>'+
   '<button class="b gbtn full-w" data-act="auth-shared">'+gicon()+'Continue with Google</button>'+
@@ -968,21 +976,21 @@ V.paid=function(){
   '<div class="pb" style="gap:18px">'+
   '<div class="stack center" style="gap:6px"><h1 class="h1" style="text-align:center">Keep finding Viral Breakouts</h1><p class="sub" style="color:var(--coral-d);font-weight:600;text-align:center">'+sub+'</p></div>'+
   '<div class="price"><span class="eb c">UGC Breakouts Pro</span><div class="amt">$49<small>/mo</small></div><button class="b b1 full-w" data-act="upgrade">Upgrade · $49/mo</button></div>'+
-  '<ol class="ol"><li><span><b>100 searches / mo</b></span></li><li><span><b>100 video analyses / mo</b><br><small>Hooks, Why, and What next on the clips you open.</small></span></li><li><span><b>Ranked Breakouts for your product</b><br><small>Remake what already worked for TikTok UGC.</small></span></li></ol>'+
+  '<ol class="ol"><li><span><b>100 searches / mo</b><br><small>Dozens of Viral Breakouts in every search.</small></span></li><li><span><b>100 video analyses / mo</b><br><small>See exactly why each video broke out.</small></span></li><li><span><b>Your creative director on every video</b><br><small>Hooks to try and what to film next, so your remake is ready to shoot.</small></span></li><li><span><b>Ranked Breakouts for your product</b><br><small>Remake what already worked for TikTok UGC.</small></span></li></ol>'+
   '<button class="b b3" data-act="affiliate">Not now</button></div>';
 };
 
 V.pro=function(){
+  var rows=[["focus-search","","Search a new product or video style","Go to Home and start hunting."],["results","Lip oil","Analyze a breakout","Open a video and see why it worked."],["top","","See Top Breakouts","The biggest breakouts in every category."]];
   return '<div class="tb"><button class="logo" data-act="home">UGC <b>Breakouts</b></button><span class="sp"></span>'+countPill()+'</div>'+
   '<div class="pb" style="justify-content:center;gap:20px">'+
   '<div class="stack center" style="gap:14px"><div class="tile g">'+ic("check")+'</div><h1 class="h1" style="font-size:32px">Congratulations</h1><p class="sub" style="margin-top:-8px;text-align:center">Pro is on · 100 searches + 100 analyses / mo</p></div>'+
-  '<div class="box white"><ol class="ol"><li><span><b>Search a new product</b><br><span style="color:var(--mid)">Go to Home and start hunting.</span></span></li><li><span><b>Analyze a breakout</b><br><span style="color:var(--mid)">Open a video and see why it worked.</span></span></li></ol></div>'+
-  '<button class="b b1 full-w" data-act="focus-search">Search a new product</button></div>';
+  '<nav class="list steps2" aria-label="What to do next">'+rows.map(function(r){return '<button data-act="'+r[0]+'"'+(r[1]?' data-q="'+r[1]+'"':'')+'><span><b>'+r[2]+'</b><small>'+r[3]+'</small></span>'+ic("chev")+'</button>';}).join("")+'</nav></div>';
 };
 
 V.affiliate=function(){
   var head='<div class="tb">'+backBtn()+'<span class="sp"></span><span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span><span class="ib ghost"></span></div>';
-  var cash=S.affReward==="cash",reward=cash?'$49':'2 months of Pro';
+  var cash=true,reward='$49';
   var steps='<div class="how3"><div><i>'+ic("share")+'</i>Get your affiliate link</div><div><i>'+ic("userplus")+'</i>They upgrade to Pro</div><div><i>'+ic(cash?"dollar":"star")+'</i>You get '+reward+'</div></div>';
   if(S.affLink){
     return head+'<div class="pb" style="gap:16px"><h1 class="h1">Your link is ready</h1><p class="sub" style="margin-top:-8px">Share it with creators who need Breakouts.</p>'+
@@ -990,9 +998,8 @@ V.affiliate=function(){
   }
   return head+'<div class="pb" style="gap:16px"><h1 class="h1">Earn when creators go Pro</h1><p class="sub" style="margin-top:-8px">Bring TikTok UGC creators to Breakouts. Get paid when they upgrade.</p>'+
   '<div class="affhero"><p class="eb">You earn</p>'+
-  '<div class="rsw" role="radiogroup" aria-label="Reward"><button role="radio" aria-checked="'+cash+'" data-act="reward" data-k="cash">$49 one time</button><button role="radio" aria-checked="'+!cash+'" data-act="reward" data-k="pro">2 months of Pro</button></div>'+
-  '<div class="earn">'+(cash?'$49<small>one time</small>':'2 months<small>of Pro</small>')+'</div>'+
-  '<p class="fine" style="text-align:left">'+(cash?'Equal to 1 month of Pro.':'For each creator who goes Pro.')+'</p>'+
+  '<div class="earn">$49<small>one time</small></div>'+
+  '<p class="fine" style="text-align:left">For each creator who goes Pro. Equal to 1 month of Pro.</p>'+
   '<button class="b b1 full-w" data-act="aff-link">Get my affiliate link</button></div>'+steps+'</div>';
 };
 
@@ -1032,7 +1039,7 @@ V.account=function(){
 /* ---------------- rail + notes ---------------- */
 var RAIL=[
   {g:"Logged out",items:[["home-out","01","Home"],["teaser","01b","Sign in"]]},
-  {g:"Search",items:[["proc","01c","Processing"],["proc-slow","01c","Processing after 0:30"],["proc-ready","01c","Ready"],["home-in","01","Home, signed in"],["home-searching","01","Home, 2 searches running"],["home-ready","01","Home, ready banner"]]},
+  {g:"Search",items:[["proc","01c","Processing"],["proc-slow","01c","Processing after 1:00"],["proc-ready","01c","Ready"],["home-in","01","Home, signed in"],["home-searching","01","Home, 2 searches running"],["home-ready","01","Home, ready banner"]]},
   {g:"Breakouts",items:[["results","02","Results"],["empty","02","No breakouts"],["top","02b","Top Breakouts feed"],["detail","03","Detail"]]},
   {g:"Sharing",items:[["share","04","Share video"],["shared","05","Shared with you"]]},
   {g:"Money",items:[["paid","07","Paid, search cap"],["paid-videos","07","Paid, video cap"],["paid-analyses","07","Paid, analysis cap"],["pro","09","Pro success"],["affiliate","12","Affiliate"]]},
@@ -1047,7 +1054,7 @@ function jump(key){
     "home-out":function(){S.view="home";},
     "teaser":function(){S.view="teaser";},
     "proc":function(){S.loggedIn=true;S.stack=home;var s=mk("Lip oil",0,9);S.view="proc";S.params={id:s.id};},
-    "proc-slow":function(){S.loggedIn=true;S.stack=home;var s=mk("Lip oil",32,60);S.view="proc";S.params={id:s.id};},
+    "proc-slow":function(){S.loggedIn=true;S.stack=home;var s=mk("Lip oil",62,90);S.view="proc";S.params={id:s.id};},
     "proc-ready":function(){S.loggedIn=true;S.stack=home;var s=mk("Lip oil",0,9);finish(s);S.view="proc";S.params={id:s.id};},
     "home-in":function(){S.loggedIn=true;S.left=2;S.view="home";},
     "home-searching":function(){S.loggedIn=true;S.left=2;mk("Lip oil",3,40);mk("GRWM",1,45);S.view="home";},
@@ -1076,7 +1083,7 @@ function currentKey(){
   if(S.railKey==="questions")return "questions";
   var v=S.view;
   if(v==="home"){if(!S.loggedIn)return "home-out";if(readyUnseen().length)return "home-ready";if(pending().length)return "home-searching";return "home-in";}
-  if(v==="proc"){var s=findSearch(S.params.id);if(s&&s.done)return "proc-ready";if(s&&s.el>=30)return "proc-slow";return "proc";}
+  if(v==="proc"){var s=findSearch(S.params.id);if(s&&s.done)return "proc-ready";if(s&&s.el>=60)return "proc-slow";return "proc";}
   if(v==="account")return S.plan==="pro"?"account-pro":"account";
   if(v==="paid")return S.params.reason==="videos"?"paid-videos":(S.params.reason==="analyses"?"paid-analyses":"paid");
   return v;
@@ -1087,17 +1094,17 @@ var NONE=[["f","No changes from this round of feedback."]];
 var NOTES={
   "home-out":{id:"01 · 01-home-search",h:"Home, logged out",li:[["f","No changes from this round. Earlier fix: the background photo with the Instagram logo was swapped out (TikTok only lock)."]]},
   "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in",li:[["q","No TikTok sign in. TikTok's API returns no email (checked the docs), so it's Google. Ivan: “if no, then we go google.”"],["q","Free is 3 searches and 3 video analyses. Ivan: “yes, 3?”"]]},
-  "proc":{id:"01c · 01c-processing",h:"Processing",li:[["q","A search counts when results arrive. Ivan: “search counts when it arrives.”"],["q","Searches take about 30 seconds. Ivan: “i think 30 seconds.” The wait copy says so, and Browse while you wait appears at 0:30."],["a","Is 0:30 the right point to show Browse while you wait?"]]},
+  "proc":{id:"01c · 01c-processing",h:"Processing",li:[["q","A search counts when results arrive. Ivan: “search counts when it arrives.”"],["r","Round 3: wait copy is “Usually 15 seconds to a minute.” Ivan: “will be between 15 seconds and 1min.” Browse while you wait now appears at 1:00, once the wait runs past the usual."],["a","When a video is played: does it play in the box, or open a popup with the analysis? The prototype plays it in the box."]]},
   "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",li:[["c","The menu links to the Top Breakouts feed."]]},
   "results":{id:"02 · 02-results",h:"Results",li:[["r","Paywall after the top 8, saying there are dozens more with Pro. Ivan: “showing only 8 or 10 videos and saying they can see dozens of videos (if they pay).”"],["r","Persistent search on top, unchanged. Ivan: “LOVE the persistent search on the top!”"],["r","Sort and filter. Ivan: “we'll probably need a sort/filter?”"],["r","Analyze, Save, and Share buttons unchanged. Ivan: “love the analyze, save, share buttons.”"],["r","View analysis and Analyze video look different: analyzed videos have a teal Analyzed badge and a solid button, the rest have an outlined Analyze video button."],["q","Free users get 3 analyses. Analyzing a fourth video opens Paid (analysis cap)."],["c","The paywall opens the video cap version of Paid. Ivan: “we need paid cap hit video.”"],["a","8 or 10 free videos? The prototype shows 8."],["a","Which sort and filter options?"]]},
   "empty":{id:"02 · 02-results-empty",h:"No breakouts",li:[["q","Shows when a search finds fewer than 25 breakouts, and doesn't use a search. Ivan: “25?” and “if they have a bad search… we tell them to search again.”"]]},
   "top":{id:"02b · new screen",h:"Top Breakouts feed",li:[["c","A feed of every video we've sourced, top scores first, with category chips to pick from. Ivan: “a menu that says top breakouts and then a list of all the breakouts across all categories… chip, you know, the little selector things.”"],["a","Which categories at launch, and how often does the feed update?"]]},
-  "detail":{id:"03 · 03-detail",h:"Detail",li:[["r","New short Breakout Score explainer, no “punched above.” Ivan: “need a new, shorter description of breakout score (eli10).”"],["q","The explainer says 0 to 100. Ivan: “a combo of a few variables, but the range is 0-100.”"],["r","Watch on TikTok removed. Ivan: “remove watch in tiktok for now?”"],["q","Paid and Spark ad videos stay in the rankings, unlabeled. No change for MVP."]]},
-  "share":{id:"04 · 04-share",h:"Share video",li:[["r","The note locks when the link is copied, so the note that was copied is the note that gets sent. Ivan: “what if someone types, copies, then changes the note, which note will be sent.”"],["a","After copying, the note can't be changed. Should people be able to edit it and get a new link?"]]},
-  "shared":{id:"05 · 05-shared",h:"Shared with you",li:[["r","More CTA at the bottom: try it on your own brand, product, or style, with a search box and “Free. Just your email.” Ivan: “convince them to sign on, try us out, search a brand or product or style of their own, free, just your email.”"],["q","Sign up with Google or email (no TikTok, since it gives no email)."],["q","The sender line shows first name and email. Ivan: “first name and email?”"],["q","The recipient sees the sender's analysis as it is. Ivan: “yes.”"]]},
-  "paid":{id:"07 · 07-paid",h:"Paid",li:[["c","Three versions: search cap, video cap, and analysis cap. Ivan: “this is paid cap hit search. We need paid cap hit video.”"],["q","Analysis cap reads “You used your 3 free video analyses.”"],["f","Earlier fix: removed the internal note “Your hero benefit. Not unlimited.” from the customer copy."]]},
-  "pro":{id:"09 · 09-pro-success",h:"Pro success",li:[["f","No changes from this round."]]},
-  "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["q","The reward is $49, equal to 1 month of Pro, with 2 months of Pro as an option. Ivan: “it's equal to 1 month of paid (i was thinking 2 months of pro as an option).”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
+  "detail":{id:"03 · 03-detail",h:"Detail",li:[["r","New short Breakout Score explainer, no “punched above.” Ivan: “need a new, shorter description of breakout score (eli10).”"],["q","The explainer says 0 to 100. Ivan: “a combo of a few variables, but the range is 0-100.”"],["r","Watch on TikTok removed. Ivan: “remove watch in tiktok for now?”"],["r","Round 3: views, likes, comments, and shares are now the big numbers, with posted date, length, and network small underneath. Ivan: “the data points that are bigger aren't the important ones, it should be flipped.”"],["r","Round 3: followers shows once, next to the handle. Ivan: “followers is displayed twice.”"],["q","Paid and Spark ad videos stay in the rankings, unlabeled. No change for MVP."]]},
+  "share":{id:"04 · 04-share",h:"Share video",li:[["r","The note locks when the link is copied, so the note that was copied is the note that gets sent. Ivan: “what if someone types, copies, then changes the note, which note will be sent.”"],["r","Round 3: Edit note unlocks it. Copying again makes a new link with the new note, and the earlier link keeps its old note. Ivan: “should be a way to edit note?”"]]},
+  "shared":{id:"05 · 05-shared",h:"Shared with you",li:[["r","More CTA at the bottom: try it on your own brand, product, or style, with a search box and “Free. Just your email.” Ivan: “convince them to sign on, try us out, search a brand or product or style of their own, free, just your email.”"],["r","Round 3: the heading is “Find Breakouts of your own!”"],["q","Sign up with Google or email (no TikTok, since it gives no email)."],["q","The sender line shows first name and email. Ivan: “first name and email?”"],["q","The recipient sees the sender's analysis as it is. Ivan: “yes.”"]]},
+  "paid":{id:"07 · 07-paid",h:"Paid",li:[["c","Three versions: search cap, video cap, and analysis cap. Ivan: “this is paid cap hit search. We need paid cap hit video.”"],["q","Analysis cap reads “You used your 3 free video analyses.”"],["r","Round 3: all three versions say you get dozens of Viral Breakouts per search, and list the analysis and the creative director as features. Ivan: “add that you get dozens of videos per search, maybe add more features, like our analysis and creative director (better copy).”"],["f","Earlier fix: removed the internal note “Your hero benefit. Not unlimited.” from the customer copy."]]},
+  "pro":{id:"09 · 09-pro-success",h:"Pro success",li:[["r","Round 3: the first step reads “Search a new product or video style.” Ivan: “call out search new product or video style.”"],["r","Round 3: added See Top Breakouts. Ivan: “add? top breakout.”"],["r","Round 3: all three steps are tappable. Ivan: “make those buttons clickable.”"]]},
+  "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["r","Round 3: $49 only, no reward selector. Ivan: “they wont be able to select, let's keep it $49 for now.”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
   "library":{id:"08 · 08-library",h:"Library",li:[["r","Searches vs History merged into one Searches tab: saved searches at the top, every other search under Recent. Ivan: “what's the difference between searches and history, is it saved searches vs all searches.”"],["q","Saved searches are snapshots. Refreshing one would cost a search. Ivan: “refresh costs another ‘search’ credit.”"],["a","Where should Refresh go?"]]},
   "account":{id:"11 · 11-account",h:"Account",li:[["f","No changes from this round."]]}
 };
@@ -1109,9 +1116,9 @@ function notesHtml(key){
   var legend='<div class="legend"><span><span class="tag r">IVAN</span> his notes</span><span><span class="tag q">ANSWER</span> his answers</span><span><span class="tag c">CALL</span> 15 Sept call</span><span><span class="tag f">LOCK</span> fix to his own locks</span><span><span class="tag a">ASK</span> needs Ivan</span></div>';
   if(key==="questions"){
     return legend+'<p class="sid">Open</p><h2>Questions for Ivan</h2><ul>'+
-    ["8 or 10 free videos before the Results paywall? The prototype shows 8.","Which sort and filter options?","Is 0:30 the right point to show Browse while you wait?","Share: after copying, the note is locked. Should people be able to edit it and get a new link?","Affiliate: $49 or 2 months of Pro as the default?","Library: where should Refresh go for a saved search?","Top Breakouts feed: which categories at launch, and how often does it update?"].map(function(q){return li("a",q);}).join("")+'</ul>'+
+    ["8 or 10 free videos before the Results paywall? The prototype shows 8.","Which sort and filter options?","When a video is played, does it play in the box or open a popup with the analysis?","Library: where should Refresh go for a saved search?","Top Breakouts feed: which categories at launch, and how often does it update?","Price: stay at $49 a month?"].map(function(q){return li("a",q);}).join("")+'</ul>'+
     '<p class="sid" style="margin-top:8px">Answered</p><ul>'+
-    ["Breakout Score is a combo of a few variables, ranging 0 to 100.","A search counts when results arrive.","Free users get 3 video analyses.","No TikTok sign in (no email), so Google.","The affiliate reward equals 1 month of Pro, with 2 months of Pro as an option.","Searches take about 30 seconds.","Fewer than 25 breakouts shows No breakouts.","Saved searches are snapshots, and a refresh costs a search.","The sender line shows first name and email, and the recipient sees the sender's analysis.","Paid and Spark ad videos stay in rankings, unlabeled, for MVP."].map(function(q){return li("q",q);}).join("")+'</ul>';
+    ["Breakout Score is a combo of a few variables, ranging 0 to 100.","A search counts when results arrive.","Free users get 3 video analyses.","No TikTok sign in (no email), so Google.","Searches take 15 seconds to a minute (round 3).","Share notes can be edited; each edit makes a new link (round 3).","Affiliate reward is $49 only for now (round 3).","Fewer than 25 breakouts shows No breakouts.","Saved searches are snapshots, and a refresh costs a search.","The sender line shows first name and email, and the recipient sees the sender's analysis.","Paid and Spark ad videos stay in rankings, unlabeled, for MVP."].map(function(q){return li("q",q);}).join("")+'</ul>';
   }
   var n=NOTES[key]||NOTES["home-out"];
   return legend+'<p class="sid">'+n.id+'</p><h2>'+n.h+'</h2><ul>'+n.li.map(function(x){return li(x[0],x[1]);}).join("")+'</ul>';
@@ -1132,14 +1139,14 @@ function renderChrome(){
   if(key!==lastNotesKey){document.getElementById("notes").innerHTML=notesHtml(key);lastNotesKey=key;}
   document.getElementById("where").textContent=NOTES[key]?NOTES[key].id:"Questions";
   var ctl="";
-  if(S.view==="proc"){var s=findSearch(S.params.id);if(s&&!s.done)ctl='<button data-ctl="slow">Jump to 0:30</button><button data-ctl="ready">Jump to Ready</button>';}
+  if(S.view==="proc"){var s=findSearch(S.params.id);if(s&&!s.done)ctl='<button data-ctl="slow">Jump to 1:00</button><button data-ctl="ready">Jump to Ready</button>';}
   if(pending().length&&S.view!=="proc")ctl='<button data-ctl="finish-all">Finish running searches</button>';
   document.getElementById("ctl").innerHTML=ctl+'<button data-ctl="restart">Restart</button>';
 }
 document.getElementById("ctl").addEventListener("click",function(e){
   var b=e.target.closest("[data-ctl]");if(!b)return;var c=b.getAttribute("data-ctl");
   if(c==="restart"){jump("home-out");return;}
-  if(c==="slow"){var s=findSearch(S.params.id);if(s){s.el=Math.max(s.el,30);s.need=Math.max(s.need,s.el+20);render(false);}return;}
+  if(c==="slow"){var s=findSearch(S.params.id);if(s){s.el=Math.max(s.el,60);s.need=Math.max(s.need,s.el+20);render(false);}return;}
   if(c==="ready"){var s2=findSearch(S.params.id);if(s2)s2.el=s2.need-1;return;}
   if(c==="finish-all"){pending().forEach(function(s){s.el=s.need-1;});}
 });
@@ -1203,11 +1210,14 @@ function act(a,el){
     case "play": var k=d("key");S.playing=S.playing===k?null:k;render(false); break;
     case "info": S.infoOpen=!S.infoOpen;render(false); break;
     case "copy-link":
-      var cv=d("v"),vv=vid(cv);
-      if(!S.links[cv])S.links[cv]={note:S.notes[cv]||""};
+      var cv=d("v"),vv=vid(cv),cl=S.links[cv],cn=S.notes[cv]||"",made="";
+      if(!cl){S.links[cv]={note:cn,ver:1};}
+      else if(S.editing[cv]&&cn!==cl.note){cl.ver++;cl.note=cn;made="new";}
+      S.editing[cv]=false;
       var ct="https://"+linkFor(vv)+(S.links[cv].note.trim()?"\n\n"+S.links[cv].note.trim():"");
       try{navigator.clipboard&&navigator.clipboard.writeText(ct).catch(function(){});}catch(e){}
-      render(false); toast("<b>Link copied.</b> Anyone with the link can view it."); break;
+      render(false); toast(made?"<b>New link copied.</b> Your earlier link still shows its old note.":"<b>Link copied.</b> Anyone with the link can view it."); break;
+    case "edit-note": var en=d("v"); S.editing[en]=true; S.notes[en]=S.links[en].note; render(false); var tn=document.getElementById("note"); if(tn){tn.focus();tn.setSelectionRange(tn.value.length,tn.value.length);} break;
     case "paid": go("paid",{reason:"searches"}); break;
     case "paid-videos": go("paid",{reason:"videos"}); break;
     case "upgrade": S.plan="pro";go("pro",{},{replace:true}); break;
