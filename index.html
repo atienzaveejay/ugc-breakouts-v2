@@ -586,6 +586,9 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .phone.desk .drow{display:flex;flex-direction:column}
 .phone.desk .dsplit .shc{grid-template-columns:180px 1fr}
 .phone.desk .h1.big{font-size:40px}
+.dfill{flex:1}
+.dfill{padding-top:16px;padding-bottom:16px}
+.dfill>.proc,.dfill>.pb{flex:1;justify-content:center;padding-top:0;padding-bottom:0}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
 </head>
@@ -1183,7 +1186,7 @@ function deskGeneric(){
   var body=stripTb((V[S.view]||V.home)());
   var cfg=DTB[S.view]||{};if(S.view==="empty")cfg={search:1,q:S.params.q,pill:1,nav:1};
   var back=DESK_BACK[S.view];if(S.view==="proc"){var ps=findSearch(S.params.id);back=ps&&!ps.done;}
-  return dtb(cfg)+'<div class="dpage" style="max-width:'+(DESK_WIDTH[S.view]||640)+'px">'+(back?'<button class="dback" data-act="back">'+ic("back")+'Back</button>':'')+({library:'Library',account:'Account'}[S.view]?'<h1 class="h1" style="font-size:32px">'+{library:'Library',account:'Account'}[S.view]+'</h1>':'')+body+'</div>';
+  return dtb(cfg)+'<div class="dpage'+((S.view==="proc"||S.view==="pro")?' dfill':'')+'" style="max-width:'+(DESK_WIDTH[S.view]||640)+'px">'+(back?'<button class="dback" data-act="back">'+ic("back")+'Back</button>':'')+({library:'Library',account:'Account'}[S.view]?'<h1 class="h1" style="font-size:32px">'+{library:'Library',account:'Account'}[S.view]+'</h1>':'')+body+'</div>';
 }
 function fitDesk(){
   if(DEVICE!=="desk")return;
