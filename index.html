@@ -590,39 +590,92 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .dfill{padding-top:16px;padding-bottom:16px}
 .dfill>.proc,.dfill>.pb{flex:1;justify-content:center;padding-top:0;padding-bottom:0}
 /* ---------- sales page, below the logged out fold ---------- */
-.sell{position:relative;z-index:1;padding:6px 16px 28px;display:flex;flex-direction:column;gap:34px;background:var(--paper)}
-.sblk{display:flex;flex-direction:column;gap:12px}
-.sblk>.eb+.s1{margin-top:-4px}
-.s1{font-size:26px;font-weight:800;letter-spacing:-.04em;line-height:1.12;margin:0;text-wrap:balance}
-.s2{margin:0;color:var(--mid);font-size:15.5px;line-height:1.45}
-.s3{margin:0;font-size:14.5px;line-height:1.5}
-.pain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
-.pain li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:15px;line-height:1.4;align-items:start}
-.pain li::before{content:"";width:8px;height:8px;border-radius:3px;background:var(--coral);margin:7px 0 0 6px}
-.cards2{display:grid;grid-template-columns:1fr;gap:10px}
-.cards2>div{background:#fff;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px}
-.cards2 b{font-size:16.5px;letter-spacing:-.02em}
-.cards2 span{color:var(--mid);font-size:14px;line-height:1.5}
-.sellcap{margin:0;color:var(--mid);font-size:13.5px}
-.selldiv{height:1px;background:var(--hair);border:0;margin:0}
-.phone.desk .sell{max-width:1000px;margin:0 auto;padding:0 32px 72px;gap:56px}
-.phone.desk .sell .s1{font-size:34px}
-.phone.desk .sell .s2{font-size:17px}
-.phone.desk .cards2{grid-template-columns:1fr 1fr;gap:16px}
-.phone.desk .sell .chk{display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}
+.sell{position:relative;z-index:1;display:flex;flex-direction:column;background:var(--paper)}
+.sct{padding:44px 16px 48px;background:var(--paper);position:relative}
+.sct.white{background:#fff}
+.sct.dark{background:var(--ink);color:#fff;padding-bottom:0;z-index:2}
+.sct.pull{padding-top:124px}
+.sct.cta{background:var(--ink);color:#fff;padding:40px 16px 32px}
+.swrap{display:flex;flex-direction:column;gap:24px}
+.swrap.ex{margin-bottom:-72px}
+.sct .eb{color:var(--mid)}
+.sct.dark .eb{color:var(--cyan)}
+.shead{display:flex;flex-direction:column;gap:7px}
+.s1{font-size:27px;font-weight:800;letter-spacing:-.04em;line-height:1.14;margin:0;text-wrap:balance}
+.s2{margin:0;color:var(--mid);font-size:16px;line-height:1.5;max-width:33em}
+.sct.dark .s2{color:#C9BFB9}
+.s3{margin:0;font-size:15px;line-height:1.55;max-width:33em}
+.sellcap{margin:0;color:var(--mid);font-size:13.5px;max-width:33em}
+.sct.dark .sellcap{color:#A79C96}
+.sct.dark .sample{border:0;box-shadow:0 30px 60px -28px rgba(0,0,0,.75);color:var(--ink)}
+
+.pain{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.pain li{display:grid;grid-template-columns:24px 1fr;gap:12px;font-size:16.5px;line-height:1.35;align-items:start;font-weight:600;letter-spacing:-.01em}
+.pain li::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--coral);margin:7px 0 0 7px;box-shadow:0 0 0 5px rgba(255,79,94,.14)}
+
+.steps3{display:flex;flex-direction:column;gap:12px}
+.st3{background:var(--paper);border-radius:20px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px}
+.st3 i{width:38px;height:38px;border-radius:13px;background:#FCE6EA;color:var(--coral-d);display:grid;place-items:center;font:800 17px/1 var(--sans);font-style:normal;margin-bottom:6px}
+.st3 b{font-size:17px;letter-spacing:-.025em;line-height:1.25}
+.st3 span{color:var(--mid);font-size:14.5px;line-height:1.5}
+
+.gets{display:grid;grid-template-columns:1fr;gap:20px}
+.get{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start}
+.get i{width:42px;height:42px;border-radius:14px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center}
+.get i svg{width:20px;height:20px}
+.get b{font-size:16px;letter-spacing:-.02em;display:block}
+.get span{color:var(--mid);font-size:14.5px;line-height:1.5;display:block;margin-top:3px}
+
+.jobs{display:grid;grid-template-columns:1fr;gap:12px}
+.jobs>div{background:#fff;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 34px -28px rgba(23,19,18,.6)}
+.jobs b{font-size:17px;letter-spacing:-.025em}
+.jobs span{color:var(--mid);font-size:14.5px;line-height:1.5}
+.jobs .jt{width:36px;height:36px;border-radius:12px;background:var(--gold-soft);color:#8A6D10;display:grid;place-items:center;margin-bottom:2px}
+.jobs .jt svg{width:19px;height:19px}
+
+.prices{display:grid;grid-template-columns:1fr;gap:14px}
+.pcard{background:var(--paper);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.pcard.pro{background:var(--ink);color:#fff;box-shadow:0 26px 50px -30px rgba(23,19,18,.95)}
+.pcard .ph{display:flex;align-items:baseline;gap:10px}
+.pcard .ph b{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mid)}
+.pcard.pro .ph b{color:var(--cyan)}
+.pcard .pp{font-size:34px;font-weight:800;letter-spacing:-.045em;line-height:1;margin-left:auto}
+.pcard .pp small{font-size:13px;font-weight:700;color:var(--mid);letter-spacing:0}
+.pcard.pro .pp small{color:#A79C96}
+.plist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.plist li{display:grid;grid-template-columns:19px 1fr;gap:10px;font-size:14.5px;line-height:1.4;align-items:start}
+.plist svg{width:17px;height:17px;color:var(--teal);margin-top:2px}
+.pcard.pro .plist svg{color:var(--cyan)}
+.ctabox.plain{background:transparent;padding:0;border-radius:0}
+.sfoot{font-size:12.5px;color:#A79C96;text-align:center;margin:0}
+
+.phone.desk .sct{padding:76px 0 84px}
+.phone.desk .sct.dark{padding-bottom:0}
+.phone.desk .sct.pull{padding-top:168px}
+.phone.desk .sct.cta{padding:72px 0 44px}
+.phone.desk .swrap{max-width:1040px;margin:0 auto;padding:0 32px;gap:32px}
+.phone.desk .swrap.ex{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:56px;align-items:start;margin-bottom:-88px}
+.phone.desk .swrap.ex .shead{align-self:center}
+.phone.desk .swrap.prob{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+.phone.desk .s1{font-size:38px}
+.phone.desk .s2{font-size:18px}
+.phone.desk .steps3{flex-direction:row;gap:20px}
+.phone.desk .st3{flex:1;padding:24px}
+.phone.desk .gets{grid-template-columns:1fr 1fr;gap:32px 48px}
+.phone.desk .jobs{grid-template-columns:1fr 1fr;gap:20px}
+.phone.desk .jobs>div{padding:28px}
+.phone.desk .prices{grid-template-columns:1fr 1fr;gap:20px;max-width:720px}
+.phone.desk .pcard{padding:28px}
 .phone.desk .sell .faq{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
-.phone.desk .sell .sgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start}
-.phone.desk .sell .plans2{gap:16px}
-.sell .trow>:nth-child(n+4){display:none}
 .phone.desk .sell .trow{grid-template-columns:repeat(5,1fr);gap:16px}
-.phone.desk .sell .trow>:nth-child(n+4){display:flex}
 .phone.desk .sell .trow .th2{aspect-ratio:9/14;border-radius:16px}
 .phone.desk .sell .trow .sb{left:8px;bottom:8px;padding:3px 9px 4px}
 .phone.desk .sell .trow .sb b{font-size:19px}
 .phone.desk .sell .trow .tmeta b{font-size:14.5px}
-.phone.desk .sell .ctabox{padding:32px}
-.phone.desk .sell .ctabox h3{font-size:32px}
-
+.phone.desk .sell .ctabox h3{font-size:34px}
+.phone.desk .sell .ctabox .sf,.phone.desk .sell .ctabox .gbtn,.phone.desk .sell .ctabox .emailf,.phone.desk .sell .ctabox .fine{max-width:560px}
+.sell .trow>:nth-child(n+4){display:none}
+.phone.desk .sell .trow>:nth-child(n+4){display:flex}
 .browse{visibility:hidden;opacity:0}
 .browse.on{visibility:visible;opacity:1}
 @media (prefers-reduced-motion: no-preference){.browse.on{transition:opacity .25s ease}}
@@ -896,118 +949,117 @@ function chipBlock(){
 function sellTile(t){
   return '<button class="tt2" data-act="sell-search" data-q="'+esc(t.product)+'" aria-label="'+esc(t.product)+' by @'+t.handle+', Breakout Score '+t.score+'"><span class="th2" style="'+bg(t.img)+'"><span class="catc">'+t.cat+'</span><span class="sb"><b>'+t.score+'</b><span>Breakout Score</span></span></span><span class="tmeta"><b>'+esc(t.product)+'</b><small>@'+t.handle+'</small></span></button>';
 }
-function sellFaq(rows){
-  return '<div class="faq">'+rows.map(function(r){return '<details><summary>'+r[0]+'</summary><p>'+r[1]+'</p></details>';}).join("")+'</div>';
+function sellHead(eb,h,sub){
+  return '<div class="shead">'+(eb?'<p class="eb">'+eb+'</p>':'')+'<h2 class="s1">'+h+'</h2>'+(sub?'<p class="s2">'+sub+'</p>':'')+'</div>';
 }
 function sellPage(){
   var v=vid("v1"),a=AN.v1,tops=feedList("All").slice(0,5);
-  var chk=[
-    ["The Breakout Score","0 to 100. It shows how much the video beat what accounts that size usually get."],
-    ["The hook, written out","The line that stopped the scroll, plus three more you can try."],
-    ["Why it worked","Three reasons in plain language, so you copy the thinking and not the video."],
-    ["What you can do next","Your version. What to shoot, and in what order."],
-    ["Your Library","Save the ones you will actually film. They stay there."],
-    ["A share link","Send the video and your note to a brand. Whoever opens it sees the analysis, with no account."]
-  ];
+  var steps=[
+    ["Search a product, style, or tag","Lip oil. GRWM. #booktok. Anything you could film this week."],
+    ["See what broke out","TikToks ranked by Breakout Score, 0 to 100. Dozens of them in a search."],
+    ["Get the creative strategy","The hook, why the video worked, and what you can do next."]];
+  var gets=[
+    ["spark","The Breakout Score","0 to 100. It shows how much the video beat what accounts that size usually get."],
+    ["comment","The hook, written out","The line that stopped the scroll, plus three more you can try."],
+    ["eye","Why it worked","Three reasons in plain language, so you copy the thinking and not the video."],
+    ["arrow","What you can do next","Your version. What to shoot, and in what order."],
+    ["save","Your Library","Save the ones you will actually film. They stay there."],
+    ["share","A share link","Send the video and your note to a brand. Whoever opens it sees the analysis, with no account."]];
+  var free=["3 searches","3 video analyses","Top 10 results","Top Breakouts feed"];
+  var pro=["100 searches a month","100 video analyses","Every result, dozens a search","Library and share links"];
+  function plist(items){return '<ul class="plist">'+items.map(function(x){return '<li>'+ic("check")+'<span>'+x+'</span></li>';}).join("")+'</ul>';}
+
   return '<div class="sell" id="sell">'+
 
   /* 1. the problem */
-  '<section class="sblk">'+
-  '<p class="eb">The real problem</p>'+
-  '<h2 class="s1">Filming is the easy part.</h2>'+
-  '<p class="s2">Knowing what to film is what costs you the weekend.</p>'+
+  '<section class="sct"><div class="swrap prob">'+
+  sellHead("The real problem","Filming is the easy part.","Knowing what to film is what costs you the weekend.")+
+  '<div class="stack" style="gap:22px">'+
   '<ul class="pain">'+
   ['You catch the trend a week after it peaked.',
    'You pitch a brand with a mood board and hope.',
-   'A video flops and nobody tells you why.'].map(function(x){return '<li>'+x+'</li>';}).join("")+
+   'A video flops and nobody tells you why.'].map(function(x){return '<li><span>'+x+'</span></li>';}).join("")+
   '</ul>'+
   '<p class="s3">UGC Breakouts starts from TikToks that already worked, and shows you what to take from them.</p>'+
-  '</section>'+
+  '</div></div></section>'+
 
   /* 2. how it works */
-  '<section class="sblk">'+
-  '<p class="eb">How it works</p>'+
-  '<h2 class="s1">Three steps, about a minute.</h2>'+
-  '<ol class="ol" style="margin-top:4px">'+
-  [['Search a product, style, or tag','Lip oil. GRWM. #booktok. Anything you could film this week.'],
-   ['See what broke out','TikToks ranked by Breakout Score, 0 to 100. Dozens of them in a search.'],
-   ['Get the creative strategy','The hook, why the video worked, and what you can do next.']
-  ].map(function(s){return '<li><span><b>'+s[0]+'</b><br><span style="color:var(--mid)">'+s[1]+'</span></span></li>';}).join("")+
-  '</ol></section>'+
+  '<section class="sct white"><div class="swrap">'+
+  sellHead("How it works","Three steps, about a minute.","")+
+  '<div class="steps3">'+steps.map(function(s,k){return '<div class="st3"><i>'+(k+1)+'</i><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';}).join("")+'</div>'+
+  '</div></section>'+
 
-  /* 3. the example */
-  '<section class="sblk"><div class="sgrid"><div class="sblk">'+
+  /* 3. the example, on a dark band, with the card straddling the edge */
+  '<section class="sct dark"><div class="swrap ex">'+
+  '<div class="shead">'+
   '<p class="eb">One search, one video</p>'+
   '<h2 class="s1">This is what you get back.</h2>'+
   '<p class="s2">Not a trend report. A brief for the video you are going to film.</p>'+
-  '<p class="sellcap">Three analyses are free, so you can try this before you pay anything.</p>'+
+  '<p class="sellcap" style="margin-top:6px">Three analyses are free, so you can try this before you pay anything.</p>'+
   '</div>'+
   '<div class="sample"><div class="band">Lip oil, Breakout '+v.score+' <span>Real output</span></div><div class="in">'+
   '<div class="mini">'+vtile(v,{sm:true,key:"sell1",style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px"><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>&middot; '+v.followers+' followers</small></div><div class="st"><span>'+ic("eye")+v.views+' views</span></div></div></div>'+
-  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">\u201C'+a.hook+'\u201D</p>'+
+  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+a.hook+'”</p>'+
   '<p class="eb c">Why the video worked</p><ol class="ol">'+a.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol>'+
   '<p class="eb c">What you can do next</p><ol class="ol">'+nextFor(a).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>'+
-  '</div></div></div></section>'+
-
-  /* 4. what is in every analysis */
-  '<section class="sblk">'+
-  '<p class="eb">In every analysis</p>'+
-  '<h2 class="s1">Everything you need to remake it.</h2>'+
-  '<ul class="chk" style="margin-top:6px">'+chk.map(function(c){return '<li>'+ic("checkc")+'<span><b>'+c[0]+'</b><small>'+c[1]+'</small></span></li>';}).join("")+'</ul>'+
-  '</section>'+
-
-  /* 5. top breakouts */
-  '<section class="sblk">'+
-  '<p class="eb">Top Breakouts</p>'+
-  '<h2 class="s1">See what is breaking out right now.</h2>'+
-  '<p class="s2">A feed across every category, top scores first. Open it before you plan your week.</p>'+
-  '<div class="trow" style="margin-top:4px">'+tops.map(sellTile).join("")+'</div>'+
-  '</section>'+
-
-  /* 6. who it is for */
-  '<section class="sblk">'+
-  '<p class="eb">Who it is for</p>'+
-  '<h2 class="s1">Two jobs, one search.</h2>'+
-  '<div class="cards2" style="margin-top:4px">'+
-  '<div><b>You pitch brands</b><span>Walk in with the video that broke out in their category and the reason it worked. The share link does the pitch for you.</span></div>'+
-  '<div><b>You are growing your own account</b><span>Stop guessing your next three videos. Pick the Breakouts in your niche and film them this week.</span></div>'+
+  '</div></div>'+
   '</div></section>'+
 
+  /* 4. what is in every analysis */
+  '<section class="sct pull"><div class="swrap">'+
+  sellHead("In every analysis","Everything you need to remake it.","")+
+  '<div class="gets">'+gets.map(function(g){return '<div class="get"><i>'+ic(g[0])+'</i><span><b>'+g[1]+'</b><span>'+g[2]+'</span></span></div>';}).join("")+'</div>'+
+  '</div></section>'+
+
+  /* 5. top breakouts */
+  '<section class="sct white"><div class="swrap">'+
+  sellHead("Top Breakouts","See what is breaking out right now.","A feed across every category, top scores first. Open it before you plan your week.")+
+  '<div class="trow">'+tops.map(sellTile).join("")+'</div>'+
+  '</div></section>'+
+
+  /* 6. who it is for */
+  '<section class="sct"><div class="swrap">'+
+  sellHead("Who it is for","Two jobs, one search.","")+
+  '<div class="jobs">'+
+  '<div><span class="jt">'+ic("send")+'</span><b>You pitch brands</b><span>Walk in with the video that broke out in their category and the reason it worked. The share link does the pitch for you.</span></div>'+
+  '<div><span class="jt">'+ic("spark")+'</span><b>You are growing your own account</b><span>Stop guessing your next three videos. Pick the Breakouts in your niche and film them this week.</span></div>'+
+  '</div></div></section>'+
+
   /* 7. pricing */
-  '<section class="sblk">'+
-  '<p class="eb">Pricing</p>'+
-  '<h2 class="s1">Start free. Pay when it is working.</h2>'+
-  '<div class="plans2" style="margin-top:4px">'+
-  '<div><b>Free</b><span class="pp">$0</span><small>3 searches<br>3 video analyses<br>Top 10 results<br>Top Breakouts feed</small></div>'+
-  '<div class="pro"><b>Pro</b><span class="pp">$49<small>/mo</small></span><small>100 searches a month<br>100 video analyses<br>Every result, dozens a search<br>Library and share links</small></div>'+
+  '<section class="sct white"><div class="swrap">'+
+  sellHead("Pricing","Start free. Pay when it is working.","")+
+  '<div class="prices">'+
+  '<div class="pcard"><div class="ph"><b>Free</b><span class="pp">$0</span></div>'+plist(free)+'</div>'+
+  '<div class="pcard pro"><div class="ph"><b>Pro</b><span class="pp">$49<small>/mo</small></span></div>'+plist(pro)+'</div>'+
   '</div>'+
   '<p class="sellcap">Free starts with your email.</p>'+
-  '</section>'+
+  '</div></section>'+
 
   /* 8. faq */
-  '<section class="sblk">'+
-  '<p class="eb">Before you ask</p>'+
-  '<h2 class="s1">Questions creators ask.</h2>'+
-  sellFaq([
+  '<section class="sct"><div class="swrap">'+
+  sellHead("Before you ask","Questions creators ask.","")+
+  '<div class="faq">'+[
     ["What is a Breakout Score?","A score from 0 to 100. It shows how much a video beat what accounts that size usually get. Higher means the video did more than the account behind it explains."],
     ["What counts as a search?","A search counts once your results arrive. If we find fewer than 25 Breakouts, we tell you and it costs you nothing."],
     ["How long does a search take?","Usually 15 seconds to a minute. You can keep browsing while it runs."],
     ["Do I sign in with TikTok?","No. TikTok does not give us your email, so you sign in with Google or your email address."],
     ["Is it only TikTok?","Yes. TikTok only, for now."],
     ["Can I send a Breakout to someone?","Yes. Every video has a share link that carries your note. Whoever opens it sees the analysis, with no account."]
-  ])+
-  '</section>'+
+  ].map(function(r){return '<details><summary>'+r[0]+'</summary><p>'+r[1]+'</p></details>';}).join("")+'</div>'+
+  '</div></section>'+
 
-  /* 9. closing cta */
-  '<section class="ctabox" aria-labelledby="sell-cta-h">'+
+  /* 9. closing sign up */
+  '<section class="sct cta"><div class="swrap">'+
+  '<div class="ctabox plain" aria-labelledby="sell-cta-h">'+
   '<h3 id="sell-cta-h">Find Breakouts of your own!</h3>'+
   '<p>Search a product, style, or tag you could film this week. See what broke out on TikTok, and how to remake it.</p>'+
   searchField("q-sell")+
   '<button class="b gbtn full-w" data-act="auth">'+gicon()+'Continue with Google</button>'+
   '<form class="stack" data-form="email" novalidate><div class="emailf"><label for="em-sell" class="sr">Email</label><input id="em-sell" type="email" autocomplete="email" placeholder="Your email" value="'+esc(S.emailDraft)+'"><button class="b b1" type="submit">Start free</button></div>'+(S.emailErr?'<p class="err" role="alert">'+S.emailErr+'</p>':'')+'</form>'+
-  '<p class="fine">Free. Just your email.</p></section>'+
+  '<p class="fine">Free. Just your email.</p></div>'+
+  '<p class="sfoot">An app for TikTok creators. TikTok only, for now.</p>'+
+  '</div></section>'+
 
-  '<p class="fine">An app for TikTok creators. TikTok only, for now.</p>'+
   '</div>';
 }
 
@@ -1424,6 +1476,7 @@ var NOTES={
   "sales":{id:"01 · 01-home-sales",h:"Sales page, below the fold",li:[
     ["v","Veejay asked for the below the fold to be a sales page. Nothing above the fold moved, so your Home stays as it is: hero, search, chips."],
     ["v","Order: the problem, how it works in three steps, one full example analysis, what is in every analysis, Top Breakouts, who it is for, pricing, FAQ, and a closing sign up."],
+    ["v","Built as a scrolling sales page rather than stacked app screens: sections alternate between paper, white, and your ink dark, the example card straddles the edge of the dark band, the three steps are cards, each feature has its own icon, and the closing sign up runs full width in dark. Same palette and type as the app, nothing new."],
     ["q","Every claim comes from your own answers. Breakout Score 0 to 100, dozens of results a search, free is 3 searches and 3 analyses, Pro is $49 a month for 100 and 100, results take 15 seconds to a minute, under 25 Breakouts is free, no TikTok sign in, share links open with no account."],
     ["v","The example section shows a full analysis (hook, why it worked, what you can do next) instead of blurring it. The sales page has to prove the product before anyone signs in. The blurred version stays on Sign in."],
     ["r","The closing sign up reuses your Shared screen CTA word for word: heading, search box, Continue with Google, email, and Free. Just your email."],
