@@ -649,6 +649,51 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .ctabox.plain{background:transparent;padding:0;border-radius:0}
 .sfoot{font-size:12.5px;color:#A79C96;text-align:center;margin:0}
 
+/* sales page: interactive bits */
+.picklbl{font-size:12.5px;color:#A79C96;margin:0;font-weight:600}
+.dchips{display:flex;flex-wrap:wrap;gap:8px}
+.dchip{background:transparent;color:#fff;border:1.5px solid #3A322E;border-radius:999px;padding:8px 14px;font:700 13.5px var(--sans);cursor:pointer}
+.dchip[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
+.hookalt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:-2px}
+.hookalt .hl{font-size:12px;color:var(--mid);font-weight:700;margin-right:2px}
+.hpill{background:var(--paper);border:1.5px solid transparent;border-radius:999px;padding:6px 11px;font:700 12.5px var(--sans);color:var(--mid);cursor:pointer}
+.hpill[aria-pressed="true"]{background:var(--teal-soft);color:var(--teal);border-color:#B8E3E3}
+.scorerow2{display:flex;align-items:baseline;gap:8px;position:relative}
+.scorerow2 .infob{align-self:center}
+.sell .sample .pop{position:static;margin-top:2px}
+.stripwrap{position:relative}
+.strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.strip::-webkit-scrollbar{display:none}
+.strip .tt2{flex:0 0 132px;scroll-snap-align:start}
+.strip .th2{aspect-ratio:9/13;border-radius:14px}
+.strip .sb{left:6px;bottom:6px;padding:2px 7px 3px}
+.strip .sb b{font-size:15px}
+.strip .tmeta b{font-size:12.5px}
+.arrow{display:none}
+.phone.desk .strip{gap:16px}
+.phone.desk .strip .tt2{flex:0 0 184px}
+.phone.desk .strip .th2{aspect-ratio:9/14;border-radius:16px}
+.phone.desk .strip .sb{left:8px;bottom:8px;padding:3px 9px 4px}
+.phone.desk .strip .sb b{font-size:19px}
+.phone.desk .strip .tmeta b{font-size:14.5px}
+.phone.desk .arrow{display:grid;place-items:center;position:absolute;top:36%;width:44px;height:44px;border-radius:50%;background:#fff;border:0;box-shadow:0 12px 26px -12px rgba(23,19,18,.55);cursor:pointer;color:var(--ink);z-index:3;padding:0}
+.phone.desk .arrow svg{width:20px;height:20px}
+.phone.desk .arrow.l{left:-18px}
+.phone.desk .arrow.r{right:-18px}
+.rv{opacity:0;transform:translateY(14px)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: no-preference){.rv{transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.3,1)}}
+@media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none}}
+@media (hover:hover){
+  .st3,.jobs>div{transition:transform .2s ease,box-shadow .2s ease}
+  .st3:hover{transform:translateY(-3px);box-shadow:0 18px 34px -24px rgba(23,19,18,.55)}
+  .jobs>div:hover{transform:translateY(-3px);box-shadow:0 22px 42px -26px rgba(23,19,18,.6)}
+  .strip .th2{transition:transform .25s ease}
+  .strip .tt2:hover .th2{transform:scale(1.04)}
+  .dchip:hover{border-color:#6C615B}
+  .hpill:hover{color:var(--ink)}
+  .arrow:hover{background:var(--paper)}
+}
 .phone.desk .sct{padding:76px 0 84px}
 .phone.desk .sct.dark{padding-bottom:0}
 .phone.desk .sct.pull{padding-top:168px}
@@ -674,8 +719,6 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .phone.desk .sell .trow .tmeta b{font-size:14.5px}
 .phone.desk .sell .ctabox h3{font-size:34px}
 .phone.desk .sell .ctabox .sf,.phone.desk .sell .ctabox .gbtn,.phone.desk .sell .ctabox .emailf,.phone.desk .sell .ctabox .fine{max-width:560px}
-.sell .trow>:nth-child(n+4){display:none}
-.phone.desk .sell .trow>:nth-child(n+4){display:flex}
 .browse{visibility:hidden;opacity:0}
 .browse.on{visibility:visible;opacity:1}
 @media (prefers-reduced-motion: no-preference){.browse.on{transition:opacity .25s ease}}
@@ -838,7 +881,8 @@ function fresh(){
     history:[{q:"Lip oil",when:"Today, 2:14 PM",n:38,saved:true},{q:"Tinted moisturizer",when:"Yesterday, 8:02 PM",n:27,saved:false},{q:"GRWM",when:"Sep 9, 11:40 AM",n:29,saved:true},{q:"SPF routine",when:"Sep 8, 7:15 PM",n:24,saved:true},{q:"#cleangirl",when:"Sep 5, 10:22 AM",n:19,saved:true},{q:"#momtok",when:"Sep 4, 9:05 AM",n:0,saved:false}],
     libTab:"searches",chipSet:0,affLink:false,affReward:"cash",infoOpen:false,menu:false,toast:null,playing:null,
     view:"home",params:{},stack:[],railKey:"home-out",focusSearch:false,
-    topCat:"All",sort:"score",filters:{},sortSheet:false,emailErr:"",emailDraft:"",sharedQ:""};
+    topCat:"All",sort:"score",filters:{},sortSheet:false,emailErr:"",emailDraft:"",sharedQ:"",
+    sellV:"v1",sellHook:0,sellInfo:false};
 }
 S = fresh();
 
@@ -946,6 +990,7 @@ function chipBlock(){
 }
 
 /* ---------------- sales page (below the logged out fold) ---------------- */
+var DEMOS=[["v1","Lip oil"],["v9","Air fryer"],["v10","Closet organizer"],["v13","Wide leg jeans"],["v11","Resistance bands"]];
 function sellTile(t){
   return '<button class="tt2" data-act="sell-search" data-q="'+esc(t.product)+'" aria-label="'+esc(t.product)+' by @'+t.handle+', Breakout Score '+t.score+'"><span class="th2" style="'+bg(t.img)+'"><span class="catc">'+t.cat+'</span><span class="sb"><b>'+t.score+'</b><span>Breakout Score</span></span></span><span class="tmeta"><b>'+esc(t.product)+'</b><small>@'+t.handle+'</small></span></button>';
 }
@@ -953,7 +998,9 @@ function sellHead(eb,h,sub){
   return '<div class="shead">'+(eb?'<p class="eb">'+eb+'</p>':'')+'<h2 class="s1">'+h+'</h2>'+(sub?'<p class="s2">'+sub+'</p>':'')+'</div>';
 }
 function sellPage(){
-  var v=vid("v1"),a=AN.v1,tops=feedList("All").slice(0,5);
+  var tops=feedList("All").slice(0,12);
+  var sv=vid(S.sellV||"v1"),sa=anFor(sv);
+  var hookNow=(S.sellHook?(sa.tries[S.sellHook-1]||[])[1]:sa.hook)||sa.hook;
   var steps=[
     ["Search a product, style, or tag","Lip oil. GRWM. #booktok. Anything you could film this week."],
     ["See what broke out","TikToks ranked by Breakout Score, 0 to 100. Dozens of them in a search."],
@@ -985,23 +1032,30 @@ function sellPage(){
 
   /* 2. how it works */
   '<section class="sct white"><div class="swrap">'+
-  sellHead("How it works","Three steps, about a minute.","")+
+  sellHead("How it works","Three steps that take only a minute.","")+
   '<div class="steps3">'+steps.map(function(s,k){return '<div class="st3"><i>'+(k+1)+'</i><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';}).join("")+'</div>'+
   '</div></section>'+
 
-  /* 3. the example, on a dark band, with the card straddling the edge */
+  /* 3. the example, switchable, on a dark band, card straddling the edge */
   '<section class="sct dark"><div class="swrap ex">'+
   '<div class="shead">'+
   '<p class="eb">One search, one video</p>'+
   '<h2 class="s1">This is what you get back.</h2>'+
   '<p class="s2">Not a trend report. A brief for the video you are going to film.</p>'+
+  '<div class="stack" style="gap:10px;margin-top:4px"><p class="picklbl">Pick a search and see what comes back</p>'+
+  '<div class="dchips" role="group" aria-label="Example search">'+DEMOS.map(function(d){var on=d[0]===sv.id;return '<button class="dchip" data-act="sell-ex" data-v="'+d[0]+'" aria-pressed="'+on+'">'+esc(d[1])+'</button>';}).join("")+'</div></div>'+
   '<p class="sellcap" style="margin-top:6px">Three analyses are free, so you can try this before you pay anything.</p>'+
   '</div>'+
-  '<div class="sample"><div class="band">Lip oil, Breakout '+v.score+' <span>Real output</span></div><div class="in">'+
-  '<div class="mini">'+vtile(v,{sm:true,key:"sell1",style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px"><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>&middot; '+v.followers+' followers</small></div><div class="st"><span>'+ic("eye")+v.views+' views</span></div></div></div>'+
-  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+a.hook+'”</p>'+
-  '<p class="eb c">Why the video worked</p><ol class="ol">'+a.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol>'+
-  '<p class="eb c">What you can do next</p><ol class="ol">'+nextFor(a).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>'+
+  '<div class="sample"><div class="band">'+esc(sv.product)+', Breakout '+sv.score+' <span>Real output</span></div><div class="in">'+
+  '<div class="mini">'+vtile(sv,{sm:true,key:"sell-"+sv.id,style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px">'+
+  '<div class="scorerow2"><div class="bigs"><b>'+sv.score+'</b><span>Breakout Score</span></div><button class="infob" data-act="sell-info" aria-expanded="'+!!S.sellInfo+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
+  '<div class="hd">@'+sv.handle+' <small>&middot; '+sv.followers+' followers</small></div><div class="st"><span>'+ic("eye")+sv.views+' views</span></div></div></div>'+
+  (S.sellInfo?'<div class="pop" role="note"><b>Breakout Score</b><br>A score from 0 to 100. It shows how much a video beat the average of what that account usually gets. Higher means the video did more than the account behind it explains.</div>':'')+
+  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+esc(hookNow)+'”</p>'+
+  '<div class="hookalt"><span class="hl">Or try</span>'+
+  [["0","The one that worked"]].concat(sa.tries.map(function(t,i){return [String(i+1),t[0]];})).map(function(o){var on=String(S.sellHook||0)===o[0];return '<button class="hpill" data-act="sell-hook" data-k="'+o[0]+'" aria-pressed="'+on+'">'+esc(o[1])+'</button>';}).join("")+'</div>'+
+  '<p class="eb c">Why the video worked</p><ol class="ol">'+sa.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol>'+
+  '<p class="eb c">What you can do next</p><ol class="ol">'+nextFor(sa).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>'+
   '</div></div>'+
   '</div></section>'+
 
@@ -1014,7 +1068,9 @@ function sellPage(){
   /* 5. top breakouts */
   '<section class="sct white"><div class="swrap">'+
   sellHead("Top Breakouts","See what is breaking out right now.","A feed across every category, top scores first. Open it before you plan your week.")+
-  '<div class="trow">'+tops.map(sellTile).join("")+'</div>'+
+  '<div class="stripwrap"><div class="strip" tabindex="0" role="group" aria-label="Top Breakouts, scroll for more">'+tops.map(sellTile).join("")+'</div>'+
+  '<button class="arrow l" data-act="strip" data-d="-1" aria-label="Scroll left">'+ic("back")+'</button>'+
+  '<button class="arrow r" data-act="strip" data-d="1" aria-label="Scroll right">'+ic("chev")+'</button></div>'+
   '</div></section>'+
 
   /* 6. who it is for */
@@ -1426,7 +1482,7 @@ var RAIL=[
 ];
 function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q)};S.searches.push(s);return s;}
 function jump(key){
-  S=fresh();
+  S=fresh();revealSeen={};
   var home=[{view:"home",params:{}}];
   var setups={
     "home-out":function(){S.view="home";},
@@ -1476,6 +1532,7 @@ var NOTES={
   "sales":{id:"01 · 01-home-sales",h:"Sales page, below the fold",li:[
     ["v","Veejay asked for the below the fold to be a sales page. Nothing above the fold moved, so your Home stays as it is: hero, search, chips."],
     ["v","Order: the problem, how it works in three steps, one full example analysis, what is in every analysis, Top Breakouts, who it is for, pricing, FAQ, and a closing sign up."],
+    ["v","The page is interactive, using only things the product already does. The example swaps between five searches across five categories, so it does not read as a beauty only tool. The hook swaps between the one that worked and the three alternatives we give. The Breakout Score has the same info button as Detail. Top Breakouts is a swipeable strip of twelve, with arrows on desktop. Sections fade in once as they scroll into view, and never re-animate when a chip is tapped."],
     ["v","Built as a scrolling sales page rather than stacked app screens: sections alternate between paper, white, and your ink dark, the example card straddles the edge of the dark band, the three steps are cards, each feature has its own icon, and the closing sign up runs full width in dark. Same palette and type as the app, nothing new."],
     ["q","Every claim comes from your own answers. Breakout Score 0 to 100, dozens of results a search, free is 3 searches and 3 analyses, Pro is $49 a month for 100 and 100, results take 15 seconds to a minute, under 25 Breakouts is free, no TikTok sign in, share links open with no account."],
     ["v","The example section shows a full analysis (hook, why it worked, what you can do next) instead of blurring it. The sales page has to prove the product before anyone signs in. The blurred version stays on Sign in."],
@@ -1552,11 +1609,30 @@ document.getElementById("ctl").addEventListener("click",function(e){
 });
 
 var scr=document.getElementById("scr"),ovl=document.getElementById("ovl");
+var revealObs=null,revealSeen={};
+function wireReveal(){
+  var items=scr.querySelectorAll(".sell .swrap");
+  if(!items.length)return;
+  /* a section that has already been seen stays visible, so tapping a chip
+     re-renders without flashing the whole page back through the animation */
+  if(!("IntersectionObserver" in window)){[].forEach.call(items,function(el){el.classList.add("rv","in");});return;}
+  if(revealObs)revealObs.disconnect();
+  revealObs=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){revealSeen[e.target.getAttribute("data-rv")]=1;e.target.classList.add("in");revealObs.unobserve(e.target);}});
+  },{root:scr,rootMargin:"0px 0px -8% 0px",threshold:.08});
+  [].forEach.call(items,function(el,i){
+    el.setAttribute("data-rv",i);el.classList.add("rv");
+    if(revealSeen[i])el.classList.add("in");else revealObs.observe(el);
+  });
+}
 function render(nav,keepScroll){
   var top=scr.scrollTop;
+  var sp0=scr.querySelector(".strip"),stripLeft=sp0?sp0.scrollLeft:0;
   scr.innerHTML=DEVICE==="desk"?(DV[S.view]?DV[S.view]():deskGeneric()):(V[S.view]||V.home)();
   scr.scrollTop=(nav&&!keepScroll)?0:top;
   if(S.scrollTo){var se=scr.querySelector("#"+S.scrollTo);if(se)scr.scrollTop=se.offsetTop-10;S.scrollTo=null;}
+  if(stripLeft){var sp2=scr.querySelector(".strip");if(sp2)sp2.scrollLeft=stripLeft;}
+  wireReveal();
   renderOverlay();renderChrome();
   if(S.focusSearch){S.focusSearch=false;var inp=scr.querySelector(".sf input");if(inp){inp.focus();try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){}}}
 }
@@ -1605,6 +1681,10 @@ function act(a,el){
       if(S.plan==="free"&&S.anLeft<=0){go("paid",{reason:"analyses"});break;}
       S.analyzed[av]=true;if(S.plan==="free")S.anLeft--;go("detail",{v:av}); break;
     case "sell-search": startSearch(d("q")); break;
+    case "sell-ex": S.sellV=d("v"); S.sellHook=0; S.sellInfo=false; render(false); break;
+    case "sell-hook": S.sellHook=+d("k"); render(false); break;
+    case "sell-info": S.sellInfo=!S.sellInfo; render(false); break;
+    case "strip": var sp=scr.querySelector(".strip"); if(sp)sp.scrollBy({left:(+d("d"))*Math.round(sp.clientWidth*.8),behavior:"smooth"}); break;
     case "top": go("top"); break;
     case "top-cat": S.topCat=d("k"); render(false); break;
     case "save": var sv=d("v"); if(S.saved[sv])delete S.saved[sv];else S.saved[sv]=true; render(false); if(S.saved[sv])toast("Saved to Library"); break;
