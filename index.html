@@ -182,7 +182,7 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .box.white{background:#fff;border:1px solid rgba(23,19,18,.05)}
 .eb{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0}
 .eb.c{color:var(--coral-d)} .eb.m{color:var(--mid)}
-.q{background:#fff;border-radius:14px;padding:12px 14px;font-weight:700;font-size:16px;line-height:1.35;margin:0}
+.phone .q{background:#fff;border-radius:14px;padding:12px 14px;font-weight:700;font-size:16px;line-height:1.35;margin:0}
 .ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;counter-reset:n}
 .ol li{display:grid;grid-template-columns:26px 1fr;gap:10px;font-size:14.5px;line-height:1.45;counter-increment:n}
 .ol li::before{content:counter(n);width:26px;height:26px;border-radius:8px;background:#FCE6EA;color:var(--coral-d);font-weight:800;font-size:13px;display:grid;place-items:center}
@@ -959,7 +959,7 @@ function sellPage(){
     ["See what broke out","TikToks ranked by Breakout Score, 0 to 100. Dozens of them in a search."],
     ["Get the creative strategy","The hook, why the video worked, and what you can do next."]];
   var gets=[
-    ["spark","The Breakout Score","0 to 100. It shows how much the video beat what accounts that size usually get."],
+    ["spark","The Breakout Score","0 to 100. It shows how much a video beat the average of what that account usually gets."],
     ["comment","The hook, written out","The line that stopped the scroll, plus three more you can try."],
     ["eye","Why it worked","Three reasons in plain language, so you copy the thinking and not the video."],
     ["arrow","What you can do next","Your version. What to shoot, and in what order."],
@@ -973,12 +973,12 @@ function sellPage(){
 
   /* 1. the problem */
   '<section class="sct"><div class="swrap prob">'+
-  sellHead("The real problem","Filming is the easy part.","Knowing what to film is what costs you the weekend.")+
+  sellHead("The real problem","The hard part is deciding what to film.","You can shoot it, edit it, and post it. Working out what is worth all that is the part nobody helps with.")+
   '<div class="stack" style="gap:22px">'+
   '<ul class="pain">'+
-  ['You catch the trend a week after it peaked.',
-   'You pitch a brand with a mood board and hope.',
-   'A video flops and nobody tells you why.'].map(function(x){return '<li><span>'+x+'</span></li>';}).join("")+
+  ['You open TikTok for ideas and close it an hour later with nothing.',
+   'You remake a video that worked and yours lands flat, with no idea what was missing.',
+   'You pitch a brand with a mood board, when what they want is proof.'].map(function(x){return '<li><span>'+x+'</span></li>';}).join("")+
   '</ul>'+
   '<p class="s3">UGC Breakouts starts from TikToks that already worked, and shows you what to take from them.</p>'+
   '</div></div></section>'+
@@ -1039,7 +1039,7 @@ function sellPage(){
   '<section class="sct"><div class="swrap">'+
   sellHead("Before you ask","Questions creators ask.","")+
   '<div class="faq">'+[
-    ["What is a Breakout Score?","A score from 0 to 100. It shows how much a video beat what accounts that size usually get. Higher means the video did more than the account behind it explains."],
+    ["What is a Breakout Score?","A score from 0 to 100. It shows how much a video beat the average of what that account usually gets. Higher means the video did more than the account behind it explains."],
     ["What counts as a search?","A search counts once your results arrive. If we find fewer than 25 Breakouts, we tell you and it costs you nothing."],
     ["How long does a search take?","Usually 15 seconds to a minute. You can keep browsing while it runs."],
     ["Do I sign in with TikTok?","No. TikTok does not give us your email, so you sign in with Google or your email address."],
@@ -1480,6 +1480,11 @@ var NOTES={
     ["q","Every claim comes from your own answers. Breakout Score 0 to 100, dozens of results a search, free is 3 searches and 3 analyses, Pro is $49 a month for 100 and 100, results take 15 seconds to a minute, under 25 Breakouts is free, no TikTok sign in, share links open with no account."],
     ["v","The example section shows a full analysis (hook, why it worked, what you can do next) instead of blurring it. The sales page has to prove the product before anyone signs in. The blurred version stays on Sign in."],
     ["r","The closing sign up reuses your Shared screen CTA word for word: heading, search box, Continue with Google, email, and Free. Just your email."],
+    ["v","Breakout Score wording is now: a score from 0 to 100, showing how much a video beat the average of what that account usually gets. That measures a video against its own account, not against accounts of a similar size."],
+    ["a","The app still describes the score the old way. Detail says it beats \u201Cwhat accounts this size usually get.\u201D The two now disagree, and that is your copy, so we left it alone. Do you want Detail changed to match?"],
+    ["v","The opening no longer says filming is easy, because creators will not agree. It now says the hard part is deciding what to film. The three pains are the blank scroll, a remake that lands flat, and pitching with a mood board instead of proof."],
+    ["v","Dropped the pain about catching a trend late. The product also surfaces older videos, so being late is not the enemy we solve."],
+    ["v","The brand pitch stays on the page even though it is not built, on the basis that it will exist by the time this page goes live. If that slips, the pitch bullet and the You pitch brands card are the two places to pull."],
     ["a","No social proof yet. Do you have a creator who would give us a quote, or a number we can publish (Breakouts indexed, searches run)? There is a slot for it above pricing."],
     ["a","Pricing: can we add what it saves them, something like less than a single video's rate? Left out for now because we have not agreed on a claim."],
     ["a","Should the affiliate offer show in the footer for logged out visitors, or stay behind Not now?"],
@@ -1510,7 +1515,7 @@ function notesHtml(key){
   if(key==="questions"){
     if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens, copy, and flows as mobile, laid out per Ivan\'s MAP.md notes.</p>';
     return legend+'<p class="sid">Open</p><h2>Questions for Ivan</h2><ul>'+
-    ["Which sort and filter options?","When a video is played, does it play in the box or open a popup with the analysis?","Library: where should Refresh go for a saved search?","Top Breakouts feed: which categories at launch, and how often does it update?","Price: stay at $49 a month?","Home, signed in: rotate the headline between a few lines (“What are you filming next?”, “Find your next remake.”, “What's breaking out in your niche?”)?","Sales page: any social proof we can publish yet (a creator quote, or a number)?","Sales page: can we make a claim about what $49 saves them?","Sales page: affiliate offer in the logged out footer, or keep it behind Not now?","Sales page: Help and Terms pages before launch?","Sales page: one page for every traffic source, or one per source (X, cold email)?"].map(function(q){return li("a",q);}).join("")+'</ul>'+
+    ["Which sort and filter options?","When a video is played, does it play in the box or open a popup with the analysis?","Library: where should Refresh go for a saved search?","Top Breakouts feed: which categories at launch, and how often does it update?","Price: stay at $49 a month?","Home, signed in: rotate the headline between a few lines (“What are you filming next?”, “Find your next remake.”, “What's breaking out in your niche?”)?","Breakout Score now reads as a video against its own account average. Should the Detail screen change to match?","Sales page: any social proof we can publish yet (a creator quote, or a number)?","Sales page: can we make a claim about what $49 saves them?","Sales page: affiliate offer in the logged out footer, or keep it behind Not now?","Sales page: Help and Terms pages before launch?","Sales page: one page for every traffic source, or one per source (X, cold email)?"].map(function(q){return li("a",q);}).join("")+'</ul>'+
     '<p class="sid" style="margin-top:8px">Answered</p><ul>'+
     ["Breakout Score is a combo of a few variables, ranging 0 to 100.","Free results show the top 10 videos, then the paywall.","A search counts when results arrive.","Free users get 3 video analyses.","No TikTok sign in (no email), so Google.","Searches take 15 seconds to a minute (round 3).","Share notes can be edited; each edit makes a new link (round 3).","Affiliate reward is $49 only for now (round 3).","Fewer than 25 breakouts shows No breakouts.","Saved searches are snapshots, and a refresh costs a search.","The sender line shows first name and email, and the recipient sees the sender's analysis.","Paid and Spark ad videos stay in rankings, unlabeled, for MVP."].map(function(q){return li("q",q);}).join("")+'</ul>';
   }
