@@ -1000,6 +1000,53 @@ function sellTile(t){
 function sellHead(eb,h,sub){
   return '<div class="shead">'+(eb?'<p class="eb">'+eb+'</p>':'')+'<h2 class="s1">'+h+'</h2>'+(sub?'<p class="s2">'+sub+'</p>':'')+'</div>';
 }
+function sampleCard(sv,hookIdx,showInfo){
+  var sa=anFor(sv),hookNow=(hookIdx?(sa.tries[hookIdx-1]||[])[1]:sa.hook)||sa.hook;
+  return '<div class="sample"><div class="band">'+esc(sv.product)+', Breakout '+sv.score+' <span>Real output</span></div><div class="in">'+
+  '<div class="mini">'+vtile(sv,{sm:true,key:"sell-"+sv.id,style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px">'+
+  '<div class="scorerow2"><div class="bigs"><b>'+sv.score+'</b><span>Breakout Score</span></div><button class="infob" data-act="sell-info" aria-expanded="'+!!showInfo+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
+  '<div class="hd">@'+sv.handle+' <small>&middot; '+sv.followers+' followers</small></div><div class="st"><span>'+ic("eye")+sv.views+' views</span></div></div></div>'+
+  (showInfo?'<div class="pop" role="note"><b>Breakout Score</b><br>A score from 0 to 100. It shows how much a video beat the average of what that account usually gets. Higher means the video did more than the account behind it explains.</div>':'')+
+  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+esc(hookNow)+'”</p>'+
+  '<div class="hookalt"><span class="hl">Or try</span>'+
+  [["0","The one that worked"]].concat(sa.tries.map(function(t,i){return [String(i+1),t[0]];})).map(function(o){var on=String(hookIdx||0)===o[0];return '<button class="hpill" data-act="sell-hook" data-k="'+o[0]+'" aria-pressed="'+on+'">'+esc(o[1])+'</button>';}).join("")+'</div>'+
+  '<p class="eb c">Why the video worked</p><ol class="ol">'+sa.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol>'+
+  '<p class="eb c">What you can do next</p><ol class="ol">'+nextFor(sa).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>'+
+  '</div></div>';
+}
+/* Every option has to give back a card of the same height, or the page jumps
+   and the overlap onto the next section moves. Measure the tallest of every
+   search and hook combination off screen at the current width, then hold the
+   card to it. Keyed by width, so it stays right when the window resizes. */
+var sampleMinH={},mzNode=null;
+function lockSampleHeight(){
+  var card=scr.querySelector(".sell .sample");
+  if(!card)return;
+  var w=card.offsetWidth;
+  if(!w)return;
+  if(!(w in sampleMinH)){
+    if(!mzNode){
+      mzNode=document.createElement("div");
+      mzNode.className="sell";
+      mzNode.setAttribute("aria-hidden","true");
+      mzNode.style.cssText="position:absolute;left:-9999px;top:0;visibility:hidden;pointer-events:none";
+      document.getElementById("phone").appendChild(mzNode);
+    }
+    mzNode.style.width=w+"px";
+    var max=0;
+    DEMOS.forEach(function(d){
+      var v=vid(d[0]),a=anFor(v),n=1+Math.min(3,(a.tries||[]).length);
+      for(var k=0;k<n;k++){
+        mzNode.innerHTML=sampleCard(v,k,false);
+        var hh=mzNode.firstChild.offsetHeight;
+        if(hh>max)max=hh;
+      }
+    });
+    mzNode.innerHTML="";
+    sampleMinH[w]=max;
+  }
+  card.style.minHeight=sampleMinH[w]+"px";
+}
 function sellPage(){
   var tops=feedList("All").slice(0,12);
   var sv=vid(S.sellV||"v1"),sa=anFor(sv);
@@ -1049,17 +1096,7 @@ function sellPage(){
   '<div class="dchips" role="group" aria-label="Example search">'+DEMOS.map(function(d){var on=d[0]===sv.id;return '<button class="dchip" data-act="sell-ex" data-v="'+d[0]+'" aria-pressed="'+on+'">'+esc(d[1])+'</button>';}).join("")+'</div></div>'+
   '<p class="sellcap" style="margin-top:6px">Three analyses are free, so you can try this before you pay anything.</p>'+
   '</div>'+
-  '<div class="sample"><div class="band">'+esc(sv.product)+', Breakout '+sv.score+' <span>Real output</span></div><div class="in">'+
-  '<div class="mini">'+vtile(sv,{sm:true,key:"sell-"+sv.id,style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px">'+
-  '<div class="scorerow2"><div class="bigs"><b>'+sv.score+'</b><span>Breakout Score</span></div><button class="infob" data-act="sell-info" aria-expanded="'+!!S.sellInfo+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
-  '<div class="hd">@'+sv.handle+' <small>&middot; '+sv.followers+' followers</small></div><div class="st"><span>'+ic("eye")+sv.views+' views</span></div></div></div>'+
-  (S.sellInfo?'<div class="pop" role="note"><b>Breakout Score</b><br>A score from 0 to 100. It shows how much a video beat the average of what that account usually gets. Higher means the video did more than the account behind it explains.</div>':'')+
-  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+esc(hookNow)+'”</p>'+
-  '<div class="hookalt"><span class="hl">Or try</span>'+
-  [["0","The one that worked"]].concat(sa.tries.map(function(t,i){return [String(i+1),t[0]];})).map(function(o){var on=String(S.sellHook||0)===o[0];return '<button class="hpill" data-act="sell-hook" data-k="'+o[0]+'" aria-pressed="'+on+'">'+esc(o[1])+'</button>';}).join("")+'</div>'+
-  '<p class="eb c">Why the video worked</p><ol class="ol">'+sa.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol>'+
-  '<p class="eb c">What you can do next</p><ol class="ol">'+nextFor(sa).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>'+
-  '</div></div>'+
+  sampleCard(sv,S.sellHook||0,!!S.sellInfo)+
   '</div></section>'+
 
   /* 4. what is in every analysis */
@@ -1537,6 +1574,7 @@ var NOTES={
     ["v","Veejay asked for the below the fold to be a sales page. Nothing above the fold moved, so your Home stays as it is: hero, search, chips."],
     ["v","Order: the problem, how it works in three steps, one full example analysis, what is in every analysis, Top Breakouts, who it is for, pricing, FAQ, and a closing sign up."],
     ["v","Closing sign up is down to one thing to fill in: email and Start free, then OR, then Continue with Google as the second option. The duplicate search box is gone, because the hero at the top of this page already has one. Your Shared screen keeps its original three part CTA, where the search box is the only one on the screen."],
+    ["v","Whichever search you pick, the results card comes back the same height, so the page does not jump and the card meets the edge of the dark band in the same place every time. The height is taken from the tallest of the five searches and their hook choices, measured at whatever width the card actually is."],
     ["v","Every set of options is one width. The five example searches and the four hook choices sit on a grid, so the rows line up instead of stepping."],
     ["v","The page is interactive, using only things the product already does. The example swaps between five searches across five categories, so it does not read as a beauty only tool. The hook swaps between the one that worked and the three alternatives we give. The Breakout Score has the same info button as Detail. Top Breakouts is a swipeable strip of twelve, with arrows on desktop. Sections fade in once as they scroll into view, and never re-animate when a chip is tapped."],
     ["v","Built as a scrolling sales page rather than stacked app screens: sections alternate between paper, white, and your ink dark, the example card straddles the edge of the dark band, the three steps are cards, each feature has its own icon, and the closing sign up runs full width in dark. Same palette and type as the app, nothing new."],
@@ -1639,6 +1677,7 @@ function render(nav,keepScroll){
   if(S.scrollTo){var se=scr.querySelector("#"+S.scrollTo);if(se)scr.scrollTop=se.offsetTop-10;S.scrollTo=null;}
   if(stripLeft){var sp2=scr.querySelector(".strip");if(sp2)sp2.scrollLeft=stripLeft;}
   wireReveal();
+  lockSampleHeight();
   renderOverlay();renderChrome();
   if(S.focusSearch){S.focusSearch=false;var inp=scr.querySelector(".sf input");if(inp){inp.focus();try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){}}}
 }
