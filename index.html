@@ -647,16 +647,19 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .plist svg{width:17px;height:17px;color:var(--teal);margin-top:2px}
 .pcard.pro .plist svg{color:var(--cyan)}
 .ctabox.plain{background:transparent;padding:0;border-radius:0}
+.ordiv{display:flex;align-items:center;gap:12px;color:#8E837D;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;max-width:560px;margin:2px 0}
+.ordiv::before,.ordiv::after{content:"";height:1px;background:#3A322E;flex:1}
+.sell .ctabox .gbtn{background:transparent;color:#fff;border:1.5px solid #4A413D}
 .sfoot{font-size:12.5px;color:#A79C96;text-align:center;margin:0}
 
 /* sales page: interactive bits */
 .picklbl{font-size:12.5px;color:#A79C96;margin:0;font-weight:600}
-.dchips{display:flex;flex-wrap:wrap;gap:8px}
-.dchip{background:transparent;color:#fff;border:1.5px solid #3A322E;border-radius:999px;padding:8px 14px;font:700 13.5px var(--sans);cursor:pointer}
+.dchips{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px}
+.dchip{background:transparent;color:#fff;border:1.5px solid #3A322E;border-radius:999px;padding:9px 10px;font:700 13.5px var(--sans);cursor:pointer;text-align:center;min-height:38px}
 .dchip[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
-.hookalt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:-2px}
-.hookalt .hl{font-size:12px;color:var(--mid);font-weight:700;margin-right:2px}
-.hpill{background:var(--paper);border:1.5px solid transparent;border-radius:999px;padding:6px 11px;font:700 12.5px var(--sans);color:var(--mid);cursor:pointer}
+.hookalt{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:-2px}
+.hookalt .hl{grid-column:1/-1;font-size:12px;color:var(--mid);font-weight:700}
+.hpill{background:var(--paper);border:1.5px solid transparent;border-radius:999px;padding:6px 8px;font:700 12.5px/1.25 var(--sans);color:var(--mid);cursor:pointer;display:grid;place-items:center;text-align:center;min-height:36px}
 .hpill[aria-pressed="true"]{background:var(--teal-soft);color:var(--teal);border-color:#B8E3E3}
 .scorerow2{display:flex;align-items:baseline;gap:8px;position:relative}
 .scorerow2 .infob{align-self:center}
@@ -711,7 +714,7 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .phone.desk .jobs>div{padding:28px}
 .phone.desk .prices{grid-template-columns:1fr 1fr;gap:20px;max-width:720px}
 .phone.desk .pcard{padding:28px}
-.phone.desk .sell .faq{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}
+.phone.desk .sell .faq{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;align-items:start}
 .phone.desk .sell .trow{grid-template-columns:repeat(5,1fr);gap:16px}
 .phone.desk .sell .trow .th2{aspect-ratio:9/14;border-radius:16px}
 .phone.desk .sell .trow .sb{left:8px;bottom:8px;padding:3px 9px 4px}
@@ -1020,7 +1023,7 @@ function sellPage(){
 
   /* 1. the problem */
   '<section class="sct"><div class="swrap prob">'+
-  sellHead("The real problem","The hard part is deciding what to film.","You can shoot it, edit it, and post it. Working out what is worth all that is the part nobody helps with.")+
+  sellHead("The real problem","The hard part is deciding what to film.","You can shoot it, edit it, and post it. Knowing what is worth your effort is what's missing.")+
   '<div class="stack" style="gap:22px">'+
   '<ul class="pain">'+
   ['You open TikTok for ideas and close it an hour later with nothing.',
@@ -1032,7 +1035,7 @@ function sellPage(){
 
   /* 2. how it works */
   '<section class="sct white"><div class="swrap">'+
-  sellHead("How it works","Three steps that take only a minute.","")+
+  sellHead("How it works","Three steps that take only a few minutes.","")+
   '<div class="steps3">'+steps.map(function(s,k){return '<div class="st3"><i>'+(k+1)+'</i><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';}).join("")+'</div>'+
   '</div></section>'+
 
@@ -1108,11 +1111,12 @@ function sellPage(){
   '<section class="sct cta"><div class="swrap">'+
   '<div class="ctabox plain" aria-labelledby="sell-cta-h">'+
   '<h3 id="sell-cta-h">Find Breakouts of your own!</h3>'+
-  '<p>Search a product, style, or tag you could film this week. See what broke out on TikTok, and how to remake it.</p>'+
-  searchField("q-sell")+
-  '<button class="b gbtn full-w" data-act="auth">'+gicon()+'Continue with Google</button>'+
+  '<p>One search shows you what broke out on TikTok in your niche, and how to remake it.</p>'+
   '<form class="stack" data-form="email" novalidate><div class="emailf"><label for="em-sell" class="sr">Email</label><input id="em-sell" type="email" autocomplete="email" placeholder="Your email" value="'+esc(S.emailDraft)+'"><button class="b b1" type="submit">Start free</button></div>'+(S.emailErr?'<p class="err" role="alert">'+S.emailErr+'</p>':'')+'</form>'+
-  '<p class="fine">Free. Just your email.</p></div>'+
+  '<p class="fine">Free. Just your email.</p>'+
+  '<div class="ordiv"><span>or</span></div>'+
+  '<button class="b gbtn full-w" data-act="auth">'+gicon()+'Continue with Google</button>'+
+  '</div>'+
   '<p class="sfoot">An app for TikTok creators. TikTok only, for now.</p>'+
   '</div></section>'+
 
@@ -1532,6 +1536,8 @@ var NOTES={
   "sales":{id:"01 · 01-home-sales",h:"Sales page, below the fold",li:[
     ["v","Veejay asked for the below the fold to be a sales page. Nothing above the fold moved, so your Home stays as it is: hero, search, chips."],
     ["v","Order: the problem, how it works in three steps, one full example analysis, what is in every analysis, Top Breakouts, who it is for, pricing, FAQ, and a closing sign up."],
+    ["v","Closing sign up is down to one thing to fill in: email and Start free, then OR, then Continue with Google as the second option. The duplicate search box is gone, because the hero at the top of this page already has one. Your Shared screen keeps its original three part CTA, where the search box is the only one on the screen."],
+    ["v","Every set of options is one width. The five example searches and the four hook choices sit on a grid, so the rows line up instead of stepping."],
     ["v","The page is interactive, using only things the product already does. The example swaps between five searches across five categories, so it does not read as a beauty only tool. The hook swaps between the one that worked and the three alternatives we give. The Breakout Score has the same info button as Detail. Top Breakouts is a swipeable strip of twelve, with arrows on desktop. Sections fade in once as they scroll into view, and never re-animate when a chip is tapped."],
     ["v","Built as a scrolling sales page rather than stacked app screens: sections alternate between paper, white, and your ink dark, the example card straddles the edge of the dark band, the three steps are cards, each feature has its own icon, and the closing sign up runs full width in dark. Same palette and type as the app, nothing new."],
     ["q","Every claim comes from your own answers. Breakout Score 0 to 100, dozens of results a search, free is 3 searches and 3 analyses, Pro is $49 a month for 100 and 100, results take 15 seconds to a minute, under 25 Breakouts is free, no TikTok sign in, share links open with no account."],
