@@ -327,6 +327,46 @@ var SPEC='<div class="whead"><h2>Spec for Lester</h2><p>Build notes for the pitc
 '<li><b>Stale numbers.</b> The stats are a snapshot with a date on slide 2. Refreshing re-reads the account.</li>'+
 '<li><b>Public links.</b> Unguessable slugs (random suffix), noindex, and the creator can turn a link off.</li></ul></div>';
 
+/* ---------------- inspiration board (Veejay, 29 Sept) ---------------- */
+var INSP_A=[
+  {img:"spotify-wrapped",n:"Spotify Wrapped 2025",l1:"Minutes listened, top 5 artists and songs, top genre. Skips and anything below average stay out.",l2:"9:16 cards with spotify.com/wrapped on each. 500M+ shares in the first 24 hours (company claim).",cr:"Spotify Newsroom, 3 Dec 2025",u:"https://newsroom.spotify.com/2025-12-03/2025-wrapped-user-experience/"},
+  {img:"spotify-artists",n:"Spotify for Artists Wrapped 2025",l1:"Listeners, streams and countries, plus growth against the artist’s own last year: “Your saves grew 534%.”",l2:"Accolade labels like “The Early Riser”. Every story has a share card. Revenue is left out.",cr:"Spotify Newsroom, 3 Dec 2025",u:"https://newsroom.spotify.com/2025-12-03/wrapped-for-artists-songwriters-creators-authors-advertisers/"},
+  {img:"youtube-recap",n:"YouTube Recap 2025",l1:"Top channels, top interests as ranked bars, and “Top 10% of viewers” for a channel you watched.",l2:"First edition. Download and Share on every 9:16 card. No published share figure.",cr:"YouTube Official Blog, Dec 2025",u:"https://blog.youtube/news-and-events/youtube-recap-2025/"},
+  {img:"youtube-personality",n:"YouTube Recap personalities",l1:"A viewer personality with its rarity on the card: Skill Builder 11% of people, Trailblazer 0.1%.",l2:"YouTube published the split of all types after launch, which gave people a reason to compare.",cr:"YouTube Official Blog, 8 Dec 2025",u:"https://blog.youtube/culture-and-trends/unpacking-youtube-recap-2025-personality/"},
+  {img:"duolingo",n:"Duolingo Year in Review",l1:"Days, minutes, words and XP, with a percentile: “top 5% of learners worldwide.” Plus a learner style.",l2:"Putting the percentile on the share card in 2021 raised share rates (company claim).",cr:"Duolingo Blog, 8 Dec 2022",u:"https://blog.duolingo.com/year-in-review-behind-the-scenes"},
+  {img:"apple-replay",n:"Apple Music Replay",l1:"One number per screen: “These minutes made it big. Total Minutes 17,527.”",l2:"Story cards and a highlight reel to share. No published share figure.",cr:"Apple Newsroom, Nov 2022",u:"https://www.apple.com/newsroom/2022/11/apple-music-launches-new-replay-experience-reveals-2022s-top-charts/"},
+  {img:"github-skyline",n:"GitHub Skyline",l1:"A year of contributions as a 3D city you can print, with the username on the base.",l2:"The one pick shown to peers and recruiters, not friends. Volume only, no quality measure.",cr:"GitHub Changelog, 9 Dec 2024",u:"https://github.blog/changelog/2024-12-09-github-skyline-cli-extension/"},
+  {img:"",n:"Twitch Recap for streamers",l1:"Hours streamed, top stream by peak viewers, biggest fans, and “Top 10% of streamers” in a category.",l2:"One downloadable share graphic. Average viewers and follower losses are left out.",cr:"Twitch Help, 2025 edition. No official card image to show.",u:"https://help.twitch.tv/s/article/annual-recap"}
+];
+var INSP_B=[
+  {img:"linktree",n:"Linktree Media Kit",l1:"Audience, click rate, and how the creator ranks against similar creators. Can show percentiles instead of raw numbers.",l2:"Live link, refreshed daily over 28 days. Verified numbers are labeled and can’t be edited.",cr:"Linktree Help Center, Sept 2026",u:"https://linktr.ee/help/en/articles/16937450-how-to-set-up-and-share-your-media-kit"},
+  {img:"beacons",n:"Beacons Media Kit",l1:"Total followers across platforms, rates per deliverable, top content and partner logos.",l2:"Auto updating link plus PDF, free. No benchmark and no per video comparison.",cr:"Beacons product page",u:"https://beacons.ai/i/app-pages/media-kit"},
+  {img:"later",n:"Later Media Kit",l1:"Followers, engagement rate, top 3 posts by reach. Uses a median over 90 days, not an average.",l2:"Shared as a link on paid plans, with a “last updated” date. Image is Later’s free template.",cr:"Later Blog, 4 Jun 2025",u:"https://later.com/blog/influencer-media-kit/"},
+  {img:"passionfroot",n:"Passionfroot Storefront",l1:"Channel stats, demographics and priced packages that a brand can book and pay for directly.",l2:"A verified badge in return for connecting the account. “Verified storefronts get more brand deals” (company claim).",cr:"Passionfroot Help Center",u:"https://help.passionfroot.me/en/articles/11552776-storefront"},
+  {img:"tiktok-one",n:"TikTok One creator profiles",l1:"Views, likes and engagement per video, straight from TikTok. Brands filter by median views.",l2:"Lives inside the marketplace. Brands find the creator, the creator doesn’t send it.",cr:"TikTok for Business Blog, 13 May 2026",u:"https://ads.tiktok.com/business/en/blog/tiktok-one-creative-platform"},
+  {img:"collabstr",n:"Collabstr creator profile",l1:"Followers, average views, engagement, audience charts, fixed price packages and badges like “Top Creator”.",l2:"Stats are blurred for logged out brands. 1.2M+ creators listed (company claim).",cr:"Screenshot of a public Collabstr profile, 29 Sep 2026",u:"https://collabstr.com/"}
+];
+var TAKE=[
+  {h:"Compare the creator to their own average",p:"Spotify for Artists leads with growth against the artist’s own last year, and Later uses a median so one big post doesn’t skew the number. None of the six media kits scores single videos against the creator’s own usual views, so “12x my usual views” is open ground. It also flatters a small account more than a follower count does.",f:"Spotify for Artists, Later, all six media kits",ok:1},
+  {h:"One number per screen",p:"Apple Replay gives total minutes a whole screen. Spotify for Artists does the same with “20.1M total Canvas views.” The deck’s breakouts slide could open on the single biggest multiple before the three cards.",f:"Apple Music Replay, Spotify for Artists",ok:1},
+  {h:"Put the flattering number on the card people share",p:"Duolingo moved the percentile onto its share card in 2021 and share rates went up. Its top 10% of XP earners made more than half of all shares in 2020. Expect the creators with the biggest breakouts to share first.",f:"Duolingo",ok:1},
+  {h:"A 9:16 breakout card next to the brand deck",p:"Spotify, YouTube and Twitch all ship a story sized card with the product’s URL on it. A “my breakout” card (thumbnail, multiple, Breakout Score, ugcbreakouts.com) would spread to other creators, while the deck goes to brands. Spotify reports 500M+ Wrapped shares in 24 hours (company claim).",f:"Spotify Wrapped, YouTube Recap, Twitch Recap",ok:1},
+  {h:"Label what is read from TikTok",p:"Linktree marks verified numbers and locks them. Passionfroot gives a verified badge for connecting. Our numbers come from public TikTok and are already read only. Slide 2 dates them, and a small “Read from public TikTok” tag would say they can’t be edited. Audience fields stay marked as typed by the creator.",f:"Linktree, Passionfroot, Collabstr",ok:1},
+  {h:"Live link that stays current, with a date",p:"Linktree and Beacons sell the kit as always up to date, and Later prints a “last updated” date. A deck link that re-reads the account on open costs a scrape each time, so a dated snapshot with a Refresh button fits UB better.",f:"Linktree, Beacons, Later",ok:1},
+  {h:"A style label from the creator’s own breakouts",p:"Duolingo learner styles, YouTube personalities and Spotify accolades all hand people a label. UB could name a creator’s pattern from their breakout analyses, like “Opens on the product.” Rarity numbers (YouTube’s “0.1% of people”) need a population we don’t have, so leave those out.",f:"Duolingo, YouTube Recap, Spotify for Artists",ok:2},
+  {h:"Skip: “Top 10% of creators” percentiles",p:"YouTube, Twitch, Duolingo and Linktree rank the user against everyone else. UB only sees the accounts that show up in searches, not a fair sample of all creators in a niche. A percentile would be invented, and it would also mix up the Breakout Score definition. Flagged, not proposed.",f:"YouTube Recap, Twitch Recap, Linktree",ok:0}
+];
+function inspTile(x){
+  var im=x.img?'<a class="im" href="insp/'+x.img+'.jpg" target="_blank" rel="noopener" aria-label="'+esc(x.n)+', open image" style="background-image:url(insp/'+x.img+'.jpg)"></a>':'<div class="im noim"><span>No official image</span></div>';
+  return '<figure>'+im+'<figcaption><b>'+x.n+'</b><span class="cap">'+x.l1+'</span><span class="cap">'+x.l2+'</span><span class="cr">Source: <a href="'+x.u+'" target="_blank" rel="noopener">'+x.cr+'</a></span></figcaption></figure>';
+}
+var INSP_HTML='<div class="whead"><h2>Inspiration: apps that share your own stats</h2><p>Real products that turn a person’s own numbers into something they post or send. The first group is shared with friends. The second is sent to brands, which is closest to our deck. Figures are the companies’ own claims where marked. Images belong to each company and are credited under each tile.</p></div>'+
+'<section class="ig-sec"><h3>Shared with friends</h3><div class="igrid">'+INSP_A.map(inspTile).join("")+'</div></section>'+
+'<section class="ig-sec"><h3>Sent to brands</h3><div class="igrid">'+INSP_B.map(inspTile).join("")+'</div></section>'+
+'<section class="ig-sec"><h3>What UB can take from them</h3><p>The tag under each one says what data it needs. The last one would need data we don’t have, so it is flagged and skipped.</p><div class="tk">'+
+TAKE.map(function(t,k){return '<div class="row'+(t.ok?'':' skip')+'"><i>'+(k+1)+'</i><div><h4>'+t.h+'</h4><p>'+t.p+'</p><p class="from">From: '+t.f+'</p><span class="dat'+(t.ok===1?'':' no')+'">'+(t.ok===1?'PUBLIC DATA ONLY':(t.ok===2?'PUBLIC DATA, LABEL ONLY':'NEEDS DATA WE DON’T HAVE'))+'</span></div></div>';}).join("")+
+'</div></section>';
+
 /* ---------------- notes ---------------- */
 function li(t,txt){return '<li><span class="tag '+t+'">'+({r:"IVAN",a:"ASK",f:"LOCK",d:"DEV",q:"SOURCE",v:"VEEJAY"})[t]+'</span><span>'+txt+'</span></li>';}
 function src(u,l){return ' <a href="'+u+'" target="_blank" rel="noopener" style="color:var(--acc)">'+l+'</a>';}
@@ -348,6 +388,7 @@ var NOTES={
   "paid":{id:"P14 · paid, pitch deck cap",h:"Paid: pitch deck cap",li:[["a","A fourth version of Paid, same layout as the existing three. The pitch lines go first."],["a","Free is 1 pitch deck, Pro is 20 a month. Right numbers?"]]},
   "desk":{id:"P15 · desktop editor",h:"Desktop: deck editor",li:[["a","Slides on the left, the slide in the middle, its fields on the right. Brands mostly open links on a laptop, so this is close to what they see."],["a","Only the editor has a desktop layout here. The steps would reuse the mobile layout at a centered width."]]},
   "sample":{id:"Sample",h:"Sample deck",li:[["f","Invented creator (Rae M.), brand (Pellwyn) and numbers. SAMPLE sits on every slide, and every handle starts with “sample.”"],["q","Media kit guides list the same core: stats, work samples, rates, contact."+src("https://billo.app/blog/ugc-portfolio/","Billo")+" What we add is which videos beat the creator's own average, and the pattern behind them."],["q","Beacons and similar link in bio tools already offer media kits on paid plans."+src("https://beacons.ai/i/plans","Beacons")]]},
+  "inspiration":{id:"Inspiration",h:"Apps that share your stats",li:[["v","Veejay, 29 Sept: “can you get inspirations of apps that ran this? where they share stats? one is spotify”. 14 examples above, 8 shared with friends and 6 sent to brands."],["a","Add a 9:16 “my breakout” card as a second output next to the deck. It is free reach among creators, and the deck stays for brands."],["a","Open the breakouts slide on the single biggest multiple, Apple Replay style, before the three cards. Suggestion only, the slides are unchanged."],["a","Add a small “Read from public TikTok” tag next to the numbers on slide 2, like Linktree’s verified label. Slide 2 already carries the date range."],["a","A style label from the creator’s own breakouts, on the share card only. Plain wording, no rarity figure."],["q","Duolingo: moving the percentile onto the share card raised share rates, and its top 10% made more than half of shares."+src("https://blog.duolingo.com/year-in-review-behind-the-scenes","Duolingo Blog")],["q","Spotify: 200M+ engaged users and 500M+ shares in Wrapped’s first 24 hours. Company claim reported by TechCrunch."+src("https://techcrunch.com/2025/12/04/spotify-says-wrapped-2025-is-its-biggest-yet-with-200m-users-in-its-first-day","TechCrunch")],["q","Spotify for Artists: over 18,000 artists shared a Wrapped Clip for 2024 (company claim)."+src("https://artists.spotify.com/en/get-ready-for-wrapped","Spotify for Artists")]]},
   "spec":{id:"Spec",h:"Spec for Lester",li:[["d","Data, small accounts, prompt outline, export, limits and risks are above. Nothing here is built yet."],["a","Two numbers to set: the minimum video count (15?) and the Breakout Score that counts as a breakout (60?)."]]}
 };
 var QUESTIONS=[
@@ -377,7 +418,7 @@ var RAIL=[
   {g:"Build",items:[["handle","P4","Your TikTok"],["reading","P5","Reading your account"],["few","P6","Not enough videos"],["private","P7","Private account"],["you","P8","About you"],["brand","P9","Pitching one brand?"],["gen","P10","Building"]]},
   {g:"Deck",items:[["edit","P11","Edit the deck"],["share","P12","Send and export"],["brandview","P13","What the brand sees"],["desk","P15","Desktop editor"]]},
   {g:"Money",items:[["paid","P14","Paid, pitch deck cap"]]},
-  {g:"Review",items:[["sample","","Sample deck, all slides"],["spec","","Spec for Lester"],["questions","","Questions for Ivan"]]}
+  {g:"Review",items:[["sample","","Sample deck, all slides"],["inspiration","","Inspiration"],["spec","","Spec for Lester"],["questions","","Questions for Ivan"]]}
 ];
 /* old deep links from the first version */
 var ALIAS={"entry-results":"entry-library","pick":"handle"};
@@ -402,7 +443,7 @@ function jump(key){
   render(true);
 }
 function currentKey(){
-  if(S.railKey==="sample"||S.railKey==="spec"||S.railKey==="questions")return S.railKey;
+  if(S.railKey==="sample"||S.railKey==="spec"||S.railKey==="inspiration"||S.railKey==="questions")return S.railKey;
   if(DEVICE==="desk")return "desk";
   return S.view;
 }
@@ -432,9 +473,9 @@ function startRead(){
 var scr=document.getElementById("scr"),ovl=document.getElementById("ovl"),wide=document.getElementById("wide");
 var lastNotes=null;
 function render(nav){
-  var key=currentKey(),isWide=(key==="sample"||key==="spec");
+  var key=currentKey(),isWide=(key==="sample"||key==="spec"||key==="inspiration");
   document.body.classList.toggle("wideon",isWide);
-  if(isWide){wide.innerHTML=key==="sample"?sampleWide():SPEC;}
+  if(isWide){wide.innerHTML=key==="sample"?sampleWide():(key==="inspiration"?INSP_HTML:SPEC);}
   else{
     var top=scr.scrollTop;
     scr.innerHTML=DEVICE==="desk"?deskEdit():(V[S.view]||V["entry-library"])();
