@@ -415,9 +415,14 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .ttact{display:flex;gap:12px;align-items:center}
 .ttact .grow{flex:1}
 .lnkb{background:none;border:0;font:700 14px var(--sans);color:var(--teal);cursor:pointer;padding:10px 4px;white-space:nowrap}
+.atabs{display:flex;flex-direction:column;gap:12px}
+.atabs .tabs{background:rgba(255,255,255,.65)}
+.atabs .q{margin:0}
+.tries{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.tries li{font-size:14.5px;line-height:1.4;padding-left:12px;border-left:2px solid var(--teal)}
+.lkrow{display:flex;align-items:center;gap:8px;width:100%;border:1px dashed var(--hair);background:rgba(255,255,255,.6);border-radius:12px;padding:12px 14px;font:600 14px var(--sans);color:var(--mid);cursor:pointer;margin-top:10px;text-align:left}
+.lkrow svg{width:16px;height:16px;flex:none}
 .ownl{margin:-2px 0 0;font-size:13.5px;color:var(--mid)}
-.ownbox{display:flex;flex-direction:column;gap:12px}
-.ownbox .tabs{background:rgba(255,255,255,.6)}
 .xline{margin:2px 0 0;font-size:14px;color:var(--mid)}
 .xline b{color:var(--ink);font-size:16px}
 .ttv .th{width:44px;height:58px;border-radius:9px;background:center/cover}
@@ -651,9 +656,10 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .pain li{display:grid;grid-template-columns:24px 1fr;gap:12px;font-size:16.5px;line-height:1.35;align-items:start;font-weight:600;letter-spacing:-.01em}
 .pain li::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--coral);margin:7px 0 0 7px;box-shadow:0 0 0 5px rgba(255,79,94,.14)}
 
-.steps3{display:flex;flex-direction:column;gap:12px}
-.st3{background:var(--paper);border-radius:20px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px}
-.st3 i{width:38px;height:38px;border-radius:13px;background:#FCE6EA;color:var(--coral-d);display:grid;place-items:center;font:800 17px/1 var(--sans);font-style:normal;margin-bottom:6px}
+.steps3{display:flex;flex-direction:column;gap:0}
+.st3{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--hair)}
+.st3:first-child{border-top:0}
+.st3 i{width:32px;height:32px;flex:none;border-radius:50%;background:#FCE6EA;color:var(--coral-d);display:grid;place-items:center;font:800 15px/1 var(--sans);font-style:normal}
 .st3 b{font-size:17px;letter-spacing:-.025em;line-height:1.25}
 .st3 span{color:var(--mid);font-size:14.5px;line-height:1.5}
 
@@ -692,8 +698,9 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 
 /* sales page: interactive bits */
 .picklbl{font-size:12.5px;color:#A79C96;margin:0;font-weight:600}
-.dchips{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px}
-.dchip{background:transparent;color:#fff;border:1.5px solid #3A322E;border-radius:999px;padding:9px 10px;font:700 13.5px var(--sans);cursor:pointer;text-align:center;min-height:38px}
+.dchips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-right:-20px;padding-right:20px}
+.dchips::-webkit-scrollbar{display:none}
+.dchip{flex:none;background:transparent;color:#fff;border:1.5px solid #3A322E;border-radius:999px;padding:8px 14px;font:700 13.5px var(--sans);cursor:pointer;text-align:center;min-height:38px}
 .dchip[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
 .hookalt{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:-2px}
 .hookalt .hl{grid-column:1/-1;font-size:12px;color:var(--mid);font-weight:700}
@@ -727,7 +734,6 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 @media (prefers-reduced-motion: reduce){.rv{opacity:1;transform:none}}
 @media (hover:hover){
   .st3,.jobs>div{transition:transform .2s ease,box-shadow .2s ease}
-  .st3:hover{transform:translateY(-3px);box-shadow:0 18px 34px -24px rgba(23,19,18,.55)}
   .jobs>div:hover{transform:translateY(-3px);box-shadow:0 22px 42px -26px rgba(23,19,18,.6)}
   .strip .th2{transition:transform .25s ease}
   .strip .tt2:hover .th2{transform:scale(1.04)}
@@ -746,7 +752,7 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .phone.desk .s1{font-size:38px}
 .phone.desk .s2{font-size:18px}
 .phone.desk .steps3{flex-direction:row;gap:20px}
-.phone.desk .st3{flex:1;padding:24px}
+.phone.desk .st3{flex:1;padding:16px 0;border-top:0}
 .phone.desk .gets{grid-template-columns:1fr 1fr;gap:32px 48px}
 .phone.desk .jobs{grid-template-columns:1fr 1fr;gap:20px}
 .phone.desk .jobs>div{padding:28px}
@@ -822,7 +828,7 @@ body.fs.desk .phone{height:800px}
     <div class="brand">
       <p class="kicker">Round 3 notes · plus the sales page</p>
       <h1>UGC Breakouts <b>v2</b></h1>
-      <p>Clickable prototype. Round 1 Slack changes are in. The notes list this round: Ivan's notes, his answers, the call, and the sales page Veejay asked for.</p>
+      <p>Clickable prototype. Tap through it like the app.</p>
       <a href="pitch-free/" style="display:inline-block;margin-top:10px;font:600 12.5px var(--sans);color:var(--acc);text-decoration:none">Breakout Cards (Spotify Wrapped Style) ›</a>
       <div class="devseg" role="group" aria-label="Device"><button type="button" id="dev-phone" aria-pressed="true">Phone</button><button type="button" id="dev-desk" aria-pressed="false">Desktop</button></div>
     </div>
@@ -1081,11 +1087,7 @@ function sampleCard(sv,hookIdx,showInfo){
   '<div class="scorerow2"><div class="bigs"><b>'+sv.score+'</b><span>Breakout Score</span></div><button class="infob" data-act="sell-info" aria-expanded="'+!!showInfo+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
   '<div class="hd">@'+sv.handle+' <small>&middot; '+sv.followers+' followers</small></div><div class="st"><span>'+ic("eye")+sv.views+' views</span></div></div></div>'+
   (showInfo?'<div class="pop" role="note"><b>Breakout Score</b><br>A score from 0 to 100. It shows how much a video beat the average of what that account usually gets. Higher means the video did more than the account behind it explains.</div>':'')+
-  '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+esc(hookNow)+'”</p>'+
-  '<div class="hookalt"><span class="hl">Or try</span>'+
-  [["0","The one that worked"]].concat(sa.tries.map(function(t,i){return [String(i+1),t[0]];})).map(function(o){var on=String(hookIdx||0)===o[0];return '<button class="hpill" data-act="sell-hook" data-k="'+o[0]+'" aria-pressed="'+on+'">'+esc(o[1])+'</button>';}).join("")+'</div>'+
-  '<p class="eb c">Why the video worked</p><ol class="ol">'+sa.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol>'+
-  '<p class="eb c">What you can do next</p><ol class="ol">'+nextFor(sa).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>'+
+  anTabs(sa,nextFor(sa),"sell")+
   '</div></div>';
 }
 /* Every option has to give back a card of the same height, or the page jumps
@@ -1108,27 +1110,29 @@ function lockSampleHeight(){
     }
     mzNode.style.width=w+"px";
     var max=0;
+    S.atab=S.atab||{};var keep=S.atab.sell;
     DEMOS.forEach(function(d){
-      var v=vid(d[0]),a=anFor(v),n=1+Math.min(3,(a.tries||[]).length);
-      for(var k=0;k<n;k++){
-        mzNode.innerHTML=sampleCard(v,k,false);
+      var v=vid(d[0]);
+      ["hook","why","next"].forEach(function(t){
+        S.atab.sell=t;mzNode.innerHTML=sampleCard(v,0,false);
         var hh=mzNode.firstChild.offsetHeight;
         if(hh>max)max=hh;
-      }
+      });
     });
+    S.atab.sell=keep;
     mzNode.innerHTML="";
     sampleMinH[w]=max;
   }
   card.style.minHeight=sampleMinH[w]+"px";
 }
 function sellPage(){
-  var tops=feedList("All").slice(0,12);
+  var tops=feedList("All").slice(0,8);
   var sv=vid(S.sellV||"v1"),sa=anFor(sv);
   var hookNow=(S.sellHook?(sa.tries[S.sellHook-1]||[])[1]:sa.hook)||sa.hook;
   var steps=[
-    ["Search a product, style, or tag","Lip oil. GRWM. #booktok. Anything you could film this week."],
-    ["See what broke out","TikToks ranked by Breakout Score, 0 to 100. Dozens of them in a search."],
-    ["Get the creative strategy","The hook, why the video worked, and what you can do next."]];
+    ["Search a product or style",""],
+    ["See what broke out",""],
+    ["Get the hook and what to film",""]];
   var gets=[
     ["spark","The Breakout Score","0 to 100. It shows how much a video beat the average of what that account usually gets."],
     ["comment","The hook, written out","The line that stopped the scroll, plus three more you can try."],
@@ -1142,79 +1146,43 @@ function sellPage(){
 
   return '<div class="sell" id="sell">'+
 
-  /* 1. the problem */
-  '<section class="sct"><div class="swrap prob">'+
-  sellHead("The real problem","The hard part is deciding what to film.","You can shoot it, edit it, and post it. Knowing what is worth your effort is what's missing.")+
-  '<div class="stack" style="gap:22px">'+
-  '<ul class="pain">'+
-  ['You open TikTok for ideas and close it an hour later with nothing.',
-   'You remake a video that worked and yours lands flat, with no idea what was missing.',
-   'You pitch a brand with a mood board, when what they want is proof.'].map(function(x){return '<li><span>'+x+'</span></li>';}).join("")+
-  '</ul>'+
-  '<p class="s3">UGC Breakouts starts from TikToks that already worked, and shows you what to take from them.</p>'+
-  '</div></div></section>'+
-
-  /* 2. how it works */
+  /* 1. the problem and how it works */
   '<section class="sct white"><div class="swrap">'+
-  sellHead("How it works","Three steps that take only a few minutes.","")+
-  '<div class="steps3">'+steps.map(function(s,k){return '<div class="st3"><i>'+(k+1)+'</i><b>'+s[0]+'</b><span>'+s[1]+'</span></div>';}).join("")+'</div>'+
+  sellHead("","The hard part is deciding what to film.","")+
+  '<div class="steps3">'+steps.map(function(s,k){return '<div class="st3"><i>'+(k+1)+'</i><b>'+s[0]+'</b></div>';}).join("")+'</div>'+
   '</div></section>'+
 
-  /* 3. the example, switchable, on a dark band, card straddling the edge */
+  /* 3. the example */
   '<section class="sct dark"><div class="swrap ex">'+
-  '<div class="shead">'+
-  '<p class="eb">One search, one video</p>'+
-  '<h2 class="s1">This is what you get back.</h2>'+
-  '<p class="s2">Not a trend report. A brief for the video you are going to film.</p>'+
-  '<div class="stack" style="gap:10px;margin-top:4px"><p class="picklbl">Pick a search and see what comes back</p>'+
-  '<div class="dchips" role="group" aria-label="Example search">'+DEMOS.map(function(d){var on=d[0]===sv.id;return '<button class="dchip" data-act="sell-ex" data-v="'+d[0]+'" aria-pressed="'+on+'">'+esc(d[1])+'</button>';}).join("")+'</div></div>'+
-  '<p class="sellcap" style="margin-top:6px">Three analyses are free, so you can try this before you pay anything.</p>'+
+  '<div class="shead"><h2 class="s1">This is what you get back.</h2>'+
+  '<div class="dchips" role="group" aria-label="Example search" style="margin-top:6px">'+DEMOS.map(function(d){var on=d[0]===sv.id;return '<button class="dchip" data-act="sell-ex" data-v="'+d[0]+'" aria-pressed="'+on+'">'+esc(d[1])+'</button>';}).join("")+'</div>'+
   '</div>'+
-  sampleCard(sv,S.sellHook||0,!!S.sellInfo)+
+  sampleCard(sv,0,!!S.sellInfo)+
   '</div></section>'+
 
-  /* 4. what is in every analysis */
+  /* 4. top breakouts */
   '<section class="sct pull"><div class="swrap">'+
-  sellHead("In every analysis","Everything you need to remake it.","")+
-  '<div class="gets">'+gets.map(function(g){return '<div class="get"><i>'+ic(g[0])+'</i><span><b>'+g[1]+'</b><span>'+g[2]+'</span></span></div>';}).join("")+'</div>'+
-  '</div></section>'+
-
-  /* 5. top breakouts */
-  '<section class="sct white"><div class="swrap">'+
-  sellHead("Top Breakouts","See what is breaking out right now.","A feed across every category, top scores first. Open it before you plan your week.")+
+  sellHead("","Breaking out right now","")+
   '<div class="stripwrap"><div class="strip" tabindex="0" role="group" aria-label="Top Breakouts, scroll for more">'+tops.map(sellTile).join("")+'</div>'+
   '<button class="arrow l" data-act="strip" data-d="-1" aria-label="Scroll left">'+ic("back")+'</button>'+
   '<button class="arrow r" data-act="strip" data-d="1" aria-label="Scroll right">'+ic("chev")+'</button></div>'+
   '</div></section>'+
 
-  /* 6. who it is for */
-  '<section class="sct"><div class="swrap">'+
-  sellHead("Who it is for","Two jobs, one search.","")+
-  '<div class="jobs">'+
-  '<div><span class="jt">'+ic("send")+'</span><b>You pitch brands</b><span>Walk in with the video that broke out in their category and the reason it worked. The share link does the pitch for you.</span></div>'+
-  '<div><span class="jt">'+ic("spark")+'</span><b>You are growing your own account</b><span>Stop guessing your next three videos. Pick the Breakouts in your niche and film them this week.</span></div>'+
-  '</div></div></section>'+
-
-  /* 7. pricing */
+  /* 5. pricing */
   '<section class="sct white"><div class="swrap">'+
-  sellHead("Pricing","Start free. Pay when it is working.","")+
+  sellHead("","Start free. Pay when it’s working.","")+
   '<div class="prices">'+
   '<div class="pcard"><div class="ph"><b>Free</b><span class="pp">$0</span></div>'+plist(free)+'</div>'+
   '<div class="pcard pro"><div class="ph"><b>Pro</b><span class="pp">$49<small>/mo</small></span></div>'+plist(pro)+'</div>'+
-  '</div>'+
-  '<p class="sellcap">Free starts with your email.</p>'+
-  '</div></section>'+
+  '</div></div></section>'+
 
-  /* 8. faq */
+  /* 6. three questions */
   '<section class="sct"><div class="swrap">'+
-  sellHead("Before you ask","Questions creators ask.","")+
+  sellHead("","Questions","")+
   '<div class="faq">'+[
-    ["What is a Breakout Score?","A score from 0 to 100. It shows how much a video beat the average of what that account usually gets. Higher means the video did more than the account behind it explains."],
-    ["What counts as a search?","A search counts once your results arrive. If we find fewer than 25 Breakouts, we tell you and it costs you nothing."],
-    ["How long does a search take?","Usually 15 seconds to a minute. You can keep browsing while it runs."],
-    ["Do I sign in with TikTok?","No. TikTok does not give us your email, so you sign in with Google or your email address."],
-    ["Is it only TikTok?","Yes. TikTok only, for now."],
-    ["Can I send a Breakout to someone?","Yes. Every video has a share link that carries your note. Whoever opens it sees the analysis, with no account."]
+    ["What is a Breakout Score?","0 to 100. How much a video beat what that account usually gets."],
+    ["What counts as a search?","Only searches that return 25 or more Breakouts."],
+    ["Do I sign in with TikTok?","No. Google or email."]
   ].map(function(r){return '<details><summary>'+r[0]+'</summary><p>'+r[1]+'</p></details>';}).join("")+'</div>'+
   '</div></section>'+
 
@@ -1222,13 +1190,11 @@ function sellPage(){
   '<section class="sct cta"><div class="swrap">'+
   '<div class="ctabox plain" aria-labelledby="sell-cta-h">'+
   '<h3 id="sell-cta-h">Find Breakouts of your own!</h3>'+
-  '<p>One search shows you what broke out on TikTok in your niche, and how to remake it.</p>'+
   '<form class="stack" data-form="email" novalidate><div class="emailf"><label for="em-sell" class="sr">Email</label><input id="em-sell" type="email" autocomplete="email" placeholder="Your email" value="'+esc(S.emailDraft)+'"><button class="b b1" type="submit">Start free</button></div>'+(S.emailErr?'<p class="err" role="alert">'+S.emailErr+'</p>':'')+'</form>'+
   '<p class="fine">Free. Just your email.</p>'+
   '<div class="ordiv"><span>or</span></div>'+
   '<button class="b gbtn full-w" data-act="auth">'+gicon()+'Continue with Google</button>'+
   '</div>'+
-  '<p class="sfoot">An app for TikTok creators. TikTok only, for now.</p>'+
   '</div></section>'+
 
   '</div>';
@@ -1265,9 +1231,7 @@ V.teaser=function(){
   '<div class="sample"><div class="band">Example</div><div class="in">'+
   '<div class="mini">'+vtile(v,{sm:true,key:"t1",style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px"><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div><div class="st"><span>'+ic("eye")+v.views+' views</span></div></div></div>'+
   '<p class="eb">The hook</p><p class="q" style="background:var(--teal-soft)">“'+a.hook+'”</p>'+
-  '<p class="eb c">Why the video worked</p><ol class="ol"><li>'+a.why[0]+'</li></ol>'+
-  '<div class="locked"><div class="blur"><ol class="ol"><li>'+a.why[1]+'</li><li>'+a.why[2]+'</li></ol><p class="eb c" style="margin-top:12px">What you can do next</p><p style="margin:6px 0 0">'+nextFor(a)[0]+'</p></div>'+
-  '<div class="lk"><button data-act="auth">'+ic("lock")+'Unlocks when you sign in</button></div></div>'+
+  '<button class="lkrow" data-act="auth">'+ic("lock")+'Why it worked and what to film next</button>'+
   '</div></div></div>';
 };
 
@@ -1358,13 +1322,17 @@ V.empty=function(){
   '<p class="sub" style="font-size:15px;margin-top:-6px">Try another product or format. This doesn\'t count toward your free searches.</p></div></div>';
 };
 
+function firstS(w){var m=w.match(/^.*?[.!?](?=\s|$)/);return m?m[0]:w;}
+function anTabs(a,nx,key,def){
+  S.atab=S.atab||{};var t=S.atab[key]||def||"hook";
+  var tabs=[["hook","Hook"],["why","Why"],["next","What next"]];
+  var body=t==="hook"?'<p class="q">“'+esc(a.hook)+'”</p><p class="eb">Try these</p><ul class="tries">'+a.tries.map(function(x){return '<li>“'+esc(x[1])+'”</li>';}).join("")+'</ul>':
+    '<ol class="ol">'+(t==="why"?a.why:nx).map(function(w){return '<li>'+firstS(w)+'</li>';}).join("")+'</ol>';
+  return '<div class="atabs"><div class="tabs" role="tablist" aria-label="Analysis">'+tabs.map(function(x){return '<button role="tab" data-act="atab" data-key="'+key+'" data-k="'+x[0]+'" aria-selected="'+(t===x[0])+'">'+x[1]+'</button>';}).join("")+'</div>'+body+'</div>';
+}
 function ownBody(v,a,nx){
-  var t=S.otab||"next";
-  var tabs=[["next","What next"],["hook","Hook"],["why","Why"]];
-  var body=t==="hook"?'<p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(x){return '<li><span>“'+x[1]+'”</span></li>';}).join("")+'</ol>':
-    '<ol class="ol">'+(t==="why"?a.why:nx).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>';
   return '<p class="ownl">'+v.views+' views · Posted '+v.posted.replace(/, \d{4}$/,"")+' · '+v.len+'</p>'+
-    '<div class="box teal ownbox"><div class="tabs" role="tablist" aria-label="Analysis">'+tabs.map(function(x){return '<button role="tab" data-act="otab" data-k="'+x[0]+'" aria-selected="'+(t===x[0])+'">'+x[1]+'</button>';}).join("")+'</div>'+body+'</div>';
+    '<div class="box teal">'+anTabs(a,nx,"own","next")+'</div>';
 }
 V.detail=function(){
   var v=vid(S.params.v||"v1"),a=anFor(v),nx=nextFor(a);
@@ -1376,9 +1344,7 @@ V.detail=function(){
   (S.infoOpen?'<div class="pop" role="note"><b>Breakout Score</b><br>'+(v.own?'A score from 0 to 100. It shows how much this video beat the average of what your account usually gets.':'A score from 0 to 100. It shows how much this video beat what accounts this size usually get. More likes, comments, and shares, and a newer post, push it higher.')+'</div>':'')+
   (v.own?'</div>'+ownBody(v,a,nx):'<div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div></div>'+
   '<div class="vit"><div class="bigstats"><div><b>'+v.views+'</b><small>Views</small></div><div><b>'+v.likes+'</b><small>Likes</small></div><div><b>'+v.comments+'</b><small>Comments</small></div><div><b>'+v.shares+'</b><small>Shares</small></div></div><div class="vsmall">Posted '+v.posted+' · '+v.len+' · TikTok</div></div>'+
-  '<div class="box teal"><h3>Hooks</h3><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(t){return '<li><span>'+t[0]+': “'+t[1]+'”</span></li>';}).join("")+'</ol></div>'+
-  '<div class="box white"><h3>Why the video worked</h3><ol class="ol">'+a.why.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
-  '<div class="box next"><h3>What you can do next</h3><ol class="ol">'+nx.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>')+
+  '<div class="box teal">'+anTabs(a,nx,"d")+'</div>')+
   '</div>'+
   '<div class="dock"><div class="row"><button class="b b2 grow'+(S.saved[v.id]?' on':'')+'" data-act="save" data-v="'+v.id+'" aria-pressed="'+!!S.saved[v.id]+'">'+ic(S.saved[v.id]?"saved":"save")+'Save</button><button class="b b1 grow" data-act="share" data-v="'+v.id+'">'+ic("share")+'Share</button></div></div>';
 };
@@ -1405,11 +1371,8 @@ V.shared=function(){
   '<div class="pb" style="gap:16px">'+
   '<div class="msg"><div class="av" aria-hidden="true">M</div><div class="bubble"><span class="who"><b>Maya</b> (maya@example.com) sent you a breakout</span><p>“This wipe hook is gold. Remake tonight.”</p></div></div>'+
   '<div class="shc" style="grid-template-columns:120px 1fr">'+vtile(v,{style:"aspect-ratio:9/15"})+'<div class="stack" style="gap:6px"><span class="eb m">A Viral Breakout for Lip oil</span><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>· '+v.followers+'</small></div>'+stats(v)+'</div></div>'+
-  '<div class="box teal"><h3>Hooks</h3><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(t){return '<li>'+t[0]+': “'+t[1]+'”</li>';}).join("")+'</ol></div>'+
-  '<div class="box white"><h3>Why the video worked</h3><ol class="ol">'+a.why.map(function(w){return '<li>'+w.split(". ")[0].replace(/\.$/,"")+'.</li>';}).join("")+'</ol></div>'+
-  '<div class="box next"><p class="eb">What you can do next</p><ol class="ol">'+nextFor(a).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
+  '<div class="box teal">'+anTabs(a,nextFor(a),"sh")+'</div>'+
   '<section class="ctabox" id="cta" aria-labelledby="cta-h"><h3 id="cta-h">Find Breakouts of your own!</h3>'+
-  '<p>Try it on your own brand, product, or style. See what\'s breaking out on TikTok and how to remake it.</p>'+
   '<form class="sf" data-form="shared-q" role="search">'+ic("search")+'<label for="q-shared" class="sr">Search a brand, product, or style</label><input id="q-shared" type="text" autocomplete="off" placeholder="Search a brand, product, or style" value="'+esc(S.sharedQ)+'"></form>'+
   '<button class="b gbtn full-w" data-act="auth-shared">'+gicon()+'Continue with Google</button>'+
   '<form class="stack" data-form="email" novalidate><div class="emailf"><label for="em-shared" class="sr">Email</label><input id="em-shared" type="email" autocomplete="email" placeholder="Your email" value="'+esc(S.emailDraft)+'"><button class="b b1" type="submit">Start free</button></div>'+(S.emailErr?'<p class="err" role="alert">'+S.emailErr+'</p>':'')+'</form>'+
@@ -1673,8 +1636,8 @@ function currentKey(){
 function li(t,txt){return '<li><span class="tag '+t+'">'+({r:"IVAN",q:"ANSWER",c:"CALL",f:"LOCK",a:"ASK",v:"VEEJAY"})[t]+'</span><span>'+txt+'</span></li>';}
 var NONE=[["f","No changes from this round of feedback."]];
 var NOTES={
-  "home-out":{id:"01 · 01-home-search",h:"Home, logged out",li:[["f","The fold is unchanged: same wordmark, tagline, audience line, search bar, and chips. Earlier fix: the background photo with the Instagram logo was swapped out (TikTok only lock)."],["v","Below the fold is now a sales page. Scroll down, or open Home, sales page in the rail."]]},
-  "sales":{id:"01 · 01-home-sales",h:"Sales page, below the fold",li:[
+  "home-out":{id:"01 · 01-home-search",h:"Home, logged out",li:[["v","Veejay, 3 Oct: less text. The page below the fold is now five short sections: the problem in one line with three steps, the example, what’s breaking out, pricing, and three questions."],["f","The fold is unchanged: same wordmark, tagline, audience line, search bar, and chips. Earlier fix: the background photo with the Instagram logo was swapped out (TikTok only lock)."],["v","Below the fold is now a sales page. Scroll down, or open Home, sales page in the rail."]]},
+  "sales":{id:"01 · 01-home-sales",h:"Sales page, below the fold",li:[["v","Veejay, 3 Oct: less text. Five short sections, no paragraphs. The example shows its analysis behind Hook, Why and What next tabs."],
     ["v","Veejay asked for the below the fold to be a sales page. Nothing above the fold moved, so your Home stays as it is: hero, search, chips."],
     ["v","Order: the problem, how it works in three steps, one full example analysis, what is in every analysis, Top Breakouts, who it is for, pricing, FAQ, and a closing sign up."],
     ["v","Closing sign up is down to one thing to fill in: email and Start free, then OR, then Continue with Google as the second option. The duplicate search box is gone, because the hero at the top of this page already has one. Your Shared screen keeps its original three part CTA, where the search box is the only one on the screen."],
@@ -1696,15 +1659,15 @@ var NOTES={
     ["a","The footer has no Help or Terms links yet, because those pages do not exist. Do you want them before launch?"],
     ["a","Is this the same page for X and cold email traffic, or a different page per source?"],
     ["f","TikTok only, Breakout language throughout, and no dash asides."]]},
-  "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in",li:[["r","Polish: cut “Sign in to run your search.” and “What you get for every video”. The free allowance line stays. Ivan: “too many subtext and repeating elements on some pages.”"],["q","No TikTok sign in. TikTok's API returns no email (checked the docs), so it's Google. Ivan: “if no, then we go google.”"],["q","Free is 3 searches and 3 video analyses. Ivan: “yes, 3?”"]]},
+  "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in",li:[["v","Veejay, 3 Oct: the example shows only the score and the hook. The rest sits behind a single locked line."],["r","Polish: cut “Sign in to run your search.” and “What you get for every video”. The free allowance line stays. Ivan: “too many subtext and repeating elements on some pages.”"],["q","No TikTok sign in. TikTok's API returns no email (checked the docs), so it's Google. Ivan: “if no, then we go google.”"],["q","Free is 3 searches and 3 video analyses. Ivan: “yes, 3?”"]]},
   "proc":{id:"01c · 01c-processing",h:"Processing",li:[["r","Polish: one heading, “Finding Lip oil breakouts”, instead of three “Searching” lines. Cut “Watch examples while you wait.” The example scores now sit on a dark chip so they read on light thumbnails. Ivan: “too many subtext and repeating elements on some pages.”"],["q","A search counts when results arrive. Ivan: “search counts when it arrives.”"],["r","Round 3: wait copy is “Usually 15 seconds to a minute.” Ivan: “will be between 15 seconds and 1min.” Browse while you wait now appears at 1:00, once the wait runs past the usual."],["a","When a video is played: does it play in the box, or open a popup with the analysis? The prototype plays it in the box."]]},
   "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",li:[["r","Polish: cut the line under the heading (it repeated the search box) and the “Open ›” on every recent search. Ivan: “too many subtext and repeating elements on some pages.”"],["r","The headline is now “What are you filming next?” instead of “Welcome back.” Ivan: “welcome back, that can get old?”"],["a","Idea: rotate the headline between a few lines so it stays fresh, like “What are you filming next?”, “Find your next remake.”, and “What's breaking out in your niche?” OK to rotate?"],["c","The menu links to the Top Breakouts feed."]]},
   "results":{id:"02 · 02-results",h:"Results",li:[["r","Polish: the “Lip oil” tag on every video is gone, since the search is already at the top. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Paywall after the top 10, saying there are dozens more with Pro. Ivan (follow up): “yeah, let's do 10.” Ivan: “showing only 8 or 10 videos and saying they can see dozens of videos (if they pay).”"],["r","Persistent search on top, unchanged. Ivan: “LOVE the persistent search on the top!”"],["r","Sort and filter. Ivan: “we'll probably need a sort/filter?”"],["r","Analyze, Save, and Share buttons unchanged. Ivan: “love the analyze, save, share buttons.”"],["r","View analysis and Analyze video look different: analyzed videos have a teal Analyzed badge and a solid button, the rest have an outlined Analyze video button."],["q","Free users get 3 analyses. Analyzing a fourth video opens Paid (analysis cap)."],["c","The paywall opens the video cap version of Paid. Ivan: “we need paid cap hit video.”"],["a","Which sort and filter options? Ivan asked whether to keep or remove Under 100K followers."]]},
   "empty":{id:"02 · 02-results-empty",h:"No breakouts",li:[["q","Shows when a search finds fewer than 25 breakouts, and doesn't use a search. Ivan: “25?” and “if they have a bad search… we tell them to search again.”"]]},
   "top":{id:"02b · new screen",h:"Top Breakouts feed",li:[["r","Polish: cut the line under the heading. Ivan: “too many subtext and repeating elements on some pages.”"],["c","A feed of every video we've sourced, top scores first, with category chips to pick from. Ivan: “a menu that says top breakouts and then a list of all the breakouts across all categories… chip, you know, the little selector things.”"],["a","Which categories at launch, and how often does the feed update?"]]},
-  "detail":{id:"03 · 03-detail",h:"Detail",li:[["r","Polish: cut the line under Hooks and the “Lip oil” tag on the video (the search is in the header). Ivan: “too many subtext and repeating elements on some pages.”"],["r","New short Breakout Score explainer, no “punched above.” Ivan: “need a new, shorter description of breakout score (eli10).”"],["q","The explainer says 0 to 100. Ivan: “a combo of a few variables, but the range is 0-100.”"],["r","Watch on TikTok removed. Ivan: “remove watch in tiktok for now?”"],["r","Round 3: views, likes, comments, and shares are now the big numbers, with posted date, length, and network small underneath. Ivan: “the data points that are bigger aren't the important ones, it should be flipped.”"],["r","Round 3: followers shows once, next to the handle. Ivan: “followers is displayed twice.”"],["q","Paid and Spark ad videos stay in the rankings, unlabeled. No change for MVP."]]},
+  "detail":{id:"03 · 03-detail",h:"Detail",li:[["v","Veejay, 3 Oct: the analysis sits behind three tabs (Hook, Why, What next), one sentence per point."],["r","Polish: cut the line under Hooks and the “Lip oil” tag on the video (the search is in the header). Ivan: “too many subtext and repeating elements on some pages.”"],["r","New short Breakout Score explainer, no “punched above.” Ivan: “need a new, shorter description of breakout score (eli10).”"],["q","The explainer says 0 to 100. Ivan: “a combo of a few variables, but the range is 0-100.”"],["r","Watch on TikTok removed. Ivan: “remove watch in tiktok for now?”"],["r","Round 3: views, likes, comments, and shares are now the big numbers, with posted date, length, and network small underneath. Ivan: “the data points that are bigger aren't the important ones, it should be flipped.”"],["r","Round 3: followers shows once, next to the handle. Ivan: “followers is displayed twice.”"],["q","Paid and Spark ad videos stay in the rankings, unlabeled. No change for MVP."]]},
   "share":{id:"04 · 04-share",h:"Share video",li:[["r","Polish: cut the line under the heading. Ivan: “too many subtext and repeating elements on some pages.”"],["r","The note locks when the link is copied, so the note that was copied is the note that gets sent. Ivan: “what if someone types, copies, then changes the note, which note will be sent.”"],["r","Round 3: Edit note unlocks it. Copying again makes a new link with the new note, and the earlier link keeps its old note. Ivan: “should be a way to edit note?”"]]},
-  "shared":{id:"05 · 05-shared",h:"Shared with you",li:[["r","Polish: cut the line under Hooks. Ivan: “too many subtext and repeating elements on some pages.”"],["r","More CTA at the bottom: try it on your own brand, product, or style, with a search box and “Free. Just your email.” Ivan: “convince them to sign on, try us out, search a brand or product or style of their own, free, just your email.”"],["r","Round 3: the heading is “Find Breakouts of your own!”"],["q","Sign up with Google or email (no TikTok, since it gives no email)."],["q","The sender line shows first name and email. Ivan: “first name and email?”"],["q","The recipient sees the sender's analysis as it is. Ivan: “yes.”"]]},
+  "shared":{id:"05 · 05-shared",h:"Shared with you",li:[["v","Veejay, 3 Oct: same three tabs as Detail. The line under the sign up heading is gone."],["r","Polish: cut the line under Hooks. Ivan: “too many subtext and repeating elements on some pages.”"],["r","More CTA at the bottom: try it on your own brand, product, or style, with a search box and “Free. Just your email.” Ivan: “convince them to sign on, try us out, search a brand or product or style of their own, free, just your email.”"],["r","Round 3: the heading is “Find Breakouts of your own!”"],["q","Sign up with Google or email (no TikTok, since it gives no email)."],["q","The sender line shows first name and email. Ivan: “first name and email?”"],["q","The recipient sees the sender's analysis as it is. Ivan: “yes.”"]]},
   "paid":{id:"07 · 07-paid",h:"Paid",li:[["r","Polish: price shows once (the button says Upgrade). One line per feature, and the fourth feature is gone because it repeated the first. Ivan: “too many subtext and repeating elements on some pages.”"],["c","Three versions: search cap, video cap, and analysis cap. Ivan: “this is paid cap hit search. We need paid cap hit video.”"],["q","Analysis cap reads “You used your 3 free video analyses.”"],["r","Round 3: all three versions say you get dozens of Viral Breakouts per search, and list the analysis and the creative director as features. Ivan: “add that you get dozens of videos per search, maybe add more features, like our analysis and creative director (better copy).”"],["f","Earlier fix: removed the internal note “Your hero benefit. Not unlimited.” from the customer copy."]]},
   "pro":{id:"09 · 09-pro-success",h:"Pro success",li:[["r","Polish: the three steps keep their titles only. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Round 3: the first step reads “Search a new product or video style.” Ivan: “call out search new product or video style.”"],["r","Round 3: added See Top Breakouts. Ivan: “add? top breakout.”"],["r","Round 3: all three steps are tappable. Ivan: “make those buttons clickable.”"]]},
   "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["r","Polish: cut the line under the heading. The three steps already say it. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["r","Round 3: $49 only, no reward selector. Ivan: “they wont be able to select, let's keep it $49 for now.”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
@@ -1720,14 +1683,14 @@ NOTES["account-pro"]=NOTES.account;NOTES["paid-videos"]=NOTES.paid;NOTES["paid-a
 function notesHtml(key){
   var legend='<div class="legend"><span><span class="tag r">IVAN</span> his notes</span><span><span class="tag q">ANSWER</span> his answers</span><span><span class="tag c">CALL</span> Ivan calls</span><span><span class="tag f">LOCK</span> fix to his own locks</span><span><span class="tag v">VEEJAY</span> Veejay asked for it</span><span><span class="tag a">ASK</span> needs Ivan</span></div>';
   if(key==="questions"){
-    if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens, copy, and flows as mobile, laid out per Ivan\'s MAP.md notes.</p>';
+    if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens and copy as mobile.</p>';
     return legend+'<p class="sid">Open</p><h2>Questions for Ivan</h2><ul>'+
     ["Which sort and filter options?","When a video is played, does it play in the box or open a popup with the analysis?","Library: where should Refresh go for a saved search?","Top Breakouts feed: which categories at launch, and how often does it update?","Price: stay at $49 a month?","Home, signed in: rotate the headline between a few lines (“What are you filming next?”, “Find your next remake.”, “What's breaking out in your niche?”)?","Breakout Score now reads as a video against its own account average. Should the Detail screen change to match?","Sales page: any social proof we can publish yet (a creator quote, or a number)?","Sales page: can we make a claim about what $49 saves them?","Sales page: affiliate offer in the logged out footer, or keep it behind Not now?","Sales page: Help and Terms pages before launch?","Sales page: one page for every traffic source, or one per source (X, cold email)?"].map(function(q){return li("a",q);}).join("")+'</ul>'+
     '<p class="sid" style="margin-top:8px">Answered</p><ul>'+
     ["Breakout Score is a combo of a few variables, ranging 0 to 100.","Free results show the top 10 videos, then the paywall.","A search counts when results arrive.","Free users get 3 video analyses.","No TikTok sign in (no email), so Google.","Searches take 15 seconds to a minute (round 3).","Share notes can be edited; each edit makes a new link (round 3).","Affiliate reward is $49 only for now (round 3).","Fewer than 25 breakouts shows No breakouts.","Saved searches are snapshots, and a refresh costs a search.","The sender line shows first name and email, and the recipient sees the sender's analysis.","Paid and Spark ad videos stay in rankings, unlabeled, for MVP."].map(function(q){return li("q",q);}).join("")+'</ul>';
   }
   var n=NOTES[key]||NOTES["home-out"];
-  if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens, copy, and flows as mobile. The layout follows Ivan\'s own notes in MAP.md: centered Home hero with a wide search, Home in with recent and Library side by side, Sign in in two columns, Results in two columns, Detail with the video left and analysis right. Each top bar mirrors that screen\'s mobile header: where mobile has the menu, desktop shows its items (Upgrade, Top Breakouts, Library, Account) as links, and screens with no menu on mobile (Processing, Paid, Pro success, Affiliate, Account) have none on desktop. No new features.</p>';
+  if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens and copy as mobile.</p>';
   return legend+'<p class="sid">'+n.id+'</p><h2>'+n.h+'</h2><ul>'+n.li.map(function(x){return li(x[0],x[1]);}).join("")+'</ul>';
 }
 
@@ -1863,7 +1826,7 @@ function act(a,el){
     case "tab": S.libTab=d("k");render(false); break;
     case "logout": jump("home-out"); break;
     case "tt-all": S.ttAll=!S.ttAll; render(false); break;
-    case "otab": S.otab=d("k"); render(false); break;
+    case "atab": S.atab=S.atab||{}; S.atab[d("key")]=d("k"); render(false); break;
     case "tt-change": S.tt="";render(false);var th=document.getElementById("tt-h");if(th){th.focus();th.select();}break;
     case "sort-open": S.sortSheet=true; renderOverlay(); break;
     case "sort-close": S.sortSheet=false; renderOverlay(); break;
