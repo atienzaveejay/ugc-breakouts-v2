@@ -1864,6 +1864,12 @@ phone.addEventListener("input",function(e){
 
 buildRail();
 render(true);
+/* deep links: #<screen key> opens that screen, e.g. #account-tt */
+(function(){
+  var keys=[];RAIL.forEach(function(g){g.items.forEach(function(it){keys.push(it[0]);});});
+  function open(){var k=(location.hash||"").slice(1);if(k&&keys.indexOf(k)>-1)jump(k);}
+  open();window.addEventListener("hashchange",open);
+})();
 /* ---------------- full screen mockup ---------------- */
 (function(){
   var bar=document.querySelector(".stagebar");if(!bar)return;
