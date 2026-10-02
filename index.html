@@ -400,8 +400,15 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .ttst{display:flex;gap:20px}
 .ttst b{display:block;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
 .ttst small{display:block;font-size:12px;color:var(--mid);font-weight:600}
-.ttv{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center}
+.ttv{display:grid;grid-template-columns:44px 1fr 18px;gap:10px;align-items:center;background:none;border:0;padding:4px 0;margin:-4px 0;width:100%;text-align:left;font-family:var(--sans);color:var(--ink);cursor:pointer;border-radius:10px}
+.ttv svg.chev{width:18px;height:18px;color:var(--mid)}
+.ttv:hover b{text-decoration:underline}
 .ttv>div{min-width:0}
+.storyv{flex:1;display:flex;background:#171312}
+.storyf{border:0;width:100%;height:100%;display:block}
+.storyd{width:330px;height:600px;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(23,19,18,.6);background:#171312}
+.xline{margin:2px 0 0;font-size:14px;color:var(--mid)}
+.xline b{color:var(--ink);font-size:16px}
 .ttv .th{width:44px;height:58px;border-radius:9px;background:center/cover}
 .ttv b{font-size:14px}
 .ttv b .s{color:var(--gold)}
@@ -745,6 +752,24 @@ body.desk .stagebar{max-width:calc(1280px * var(--sc,1));margin:0 auto}
 .browse{visibility:hidden;opacity:0}
 .browse.on{visibility:visible;opacity:1}
 @media (prefers-reduced-motion: no-preference){.browse.on{transition:opacity .25s ease}}
+/* full screen mockup */
+.fsbtn{display:inline-flex;align-items:center;gap:5px}
+.fsbtn svg{width:13px;height:13px}
+body.fs{overflow:hidden}
+body.fs .stage{position:fixed;inset:0;z-index:200;width:auto;max-width:none;margin:0;padding:12px 12px 16px;background:#0E1413;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+body.fs .stagebar{width:min(560px,100%);max-width:none}
+body.fs .stagebar .where{color:#9DB0AC}
+body.fs #frame{width:auto;height:calc(100dvh - 70px);aspect-ratio:390/844;max-width:100%;margin:0}
+body.fs .phone{height:100%;min-height:0}
+body.fs.desk #frame{aspect-ratio:auto;height:calc(800px * var(--sc,1));width:calc(1280px * var(--sc,1))}
+body.fs.desk .stagebar{width:calc(1280px * var(--sc,1));max-width:100%}
+body.fs.desk .phone{height:800px}
+@media (max-width:520px){
+  body.fs .stage{padding:6px 0 0;justify-content:flex-start}
+  body.fs .stagebar{padding:0 10px}
+  body.fs #frame{width:100%;height:calc(100dvh - 48px);aspect-ratio:auto}
+  body.fs .phone{border-radius:0}
+}
 </style>
 <style>[hidden]{display:none!important}img{max-width:100%}</style>
 </head>
@@ -882,7 +907,24 @@ var EXTRA = [
   {id:"v11",handle:"reps.with.rae",followers:"15K",fol:15000,score:79,img:"bands",brand:"Gymshark",len:"0:17",views:"640K",likes:"88K",comments:"2.2K",shares:"14K",posted:"Sep 11, 2026",days:4,sound:"gym playlist beat",cat:"Fitness",product:"Resistance bands",hook:"One band, 10 minutes, no gym.",setting:"living room"},
   {id:"v12",handle:"deskset.dev",followers:"41K",fol:41000,score:74,img:"tripod",brand:"UBeesize",len:"0:23",views:"920K",likes:"97K",comments:"3.4K",shares:"19K",posted:"Sep 12, 2026",days:3,sound:"Original sound",cat:"Tech",product:"Phone tripod",hook:"The $20 tripod that fixed my shaky videos.",setting:"desk"}
 ];
-var ALLV = VIDEOS.concat(EXTRA);
+var OWN = [
+  {id:"r1",own:true,x:12,handle:"sample.raefilms",followers:"18K",fol:18000,score:91,img:"oil",brand:"",len:"0:22",views:"112K",likes:"14K",comments:"410",shares:"2.6K",posted:"Aug 14, 2026",days:49,sound:"Original sound",cat:"Beauty",product:"Lip gloss",hook:"I stopped buying lip gloss after this."},
+  {id:"r2",own:true,x:7,handle:"sample.raefilms",followers:"18K",fol:18000,score:78,img:"face",brand:"",len:"0:27",views:"64K",likes:"7.9K",comments:"260",shares:"1.1K",posted:"Sep 2, 2026",days:30,sound:"Original sound",cat:"Beauty",product:"Foundation",hook:"Hour one vs hour six. No touch-ups."},
+  {id:"r3",own:true,x:4,handle:"sample.raefilms",followers:"18K",fol:18000,score:69,img:"flatlay",brand:"",len:"0:19",views:"41K",likes:"4.6K",comments:"180",shares:"720",posted:"Jun 19, 2026",days:105,sound:"Original sound",cat:"Lifestyle",product:"Purse",hook:"Everything in my purse, ranked by how often I use it."}
+];
+AN.r1={hook:"I stopped buying lip gloss after this.",
+  tries:[["Swap","The one thing that replaced every gloss I owned."],["Test","Lip gloss vs this, after a coffee."],["Question","Would you give up lip gloss for this?"]],
+  why:["The product is on screen in the first second, before you say a word.","Giving something up is a bigger claim than “I like this”, so people wait for the reason.","The proof shot (coffee cup, no smudge) lands at 0:14, right where viewers start to drop."],
+  next:["Make the next one the same shape: a claim in the first line, the product already in hand.","Try “Stop buying X” on another product you really switched from.","Keep it under 25 seconds, and put the proof shot before the halfway mark."]};
+AN.r2={hook:"Hour one vs hour six. No touch-ups.",
+  tries:[["Wear test","I didn't touch my face for six hours. Here's my foundation."],["Split","Morning me vs end of shift me."],["Question","What does your foundation look like at 6pm?"]],
+  why:["The time contrast sets up a before and after in the hook itself.","Same mirror and light in both shots, so the change is easy to trust.","People comment their own hour six, which keeps it in feeds."],
+  next:["Run another wear test, on a product people already complain about.","Keep the same mirror and light for both shots.","End on the hour six close up, with the time on screen."]};
+AN.r3={hook:"Everything in my purse, ranked by how often I use it.",
+  tries:[["Ranking","My makeup bag, ranked from never to every day."],["Confession","What's in my purse that I never use."],["Question","What's the one thing always in your bag?"]],
+  why:["A ranking gives people a reason to watch to number one.","Flat lay from above is fast to read, item by item.","Everyday items make it easy to relate, so it gets saves."],
+  next:["Rank another everyday set: your makeup bag or desk.","Shoot it flat lay from above again, one item per beat.","Save the most used item for last."]};
+var ALLV = VIDEOS.concat(EXTRA,OWN);
 function nextFor(a){return a.next||a.shots.map(function(x){return x[1];});}
 function termFor(v){return v.cat==="Beauty"?S.query:v.product;}
 var CHIPSETS=[["GRWM","Lip oil","OOTD","#momtok","Air fryer","get ready with me","#booktok","Hair mask","SPF"],["Day in my life","Retinol serum","#cleangirl","Protein powder","POV","Tinted moisturizer","#fitness","LED mask","Matcha"],["Storytime","Nail polish","#skincare","Cold brew","Outfit check","Foam roller","#beauty","Lip balm","Yoga mat"]];
@@ -1307,11 +1349,12 @@ V.empty=function(){
 
 V.detail=function(){
   var v=vid(S.params.v||"v1"),a=anFor(v),nx=nextFor(a);
-  return '<div class="tb">'+backBtn()+searchPill(S.query)+countPillShort()+menuBtn()+'</div>'+
+  return '<div class="tb">'+backBtn()+(v.own?'<span class="tt">Your breakout</span><span class="sp"></span>':searchPill(S.query))+countPillShort()+menuBtn()+'</div>'+
   '<div class="pb" style="gap:14px">'+
   '<div style="align-self:center;width:62%">'+vtile(v,{style:"aspect-ratio:9/16"})+'</div>'+
   '<div class="facts"><div class="scorerow"><b>'+v.score+'</b><span>Breakout Score</span><button class="infob" data-act="info" aria-expanded="'+S.infoOpen+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
-  (S.infoOpen?'<div class="pop" role="note"><b>Breakout Score</b><br>A score from 0 to 100. It shows how much this video beat what accounts this size usually get. More likes, comments, and shares, and a newer post, push it higher.</div>':'')+
+  (v.own?'<p class="xline"><b>'+v.x+'x</b> your usual views</p>':'')+
+  (S.infoOpen?'<div class="pop" role="note"><b>Breakout Score</b><br>'+(v.own?'A score from 0 to 100. It shows how much this video beat the average of what your account usually gets.':'A score from 0 to 100. It shows how much this video beat what accounts this size usually get. More likes, comments, and shares, and a newer post, push it higher.')+'</div>':'')+
   '<div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div></div>'+
   '<div class="vit"><div class="bigstats"><div><b>'+v.views+'</b><small>Views</small></div><div><b>'+v.likes+'</b><small>Likes</small></div><div><b>'+v.comments+'</b><small>Comments</small></div><div><b>'+v.shares+'</b><small>Shares</small></div></div><div class="vsmall">Posted '+v.posted+' · '+v.len+' · TikTok</div></div>'+
   '<div class="box teal"><h3>Hooks</h3><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(t){return '<li><span>'+t[0]+': “'+t[1]+'”</span></li>';}).join("")+'</ol></div>'+
@@ -1411,16 +1454,18 @@ V.library=function(){
   '<div class="stack" role="tabpanel" aria-labelledby="tab-'+t+'">'+body+'</div></div>';
 };
 
-var TT_TOP=[{img:"oil",x:12,score:91,hook:"I stopped buying lip gloss after this."},{img:"face",x:7,score:78,hook:"Hour one vs hour six. No touch-ups."},{img:"flatlay",x:4,score:69,hook:"Everything in my purse, ranked by how often I use it."}];
 function ttCard(){
   if(S.tt==="loading")return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><div class="ttload" role="status"><i></i>Reading @'+esc(S.ttHandle)+'</div></section>';
   if(!S.tt)return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><p>See which of your own TikToks broke out.</p>'+
     '<form class="stack" data-form="tt" style="gap:10px"><label for="tt-h" class="sr">Your TikTok handle</label><div class="ttin"><span>@</span><input id="tt-h" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="yourhandle" value="'+esc(S.ttHandle||"")+'"></div><button class="b b2 full-w" type="submit">Show my breakouts</button></form></section>';
   return '<section class="ttc" aria-label="Your breakouts"><div class="hd"><h3>Your breakouts</h3><button data-act="tt-change">@'+esc(S.ttHandle)+' · Change</button></div>'+
     '<div class="ttst"><div><b>9.2K</b><small>usual views</small></div><div><b>12x</b><small>biggest breakout</small></div><div><b>1 in 8</b><small>broke out</small></div></div>'+
-    TT_TOP.map(function(v){return '<div class="ttv"><span class="th" style="'+bg(v.img)+'"></span><div><b>'+v.x+'x your usual · <b class="s">'+v.score+'</b></b><span>'+esc(v.hook)+'</span></div></div>';}).join("")+
-    '<a class="b b2 full-w" href="pitch-free/#c1" target="_blank" rel="noopener" style="text-decoration:none">Play your story</a></section>';
+    OWN.map(function(v){return '<button class="ttv" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><div><b>'+v.x+'x your usual · <b class="s">'+v.score+'</b></b><span>'+esc(v.hook)+'</span></div>'+ic("chev","chev")+'</button>';}).join("")+
+    '<button class="b b2 full-w" data-act="mystory">'+ic("play")+'Play your story</button></section>';
 }
+V.story=function(){
+  return '<div class="storyv"><iframe class="storyf" src="pitch-free/?app=1" title="Your breakout story" allow="autoplay"></iframe></div>';
+};
 V.account=function(){
   var pro=S.plan==="pro";
   return '<div class="tb">'+backBtn()+'<span class="tt">Account</span><span class="sp"></span></div>'+
@@ -1486,13 +1531,16 @@ DV.results=function(){
   var wall=h.indexOf('<div class="wall">')>-1?h.slice(h.indexOf('<div class="wall">'),h.length-6):'';
   return dtb({search:1,q:q,pill:1,nav:1})+'<div class="dpage" style="max-width:1100px"><div class="rh"><h1 class="h1 big" style="margin:0">Breakouts for <em>'+esc(q)+'</em></h1></div>'+ctrls+cards+wall+'</div>';
 };
+DV.story=function(){
+  return dtb({nav:1})+'<div class="dpage" style="max-width:640px;align-items:center"><button class="dback" data-act="back" style="align-self:flex-start">'+ic("back")+'Account</button><div class="storyd"><iframe class="storyf" src="pitch-free/?app=1" title="Your breakout story"></iframe></div></div>';
+};
 DV.detail=function(){
   var h=V.detail(),v=vid(S.params.v||"v1");
   var facts=between(h,'<div class="facts">','<div class="box teal">');
   var iD=h.indexOf('<div class="dock">');
   var boxes=h.slice(h.indexOf('<div class="box teal">'),iD-6);
   var actions=h.slice(iD).replace('class="dock"','class="drow"');
-  return dtb({search:1,pill:1,nav:1})+'<div class="dpage" style="max-width:1100px"><button class="dback" data-act="back">'+ic("back")+'Back</button><div class="dsplit" style="grid-template-columns:380px minmax(0,1fr)">'+
+  return dtb(v.own?{pill:1,nav:1}:{search:1,pill:1,nav:1})+'<div class="dpage" style="max-width:1100px"><button class="dback" data-act="back">'+ic("back")+'Back</button>'+(v.own?'<h1 class="h1" style="font-size:28px;margin:0 0 14px">Your breakout</h1>':'')+'<div class="dsplit" style="grid-template-columns:380px minmax(0,1fr)">'+
   '<div class="dsticky" style="top:84px"><div style="display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:start"><div>'+vtile(v,{style:"aspect-ratio:9/16"})+'</div>'+facts.replace('<div class="vit">','</div><div class="vit">')+actions+'</div>'+
   '<div class="stack" style="gap:14px">'+boxes+'</div></div></div>';
 };
@@ -1527,7 +1575,7 @@ function deskGeneric(){
 function fitDesk(){
   if(DEVICE!=="desk")return;
   var main=document.querySelector(".main"),w=main.clientWidth-parseFloat(getComputedStyle(main).paddingLeft)*2;
-  var sc=Math.min(1,w/1280,Math.max(.45,(window.innerHeight-90)/800));
+  var sc=document.body.classList.contains("fs")?Math.min(1.25,(window.innerWidth-24)/1280,(window.innerHeight-70)/800):Math.min(1,w/1280,Math.max(.45,(window.innerHeight-90)/800));
   document.body.style.setProperty("--sc",sc.toFixed(4));
 }
 window.addEventListener("resize",fitDesk);
@@ -1549,7 +1597,7 @@ var RAIL=[
   {g:"Breakouts",items:[["results","02","Results"],["empty","02","No breakouts"],["top","02b","Top Breakouts feed"],["detail","03","Detail"]]},
   {g:"Sharing",items:[["share","04","Share video"],["shared","05","Shared with you"]]},
   {g:"Money",items:[["paid","07","Paid, search cap"],["paid-videos","07","Paid, video cap"],["paid-analyses","07","Paid, analysis cap"],["pro","09","Pro success"],["affiliate","12","Affiliate"]]},
-  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-tt","11","Account, your breakouts"],["account-pro","11","Account, Pro"]]},
+  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-tt","11","Account, your breakouts"],["own-detail","11a","Your breakout, analysis"],["own-story","11b","Your story"],["account-pro","11","Account, Pro"]]},
   {g:"Review",items:[["questions","","Questions for Ivan"]]}
 ];
 function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q)};S.searches.push(s);return s;}
@@ -1581,6 +1629,8 @@ function jump(key){
     "account":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="account";},
     "account-pro":function(){S.loggedIn=true;S.plan="pro";S.stack=home;S.view="account";},
     "account-tt":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="account";S.tt="done";S.ttHandle="sample.raefilms";},
+    "own-detail":function(){S.loggedIn=true;S.left=2;S.tt="done";S.ttHandle="sample.raefilms";S.stack=[{view:"home",params:{}},{view:"account",params:{}}];S.view="detail";S.params={v:"r1"};},
+    "own-story":function(){S.loggedIn=true;S.left=2;S.tt="done";S.ttHandle="sample.raefilms";S.stack=[{view:"home",params:{}},{view:"account",params:{}}];S.view="story";},
     "questions":function(){S.loggedIn=true;S.left=2;S.view="home";}
   };
   (setups[key]||setups["home-out"])();
@@ -1594,6 +1644,8 @@ function currentKey(){
   if(v==="home"){if(!S.loggedIn)return "home-out";if(readyUnseen().length)return "home-ready";if(pending().length)return "home-searching";return "home-in";}
   if(v==="proc"){var s=findSearch(S.params.id);if(s&&s.done)return "proc-ready";if(s&&s.el>=60)return "proc-slow";return "proc";}
   if(v==="account")return S.plan==="pro"?"account-pro":(S.tt==="done"?"account-tt":"account");
+  if(v==="detail"&&vid(S.params.v).own)return "own-detail";
+  if(v==="story")return "own-story";
   if(v==="paid")return S.params.reason==="videos"?"paid-videos":(S.params.reason==="analyses"?"paid-analyses":"paid");
   return v;
 }
@@ -1638,7 +1690,9 @@ var NOTES={
   "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["r","Polish: cut the line under the heading. The three steps already say it. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["r","Round 3: $49 only, no reward selector. Ivan: “they wont be able to select, let's keep it $49 for now.”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
   "library":{id:"08 · 08-library",h:"Library",li:[["r","Searches vs History merged into one Searches tab: saved searches at the top, every other search under Recent. Ivan: “what's the difference between searches and history, is it saved searches vs all searches.”"],["q","Saved searches are snapshots. Refreshing one would cost a search. Ivan: “refresh costs another ‘search’ credit.”"],["a","Where should Refresh go?"]]},
   "account":{id:"11 · 11-account",h:"Account",li:[["c","New: Your breakouts, the profile analyzer, on the profile page. Ivan, 2 Oct call: “add the UGC profile analyzer to the profile.” Type a TikTok handle, see your own breakouts."],["a","Uses the same Breakout Score as search: each video against the account’s own average. 12x is the biggest breakout’s views over the usual. Does reading one handle cost a search, or is it free?"],["a","One handle per account, changeable any time?"]]},
-  "account-tt":{id:"11 · 11-account",h:"Account, your breakouts",li:[["c","The profile analyzer after a handle is read. Three numbers and the top 3 breakouts, nothing else. Ivan, 2 Oct call."],["a","Play your story opens the Free Breakout Story cards for this handle. The same story is what we send creators who say yes to our TikTok DM."],["a","Tapping a breakout: open its analysis (costs an analysis), or leave the rows as a list?"]]}
+  "account-tt":{id:"11 · 11-account",h:"Account, your breakouts",li:[["c","The profile analyzer after a handle is read. Three numbers and the top 3 breakouts, nothing else. Ivan, 2 Oct call."],["a","Play your story opens the Free Breakout Story cards for this handle. The same story is what we send creators who say yes to our TikTok DM."],["v","Where it leads: each breakout opens its own analysis (11a). Play your story opens the story cards in the app (11b). The story’s last card goes to search."],["a","Does opening one of your own breakouts use one of the 3 free analyses?"]]},
+  "own-detail":{id:"11a · from Account",h:"Your breakout, analysis",li:[["v","Tapping a breakout on Account opens this. Same analysis as any search result: hooks, why it worked, what to do next, written for your own video."],["a","Header says Your breakout instead of the search, and the score line adds “12x your usual views”. The info popover uses the settled wording: against your account’s own average."],["a","Save and Share work as on any breakout. Back returns to Account."]]},
+  "own-story":{id:"11b · from Account",h:"Your story",li:[["v","Play your story on Account opens the same story cards we DM to creators, full screen inside the app. Tap or wait to move through, X goes back to Account."],["a","Signed in, the last card says “Search a new product or video style” (Ivan’s Pro success wording) and goes to Home with the search ready, instead of the free sign up."]]}
 };
 ["proc-slow","proc-ready"].forEach(function(k){NOTES[k]=NOTES.proc;});
 ["home-searching","home-ready"].forEach(function(k){NOTES[k]=NOTES["home-in"];});
@@ -1705,7 +1759,9 @@ function wireReveal(){
 function render(nav,keepScroll){
   var top=scr.scrollTop;
   var sp0=scr.querySelector(".strip"),stripLeft=sp0?sp0.scrollLeft:0;
-  scr.innerHTML=DEVICE==="desk"?(DV[S.view]?DV[S.view]():deskGeneric()):(V[S.view]||V.home)();
+  var keepStory=S.view==="story"&&scr.querySelector("iframe.storyf")&&scr.getAttribute("data-dev")===DEVICE;
+  if(!keepStory)scr.innerHTML=DEVICE==="desk"?(DV[S.view]?DV[S.view]():deskGeneric()):(V[S.view]||V.home)();
+  scr.setAttribute("data-dev",DEVICE);
   scr.scrollTop=(nav&&!keepScroll)?0:top;
   if(S.scrollTo){var se=scr.querySelector("#"+S.scrollTo);if(se)scr.scrollTop=se.offsetTop-10;S.scrollTo=null;}
   if(stripLeft){var sp2=scr.querySelector(".strip");if(sp2)sp2.scrollLeft=stripLeft;}
@@ -1789,6 +1845,7 @@ function act(a,el){
     case "account": go("account"); break;
     case "tab": S.libTab=d("k");render(false); break;
     case "logout": jump("home-out"); break;
+    case "mystory": go("story"); break;
     case "tt-change": S.tt="";render(false);var th=document.getElementById("tt-h");if(th){th.focus();th.select();}break;
     case "sort-open": S.sortSheet=true; renderOverlay(); break;
     case "sort-close": S.sortSheet=false; renderOverlay(); break;
@@ -1824,8 +1881,38 @@ phone.addEventListener("input",function(e){
   if(e.target.id==="q-shared")S.sharedQ=e.target.value;
 });
 
+window.addEventListener("message",function(e){
+  var m=e.data&&e.data.ub;if(!m||S.view!=="story")return;
+  if(m==="close")back();
+  if(m==="search"){S.stack=[];S.view="home";S.params={};S.focusSearch=true;render(true);}
+});
 buildRail();
 render(true);
+/* ---------------- full screen mockup ---------------- */
+(function(){
+  var bar=document.querySelector(".stagebar");if(!bar)return;
+  var b=document.createElement("button");b.type="button";b.className="fsbtn";b.setAttribute("aria-pressed","false");
+  var ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  function label(on){b.innerHTML=ICO+(on?"Exit full screen":"Full screen");b.setAttribute("aria-pressed",String(on));}
+  label(false);
+  var ctl=bar.querySelector(".ctl");bar.insertBefore(b,ctl);
+  bar.style.gap="8px";
+  function set(on){
+    document.body.classList.toggle("fs",on);label(on);
+    if(on&&document.documentElement.requestFullscreen&&!document.fullscreenElement){document.documentElement.requestFullscreen().catch(function(){});}
+    if(!on&&document.fullscreenElement&&document.exitFullscreen){document.exitFullscreen().catch(function(){});}
+    window.dispatchEvent(new Event("resize"));
+  }
+  b.addEventListener("click",function(){set(!document.body.classList.contains("fs"));});
+  document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&document.body.classList.contains("fs"))set(false);});
+  document.addEventListener("keydown",function(e){
+    if(e.target.matches&&e.target.matches("input,textarea,select"))return;
+    if(e.key==="Escape"&&document.body.classList.contains("fs"))set(false);
+    if((e.key==="f"||e.key==="F")&&!e.metaKey&&!e.ctrlKey)set(!document.body.classList.contains("fs"));
+  });
+  if(/[?&]fs\b/.test(location.search))set(true);
+})();
+
 })();
 </script>
 

@@ -75,8 +75,8 @@ var CARD={
     '<div class="cin"><div class="fill"><div class="fan">'+
     ['112K','64K','41K'].map(function(n,k){return '<div class="sl s'+(k+1)+'"><i class="c"></i><i class="h"></i><i></i><i style="width:80%"></i><div class="n"><b>'+n+'</b></div></div>';}).join("")+
     '</div></div><p class="cta-h rise d1">Find Breakouts of your own!</p><p class="body rise d2">Try it on your own brand, product, or style. See what’s breaking out on TikTok and how to remake it.</p>'+
-    '<div class="cbtns rise d3"><a class="cbtn" href="../#teaser" target="_blank" rel="noopener">Start free '+ic("arrow").replace('<svg','<svg style="width:5cqw;height:5cqw"')+'</a><button type="button" class="cbtn alt" data-act="replay">Watch again</button></div>'+
-    '<div class="cfoot"><span>Free. Just your email.</span>'+SMP+'</div></div>';}},
+    '<div class="cbtns rise d3">'+(APP?'<button type="button" class="cbtn" data-act="appsearch">Search a new product or video style</button>':'<a class="cbtn" href="../#teaser" target="_blank" rel="noopener">Start free '+ic("arrow").replace('<svg','<svg style="width:5cqw;height:5cqw"')+'</a>')+'<button type="button" class="cbtn alt" data-act="replay">Watch again</button></div>'+
+    '<div class="cfoot"><span>'+(APP?'':'Free. Just your email.')+'</span>'+SMP+'</div></div>';}},
   /* edge cases */
   p1:{t:"t-ink",n:"Private account",h:function(){return '<i class="shp ring" style="width:56cqw;height:56cqw;right:-26cqw;top:-8cqw"></i>'+
     '<div class="cin"><p class="lab rise">@sample.quietfilms</p><div class="fill" style="justify-content:flex-start"><p class="hook pop" style="font-size:17cqw">This account is <span>private.</span></p></div>'+
@@ -252,7 +252,9 @@ var RAIL=[
 var KEYS=[];RAIL.forEach(function(g){g.items.forEach(function(it){KEYS.push(it[0]);});});
 
 /* ---------------- state ---------------- */
-var Q=new URLSearchParams(location.search),EXP=Q.get("export"),STILL=Q.has("still")||!!EXP;
+var Q=new URLSearchParams(location.search),EXP=Q.get("export"),STILL=Q.has("still")||!!EXP,APP=Q.has("app");
+if(APP)document.body.classList.add("app");
+function toApp(m){try{parent.postMessage({ub:m},"*");}catch(e){}}
 var S={key:"landing",view:"landing",set:"main",i:0,play:false,still:STILL,handle:RAE.handle,err:"",rc:0,rs:0,toast:""};
 var DEVICE="phone";
 var scr=document.getElementById("scr"),ovl=document.getElementById("ovl");
@@ -332,11 +334,12 @@ function onAct(a,el,e){
     case "next":step(1);break;
     case "prev":step(-1);break;
     case "toggle":S.play=!S.play;render();break;
-    case "close":if(DEVICE==="desk"){S.i=0;S.play=false;render();}else{S.view="landing";S.key="landing";render();}break;
+    case "close":if(APP){toApp("close");break;}if(DEVICE==="desk"){S.i=0;S.play=false;render();}else{S.view="landing";S.key="landing";render();}break;
     case "replay":S.i=0;S.play=true;render();break;
     case "again":S.view="landing";S.key="landing";S.handle="";render();var h=document.getElementById("hdl");if(h)h.focus();break;
     case "openlink":e.preventDefault();S.handle=RAE.handle;S.set="main";S.view="reading";startRead();render();break;
     case "noop":break;
+    case "appsearch":toApp("search");break;
     case "signin":toast("Existing accounts sign in the usual way.");break;
     case "ub":toast("Opens UGC Breakouts search, signed out.");break;
     case "share":e.preventDefault();toast("Opens the phone’s share sheet with the image.");break;
@@ -389,7 +392,7 @@ document.getElementById("ctl").addEventListener("click",function(e){
 function fitDesk(){
   if(DEVICE!=="desk")return;
   var main=document.querySelector(".main"),w=main.clientWidth-parseFloat(getComputedStyle(main).paddingLeft)*2;
-  var sc=Math.min(1,w/1280,Math.max(.45,(window.innerHeight-90)/800));
+  var sc=document.body.classList.contains("fs")?Math.min(1.25,(window.innerWidth-24)/1280,(window.innerHeight-70)/800):Math.min(1,w/1280,Math.max(.45,(window.innerHeight-90)/800));
   document.body.style.setProperty("--sc",sc.toFixed(4));
 }
 window.addEventListener("resize",fitDesk);
@@ -423,5 +426,30 @@ if(EXP){
 }
 window.addEventListener("hashchange",function(){var k=(location.hash||"").slice(1);if(KEYS.indexOf(k)>-1&&k!==S.key)jump(k);});
 var h0=(location.hash||"").slice(1);
-jump(KEYS.indexOf(h0)>-1?h0:"dm");
+if(!APP)/* ---------------- full screen mockup ---------------- */
+(function(){
+  var bar=document.querySelector(".stagebar");if(!bar)return;
+  var b=document.createElement("button");b.type="button";b.className="fsbtn";b.setAttribute("aria-pressed","false");
+  var ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  function label(on){b.innerHTML=ICO+(on?"Exit full screen":"Full screen");b.setAttribute("aria-pressed",String(on));}
+  label(false);
+  var ctl=bar.querySelector(".ctl");bar.insertBefore(b,ctl);
+  bar.style.gap="8px";
+  function set(on){
+    document.body.classList.toggle("fs",on);label(on);
+    if(on&&document.documentElement.requestFullscreen&&!document.fullscreenElement){document.documentElement.requestFullscreen().catch(function(){});}
+    if(!on&&document.fullscreenElement&&document.exitFullscreen){document.exitFullscreen().catch(function(){});}
+    window.dispatchEvent(new Event("resize"));
+  }
+  b.addEventListener("click",function(){set(!document.body.classList.contains("fs"));});
+  document.addEventListener("fullscreenchange",function(){if(!document.fullscreenElement&&document.body.classList.contains("fs"))set(false);});
+  document.addEventListener("keydown",function(e){
+    if(e.target.matches&&e.target.matches("input,textarea,select"))return;
+    if(e.key==="Escape"&&document.body.classList.contains("fs"))set(false);
+    if((e.key==="f"||e.key==="F")&&!e.metaKey&&!e.ctrlKey)set(!document.body.classList.contains("fs"));
+  });
+  if(/[?&]fs\b/.test(location.search))set(true);
+})();
+if(APP){jump("c1");S.play=true;render();}
+else jump(KEYS.indexOf(h0)>-1?h0:"dm");
 })();

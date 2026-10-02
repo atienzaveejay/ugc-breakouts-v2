@@ -340,3 +340,30 @@ body.exp .shell{display:none}
 .dmlink span{display:block;font-size:12.5px;color:var(--mid);margin-top:4px;word-break:break-all}
 .dmbar{padding:10px 14px 16px;border-top:1px solid var(--hair)}
 .dmbar span{display:block;height:42px;border-radius:21px;background:#F1EEEA;color:var(--mid);font-size:14.5px;padding:0 16px;line-height:42px}
+
+/* full screen mockup */
+.fsbtn{display:inline-flex;align-items:center;gap:5px}
+.fsbtn svg{width:13px;height:13px}
+body.fs{overflow:hidden}
+body.fs .stage{position:fixed;inset:0;z-index:200;width:auto;max-width:none;margin:0;padding:12px 12px 16px;background:#0E1413;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+body.fs .stagebar{width:min(560px,100%);max-width:none}
+body.fs .stagebar .where{color:#9DB0AC}
+body.fs #frame{width:auto;height:calc(100dvh - 70px);aspect-ratio:390/844;max-width:100%;margin:0}
+body.fs .phone{height:100%;min-height:0}
+body.fs.desk #frame{aspect-ratio:auto;height:calc(800px * var(--sc,1));width:calc(1280px * var(--sc,1))}
+body.fs.desk .stagebar{width:calc(1280px * var(--sc,1));max-width:100%}
+body.fs.desk .phone{height:800px}
+@media (max-width:520px){
+  body.fs .stage{padding:6px 0 0;justify-content:flex-start}
+  body.fs .stagebar{padding:0 10px}
+  body.fs #frame{width:100%;height:calc(100dvh - 48px);aspect-ratio:auto}
+  body.fs .phone{border-radius:0}
+}
+
+/* app mode: the story inside the UB app (Account, Play your story) */
+body.app{background:#171312}
+body.app .rail,body.app .notes,body.app .stagebar{display:none}
+body.app .shell{display:block}
+body.app .main{padding:0;display:block}
+body.app .stage{position:static;width:100%;gap:0}
+body.app .phone{width:100vw;height:100vh;height:100dvh;min-height:0;border-radius:0;box-shadow:none}
