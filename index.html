@@ -418,9 +418,6 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .ownl{margin:-2px 0 0;font-size:13.5px;color:var(--mid)}
 .ownbox{display:flex;flex-direction:column;gap:12px}
 .ownbox .tabs{background:rgba(255,255,255,.6)}
-.storyv{flex:1;display:flex;background:#171312}
-.storyf{border:0;width:100%;height:100%;display:block}
-.storyd{width:330px;height:600px;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(23,19,18,.6);background:#171312}
 .xline{margin:2px 0 0;font-size:14px;color:var(--mid)}
 .xline b{color:var(--ink);font-size:16px}
 .ttv .th{width:44px;height:58px;border-radius:9px;background:center/cover}
@@ -826,7 +823,7 @@ body.fs.desk .phone{height:800px}
       <p class="kicker">Round 3 notes · plus the sales page</p>
       <h1>UGC Breakouts <b>v2</b></h1>
       <p>Clickable prototype. Round 1 Slack changes are in. The notes list this round: Ivan's notes, his answers, the call, and the sales page Veejay asked for.</p>
-      <a href="pitch-free/" style="display:inline-block;margin-top:10px;font:600 12.5px var(--sans);color:var(--acc);text-decoration:none">Free breakout story (profile analyzer) ›</a>
+      <a href="pitch-free/" style="display:inline-block;margin-top:10px;font:600 12.5px var(--sans);color:var(--acc);text-decoration:none">Breakout cards (separate, Wrapped style) ›</a>
       <div class="devseg" role="group" aria-label="Device"><button type="button" id="dev-phone" aria-pressed="true">Phone</button><button type="button" id="dev-desk" aria-pressed="false">Desktop</button></div>
     </div>
     <div class="mnav">
@@ -1485,11 +1482,8 @@ function ttCard(){
     '<button class="tthero" data-act="detail" data-v="'+top.id+'"><span class="th" style="'+bg(top.img)+'"></span><span class="tx"><small>Your biggest breakout</small><b>'+top.x+'x</b><span>your usual views</span></span>'+ic("chev","chev")+'</button>'+
     '<p class="ttq">1 in 8 of your videos broke out.</p>'+
     (S.ttAll?rest.map(function(v){return '<button class="ttv" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><div><b>'+v.x+'x your usual</b><span>'+esc(v.hook)+'</span></div>'+ic("chev","chev")+'</button>';}).join(""):'')+
-    '<div class="ttact"><button class="b b2 grow" data-act="mystory">'+ic("play")+'Play your story</button><button class="lnkb" data-act="tt-all" aria-expanded="'+!!S.ttAll+'">'+(S.ttAll?'Show less':'See all 3')+'</button></div></section>';
+    '<button class="lnkb" data-act="tt-all" aria-expanded="'+!!S.ttAll+'" style="align-self:flex-start;padding:2px 0">'+(S.ttAll?'Show less':'See all 3')+'</button></section>';
 }
-V.story=function(){
-  return '<div class="storyv"><iframe class="storyf" src="pitch-free/?app=1" title="Your breakout story" allow="autoplay"></iframe></div>';
-};
 V.account=function(){
   var pro=S.plan==="pro";
   return '<div class="tb">'+backBtn()+'<span class="tt">Account</span><span class="sp"></span></div>'+
@@ -1554,9 +1548,6 @@ DV.results=function(){
   var cards=ids.length?'<div class="dgrid2">'+ids.map(function(id){return dcard(vid(id));}).join("")+'</div>':'<div class="nomatch"><b style="color:var(--ink)">No videos match these filters</b><button class="b b2" data-act="clear-filters">Clear filters</button></div>';
   var wall=h.indexOf('<div class="wall">')>-1?h.slice(h.indexOf('<div class="wall">'),h.length-6):'';
   return dtb({search:1,q:q,pill:1,nav:1})+'<div class="dpage" style="max-width:1100px"><div class="rh"><h1 class="h1 big" style="margin:0">Breakouts for <em>'+esc(q)+'</em></h1></div>'+ctrls+cards+wall+'</div>';
-};
-DV.story=function(){
-  return dtb({nav:1})+'<div class="dpage" style="max-width:640px;align-items:center"><button class="dback" data-act="back" style="align-self:flex-start">'+ic("back")+'Account</button><div class="storyd"><iframe class="storyf" src="pitch-free/?app=1" title="Your breakout story"></iframe></div></div>';
 };
 DV.detail=function(){
   var h=V.detail(),v=vid(S.params.v||"v1");
@@ -1628,7 +1619,7 @@ var RAIL=[
   {g:"Breakouts",items:[["results","02","Results"],["empty","02","No breakouts"],["top","02b","Top Breakouts feed"],["detail","03","Detail"]]},
   {g:"Sharing",items:[["share","04","Share video"],["shared","05","Shared with you"]]},
   {g:"Money",items:[["paid","07","Paid, search cap"],["paid-videos","07","Paid, video cap"],["paid-analyses","07","Paid, analysis cap"],["pro","09","Pro success"],["affiliate","12","Affiliate"]]},
-  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-tt","11","Account, your breakouts"],["own-detail","11a","Your breakout, analysis"],["own-story","11b","Your story"],["account-pro","11","Account, Pro"]]},
+  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-tt","11","Account, your breakouts"],["own-detail","11a","Your breakout, analysis"],["account-pro","11","Account, Pro"]]},
   {g:"Review",items:[["questions","","Questions for Ivan"]]}
 ];
 function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q)};S.searches.push(s);return s;}
@@ -1661,7 +1652,6 @@ function jump(key){
     "account-pro":function(){S.loggedIn=true;S.plan="pro";S.stack=home;S.view="account";},
     "account-tt":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="account";S.tt="done";S.ttHandle="sample.raefilms";},
     "own-detail":function(){S.loggedIn=true;S.left=2;S.tt="done";S.ttHandle="sample.raefilms";S.stack=[{view:"home",params:{}},{view:"account",params:{}}];S.view="detail";S.params={v:"r1"};},
-    "own-story":function(){S.loggedIn=true;S.left=2;S.tt="done";S.ttHandle="sample.raefilms";S.stack=[{view:"home",params:{}},{view:"account",params:{}}];S.view="story";},
     "questions":function(){S.loggedIn=true;S.left=2;S.view="home";}
   };
   (setups[key]||setups["home-out"])();
@@ -1676,7 +1666,6 @@ function currentKey(){
   if(v==="proc"){var s=findSearch(S.params.id);if(s&&s.done)return "proc-ready";if(s&&s.el>=60)return "proc-slow";return "proc";}
   if(v==="account")return S.plan==="pro"?"account-pro":(S.tt==="done"?"account-tt":"account");
   if(v==="detail"&&vid(S.params.v).own)return "own-detail";
-  if(v==="story")return "own-story";
   if(v==="paid")return S.params.reason==="videos"?"paid-videos":(S.params.reason==="analyses"?"paid-analyses":"paid");
   return v;
 }
@@ -1721,9 +1710,8 @@ var NOTES={
   "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["r","Polish: cut the line under the heading. The three steps already say it. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["r","Round 3: $49 only, no reward selector. Ivan: “they wont be able to select, let's keep it $49 for now.”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
   "library":{id:"08 · 08-library",h:"Library",li:[["r","Searches vs History merged into one Searches tab: saved searches at the top, every other search under Recent. Ivan: “what's the difference between searches and history, is it saved searches vs all searches.”"],["q","Saved searches are snapshots. Refreshing one would cost a search. Ivan: “refresh costs another ‘search’ credit.”"],["a","Where should Refresh go?"]]},
   "account":{id:"11 · 11-account",h:"Account",li:[["c","New: Your breakouts, the profile analyzer, on the profile page. Ivan, 2 Oct call: “add the UGC profile analyzer to the profile.” Type a TikTok handle, see your own breakouts."],["a","Uses the same Breakout Score as search: each video against the account’s own average. 12x is the biggest breakout’s views over the usual. Does reading one handle cost a search, or is it free?"],["a","One handle per account, changeable any time?"]]},
-  "account-tt":{id:"11 · 11-account",h:"Account, your breakouts",li:[["c","The profile analyzer after a handle is read. Ivan, 2 Oct call."],["v","Veejay, 2 Oct: less overwhelming. One breakout up front (the biggest, as a big 12x), one line for the breakout rate, and the other two behind See all 3. One action: Play your story."],["a","Play your story opens the Free Breakout Story cards for this handle. The same story is what we send creators who say yes to our TikTok DM."],["v","Where it leads: each breakout opens its own analysis (11a). Play your story opens the story cards in the app (11b). The story’s last card goes to search."],["a","Does opening one of your own breakouts use one of the 3 free analyses?"]]},
-  "own-detail":{id:"11a · from Account",h:"Your breakout, analysis",li:[["v","Veejay, 2 Oct: less overwhelming. Smaller video, one line of stats instead of four boxes, and the analysis behind three tabs. What next opens first, since that is what you act on."],["v","Tapping a breakout on Account opens this. Same analysis as any search result: hooks, why it worked, what to do next, written for your own video."],["a","Header says Your breakout instead of the search, and the score line adds “12x your usual views”. The info popover uses the settled wording: against your account’s own average."],["a","Save and Share work as on any breakout. Back returns to Account."]]},
-  "own-story":{id:"11b · from Account",h:"Your story",li:[["v","Play your story on Account opens the same story cards we DM to creators, full screen inside the app. Tap or wait to move through, X goes back to Account."],["a","Signed in, the last card says “Search a new product or video style” (Ivan’s Pro success wording) and goes to Home with the search ready, instead of the free sign up."]]}
+  "account-tt":{id:"11 · 11-account",h:"Account, your breakouts",li:[["c","The profile analyzer after a handle is read. Ivan, 2 Oct call."],["v","Veejay, 2 Oct: less overwhelming. One breakout up front (the biggest, as a big 12x), one line for the breakout rate, and the other two behind See all 3."],["v","Veejay, 3 Oct: the profile analyzer is how creators read their own account from their profile. The Spotify Wrapped style breakout cards are a separate thing, so nothing here links to them."],["v","Where it leads: each breakout opens its own analysis (11a)."],["a","Does opening one of your own breakouts use one of the 3 free analyses?"]]},
+  "own-detail":{id:"11a · from Account",h:"Your breakout, analysis",li:[["v","Veejay, 2 Oct: less overwhelming. Smaller video, one line of stats instead of four boxes, and the analysis behind three tabs. What next opens first, since that is what you act on."],["v","Tapping a breakout on Account opens this. Same analysis as any search result: hooks, why it worked, what to do next, written for your own video."],["a","Header says Your breakout instead of the search, and the score line adds “12x your usual views”. The info popover uses the settled wording: against your account’s own average."],["a","Save and Share work as on any breakout. Back returns to Account."]]}
 };
 ["proc-slow","proc-ready"].forEach(function(k){NOTES[k]=NOTES.proc;});
 ["home-searching","home-ready"].forEach(function(k){NOTES[k]=NOTES["home-in"];});
@@ -1790,9 +1778,7 @@ function wireReveal(){
 function render(nav,keepScroll){
   var top=scr.scrollTop;
   var sp0=scr.querySelector(".strip"),stripLeft=sp0?sp0.scrollLeft:0;
-  var keepStory=S.view==="story"&&scr.querySelector("iframe.storyf")&&scr.getAttribute("data-dev")===DEVICE;
-  if(!keepStory)scr.innerHTML=DEVICE==="desk"?(DV[S.view]?DV[S.view]():deskGeneric()):(V[S.view]||V.home)();
-  scr.setAttribute("data-dev",DEVICE);
+  scr.innerHTML=DEVICE==="desk"?(DV[S.view]?DV[S.view]():deskGeneric()):(V[S.view]||V.home)();
   scr.scrollTop=(nav&&!keepScroll)?0:top;
   if(S.scrollTo){var se=scr.querySelector("#"+S.scrollTo);if(se)scr.scrollTop=se.offsetTop-10;S.scrollTo=null;}
   if(stripLeft){var sp2=scr.querySelector(".strip");if(sp2)sp2.scrollLeft=stripLeft;}
@@ -1876,7 +1862,6 @@ function act(a,el){
     case "account": go("account"); break;
     case "tab": S.libTab=d("k");render(false); break;
     case "logout": jump("home-out"); break;
-    case "mystory": go("story"); break;
     case "tt-all": S.ttAll=!S.ttAll; render(false); break;
     case "otab": S.otab=d("k"); render(false); break;
     case "tt-change": S.tt="";render(false);var th=document.getElementById("tt-h");if(th){th.focus();th.select();}break;
@@ -1914,11 +1899,6 @@ phone.addEventListener("input",function(e){
   if(e.target.id==="q-shared")S.sharedQ=e.target.value;
 });
 
-window.addEventListener("message",function(e){
-  var m=e.data&&e.data.ub;if(!m||S.view!=="story")return;
-  if(m==="close")back();
-  if(m==="search"){S.stack=[];S.view="home";S.params={};S.focusSearch=true;render(true);}
-});
 buildRail();
 render(true);
 /* ---------------- full screen mockup ---------------- */
