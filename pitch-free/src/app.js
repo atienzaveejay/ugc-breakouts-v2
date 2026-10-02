@@ -171,7 +171,7 @@ var NOTES={
     ["a","The link opens straight into their story, with the handle already filled in. No typing, no login."]]},
   landing:{id:"L1 · ugcbreakouts.com/story",h:"Landing",li:[
     ["r","Ivan, 1 Oct: not a fan of the pitch deck for now, keep the profile story. The deck ask at the end is gone."],
-    ["v","Veejay, 3 Oct: these breakout cards are their own thing, separate from the profile analyzer (how creators read their own account on their profile in the app)."],
+    ["r","Ivan, 30 Sep: “basically like spotify but it’s more addictive… we’ll find the breakouts for your thing for free.” This story is the profile analyzer. In the app it opens from the Profile analyzer buttons."],
     ["a","Anyone can still type a handle here. Keep this public page, or only open it from the DM link?"],
     ["d","Anyone can type any public handle. Cache each handle’s result for 24 hours and rate limit per IP, since every read is a scrape."]]},
   reading:{id:"L2 · reading the account",h:"Reading your account",li:[

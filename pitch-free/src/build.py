@@ -10,7 +10,7 @@ head='''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Breakout Cards</title>
+<title>Profile Analyzer Story</title>
 <meta name="description" content="UGC Breakouts proposal: a free public page where a creator types their TikTok handle and taps through a story of their own breakouts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
