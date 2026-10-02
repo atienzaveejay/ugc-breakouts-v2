@@ -100,7 +100,7 @@ function shareCard(mode){
   '<div class="cfoot"><span class="mark">ugcbreakouts.com/story</span>'+SMP+'</div></div></div>';
 }
 var SETS={
-  main:{h:RAE.handle,a:"R",cards:["c1","c2","c3","c4","c5","c6","c7","c8","c9"]},
+  main:{h:RAE.handle,a:"R",cards:["c2","c3","c5","c6","c7","c8","c9"]},
   none:{h:SLOW.handle,a:"S",cards:["n1","n2","n3"]},
   priv:{h:"sample.quietfilms",a:"Q",cards:["p1"]},
   few:{h:"sample.newfilms",a:"N",cards:["f1"]}
@@ -156,7 +156,7 @@ function desk1(){
   '<div class="dkp">'+player("main",S.i,{play:S.play,still:S.still})+'</div><button type="button" class="dkarrow r" data-act="next" aria-label="Next card">'+ic("right")+'</button></div></div></div>';
 }
 function desk2(){
-  return '<div class="dk"><div class="ltop"><span class="logo">UGC <b>Breakouts</b></span></div><div class="dk2"><h2>@'+RAE.handle+', your breakouts</h2><p class="sub">All 9 cards. Click one to play it.</p><div class="cgrid">'+
+  return '<div class="dk"><div class="ltop"><span class="logo">UGC <b>Breakouts</b></span></div><div class="dk2"><h2>@'+RAE.handle+', your breakouts</h2><p class="sub">All '+SETS.main.cards.length+' cards. Click one to play it.</p><div class="cgrid">'+
   SETS.main.cards.map(function(id,k){return '<figure><div class="mini" role="button" tabindex="0" data-k="'+k+'" aria-label="Play card '+(k+1)+'">'+renderCard(id,"still",true)+'</div><figcaption><span>'+(k+1)+'</span>'+CARD[id].n+'</figcaption></figure>';}).join("")+
   '</div></div></div>';
 }
@@ -181,31 +181,32 @@ var NOTES={
   c1:{id:"Card 1 of 9 · free",h:"Videos we read",li:[
     ["a","Opens on the count and the date range, which makes the numbers after it read as fair. The lit tiles hint at the 8 breakouts to come."],
     ["f","SAMPLE on every card, and every handle starts with “sample.” Nothing here is a real account."]]},
-  c2:{id:"Card 2 of 9 · free",h:"Your usual views",li:[
+  c2:{id:"Card 1 of 7 · free",h:"Your usual views",li:[
+    ["v","Veejay, 2 Oct: less overwhelming. The story is 7 cards now: “Videos we read” (the reading screen already counts them) and “Your top 3” (it repeated the biggest breakout) are out."],
     ["a","The baseline, framed as the creator’s own bar and never compared with bigger accounts. It is what makes the next card’s 12x mean something."],
     ["d","Average of the creator’s public videos in the range. If Ivan prefers a median so one huge video doesn’t skew it, the wording stays the same."]]},
-  c3:{id:"Card 3 of 9 · free",h:"Your biggest breakout",li:[
+  c3:{id:"Card 2 of 7 · free",h:"Your biggest breakout",li:[
     ["v","From the brief: “12x your usual views”, the video thumbnail and its hook."],
     ["f","Breakout Score: “A score from 0 to 100. It shows how much a video beat the average of what that account usually gets.” The card leads with the multiple because it needs no explaining."],
     ["a","Thumbnails here are the creator’s own videos, shown to the creator. No other creator’s content appears anywhere in the free tool."]]},
   c4:{id:"Card 4 of 9 · free",h:"Your top 3 breakouts",li:[
     ["a","A ranked list, with the multiple as the big number and the Breakout Score under it. The one line definition sits under the list."],
     ["a","Tapping a breakout could open it on TikTok. Left out for now, the same as Ivan’s “no Watch on TikTok” call in the app."]]},
-  c5:{id:"Card 5 of 9 · free",h:"Your breakout rate",li:[
+  c5:{id:"Card 3 of 7 · free",h:"Your breakout rate",li:[
     ["a","8 of 62 is shown as “1 in 8”, which reads faster than 13% on a phone."],
     ["a","What counts as a breakout is still open. This card assumes a Breakout Score of 60 or more."]]},
-  c6:{id:"Card 6 of 9 · free",h:"Your hook style",li:[
+  c6:{id:"Card 4 of 7 · free",h:"Your hook style",li:[
     ["f","A plain label from the creator’s own breakouts. No rarity figure and no “top x% of creators”: UB doesn’t see a fair sample of all creators, so any percentile would be invented. Ivan’s lock: never invent Breakout numbers."],
     ["a","The label needs a breakout analysis of the top videos, which costs a model call. Run it for free here, or hide this card until sign up?"]]},
-  c7:{id:"Card 7 of 9 · free",h:"What works for you",li:[
+  c7:{id:"Card 5 of 7 · free",h:"What works for you",li:[
     ["a","Length comes straight from public data. The format line (“tests with the proof on screen”) comes from the same analysis as card 6."],
     ["a","If there aren’t enough breakouts to find a length pattern, this card is skipped rather than shown weak."]]},
-  c8:{id:"Card 8 of 9 · free",h:"Share card",li:[
+  c8:{id:"Card 6 of 7 · free",h:"Share card",li:[
     ["v","A 9:16 image the creator can save and post, with a small ugcbreakouts.com/story mark. Save image downloads the sample PNG."],
     ["f","The hint says TikTok story only. Share opens the phone’s own share sheet. UB copy names TikTok only."],
     ["a","No text under about 36px at 1080 wide. The handle is on by default. Let creators hide it?"],
     ["q","Spotify reports 500M+ Wrapped shares in the first 24 hours (company claim). Duolingo saw share rates go up when the flattering number moved onto the share card."+src("https://blog.duolingo.com/year-in-review-behind-the-scenes","Duolingo Blog")]]},
-  c9:{id:"Card 9 of 9 · the ask",h:"Find Breakouts of your own",li:[
+  c9:{id:"Card 7 of 7 · the ask",h:"Find Breakouts of your own",li:[
     ["r","Replaces the pitch deck ask. Heading, line and “Free. Just your email.” are Ivan’s own copy from the Shared screen CTA."],
     ["a","Start free opens UB’s sign in. Inside the app (opened from Account) this card would say Search instead. Same card, two buttons?"]]},
   "private":{id:"E1 · edge case",h:"Private account",li:[
@@ -223,7 +224,7 @@ var NOTES={
     ["v","The other desktop option from the brief: every card in a grid. Click one to play it."],
     ["a","Pick one of the two for launch. D1 keeps the story feel, D2 is quicker to scan."]]},
   split:{id:"Review",h:"Free vs sign up",li:[
-    ["v","<b>Free, no login:</b> the DM link, the handle box, the reading moment, all 9 story cards, the share card with Save image and Share."],
+    ["v","<b>Free, no login:</b> the DM link, the handle box, the reading moment, all 7 story cards, the share card with Save image and Share."],
     ["v","<b>Sign up:</b> UB itself, from the last card. In the app, the same analysis sits on Account."]]}
 };
 var QUESTIONS=[
@@ -450,6 +451,6 @@ if(!APP)/* ---------------- full screen mockup ---------------- */
   });
   if(/[?&]fs\b/.test(location.search))set(true);
 })();
-if(APP){jump("c1");S.play=true;render();}
+if(APP){jump("c2");S.play=true;render();}
 else jump(KEYS.indexOf(h0)>-1?h0:"dm");
 })();

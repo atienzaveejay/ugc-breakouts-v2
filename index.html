@@ -404,6 +404,20 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .ttv svg.chev{width:18px;height:18px;color:var(--mid)}
 .ttv:hover b{text-decoration:underline}
 .ttv>div{min-width:0}
+.tthero{display:grid;grid-template-columns:64px 1fr 18px;gap:14px;align-items:center;background:none;border:0;padding:0;text-align:left;font-family:var(--sans);color:var(--ink);cursor:pointer;width:100%}
+.tthero .th{width:64px;height:86px;border-radius:12px;background:center/cover}
+.tthero .tx{display:flex;flex-direction:column;min-width:0}
+.tthero small{font-size:12.5px;color:var(--mid);font-weight:600}
+.tthero b{font-size:34px;font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.tthero .tx span{font-size:14px;color:var(--mid)}
+.tthero svg.chev{width:18px;height:18px;color:var(--mid)}
+.ttq{margin:0;font-size:14px;color:var(--mid)}
+.ttact{display:flex;gap:12px;align-items:center}
+.ttact .grow{flex:1}
+.lnkb{background:none;border:0;font:700 14px var(--sans);color:var(--teal);cursor:pointer;padding:10px 4px;white-space:nowrap}
+.ownl{margin:-2px 0 0;font-size:13.5px;color:var(--mid)}
+.ownbox{display:flex;flex-direction:column;gap:12px}
+.ownbox .tabs{background:rgba(255,255,255,.6)}
 .storyv{flex:1;display:flex;background:#171312}
 .storyf{border:0;width:100%;height:100%;display:block}
 .storyd{width:330px;height:600px;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(23,19,18,.6);background:#171312}
@@ -1347,19 +1361,27 @@ V.empty=function(){
   '<p class="sub" style="font-size:15px;margin-top:-6px">Try another product or format. This doesn\'t count toward your free searches.</p></div></div>';
 };
 
+function ownBody(v,a,nx){
+  var t=S.otab||"next";
+  var tabs=[["next","What next"],["hook","Hook"],["why","Why"]];
+  var body=t==="hook"?'<p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(x){return '<li><span>“'+x[1]+'”</span></li>';}).join("")+'</ol>':
+    '<ol class="ol">'+(t==="why"?a.why:nx).map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol>';
+  return '<p class="ownl">'+v.views+' views · Posted '+v.posted.replace(/, \d{4}$/,"")+' · '+v.len+'</p>'+
+    '<div class="box teal ownbox"><div class="tabs" role="tablist" aria-label="Analysis">'+tabs.map(function(x){return '<button role="tab" data-act="otab" data-k="'+x[0]+'" aria-selected="'+(t===x[0])+'">'+x[1]+'</button>';}).join("")+'</div>'+body+'</div>';
+}
 V.detail=function(){
   var v=vid(S.params.v||"v1"),a=anFor(v),nx=nextFor(a);
   return '<div class="tb">'+backBtn()+(v.own?'<span class="tt">Your breakout</span><span class="sp"></span>':searchPill(S.query))+countPillShort()+menuBtn()+'</div>'+
   '<div class="pb" style="gap:14px">'+
-  '<div style="align-self:center;width:62%">'+vtile(v,{style:"aspect-ratio:9/16"})+'</div>'+
+  '<div style="align-self:center;width:'+(v.own?'46%':'62%')+'">'+vtile(v,{style:"aspect-ratio:9/16"})+'</div>'+
   '<div class="facts"><div class="scorerow"><b>'+v.score+'</b><span>Breakout Score</span><button class="infob" data-act="info" aria-expanded="'+S.infoOpen+'" aria-label="What is Breakout Score?">'+ic("info")+'</button></div>'+
   (v.own?'<p class="xline"><b>'+v.x+'x</b> your usual views</p>':'')+
   (S.infoOpen?'<div class="pop" role="note"><b>Breakout Score</b><br>'+(v.own?'A score from 0 to 100. It shows how much this video beat the average of what your account usually gets.':'A score from 0 to 100. It shows how much this video beat what accounts this size usually get. More likes, comments, and shares, and a newer post, push it higher.')+'</div>':'')+
-  '<div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div></div>'+
+  (v.own?'</div>'+ownBody(v,a,nx):'<div class="hd">@'+v.handle+' <small>· '+v.followers+' followers</small></div></div>'+
   '<div class="vit"><div class="bigstats"><div><b>'+v.views+'</b><small>Views</small></div><div><b>'+v.likes+'</b><small>Likes</small></div><div><b>'+v.comments+'</b><small>Comments</small></div><div><b>'+v.shares+'</b><small>Shares</small></div></div><div class="vsmall">Posted '+v.posted+' · '+v.len+' · TikTok</div></div>'+
   '<div class="box teal"><h3>Hooks</h3><p class="q">“'+a.hook+'”</p><p class="eb">Try these</p><ol class="ol">'+a.tries.map(function(t){return '<li><span>'+t[0]+': “'+t[1]+'”</span></li>';}).join("")+'</ol></div>'+
   '<div class="box white"><h3>Why the video worked</h3><ol class="ol">'+a.why.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
-  '<div class="box next"><h3>What you can do next</h3><ol class="ol">'+nx.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>'+
+  '<div class="box next"><h3>What you can do next</h3><ol class="ol">'+nx.map(function(w){return '<li>'+w+'</li>';}).join("")+'</ol></div>')+
   '</div>'+
   '<div class="dock"><div class="row"><button class="b b2 grow'+(S.saved[v.id]?' on':'')+'" data-act="save" data-v="'+v.id+'" aria-pressed="'+!!S.saved[v.id]+'">'+ic(S.saved[v.id]?"saved":"save")+'Save</button><button class="b b1 grow" data-act="share" data-v="'+v.id+'">'+ic("share")+'Share</button></div></div>';
 };
@@ -1458,10 +1480,12 @@ function ttCard(){
   if(S.tt==="loading")return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><div class="ttload" role="status"><i></i>Reading @'+esc(S.ttHandle)+'</div></section>';
   if(!S.tt)return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><p>See which of your own TikToks broke out.</p>'+
     '<form class="stack" data-form="tt" style="gap:10px"><label for="tt-h" class="sr">Your TikTok handle</label><div class="ttin"><span>@</span><input id="tt-h" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="yourhandle" value="'+esc(S.ttHandle||"")+'"></div><button class="b b2 full-w" type="submit">Show my breakouts</button></form></section>';
+  var top=OWN[0],rest=OWN.slice(1);
   return '<section class="ttc" aria-label="Your breakouts"><div class="hd"><h3>Your breakouts</h3><button data-act="tt-change">@'+esc(S.ttHandle)+' · Change</button></div>'+
-    '<div class="ttst"><div><b>9.2K</b><small>usual views</small></div><div><b>12x</b><small>biggest breakout</small></div><div><b>1 in 8</b><small>broke out</small></div></div>'+
-    OWN.map(function(v){return '<button class="ttv" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><div><b>'+v.x+'x your usual · <b class="s">'+v.score+'</b></b><span>'+esc(v.hook)+'</span></div>'+ic("chev","chev")+'</button>';}).join("")+
-    '<button class="b b2 full-w" data-act="mystory">'+ic("play")+'Play your story</button></section>';
+    '<button class="tthero" data-act="detail" data-v="'+top.id+'"><span class="th" style="'+bg(top.img)+'"></span><span class="tx"><small>Your biggest breakout</small><b>'+top.x+'x</b><span>your usual views</span></span>'+ic("chev","chev")+'</button>'+
+    '<p class="ttq">1 in 8 of your videos broke out.</p>'+
+    (S.ttAll?rest.map(function(v){return '<button class="ttv" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><div><b>'+v.x+'x your usual</b><span>'+esc(v.hook)+'</span></div>'+ic("chev","chev")+'</button>';}).join(""):'')+
+    '<div class="ttact"><button class="b b2 grow" data-act="mystory">'+ic("play")+'Play your story</button><button class="lnkb" data-act="tt-all" aria-expanded="'+!!S.ttAll+'">'+(S.ttAll?'Show less':'See all 3')+'</button></div></section>';
 }
 V.story=function(){
   return '<div class="storyv"><iframe class="storyf" src="pitch-free/?app=1" title="Your breakout story" allow="autoplay"></iframe></div>';
@@ -1536,6 +1560,13 @@ DV.story=function(){
 };
 DV.detail=function(){
   var h=V.detail(),v=vid(S.params.v||"v1");
+  if(v.own){
+    var an=anFor(v),body=ownBody(v,an,nextFor(an)),stat=body.slice(0,body.indexOf('<div class="box')),box=body.slice(body.indexOf('<div class="box'));
+    return dtb({pill:1,nav:1})+'<div class="dpage" style="max-width:980px"><button class="dback" data-act="back">'+ic("back")+'Back</button><h1 class="h1" style="font-size:28px;margin:0 0 14px">Your breakout</h1>'+
+    '<div class="dsplit" style="grid-template-columns:220px minmax(0,1fr);gap:36px;align-items:start"><div>'+vtile(v,{style:"aspect-ratio:9/16"})+'</div>'+
+    '<div class="stack" style="gap:14px"><div class="scorerow"><b>'+v.score+'</b><span>Breakout Score</span></div><p class="xline" style="margin-top:-8px"><b>'+v.x+'x</b> your usual views</p>'+stat+box+
+    '<div class="row" style="gap:10px;max-width:360px"><button class="b b2 grow" data-act="save" data-v="'+v.id+'">'+ic(S.saved[v.id]?"saved":"save")+'Save</button><button class="b b1 grow" data-act="share" data-v="'+v.id+'">'+ic("share")+'Share</button></div></div></div></div>';
+  }
   var facts=between(h,'<div class="facts">','<div class="box teal">');
   var iD=h.indexOf('<div class="dock">');
   var boxes=h.slice(h.indexOf('<div class="box teal">'),iD-6);
@@ -1690,8 +1721,8 @@ var NOTES={
   "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["r","Polish: cut the line under the heading. The three steps already say it. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["r","Round 3: $49 only, no reward selector. Ivan: “they wont be able to select, let's keep it $49 for now.”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
   "library":{id:"08 · 08-library",h:"Library",li:[["r","Searches vs History merged into one Searches tab: saved searches at the top, every other search under Recent. Ivan: “what's the difference between searches and history, is it saved searches vs all searches.”"],["q","Saved searches are snapshots. Refreshing one would cost a search. Ivan: “refresh costs another ‘search’ credit.”"],["a","Where should Refresh go?"]]},
   "account":{id:"11 · 11-account",h:"Account",li:[["c","New: Your breakouts, the profile analyzer, on the profile page. Ivan, 2 Oct call: “add the UGC profile analyzer to the profile.” Type a TikTok handle, see your own breakouts."],["a","Uses the same Breakout Score as search: each video against the account’s own average. 12x is the biggest breakout’s views over the usual. Does reading one handle cost a search, or is it free?"],["a","One handle per account, changeable any time?"]]},
-  "account-tt":{id:"11 · 11-account",h:"Account, your breakouts",li:[["c","The profile analyzer after a handle is read. Three numbers and the top 3 breakouts, nothing else. Ivan, 2 Oct call."],["a","Play your story opens the Free Breakout Story cards for this handle. The same story is what we send creators who say yes to our TikTok DM."],["v","Where it leads: each breakout opens its own analysis (11a). Play your story opens the story cards in the app (11b). The story’s last card goes to search."],["a","Does opening one of your own breakouts use one of the 3 free analyses?"]]},
-  "own-detail":{id:"11a · from Account",h:"Your breakout, analysis",li:[["v","Tapping a breakout on Account opens this. Same analysis as any search result: hooks, why it worked, what to do next, written for your own video."],["a","Header says Your breakout instead of the search, and the score line adds “12x your usual views”. The info popover uses the settled wording: against your account’s own average."],["a","Save and Share work as on any breakout. Back returns to Account."]]},
+  "account-tt":{id:"11 · 11-account",h:"Account, your breakouts",li:[["c","The profile analyzer after a handle is read. Ivan, 2 Oct call."],["v","Veejay, 2 Oct: less overwhelming. One breakout up front (the biggest, as a big 12x), one line for the breakout rate, and the other two behind See all 3. One action: Play your story."],["a","Play your story opens the Free Breakout Story cards for this handle. The same story is what we send creators who say yes to our TikTok DM."],["v","Where it leads: each breakout opens its own analysis (11a). Play your story opens the story cards in the app (11b). The story’s last card goes to search."],["a","Does opening one of your own breakouts use one of the 3 free analyses?"]]},
+  "own-detail":{id:"11a · from Account",h:"Your breakout, analysis",li:[["v","Veejay, 2 Oct: less overwhelming. Smaller video, one line of stats instead of four boxes, and the analysis behind three tabs. What next opens first, since that is what you act on."],["v","Tapping a breakout on Account opens this. Same analysis as any search result: hooks, why it worked, what to do next, written for your own video."],["a","Header says Your breakout instead of the search, and the score line adds “12x your usual views”. The info popover uses the settled wording: against your account’s own average."],["a","Save and Share work as on any breakout. Back returns to Account."]]},
   "own-story":{id:"11b · from Account",h:"Your story",li:[["v","Play your story on Account opens the same story cards we DM to creators, full screen inside the app. Tap or wait to move through, X goes back to Account."],["a","Signed in, the last card says “Search a new product or video style” (Ivan’s Pro success wording) and goes to Home with the search ready, instead of the free sign up."]]}
 };
 ["proc-slow","proc-ready"].forEach(function(k){NOTES[k]=NOTES.proc;});
@@ -1846,6 +1877,8 @@ function act(a,el){
     case "tab": S.libTab=d("k");render(false); break;
     case "logout": jump("home-out"); break;
     case "mystory": go("story"); break;
+    case "tt-all": S.ttAll=!S.ttAll; render(false); break;
+    case "otab": S.otab=d("k"); render(false); break;
     case "tt-change": S.tt="";render(false);var th=document.getElementById("tt-h");if(th){th.focus();th.select();}break;
     case "sort-open": S.sortSheet=true; renderOverlay(); break;
     case "sort-close": S.sortSheet=false; renderOverlay(); break;
