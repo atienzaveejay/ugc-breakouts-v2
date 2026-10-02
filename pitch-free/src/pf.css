@@ -320,3 +320,23 @@ body.exp .shell{display:none}
 .expbox{position:fixed;inset:0;overflow:hidden}
 .expbox .story,.expbox>.card{position:absolute;inset:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0;padding:0;margin:-1px}
+/* L0: the DM, creator's view */
+.dm{flex:1;display:flex;flex-direction:column;background:#fff;color:var(--ink);min-height:100%}
+.dmtop{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--hair)}
+.dmtop .dmback{width:36px;height:36px;border:0;background:none;color:var(--ink);display:grid;place-items:center;cursor:default;padding:0}
+.dmtop .dmback svg{width:22px;height:22px}
+.dmtop .av.ub{flex:none;width:38px;height:38px;padding:0;border-radius:50%;background:var(--ink);color:var(--cyan);display:grid;place-items:center;font:800 13px var(--sans);letter-spacing:-.02em}
+.dmtop b{display:block;font-size:15px;font-weight:800}
+.dmtop span{font-size:12.5px;color:var(--mid)}
+.dmbody{flex:1;display:flex;flex-direction:column;gap:8px;padding:14px 14px 18px;overflow:auto}
+.dmday{margin:0 0 6px;text-align:center;font-size:12px;color:var(--mid);font-weight:600}
+.msg{max-width:78%;padding:10px 13px;border-radius:18px;font-size:15px;line-height:1.38}
+.msg.them{align-self:flex-start;background:#F1EEEA;border-bottom-left-radius:6px}
+.msg.me{align-self:flex-end;background:#2E9BF0;color:#fff;border-bottom-right-radius:6px}
+.msg.lk{padding:0;background:none;max-width:84%}
+.dmlink{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center;padding:8px 14px 8px 8px;border-radius:18px;border-bottom-left-radius:6px;background:#F1EEEA;color:var(--ink);text-decoration:none;cursor:pointer}
+.dmlink .mini{width:72px;height:128px;border-radius:12px;background:center/cover}
+.dmlink b{display:block;font-size:14.5px;font-weight:800;line-height:1.25}
+.dmlink span{display:block;font-size:12.5px;color:var(--mid);margin-top:4px;word-break:break-all}
+.dmbar{padding:10px 14px 16px;border-top:1px solid var(--hair)}
+.dmbar span{display:block;height:42px;border-radius:21px;background:#F1EEEA;color:var(--mid);font-size:14.5px;padding:0 16px;line-height:42px}

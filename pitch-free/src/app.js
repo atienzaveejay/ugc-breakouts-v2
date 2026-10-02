@@ -2,7 +2,7 @@
 "use strict";
 
 /* ---------------- sample data: invented creators, "sample." handles, invented numbers ---------------- */
-/* Same sample creator as the pitch deck proposal, so the deck preview matches the story. */
+/* Same sample creator as the pitch deck proposal. */
 var IMG={oil:"../img/oil.jpg",face:"../img/face.jpg",flatlay:"../img/flatlay.jpg",brushes:"../img/brushes.jpg",palette:"../img/palette.jpg",mask:"../img/mask.jpg",neon:"../img/neon.jpg",closet:"../img/closet.jpg",tripod:"../img/tripod.jpg"};
 var RAE={handle:"sample.raefilms",name:"Rae M.",videos:62,range:"30 Mar to 26 Sep 2026",avg:9.2,nb:8};
 var TOP=[
@@ -71,12 +71,12 @@ var CARD={
   c8:{t:"t-ink",n:"Your share card",share:1,h:function(){return '<div class="shareview"><div class="frame">'+shareCard("still")+'</div>'+
     '<div class="row"><a class="save" href="img/share-sample.png" download="my-breakouts-sample.png" data-act="save">'+ic("down")+'Save image</a><button type="button" class="share" data-act="share">'+ic("share")+'Share</button></div>'+
     '<p class="hint">Post it to your TikTok story.</p></div>';}},
-  c9:{t:"t-cyan",n:"Turn it into a pitch deck",h:function(){return '<i class="shp sq bob" style="width:30cqw;height:30cqw;left:-8cqw;top:40cqw;rotate:18deg;opacity:.9"></i>'+
+  c9:{t:"t-cyan",n:"Find Breakouts of your own",h:function(){return '<i class="shp sq bob" style="width:30cqw;height:30cqw;left:-8cqw;top:40cqw;rotate:18deg;opacity:.9"></i>'+
     '<div class="cin"><div class="fill"><div class="fan">'+
-    ['12x','9.2K','1 in 8'].map(function(n,k){return '<div class="sl s'+(k+1)+'"><i class="c"></i><i class="h"></i><i></i><i style="width:80%"></i><div class="n"><b>'+n+'</b></div></div>';}).join("")+
-    '</div></div><p class="cta-h rise d1">Turn this into a pitch deck for brands.</p><p class="body rise d2">Your numbers go in for you. Free, with just your email.</p>'+
-    '<div class="cbtns rise d3"><button type="button" class="cbtn" data-act="signup">Make my pitch deck '+ic("arrow").replace('<svg','<svg style="width:5cqw;height:5cqw"')+'</button><button type="button" class="cbtn alt" data-act="replay">Watch again</button></div>'+
-    '<div class="cfoot"><span></span>'+SMP+'</div></div>';}},
+    ['112K','64K','41K'].map(function(n,k){return '<div class="sl s'+(k+1)+'"><i class="c"></i><i class="h"></i><i></i><i style="width:80%"></i><div class="n"><b>'+n+'</b></div></div>';}).join("")+
+    '</div></div><p class="cta-h rise d1">Find Breakouts of your own!</p><p class="body rise d2">Try it on your own brand, product, or style. See what’s breaking out on TikTok and how to remake it.</p>'+
+    '<div class="cbtns rise d3"><a class="cbtn" href="../#teaser" target="_blank" rel="noopener">Start free '+ic("arrow").replace('<svg','<svg style="width:5cqw;height:5cqw"')+'</a><button type="button" class="cbtn alt" data-act="replay">Watch again</button></div>'+
+    '<div class="cfoot"><span>Free. Just your email.</span>'+SMP+'</div></div>';}},
   /* edge cases */
   p1:{t:"t-ink",n:"Private account",h:function(){return '<i class="shp ring" style="width:56cqw;height:56cqw;right:-26cqw;top:-8cqw"></i>'+
     '<div class="cin"><p class="lab rise">@sample.quietfilms</p><div class="fill" style="justify-content:flex-start"><p class="hook pop" style="font-size:17cqw">This account is <span>private.</span></p></div>'+
@@ -97,7 +97,7 @@ function shareCard(mode){
   '<div class="cin"><p class="hdl"><span class="av">R</span>@'+RAE.handle+'</p>'+
   '<p class="h1" style="margin-top:3cqw">My biggest<br>TikTok did</p><p class="big" style="color:#171312">'+v.x+'x</p><p class="h1">my usual views.</p>'+
   '<div class="fill"><div class="row2"><div class="th" style="'+bg(v.img)+'"></div><div class="facts"><p><b>1 in 8</b> of my videos broke out.</p><p>I open on the <b>product</b>.</p></div></div></div>'+
-  '<div class="cfoot"><span class="mark">ugcbreakouts.com/pitch</span>'+SMP+'</div></div></div>';
+  '<div class="cfoot"><span class="mark">ugcbreakouts.com/story</span>'+SMP+'</div></div></div>';
 }
 var SETS={
   main:{h:RAE.handle,a:"R",cards:["c1","c2","c3","c4","c5","c6","c7","c8","c9"]},
@@ -139,38 +139,17 @@ var V={
     '<ol>'+steps.map(function(s,k){return '<li class="'+(S.rs>k?'on':'')+'"><i></i>'+s+'</li>';}).join("")+'</ol></div>';
   },
   story:function(){return player(S.set,S.i,{play:S.play,still:S.still});},
-  email:function(){
-    return '<div class="ub"><div class="ltop"><span class="logo">UGC <b>Breakouts</b></span></div><div class="ubb">'+
-    '<div class="keep"><div class="mini">'+shareCard("still")+'</div><p><b>Your pitch deck for brands</b>Built from @'+RAE.handle+': your usual views, your top 3 breakouts and what works for you.</p></div>'+
-    '<h2>Where should we send your code?</h2><p class="sub">Just your email. No password and no card.</p>'+
-    '<form class="fld" data-form="email"><label for="em">Email</label><input id="em" type="email" autocomplete="email" value="rae@sample.email"><button class="pbtn" type="submit" style="margin-top:8px">Send my code</button></form>'+
-    '<p class="fine">We email a 6 digit code to sign you in.</p><button type="button" class="lnk" data-act="backstory">Back to my story</button></div></div>';
-  },
-  code:function(){
-    var b="";for(var k=0;k<6;k++)b+='<input inputmode="numeric" autocomplete="one-time-code" aria-label="Digit '+(k+1)+'" value="'+(S.code[k]||"")+'">';
-    return '<div class="ub"><div class="ltop"><span class="logo">UGC <b>Breakouts</b></span></div><div class="ubb">'+
-    '<h2>Check your email</h2><p class="sub">We sent a 6 digit code to rae@sample.email. It works for 10 minutes.</p>'+
-    '<form data-form="code" style="display:flex;flex-direction:column;gap:14px"><div class="code" data-code>'+b+'</div><button class="pbtn" type="submit">Open my deck</button></form>'+
-    '<button type="button" class="lnk" data-act="resend">Send a new code</button><button type="button" class="lnk" data-act="go" data-v="email" style="padding-top:0">Use a different email</button></div></div>';
-  },
-  deck:function(){
-    var rest=[["2","My numbers","Ready"],["3","My breakouts","Ready"],["4","What works for me","Ready"],["5","What I’d make for a brand","Optional"],["6","Rates and next step","Add your rates"]];
-    return '<div class="ub"><div class="ltop"><span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span><span class="lock2">SIGNED IN</span></div><div class="ubb">'+
-    '<h2>Your deck is started</h2><p class="sub">Slide 1 is built from the same numbers as your story.</p>'+
-    '<div class="slw">'+coverSlide()+'</div>'+
-    '<div class="rest">'+rest.map(function(r){return '<a href="../pitch-deck/#sample" target="_blank" rel="noopener"><span>'+r[0]+'</span>'+r[1]+'<em>'+r[2]+'</em></a>';}).join("")+'</div>'+
-    '<a class="pbtn" href="../pitch-deck/#you" target="_blank" rel="noopener">Finish my deck '+ic("arrow").replace('<svg','<svg style="width:18px;height:18px"')+'</a>'+
-    '<button type="button" class="sbtn2" data-act="pdf">'+ic("down").replace('<svg','<svg style="width:18px;height:18px"')+'Download PDF</button>'+
-    '<a class="lnk" href="../pitch-deck/#sample" target="_blank" rel="noopener">See every slide in the sample deck</a></div></div>';
+  dm:function(){
+    var link='<a class="dmlink" href="#" data-act="openlink"><div class="mini" style="'+bg("oil")+'"></div><div><b>@'+RAE.handle+', your breakouts</b><span>ugcbreakouts.com/story/'+RAE.handle+'</span></div></a>';
+    return '<div class="dm"><div class="dmtop"><button type="button" class="dmback" aria-label="Back" data-act="noop">'+ic("left")+'</button><span class="av ub">UB</span><div><b>UGC Breakouts</b><span>@ugcbreakouts</span></div></div>'+
+    '<div class="dmbody"><p class="dmday">Today</p>'+
+    '<div class="msg them">Hey Rae! We ran your TikToks through UGC Breakouts and found your breakouts. Want to see them?</div>'+
+    '<div class="msg me">yes!! show me</div>'+
+    '<div class="msg them">Here you go. Tap through, it takes a minute.</div>'+
+    '<div class="msg them lk">'+link+'</div></div>'+
+    '<div class="dmbar"><span>Message...</span></div></div>';
   }
 };
-function coverSlide(){
-  return '<div class="slide"><div><p class="se">UGC creator on TikTok</p><h3>My biggest TikTok did 12x my usual views.</h3>'+
-  '<div class="me"><span class="av">R</span><span><b>'+RAE.name+'</b>@'+RAE.handle+'</span></div>'+
-  '<div class="nums"><div><b>9.2K</b><small>usual views</small></div><div><b>1 in 8</b><small>videos broke out</small></div><div><b>62</b><small>videos read</small></div></div></div>'+
-  '<div class="stk">'+TOP.map(function(v){return '<div class="th" style="'+bg(v.img)+'"></div>';}).join("")+'</div>'+
-  '<div class="foot"><span>'+RAE.name+' · UGC pitch deck</span><span class="smp2">SAMPLE · invented creator and numbers</span><span>1 / 6</span></div></div>';
-}
 function desk1(){
   return '<div class="dk"><div class="ltop"><span class="logo">UGC <b>Breakouts</b></span><span class="sp"></span><button type="button" class="signin" data-act="signin">Sign in</button></div>'+
   '<div class="dk1">'+landingBody()+'<div class="dkwrap"><button type="button" class="dkarrow l" data-act="prev" aria-label="Previous card">'+ic("left")+'</button>'+
@@ -183,15 +162,17 @@ function desk2(){
 }
 
 /* ---------------- notes ---------------- */
-function li(t,txt){return '<li><span class="tag '+t+'">'+({a:"ASK",f:"LOCK",d:"DEV",q:"SOURCE",v:"VEEJAY"})[t]+'</span><span>'+txt+'</span></li>';}
+function li(t,txt){return '<li><span class="tag '+t+'">'+({r:"IVAN",c:"CALL",a:"ASK",f:"LOCK",d:"DEV",q:"SOURCE",v:"VEEJAY"})[t]+'</span><span>'+txt+'</span></li>';}
 function src(u,l){return ' <a href="'+u+'" target="_blank" rel="noopener" style="color:var(--acc)">'+l+'</a>';}
 var NOTES={
-  landing:{id:"L1 · ugcbreakouts.com/pitch",h:"Landing",li:[
-    ["v","Veejay, 29 Sept: “i want to create a design of this and make it also similar to spotify wrapped.” This is Appendix 2 of the marketing Doc, the pitch deck generator as a free tool."],
-    ["v","Appendix 2: a public page on ugcbreakouts.com, a free result, and the full deck and download behind a free email sign up. “Each pitch a creator sends is also a brand seeing UB.”"],
-    ["q","A free result before sign up is what the rivals do: viral.app, and Casey Leigh’s tool sells “no login, 30 seconds”. Live UB asks for Google sign in before the first search."],
-    ["a","Headline options. Shown: <b>Which of your TikToks broke out?</b> Other two: <b>Your TikTok, measured against you.</b> and <b>Find your biggest TikTok breakout.</b>"],
-    ["a","Story format inspired by Spotify Wrapped: 9:16 cards, one number each, a share card near the end. No Spotify name, fonts or assets. Type is UB’s Plus Jakarta Sans, and the colors are UB’s coral, cyan, teal and gold pushed brighter."],
+  dm:{id:"L0 · the DM",h:"The DM",li:[
+    ["r","Ivan, 1 Oct: DM creators from the UB TikTok, tell them we found their breakouts, and if they say yes, send their profile analysis."],
+    ["a","Sample DM copy only. The real script is its own row on the priorities Sheet."],
+    ["a","The link opens straight into their story, with the handle already filled in. No typing, no login."]]},
+  landing:{id:"L1 · ugcbreakouts.com/story",h:"Landing",li:[
+    ["r","Ivan, 1 Oct: not a fan of the pitch deck for now, keep the profile story. The deck ask at the end is gone."],
+    ["c","Ivan, 2 Oct call: the profile analyzer also lives on the profile page in the app (Account, your breakouts). Play your story there opens these same cards."],
+    ["a","Anyone can still type a handle here. Keep this public page, or only open it from the DM link and the app?"],
     ["d","Anyone can type any public handle. Cache each handle’s result for 24 hours and rate limit per IP, since every read is a scrape."]]},
   reading:{id:"L2 · reading the account",h:"Reading your account",li:[
     ["v","The short “reading your account” moment from the brief. The count runs up while videos deal across the screen."],
@@ -212,40 +193,29 @@ var NOTES={
     ["a","Tapping a breakout could open it on TikTok. Left out for now, the same as Ivan’s “no Watch on TikTok” call in the app."]]},
   c5:{id:"Card 5 of 9 · free",h:"Your breakout rate",li:[
     ["a","8 of 62 is shown as “1 in 8”, which reads faster than 13% on a phone."],
-    ["a","What counts as a breakout is still open. The deck proposal assumed a Breakout Score of 60 or more, and this card uses the same."]]},
+    ["a","What counts as a breakout is still open. This card assumes a Breakout Score of 60 or more."]]},
   c6:{id:"Card 6 of 9 · free",h:"Your hook style",li:[
     ["f","A plain label from the creator’s own breakouts. No rarity figure and no “top x% of creators”: UB doesn’t see a fair sample of all creators, so any percentile would be invented. Ivan’s lock: never invent Breakout numbers."],
-    ["a","The label needs a breakout analysis of the top videos, which costs a model call. Run it for free on /pitch, or hide this card until sign up?"]]},
+    ["a","The label needs a breakout analysis of the top videos, which costs a model call. Run it for free here, or hide this card until sign up?"]]},
   c7:{id:"Card 7 of 9 · free",h:"What works for you",li:[
     ["a","Length comes straight from public data. The format line (“tests with the proof on screen”) comes from the same analysis as card 6."],
     ["a","If there aren’t enough breakouts to find a length pattern, this card is skipped rather than shown weak."]]},
   c8:{id:"Card 8 of 9 · free",h:"Share card",li:[
-    ["v","From the brief: a 9:16 image the creator can save and post, with a small ugcbreakouts.com/pitch mark. Save image downloads the sample PNG."],
+    ["v","A 9:16 image the creator can save and post, with a small ugcbreakouts.com/story mark. Save image downloads the sample PNG."],
     ["f","The hint says TikTok story only. Share opens the phone’s own share sheet. UB copy names TikTok only."],
     ["a","No text under about 36px at 1080 wide. The handle is on by default. Let creators hide it?"],
     ["q","Spotify reports 500M+ Wrapped shares in the first 24 hours (company claim). Duolingo saw share rates go up when the flattering number moved onto the share card."+src("https://blog.duolingo.com/year-in-review-behind-the-scenes","Duolingo Blog")]]},
-  c9:{id:"Card 9 of 9 · the ask",h:"Turn this into a pitch deck",li:[
-    ["v","From the brief: “Turn this into a pitch deck for brands”, then a free email sign up."],
-    ["a","The only ask in the whole story, and it comes after the creator has seen everything free. Watch again replays from card 1."]]},
-  email:{id:"S1 · free email sign up",h:"Email",li:[
-    ["v","Just an email and a 6 digit code, from the brief."],
-    ["a","A code, not a magic link: TikTok’s in-app browser often opens links in a different browser, so a link can land signed out."],
-    ["a","Live UB signs in with Google. Offer Google here too, or keep this page to email only?"]]},
-  code:{id:"S2 · 6 digit code",h:"6 digit code",li:[
-    ["a","Six boxes that jump to the next as you type, and pasting the full code fills them all. “Works for 10 minutes” is our guess at a default."],
-    ["d","Signing in here makes a normal UB account. The story’s numbers are already saved to it."]]},
-  deck:{id:"S3 · behind sign up",h:"Deck, first slide",li:[
-    ["v","From the brief: a preview of the deck’s first slide built from the same stats, then the rest of the deck from the existing proposal. The rows and Finish my deck open the proposal."],
-    ["a","The cover title comes from the biggest breakout. Name is the TikTok display name, which is public."],
-    ["a","Behind sign up: the full deck, editing, the PDF and the brand link. The story and the share card stay free."]]},
+  c9:{id:"Card 9 of 9 · the ask",h:"Find Breakouts of your own",li:[
+    ["r","Replaces the pitch deck ask. Heading, line and “Free. Just your email.” are Ivan’s own copy from the Shared screen CTA."],
+    ["a","Start free opens UB’s sign in. Inside the app (opened from Account) this card would say Search instead. Same card, two buttons?"]]},
   "private":{id:"E1 · edge case",h:"Private account",li:[
     ["a","One card, then back to the handle box. Nothing is read."]]},
   few:{id:"E2 · edge case",h:"Not enough videos yet",li:[
     ["a","Under 15 public videos, the average isn’t steady enough. The card counts what they have and what’s left, 9 of 15."],
-    ["a","15 is the same guess as the deck proposal. An “email me at 15 videos” button would bring these creators back. Worth building?"]]},
+    ["a","15 is a guess. An “email me at 15 videos” button would bring these creators back. Worth building?"]]},
   none:{id:"E3 · edge case",h:"No breakouts yet",li:[
     ["v","From the brief: encouraging, and it still gives the baseline. Cards 1 and 2 play as normal, then this one."],
-    ["a","Shows the closest video as a multiple, from their own data. The button goes to UB’s search, since a deck with no breakouts is weak."]]},
+    ["a","Shows the closest video as a multiple, from their own data. The button goes to UB’s search."]]},
   desk1:{id:"D1 · desktop",h:"Story beside the landing",li:[
     ["v","The desktop view from the brief: the landing on the left, the story as a phone sized card on the right."],
     ["a","Arrows and the keyboard’s left and right keys move between cards. The handle box stays usable for trying another account."]]},
@@ -253,21 +223,19 @@ var NOTES={
     ["v","The other desktop option from the brief: every card in a grid. Click one to play it."],
     ["a","Pick one of the two for launch. D1 keeps the story feel, D2 is quicker to scan."]]},
   split:{id:"Review",h:"Free vs sign up",li:[
-    ["v","<b>Free, no login:</b> the handle box, the reading moment, all 9 story cards, the share card with Save image and Share."],
-    ["v","<b>Free with email and a 6 digit code:</b> the pitch deck (slide 1 preview first), editing, the PDF and the link to send brands."],
-    ["a","Pro stays as it is: searches, analyses and more decks."]]}
+    ["v","<b>Free, no login:</b> the DM link, the handle box, the reading moment, all 9 story cards, the share card with Save image and Share."],
+    ["v","<b>Sign up:</b> UB itself, from the last card. In the app, the same analysis sits on Account."]]}
 };
 var QUESTIONS=[
-  "Show a result before sign up on /pitch, even though the app itself asks for Google sign in first?",
+  "Keep a public page where anyone types a handle, or only open stories from the DM link and the app?",
   "Cache each handle for 24 hours and rate limit per IP? Every read is a scrape.",
   "Run a breakout analysis for free to get the hook style and format (cards 6 and 7), or hide those until sign up?",
-  "Same numbers as the deck proposal: 15 public videos minimum and a Breakout Score of 60 to count as a breakout?",
-  "Email code only on this page, or Google as well?",
+  "15 public videos minimum and a Breakout Score of 60 to count as a breakout?",
   "Handle on the share card by default, with an option to hide it?",
   "Launch the desktop as the story beside the landing (D1) or as a grid of cards (D2)?"
 ];
 function notesHtml(key){
-  var legend='<div class="legend"><span><span class="tag v">VEEJAY</span> Veejay asked for it</span><span><span class="tag a">ASK</span> our suggestion, needs Ivan</span><span><span class="tag q">SOURCE</span> research, linked</span><span><span class="tag d">DEV</span> for Lester</span><span><span class="tag f">LOCK</span> his rules</span></div>';
+  var legend='<div class="legend"><span><span class="tag r">IVAN</span> his notes</span><span><span class="tag c">CALL</span> Ivan calls</span><span><span class="tag v">VEEJAY</span> Veejay asked for it</span><span><span class="tag a">ASK</span> our suggestion, needs Ivan</span><span><span class="tag q">SOURCE</span> research, linked</span><span><span class="tag d">DEV</span> for Lester</span><span><span class="tag f">LOCK</span> his rules</span></div>';
   if(key==="questions")return legend+'<p class="sid">Open</p><h2>Questions for Ivan</h2><ul>'+QUESTIONS.map(function(q){return li("a",q);}).join("")+'</ul>';
   var n=NOTES[key]||NOTES.landing;
   return legend+'<p class="sid">'+n.id+'</p><h2>'+n.h+'</h2><ul>'+n.li.map(function(x){return li(x[0],x[1]);}).join("")+'</ul>';
@@ -275,9 +243,8 @@ function notesHtml(key){
 
 /* ---------------- rail ---------------- */
 var RAIL=[
-  {g:"Landing",items:[["landing","L1","/pitch landing"],["reading","L2","Reading your account"]]},
+  {g:"Landing",items:[["dm","L0","The DM"],["landing","L1","/story landing"],["reading","L2","Reading your account"]]},
   {g:"Story, free",items:SETS.main.cards.map(function(id,k){return [id,String(k+1),CARD[id].n];})},
-  {g:"Free email sign up",items:[["email","S1","Email"],["code","S2","6 digit code"],["deck","S3","Deck, first slide"]]},
   {g:"Edge cases",items:[["private","E1","Private account"],["few","E2","Not enough videos yet"],["none","E3","No breakouts yet"]]},
   {g:"Desktop",items:[["desk1","D1","Story beside the landing"],["desk2","D2","All cards"]]},
   {g:"Review",items:[["split","","Free vs sign up"],["questions","","Questions for Ivan"]]}
@@ -286,7 +253,7 @@ var KEYS=[];RAIL.forEach(function(g){g.items.forEach(function(it){KEYS.push(it[0
 
 /* ---------------- state ---------------- */
 var Q=new URLSearchParams(location.search),EXP=Q.get("export"),STILL=Q.has("still")||!!EXP;
-var S={key:"landing",view:"landing",set:"main",i:0,play:false,still:STILL,handle:RAE.handle,err:"",rc:0,rs:0,code:[],toast:""};
+var S={key:"landing",view:"landing",set:"main",i:0,play:false,still:STILL,handle:RAE.handle,err:"",rc:0,rs:0,toast:""};
 var DEVICE="phone";
 var scr=document.getElementById("scr"),ovl=document.getElementById("ovl");
 
@@ -306,7 +273,6 @@ function jump(key){
   else if(key==="reading"){S.view="reading";startRead();}
   else if(key==="split"||key==="questions"){S.view="landing";}
   else {S.view=key;}
-  if(key==="code")S.code=[];
   render();
 }
 var readTm=null,autoTm=null;
@@ -369,11 +335,8 @@ function onAct(a,el,e){
     case "close":if(DEVICE==="desk"){S.i=0;S.play=false;render();}else{S.view="landing";S.key="landing";render();}break;
     case "replay":S.i=0;S.play=true;render();break;
     case "again":S.view="landing";S.key="landing";S.handle="";render();var h=document.getElementById("hdl");if(h)h.focus();break;
-    case "signup":if(DEVICE==="desk"){toast("Opens the email step.");break;}S.view="email";S.key="email";render();break;
-    case "backstory":S.view="story";S.set="main";S.i=8;S.play=false;render();break;
-    case "go":S.view=el.getAttribute("data-v");render();break;
-    case "resend":toast("New code sent to rae@sample.email");break;
-    case "pdf":toast("PDF ready: 6 slides (sample)");break;
+    case "openlink":e.preventDefault();S.handle=RAE.handle;S.set="main";S.view="reading";startRead();render();break;
+    case "noop":break;
     case "signin":toast("Existing accounts sign in the usual way.");break;
     case "ub":toast("Opens UGC Breakouts search, signed out.");break;
     case "share":e.preventDefault();toast("Opens the phone’s share sheet with the image.");break;
@@ -385,7 +348,7 @@ var phone=document.getElementById("phone");
 phone.addEventListener("click",function(e){
   var gm=e.target.closest(".cgrid .mini");if(gm){e.preventDefault();S.i=+gm.getAttribute("data-k");S.key="desk1";S.play=false;render();return;}
   var el=e.target.closest("[data-act]");
-  if(el&&phone.contains(el)){if(el.tagName!=="A"||el.getAttribute("data-act")==="save")onAct(el.getAttribute("data-act"),el,e);if(el.tagName!=="A")e.preventDefault();return;}
+  if(el&&phone.contains(el)){if(el.tagName!=="A"||/^(save|openlink)$/.test(el.getAttribute("data-act")))onAct(el.getAttribute("data-act"),el,e);if(el.tagName!=="A")e.preventDefault();return;}
   var st=e.target.closest(".story");
   if(st&&!e.target.closest(".schrome")){var r=st.getBoundingClientRect();step((e.clientX-r.left)<r.width*.32?-1:1);}
 });
@@ -405,17 +368,6 @@ phone.addEventListener("submit",function(e){
     if(DEVICE==="desk"){S.i=0;S.play=true;S.key="desk1";render();return;}
     S.view="reading";startRead();render();
   }
-  if(f==="email"){S.view="code";S.code=[];render();var c=scr.querySelector(".code input");if(c)c.focus();}
-  if(f==="code"){S.view="deck";render();}
-});
-phone.addEventListener("input",function(e){
-  var t=e.target;if(!t.closest("[data-code]"))return;
-  var boxes=[].slice.call(scr.querySelectorAll(".code input")),k=boxes.indexOf(t),v=t.value.replace(/\D/g,"");
-  if(v.length>1){v.split("").slice(0,6-k).forEach(function(ch,j){boxes[k+j].value=ch;});var last=Math.min(5,k+v.length);boxes[last].focus();return;}
-  t.value=v;if(v&&boxes[k+1])boxes[k+1].focus();
-});
-phone.addEventListener("keydown",function(e){
-  var t=e.target;if(t.closest&&t.closest("[data-code]")&&e.key==="Backspace"&&!t.value){var b=[].slice.call(scr.querySelectorAll(".code input")),k=b.indexOf(t);if(b[k-1])b[k-1].focus();}
 });
 document.addEventListener("keydown",function(e){
   if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".cgrid .mini")){e.preventDefault();e.target.click();return;}
@@ -465,12 +417,11 @@ if(EXP){
   var box=document.createElement("div");box.className="expbox";
   var m=EXP.match(/^(main|none|priv|few)-(\d)$/);
   if(EXP==="share")box.innerHTML=shareCard("still");
-  else if(EXP==="slide")box.innerHTML=coverSlide();
   else if(m)box.innerHTML=player(m[1],+m[2],{still:true,bare:true});
   document.body.appendChild(box);
   return;
 }
 window.addEventListener("hashchange",function(){var k=(location.hash||"").slice(1);if(KEYS.indexOf(k)>-1&&k!==S.key)jump(k);});
 var h0=(location.hash||"").slice(1);
-jump(KEYS.indexOf(h0)>-1?h0:"landing");
+jump(KEYS.indexOf(h0)>-1?h0:"dm");
 })();

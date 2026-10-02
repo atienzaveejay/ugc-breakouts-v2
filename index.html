@@ -389,6 +389,26 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .meter i{display:block;height:100%;background:var(--teal);border-radius:9px}
 .mrow{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;gap:8px}
 .mrow span{color:var(--mid)}
+.ttc{background:#fff;border-radius:22px;padding:18px 16px 16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 40px -32px rgba(23,19,18,.55)}
+.ttc h3{margin:0;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.ttc .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.ttc .hd button{background:none;border:0;color:var(--mid);font:600 13.5px var(--sans);cursor:pointer;padding:6px 0}
+.ttc p{margin:0;font-size:14px;color:var(--mid);line-height:1.45}
+.ttin{display:flex;align-items:center;gap:6px;height:48px;border-radius:14px;background:var(--paper,#F6F1EC);padding:0 14px;font:600 15px var(--sans)}
+.ttin span{color:var(--mid)}
+.ttin input{flex:1;border:0;background:none;font:600 15px var(--sans);color:var(--ink);outline:none;min-width:0}
+.ttst{display:flex;gap:20px}
+.ttst b{display:block;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.ttst small{display:block;font-size:12px;color:var(--mid);font-weight:600}
+.ttv{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center}
+.ttv>div{min-width:0}
+.ttv .th{width:44px;height:58px;border-radius:9px;background:center/cover}
+.ttv b{font-size:14px}
+.ttv b .s{color:var(--gold)}
+.ttv span{display:block;font-size:13px;color:var(--mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ttload{display:flex;align-items:center;gap:10px;font:600 14px var(--sans);color:var(--mid);padding:6px 0}
+.ttload i{width:16px;height:16px;border-radius:50%;border:2px solid #E6DED7;border-top-color:var(--ink);animation:ttspin .8s linear infinite}
+@keyframes ttspin{to{transform:rotate(360deg)}}
 .list{background:#fff;border-radius:20px;overflow:hidden}
 .list button{display:flex;justify-content:space-between;align-items:center;padding:15px 16px;border:0;border-top:1px solid #F0EAE5;background:#fff;width:100%;font:600 15px var(--sans);cursor:pointer;color:var(--ink);text-align:left}
 .list button:first-child{border-top:0}
@@ -1392,11 +1412,22 @@ V.library=function(){
   '<div class="stack" role="tabpanel" aria-labelledby="tab-'+t+'">'+body+'</div></div>';
 };
 
+var TT_TOP=[{img:"oil",x:12,score:91,hook:"I stopped buying lip gloss after this."},{img:"face",x:7,score:78,hook:"Hour one vs hour six. No touch-ups."},{img:"flatlay",x:4,score:69,hook:"Everything in my purse, ranked by how often I use it."}];
+function ttCard(){
+  if(S.tt==="loading")return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><div class="ttload" role="status"><i></i>Reading @'+esc(S.ttHandle)+'</div></section>';
+  if(!S.tt)return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><p>See which of your own TikToks broke out.</p>'+
+    '<form class="stack" data-form="tt" style="gap:10px"><label for="tt-h" class="sr">Your TikTok handle</label><div class="ttin"><span>@</span><input id="tt-h" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="yourhandle" value="'+esc(S.ttHandle||"")+'"></div><button class="b b2 full-w" type="submit">Show my breakouts</button></form></section>';
+  return '<section class="ttc" aria-label="Your breakouts"><div class="hd"><h3>Your breakouts</h3><button data-act="tt-change">@'+esc(S.ttHandle)+' · Change</button></div>'+
+    '<div class="ttst"><div><b>9.2K</b><small>usual views</small></div><div><b>12x</b><small>biggest breakout</small></div><div><b>1 in 8</b><small>broke out</small></div></div>'+
+    TT_TOP.map(function(v){return '<div class="ttv"><span class="th" style="'+bg(v.img)+'"></span><div><b>'+v.x+'x your usual · <b class="s">'+v.score+'</b></b><span>'+esc(v.hook)+'</span></div></div>';}).join("")+
+    '<a class="b b2 full-w" href="pitch-free/#c1" target="_blank" rel="noopener" style="text-decoration:none">Play your story</a></section>';
+}
 V.account=function(){
   var pro=S.plan==="pro";
   return '<div class="tb">'+backBtn()+'<span class="tt">Account</span><span class="sp"></span></div>'+
   '<div class="pb" style="gap:16px">'+
   '<div class="prof"><div class="av" aria-hidden="true">I</div><div><b>Ivan B.</b><small>ivan@ugcbreakouts.com</small></div></div>'+
+  ttCard()+
   '<div class="plan"><div class="mrow"><b style="font-size:17px">Plan</b><span>'+(pro?'Pro':'Free')+'</span></div>'+
   (pro?'':'<div class="mrow"><span>Searches left</span><b>'+S.left+' of 3</b></div><button class="b b1 full-w" data-act="paid">Upgrade</button>')+'</div>'+
   '<nav class="list" aria-label="Account links"><button data-act="library">Library '+ic("chev")+'</button><button data-act="affiliate">Affiliate '+ic("chev")+'</button></nav>'+
@@ -1519,7 +1550,7 @@ var RAIL=[
   {g:"Breakouts",items:[["results","02","Results"],["empty","02","No breakouts"],["top","02b","Top Breakouts feed"],["detail","03","Detail"]]},
   {g:"Sharing",items:[["share","04","Share video"],["shared","05","Shared with you"]]},
   {g:"Money",items:[["paid","07","Paid, search cap"],["paid-videos","07","Paid, video cap"],["paid-analyses","07","Paid, analysis cap"],["pro","09","Pro success"],["affiliate","12","Affiliate"]]},
-  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-pro","11","Account, Pro"]]},
+  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-tt","11","Account, your breakouts"],["account-pro","11","Account, Pro"]]},
   {g:"Review",items:[["questions","","Questions for Ivan"]]}
 ];
 function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q)};S.searches.push(s);return s;}
@@ -1550,6 +1581,7 @@ function jump(key){
     "library":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="library";},
     "account":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="account";},
     "account-pro":function(){S.loggedIn=true;S.plan="pro";S.stack=home;S.view="account";},
+    "account-tt":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="account";S.tt="done";S.ttHandle="sample.raefilms";},
     "questions":function(){S.loggedIn=true;S.left=2;S.view="home";}
   };
   (setups[key]||setups["home-out"])();
@@ -1562,7 +1594,7 @@ function currentKey(){
   var v=S.view;
   if(v==="home"){if(!S.loggedIn)return "home-out";if(readyUnseen().length)return "home-ready";if(pending().length)return "home-searching";return "home-in";}
   if(v==="proc"){var s=findSearch(S.params.id);if(s&&s.done)return "proc-ready";if(s&&s.el>=60)return "proc-slow";return "proc";}
-  if(v==="account")return S.plan==="pro"?"account-pro":"account";
+  if(v==="account")return S.plan==="pro"?"account-pro":(S.tt==="done"?"account-tt":"account");
   if(v==="paid")return S.params.reason==="videos"?"paid-videos":(S.params.reason==="analyses"?"paid-analyses":"paid");
   return v;
 }
@@ -1606,14 +1638,15 @@ var NOTES={
   "pro":{id:"09 · 09-pro-success",h:"Pro success",li:[["r","Round 3: the first step reads “Search a new product or video style.” Ivan: “call out search new product or video style.”"],["r","Round 3: added See Top Breakouts. Ivan: “add? top breakout.”"],["r","Round 3: all three steps are tappable. Ivan: “make those buttons clickable.”"]]},
   "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["r","Round 3: $49 only, no reward selector. Ivan: “they wont be able to select, let's keep it $49 for now.”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
   "library":{id:"08 · 08-library",h:"Library",li:[["r","Searches vs History merged into one Searches tab: saved searches at the top, every other search under Recent. Ivan: “what's the difference between searches and history, is it saved searches vs all searches.”"],["q","Saved searches are snapshots. Refreshing one would cost a search. Ivan: “refresh costs another ‘search’ credit.”"],["a","Where should Refresh go?"]]},
-  "account":{id:"11 · 11-account",h:"Account",li:[["f","No changes from this round."]]}
+  "account":{id:"11 · 11-account",h:"Account",li:[["c","New: Your breakouts, the profile analyzer, on the profile page. Ivan, 2 Oct call: “add the UGC profile analyzer to the profile.” Type a TikTok handle, see your own breakouts."],["a","Uses the same Breakout Score as search: each video against the account’s own average. 12x is the biggest breakout’s views over the usual. Does reading one handle cost a search, or is it free?"],["a","One handle per account, changeable any time?"]]},
+  "account-tt":{id:"11 · 11-account",h:"Account, your breakouts",li:[["c","The profile analyzer after a handle is read. Three numbers and the top 3 breakouts, nothing else. Ivan, 2 Oct call."],["a","Play your story opens the Free Breakout Story cards for this handle. The same story is what we send creators who say yes to our TikTok DM."],["a","Tapping a breakout: open its analysis (costs an analysis), or leave the rows as a list?"]]}
 };
 ["proc-slow","proc-ready"].forEach(function(k){NOTES[k]=NOTES.proc;});
 ["home-searching","home-ready"].forEach(function(k){NOTES[k]=NOTES["home-in"];});
 NOTES["account-pro"]=NOTES.account;NOTES["paid-videos"]=NOTES.paid;NOTES["paid-analyses"]=NOTES.paid;
 
 function notesHtml(key){
-  var legend='<div class="legend"><span><span class="tag r">IVAN</span> his notes</span><span><span class="tag q">ANSWER</span> his answers</span><span><span class="tag c">CALL</span> 15 Sept call</span><span><span class="tag f">LOCK</span> fix to his own locks</span><span><span class="tag v">VEEJAY</span> Veejay asked for it</span><span><span class="tag a">ASK</span> needs Ivan</span></div>';
+  var legend='<div class="legend"><span><span class="tag r">IVAN</span> his notes</span><span><span class="tag q">ANSWER</span> his answers</span><span><span class="tag c">CALL</span> Ivan calls</span><span><span class="tag f">LOCK</span> fix to his own locks</span><span><span class="tag v">VEEJAY</span> Veejay asked for it</span><span><span class="tag a">ASK</span> needs Ivan</span></div>';
   if(key==="questions"){
     if(DEVICE==="desk")legend+='<p class="why" style="padding-bottom:12px;border-bottom:1px solid var(--wline)"><b>Desktop view.</b> Same screens, copy, and flows as mobile, laid out per Ivan\'s MAP.md notes.</p>';
     return legend+'<p class="sid">Open</p><h2>Questions for Ivan</h2><ul>'+
@@ -1757,6 +1790,7 @@ function act(a,el){
     case "account": go("account"); break;
     case "tab": S.libTab=d("k");render(false); break;
     case "logout": jump("home-out"); break;
+    case "tt-change": S.tt="";render(false);var th=document.getElementById("tt-h");if(th){th.focus();th.select();}break;
     case "sort-open": S.sortSheet=true; renderOverlay(); break;
     case "sort-close": S.sortSheet=false; renderOverlay(); break;
     case "sort": S.sort=d("k"); S.sortSheet=false; render(false); break;
@@ -1776,6 +1810,7 @@ phone.addEventListener("submit",function(e){
   e.preventDefault();
   var f=e.target;
   if(f.matches("[data-form='search']")){startSearch(f.querySelector("input").value);return;}
+  if(f.matches("[data-form='tt']")){var hv=(f.querySelector("input").value||"").trim().replace(/^@/,"");if(!hv){f.querySelector("input").focus();return;}S.ttHandle=hv;S.tt="loading";render(false);setTimeout(function(){if(S.tt==="loading"&&S.view==="account"){S.tt="done";render(false);}},1400);return;}
   if(f.matches("[data-form='shared-q']")){var em0=document.getElementById("em-shared");if(em0)em0.focus();return;}
   if(f.matches("[data-form='email']")){
     var em=f.querySelector("input").value.trim();
