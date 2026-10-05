@@ -96,11 +96,11 @@ function shareCard(mode){
   return '<div class="card sc t-coral '+(mode||"still")+'"><i class="shp star" style="width:46cqw;height:46cqw;right:-12cqw;top:-10cqw;background:#FFC53A"></i>'+
   '<div class="cin"><p class="hdl"><span class="av">R</span>@'+RAE.handle+'</p>'+
   '<p class="h1" style="margin-top:3cqw">My biggest<br>TikTok did</p><p class="big" style="color:#171312">'+v.x+'x</p><p class="h1">my usual views.</p>'+
-  '<div class="fill"><div class="row2"><div class="th" style="'+bg(v.img)+'"></div><div class="facts"><p><b>1 in 8</b> of my videos broke out.</p><p>I open on the <b>product</b>.</p></div></div></div>'+
+  '<div class="fill"><div class="row2"><div class="th" style="'+bg(v.img)+'"></div><div class="facts"><p><b>1 in 8</b> of my videos broke out.</p><p>My usual is <b>'+RAE.avg+'K</b> views.</p></div></div></div>'+
   '<div class="cfoot"><span class="mark">ugcbreakouts.com/story</span>'+SMP+'</div></div></div>';
 }
 var SETS={
-  main:{h:RAE.handle,a:"R",cards:["c2","c3","c5","c6","c7","c8","c9"]},
+  main:{h:RAE.handle,a:"R",cards:["c2","c3","c5","c8","c9"]},
   none:{h:SLOW.handle,a:"S",cards:["n1","n2","n3"]},
   priv:{h:"sample.quietfilms",a:"Q",cards:["p1"]},
   few:{h:"sample.newfilms",a:"N",cards:["f1"]}
@@ -168,12 +168,14 @@ var NOTES={
   dm:{id:"L0 · the DM",h:"The DM",li:[
     ["r","Ivan, 1 Oct: DM creators from the UB TikTok, tell them we found their breakouts, and if they say yes, send their profile analysis."],
     ["a","Sample DM copy only. The real script is its own row on the priorities Sheet."],
-    ["a","The link opens straight into their story, with the handle already filled in. No typing, no login."]]},
+    ["a","The link opens straight into their story, with the handle already filled in. No typing, no login."],
+    ["d","Ivan: run the read when the creator says yes, before they click, so the story is ready and nothing loads."],
+    ["r","Ivan: A/B/C test the DM wording, and look for tools that can automate the sends. Both sit on the outreach row."]]},
   landing:{id:"L1 · ugcbreakouts.com/story",h:"Landing",li:[
     ["r","Ivan, 1 Oct: not a fan of the pitch deck for now, keep the profile story. The deck ask at the end is gone."],
     ["r","Ivan, 30 Sep: “basically like spotify but it’s more addictive… we’ll find the breakouts for your thing for free.” This story is the profile analyzer. In the app it opens from the Profile analyzer buttons."],
-    ["a","Anyone can still type a handle here. Keep this public page, or only open it from the DM link?"],
-    ["d","Anyone can type any public handle. Cache each handle’s result for 24 hours and rate limit per IP, since every read is a scrape."]]},
+    ["r","Ivan: keep the public page where anyone types a handle, but it opens the door to abuse. An email before the first read is one option. To discuss."],
+    ["d","Rate limit per IP (Ivan: yes). Every read is a scrape, so also cache each handle’s result for 24 hours."]]},
   reading:{id:"L2 · reading the account",h:"Reading your account",li:[
     ["v","The short “reading your account” moment from the brief. The count runs up while videos deal across the screen."],
     ["a","How long a read takes is a guess. Searches take 15 seconds to a minute, and this scrapes one account. Expect the short end. Lester to confirm."],
@@ -181,59 +183,59 @@ var NOTES={
   c1:{id:"Card 1 of 9 · free",h:"Videos we read",li:[
     ["a","Opens on the count and the date range, which makes the numbers after it read as fair. The lit tiles hint at the 8 breakouts to come."],
     ["f","SAMPLE on every card, and every handle starts with “sample.” Nothing here is a real account."]]},
-  c2:{id:"Card 1 of 7 · free",h:"Your usual views",li:[
-    ["v","Veejay, 2 Oct: less overwhelming. The story is 7 cards now: “Videos we read” (the reading screen already counts them) and “Your top 3” (it repeated the biggest breakout) are out."],
+  c2:{id:"Card 1 of 5 · free",h:"Your usual views",li:[
+    ["v","Veejay, 2 Oct: less overwhelming. “Videos we read” (the reading screen already counts them) and “Your top 3” (it repeated the biggest breakout) are out."],
     ["a","The baseline, framed as the creator’s own bar and never compared with bigger accounts. It is what makes the next card’s 12x mean something."],
     ["d","Average of the creator’s public videos in the range. If Ivan prefers a median so one huge video doesn’t skew it, the wording stays the same."]]},
-  c3:{id:"Card 2 of 7 · free",h:"Your biggest breakout",li:[
+  c3:{id:"Card 2 of 5 · free",h:"Your biggest breakout",li:[
     ["v","From the brief: “12x your usual views”, the video thumbnail and its hook."],
     ["f","Breakout Score: “A score from 0 to 100. It shows how much a video beat the average of what that account usually gets.” The card leads with the multiple because it needs no explaining."],
     ["a","Thumbnails here are the creator’s own videos, shown to the creator. No other creator’s content appears anywhere in the free tool."]]},
   c4:{id:"Card 4 of 9 · free",h:"Your top 3 breakouts",li:[
     ["a","A ranked list, with the multiple as the big number and the Breakout Score under it. The one line definition sits under the list."],
     ["a","Tapping a breakout could open it on TikTok. Left out for now, the same as Ivan’s “no Watch on TikTok” call in the app."]]},
-  c5:{id:"Card 3 of 7 · free",h:"Your breakout rate",li:[
+  c5:{id:"Card 3 of 5 · free",h:"Your breakout rate",li:[
     ["a","8 of 62 is shown as “1 in 8”, which reads faster than 13% on a phone."],
-    ["a","What counts as a breakout is still open. This card assumes a Breakout Score of 60 or more."]]},
-  c6:{id:"Card 4 of 7 · free",h:"Your hook style",li:[
+    ["r","Ivan: a breakout is a Breakout Score of 60 or more, with at least 15 public videos read."]]},
+  c6:{id:"After sign up",h:"Your hook style",li:[
     ["f","A plain label from the creator’s own breakouts. No rarity figure and no “top x% of creators”: UB doesn’t see a fair sample of all creators, so any percentile would be invented. Ivan’s lock: never invent Breakout numbers."],
-    ["a","The label needs a breakout analysis of the top videos, which costs a model call. Run it for free here, or hide this card until sign up?"]]},
-  c7:{id:"Card 5 of 7 · free",h:"What works for you",li:[
+    ["r","Ivan: hidden until sign up. Not in the free story, so the free read is a scrape only, with no model call."]]},
+  c7:{id:"After sign up",h:"What works for you",li:[
     ["a","Length comes straight from public data. The format line (“tests with the proof on screen”) comes from the same analysis as card 6."],
-    ["a","If there aren’t enough breakouts to find a length pattern, this card is skipped rather than shown weak."]]},
-  c8:{id:"Card 6 of 7 · free",h:"Share card",li:[
+    ["a","If there aren’t enough breakouts to find a length pattern, this card is skipped rather than shown weak."],
+    ["r","Ivan: hidden until sign up, with the hook style card."]]},
+  c8:{id:"Card 4 of 5 · free",h:"Share card",li:[
     ["v","A 9:16 image the creator can save and post, with a small ugcbreakouts.com/story mark. Save image downloads the sample PNG."],
     ["f","The hint says TikTok story only. Share opens the phone’s own share sheet. UB copy names TikTok only."],
-    ["a","No text under about 36px at 1080 wide. The handle is on by default. Let creators hide it?"],
+    ["a","No text under about 36px at 1080 wide."],
+    ["r","Ivan: the handle stays on the card. No option to hide it."],
+    ["v","The second line is now their usual views. “I open on the product” came from the hook analysis, which is sign up only."],
     ["q","Spotify reports 500M+ Wrapped shares in the first 24 hours (company claim). Duolingo saw share rates go up when the flattering number moved onto the share card."+src("https://blog.duolingo.com/year-in-review-behind-the-scenes","Duolingo Blog")]]},
-  c9:{id:"Card 7 of 7 · the ask",h:"Find Breakouts of your own",li:[
+  c9:{id:"Card 5 of 5 · the ask",h:"Find Breakouts of your own",li:[
     ["r","Replaces the pitch deck ask. Heading, line and “Free. Just your email.” are Ivan’s own copy from the Shared screen CTA."]
     ]},
   "private":{id:"E1 · edge case",h:"Private account",li:[
     ["a","One card, then back to the handle box. Nothing is read."]]},
   few:{id:"E2 · edge case",h:"Not enough videos yet",li:[
-    ["a","Under 15 public videos, the average isn’t steady enough. The card counts what they have and what’s left, 9 of 15."],
-    ["a","15 is a guess. An “email me at 15 videos” button would bring these creators back. Worth building?"]]},
+    ["r","Ivan: 15 public videos minimum. Under that, the card counts what they have and what’s left, 9 of 15."],
+    ["a","An “email me at 15 videos” button would bring these creators back. Worth building?"]]},
   none:{id:"E3 · edge case",h:"No breakouts yet",li:[
     ["v","From the brief: encouraging, and it still gives the baseline. Cards 1 and 2 play as normal, then this one."],
     ["a","Shows the closest video as a multiple, from their own data. The button goes to UB’s search."]]},
   desk1:{id:"D1 · desktop",h:"Story beside the landing",li:[
     ["v","The desktop view from the brief: the landing on the left, the story as a phone sized card on the right."],
-    ["a","Arrows and the keyboard’s left and right keys move between cards. The handle box stays usable for trying another account."]]},
+    ["a","Arrows and the keyboard’s left and right keys move between cards. The handle box stays usable for trying another account."],
+    ["r","Ivan: D1 for launch."]]},
   desk2:{id:"D2 · desktop",h:"All cards",li:[
     ["v","The other desktop option from the brief: every card in a grid. Click one to play it."],
     ["a","Pick one of the two for launch. D1 keeps the story feel, D2 is quicker to scan."]]},
   split:{id:"Review",h:"Free vs sign up",li:[
-    ["v","<b>Free, no login:</b> the DM link, the handle box, the reading moment, all 7 story cards, the share card with Save image and Share."],
+    ["v","<b>Free, no login:</b> the DM link, the handle box, the reading moment, all 5 story cards, the share card with Save image and Share."],
+    ["r","<b>After sign up:</b> hook style and what works for you (Ivan)."],
     ["v","<b>Sign up:</b> UB itself, from the last card."]]}
 };
 var QUESTIONS=[
-  "Keep a public page where anyone types a handle, or only open the cards from the DM link?",
-  "Cache each handle for 24 hours and rate limit per IP? Every read is a scrape.",
-  "Run a breakout analysis for free to get the hook style and format (cards 6 and 7), or hide those until sign up?",
-  "15 public videos minimum and a Breakout Score of 60 to count as a breakout?",
-  "Handle on the share card by default, with an option to hide it?",
-  "Launch the desktop as the story beside the landing (D1) or as a grid of cards (D2)?"
+  "Public handle box: ask for an email before the first read, or another guard against abuse? (Ivan: let’s discuss)"
 ];
 function notesHtml(key){
   var legend='<div class="legend"><span><span class="tag r">IVAN</span> his notes</span><span><span class="tag c">CALL</span> Ivan calls</span><span><span class="tag v">VEEJAY</span> Veejay asked for it</span><span><span class="tag a">ASK</span> our suggestion, needs Ivan</span><span><span class="tag q">SOURCE</span> research, linked</span><span><span class="tag d">DEV</span> for Lester</span><span><span class="tag f">LOCK</span> his rules</span></div>';
@@ -247,7 +249,7 @@ var RAIL=[
   {g:"Landing",items:[["dm","L0","The DM"],["landing","L1","/story landing"],["reading","L2","Reading your account"]]},
   {g:"Story, free",items:SETS.main.cards.map(function(id,k){return [id,String(k+1),CARD[id].n];})},
   {g:"Edge cases",items:[["private","E1","Private account"],["few","E2","Not enough videos yet"],["none","E3","No breakouts yet"]]},
-  {g:"Desktop",items:[["desk1","D1","Story beside the landing"],["desk2","D2","All cards"]]},
+  {g:"Desktop",items:[["desk1","D1","Story beside the landing"]]},
   {g:"Review",items:[["split","","Free vs sign up"],["questions","","Questions for Ivan"]]}
 ];
 var KEYS=[];RAIL.forEach(function(g){g.items.forEach(function(it){KEYS.push(it[0]);});});
