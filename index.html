@@ -274,6 +274,21 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 @media (prefers-reduced-motion: reduce){.conf{display:none}}
 .star{width:84px;height:84px;border-radius:24px;background:linear-gradient(#fff,var(--gold-soft));border:1px solid #EAD9A4;display:grid;place-items:center;color:var(--gold)}
 .star svg{width:38px;height:38px}
+/* first search how-to video (Ivan, 1 Oct) */
+.howto{align-self:stretch;position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:0;padding:0;cursor:pointer;background:linear-gradient(140deg,#171312 0%,#0B4F52 100%);color:#fff;text-align:left;font-family:var(--sans);display:block;width:100%;flex:none}
+.howto .hw-h{position:absolute;left:16px;right:16px;top:16px;font-weight:800;font-size:19px;line-height:1.2;letter-spacing:-.02em}
+.howto .hw-p{position:absolute;right:14px;bottom:14px;width:46px;height:46px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center}
+.howto .hw-p svg{width:18px;height:18px;margin-left:3px}
+.howto .hw-d{position:absolute;left:16px;bottom:18px;font:600 12px var(--mono);background:rgba(255,255,255,.16);padding:3px 8px;border-radius:6px}
+.hfs{position:absolute;inset:0;z-index:30;background:#000;color:#fff;display:flex;align-items:center;justify-content:center}
+.hfs .fr{position:relative;width:min(100%,1100px);aspect-ratio:16/9;background:linear-gradient(140deg,#171312 0%,#0B4F52 100%);display:grid;place-items:center;padding:20px}
+.hfs .fr b{font-size:clamp(20px,4vw,44px);line-height:1.2;letter-spacing:-.02em;text-align:center;max-width:22ch}
+.hfs .bar{position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--cyan)}
+@media (prefers-reduced-motion: no-preference){.hfs .bar{animation:howbar 67s linear forwards}@keyframes howbar{to{width:100%}}}
+.hfs .top{position:absolute;left:14px;right:14px;top:14px;display:flex;justify-content:space-between;align-items:center}
+.hfs .snd{display:flex;align-items:center;gap:6px;font-weight:700;font-size:13px;background:rgba(255,255,255,.14);padding:6px 10px;border-radius:999px}
+.hfs .snd svg,.hfs .x svg{width:16px;height:16px}
+.hfs .x{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;cursor:pointer}
 
 /* home in */
 .bn{display:flex;gap:12px;align-items:center;background:var(--teal-soft);border:1px solid #BDE4E5;border-radius:16px;padding:12px 14px;width:100%;text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink)}
@@ -993,7 +1008,7 @@ function pending(){return S.searches.filter(function(s){return !s.done;});}
 function readyUnseen(){return S.searches.filter(function(s){return s.done&&!s.seen&&!s.empty;});}
 
 /* ---------------- navigation ---------------- */
-function resetUi(){S.infoOpen=false;S.menu=false;S.sortSheet=false;S.emailErr="";S.playing=null;}
+function resetUi(){S.howto=false;S.infoOpen=false;S.menu=false;S.sortSheet=false;S.emailErr="";S.playing=null;}
 function go(view,params,opt){
   opt=opt||{};
   if(!opt.replace && S.view) S.stack.push({view:S.view,params:S.params});
@@ -1012,7 +1027,7 @@ function startSearch(q){
   S.query=q;S.draft="";
   if(!S.loggedIn){go("teaser");return;}
   if(S.plan==="free" && S.left-pending().length<=0){go("paid",{reason:"searches"});return;}
-  var s={id:S.nextId++,q:q,el:0,need:9,done:false,seen:false,empty:isEmptyQ(q)};
+  var s={id:S.nextId++,q:q,el:0,need:9,done:false,seen:false,empty:isEmptyQ(q),first:S.plan==="free"&&S.left===3&&!pending().length};
   S.searches.push(s);
   go("proc",{id:s.id});
 }
@@ -1274,8 +1289,11 @@ V.proc=function(){
   '<div class="ring" id="ring">'+ringSvg(s.el/s.need)+'<div class="t"><span id="elapsed">'+mmss(s.el)+'</span><small>ELAPSED</small></div></div>'+
   '<div class="stack" style="gap:4px"><h1 class="h1" style="font-size:24px">Finding <span style="color:var(--coral-d)">'+esc(s.q)+'</span> breakouts</h1></div>'+
   '<ul class="steps" id="steps">'+stepsHtml(s)+'</ul>'+
+  (s.first?howtoHtml():'')+
   '<div id="slow-slot" data-slow="'+(s.el>=60?1:0)+'">'+slowHtml(s)+'</div></div>';
 };
+var HOWTO_H="While we search, here’s how to read your results.";
+function howtoHtml(){return '<button class="howto" data-act="howto" aria-label="Play how-to video, 1:07, opens full screen with sound"><span class="hw-h">'+HOWTO_H+'</span><span class="hw-d">1:07</span><span class="hw-p">'+ic("play")+'</span></button>';}
 function slowHtml(s){
   var ex='<p class="eb m" style="margin:6px 0 12px">Example breakouts</p><div class="exrow">'+[["palette",86],["brushes",72]].map(function(k,n){return vtile({id:"e"+n,img:k[0],handle:"example"},{sm:true,exs:k[1],key:"ex"+n});}).join("")+'</div>'+
     '<p class="fine" style="margin-top:12px">Usually 15 seconds to a minute.</p>';
@@ -1621,7 +1639,7 @@ var RAIL=[
   {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-pro","11","Account, Pro"]]},
   {g:"UGC Profile Analyzer",items:[["pa-account","PA","Button on Account"],["pa-home","PA","Button on Home"],["pa-menu","PA","Button in the menu"],["pa-empty","PA","Add your TikTok"],["pa-story","PA","Your breakout story"],["pa-done","PA","After the story"],["own-detail","PA","One breakout"]]}
 ];
-function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q)};S.searches.push(s);return s;}
+function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q),first:S.plan==="free"&&S.left===3&&!S.searches.length};S.searches.push(s);return s;}
 function jump(key){
   S=fresh();revealSeen={};
   var home=[{view:"home",params:{}}];
@@ -1708,7 +1726,7 @@ var NOTES={
     ["a","Is this the same page for X and cold email traffic, or a different page per source?"],
     ["f","TikTok only, Breakout language throughout, and no dash asides."]]},
   "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in",li:[["r","Ivan agreed 3 Oct: Terms and Privacy linked under Continue with Google."],["v","Veejay, 3 Oct: the example shows only the score and the hook. The rest sits behind a single locked line."],["r","Polish: cut “Sign in to run your search.” and “What you get for every video”. The free allowance line stays. Ivan: “too many subtext and repeating elements on some pages.”"],["q","No TikTok sign in. TikTok's API returns no email (checked the docs), so it's Google. Ivan: “if no, then we go google.”"],["q","Free is 3 searches and 3 video analyses. Ivan: “yes, 3?”"]]},
-  "proc":{id:"01c · 01c-processing",h:"Processing",li:[["r","Polish: one heading, “Finding Lip oil breakouts”, instead of three “Searching” lines. Cut “Watch examples while you wait.” The example scores now sit on a dark chip so they read on light thumbnails. Ivan: “too many subtext and repeating elements on some pages.”"],["q","A search counts when results arrive. Ivan: “search counts when it arrives.”"],["r","Round 3: wait copy is “Usually 15 seconds to a minute.” Ivan: “will be between 15 seconds and 1min.” Browse while you wait now appears at 1:00, once the wait runs past the usual."],["a","When a video is played: does it play in the box, or open a popup with the analysis? The prototype plays it in the box."]]},
+  "proc":{id:"01c · 01c-processing",h:"Processing",li:[["r","Ivan, 1 Oct: first search only, a how-to video sits under the steps, so the wait teaches how to read the results and what to pull out. Tap it to open full screen with sound on. The poster is a placeholder until the video is made. Ivan: “add a video explainer on how to use the app, what to pull out… this should help with the 1-2m loading.”"],["a","Ivan asked whether to remove Browse while you wait, especially for the first search. It stays as it is until you decide."],["a","If results arrive before the video ends, should it keep playing or stop at Breakouts ready? The prototype keeps playing."],["r","Polish: one heading, “Finding Lip oil breakouts”, instead of three “Searching” lines. Cut “Watch examples while you wait.” The example scores now sit on a dark chip so they read on light thumbnails. Ivan: “too many subtext and repeating elements on some pages.”"],["q","A search counts when results arrive. Ivan: “search counts when it arrives.”"],["r","Round 3: wait copy is “Usually 15 seconds to a minute.” Ivan: “will be between 15 seconds and 1min.” Browse while you wait now appears at 1:00, once the wait runs past the usual."],["a","When a video is played: does it play in the box, or open a popup with the analysis? The prototype plays it in the box."]]},
   "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",li:[["r","Polish: cut the line under the heading (it repeated the search box) and the “Open ›” on every recent search. Ivan: “too many subtext and repeating elements on some pages.”"],["r","The headline is now “What are you filming next?” instead of “Welcome back.” Ivan: “welcome back, that can get old?”"],["a","Idea: rotate the headline between a few lines so it stays fresh, like “What are you filming next?”, “Find your next remake.”, and “What's breaking out in your niche?” OK to rotate?"],["c","The menu links to the Top Breakouts feed."]]},
   "results-saved":{id:"02 · saved search",h:"Results, saved search",li:[["r","Ivan agreed 3 Oct: a saved search shows when it was saved and a Refresh that says it uses 1 search. After a refresh, a New since last run filter appears."]]},
   "results":{id:"02 · 02-results",h:"Results",li:[["r","Ivan agreed 3 Oct: sort Top score, Most views, Newest; filters Under 100K followers, Past 7 days, Analyzed. Videos play inline in the card."],["v","Veejay, 3 Oct: Breakout Score is labeled on the first card only, and the Pro wall is a heading plus the button."],["r","Polish: the “Lip oil” tag on every video is gone, since the search is already at the top. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Paywall after the top 10, saying there are dozens more with Pro. Ivan (follow up): “yeah, let's do 10.” Ivan: “showing only 8 or 10 videos and saying they can see dozens of videos (if they pay).”"],["r","Persistent search on top, unchanged. Ivan: “LOVE the persistent search on the top!”"],["r","Sort and filter. Ivan: “we'll probably need a sort/filter?”"],["r","Analyze, Save, and Share buttons unchanged. Ivan: “love the analyze, save, share buttons.”"],["r","View analysis and Analyze video look different: analyzed videos have a teal Analyzed badge and a solid button, the rest have an outlined Analyze video button."],["q","Free users get 3 analyses. Analyzing a fourth video opens Paid (analysis cap)."],["c","The paywall opens the video cap version of Paid. Ivan: “we need paid cap hit video.”"],["a","Which sort and filter options? Ivan asked whether to keep or remove Under 100K followers."]]},
@@ -1810,10 +1828,12 @@ function renderOverlay(){
     h+='<button class="scrim" data-act="sort-close" aria-label="Close sort"></button><div class="sheet" role="dialog" aria-label="Sort by"><span class="grab"></span><h3>Sort by</h3>'+
     [["score","Top score"],["views","Most views"],["newest","Newest"]].map(function(o){var on=S.sort===o[0];return '<button class="mi" role="menuitemradio" aria-checked="'+on+'" data-act="sort" data-k="'+o[0]+'">'+o[1]+' <small>'+(on?ic("check"):'')+'</small></button>';}).join("")+'</div>';
   }
+  if(S.howto)h+='<div class="hfs" role="dialog" aria-label="How-to video"><div class="fr"><b>'+HOWTO_H+'</b><span class="bar"></span></div><div class="top"><span class="snd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>Sound on</span><button class="x" data-act="howto-close" aria-label="Close video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>';
   if(S.toast)h+='<div class="toast" role="status">'+ic("checkc")+'<span>'+S.toast.msg+'</span></div>';
   ovl.innerHTML=h;
 }
 
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&S.howto){e.stopImmediatePropagation();S.howto=false;renderOverlay();}});
 /* ---------------- actions ---------------- */
 function signIn(q){
   S.loggedIn=true;S.left=3;S.anLeft=3;S.stack=[];S.view="";
@@ -1859,6 +1879,8 @@ function act(a,el){
     case "share": go("share",{v:d("v")}); break;
     case "play": var k=d("key");S.playing=S.playing===k?null:k;render(false); break;
     case "info": S.infoOpen=!S.infoOpen;render(false); break;
+    case "howto": S.howto=true;renderOverlay();var hx=ovl.querySelector(".hfs .x");if(hx)hx.focus(); break;
+    case "howto-close": S.howto=false;renderOverlay(); break;
     case "copy-link":
       var cv=d("v"),vv=vid(cv),cl=S.links[cv],cn=S.notes[cv]||"",made="";
       if(!cl){S.links[cv]={note:cn,ver:1};}
