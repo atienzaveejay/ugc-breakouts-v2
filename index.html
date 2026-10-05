@@ -85,12 +85,13 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 
 .mnav{display:none}
 @media (max-width:820px){
-  .shell{grid-template-columns:1fr}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .shell>*{min-width:0}
   .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--wline);padding:16px}
   .grp{display:none}
   .mnav{display:block}
   .mnav label{font-size:12px;color:var(--wmuted);display:block;margin-bottom:4px}
-  .mnav select{width:100%;font:600 15px var(--sans);padding:10px;border-radius:10px;border:1px solid var(--wline);background:var(--ground);color:var(--wink)}
+  .mnav select{width:100%;min-width:0;max-width:100%;font:600 15px var(--sans);padding:10px;border-radius:10px;border:1px solid var(--wline);background:var(--ground);color:var(--wink)}
   .stage{position:static}
   .notes{padding-top:0}
 }
@@ -611,6 +612,40 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .steps2 button{align-items:center;gap:12px}
 .steps2 button b{display:block;font-size:15.5px}
 .steps2 button small{display:block;margin-top:2px}
+/* 1 Oct feedback: menu options, running lists, Top Breakouts (Ivan items 14, 15, 19, 20) */
+.sheet .mlbl{margin:6px 4px 0;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)}
+.bbar{position:sticky;bottom:0;margin-top:auto;z-index:6;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:#fff;border-top:1px solid var(--hair);padding:6px 4px 12px;flex:none}
+.bbar button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:48px;border:0;background:none;font:700 11px var(--sans);color:var(--mid);cursor:pointer;padding:4px 0;white-space:nowrap}
+.bbar svg{width:22px;height:22px}
+.bbar button[aria-current="page"]{color:var(--ink)}
+.bbar button[aria-current="page"]::before{content:"";position:absolute;top:-7px;left:28%;right:28%;height:3px;border-radius:0 0 3px 3px;background:var(--coral)}
+.phone.navb .toast{bottom:92px}
+.hlist{display:flex;flex-direction:column}
+.hrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:12px;align-items:center;background:none;border:0;border-top:1px solid #F0EAE5;padding:10px 0;text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink);width:100%}
+.hrow:first-child{border-top:0;padding-top:2px}
+.hrow .hi{width:36px;height:36px;border-radius:11px;background:var(--paper);display:grid;place-items:center;color:var(--mid)}
+.hrow .hi svg{width:17px;height:17px}
+.hrow.ready .hi{background:var(--gold-soft);color:var(--gold)}
+.hrow.run .hi{background:var(--teal-soft)}
+.hrow .th{width:36px;height:48px;border-radius:9px;background:#d9d2cc center/cover}
+.hrow.run .th{opacity:.75}
+.hrow .tx{display:flex;flex-direction:column;gap:3px;min-width:0}
+.hrow .tx>b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hrow .tx small{font-size:12.5px;color:var(--mid)}
+.hrow .tx small b.s{color:var(--gold);font-weight:800}
+.hrow svg.chev{width:18px;height:18px;color:var(--mid)}
+.hrow .go2{font-weight:700;color:var(--coral-d);font-size:14px}
+.prog{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--teal);font-weight:700;white-space:nowrap}
+.pbar{flex:1;height:5px;border-radius:9px;background:var(--pill);overflow:hidden;max-width:140px;min-width:40px}
+.pbar i{display:block;height:100%;background:var(--cyan);border-radius:9px}
+@media (prefers-reduced-motion: no-preference){.pbar i{transition:width .9s linear}}
+.li .t .prog{margin-top:4px}
+.li.run{cursor:default}
+.li.run .th{opacity:.75}
+.li .t .badge{margin-bottom:2px}
+.badge.gold{background:var(--gold-soft);color:#8A6D10}
+.br.smp{background:var(--gold-soft);color:#8A6D10}
+.ctrls.cats{margin-bottom:-6px}
 /* ---------- desktop frame ---------- */
 .devseg{display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:3px;margin-top:14px;border:1px solid var(--wline);border-radius:10px;background:var(--ground)}
 .devseg button{border:0;border-radius:7px;background:transparent;font:600 13px var(--sans);color:var(--wmuted);padding:7px 0;cursor:pointer}
@@ -849,6 +884,8 @@ body.fs.desk .phone{height:800px}
   <symbol id="i-sort" viewBox="0 0 24 24"><path class="i" d="M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4"/></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24"><path class="i" d="M12 3l1.9 5.6 5.6 1.9-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9z"/><path class="i" d="M19 16v4M17 18h4"/></symbol>
   <symbol id="i-userplus" viewBox="0 0 24 24"><circle class="i" cx="9" cy="8" r="4"/><path class="i" d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7M19 8v6M16 11h6"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path class="i" d="M4 10.5 12 4l8 6.5V20h-5.5v-6h-5v6H4z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle class="i" cx="12" cy="12" r="8.5"/><path class="i" d="M12 7.5V12l3 2"/></symbol>
   <symbol id="i-dollar" viewBox="0 0 24 24"><path class="i" d="M12 3v18M16.5 7.5c0-1.9-2-3-4.5-3s-4.5 1.2-4.5 3.2 2 2.8 4.5 3.3 4.5 1.3 4.5 3.3-2 3.2-4.5 3.2-4.5-1.1-4.5-3"/></symbol>
 </svg>
 
@@ -953,6 +990,14 @@ var EXTRA = [
   {id:"v11",handle:"reps.with.rae",followers:"15K",fol:15000,score:79,img:"bands",brand:"Gymshark",len:"0:17",views:"640K",likes:"88K",comments:"2.2K",shares:"14K",posted:"Sep 11, 2026",days:4,sound:"gym playlist beat",cat:"Fitness",product:"Resistance bands",hook:"One band, 10 minutes, no gym.",setting:"living room"},
   {id:"v12",handle:"deskset.dev",followers:"41K",fol:41000,score:74,img:"tripod",brand:"UBeesize",len:"0:23",views:"920K",likes:"97K",comments:"3.4K",shares:"19K",posted:"Sep 12, 2026",days:3,sound:"Original sound",cat:"Tech",product:"Phone tripod",hook:"The $20 tripod that fixed my shaky videos.",setting:"desk"}
 ];
+/* proposed Top Breakouts categories (Ivan, 1 Oct item 20): SAMPLE data, photos are placeholders */
+var SAMPLES = [
+  {id:"v16",sample:true,handle:"sample.pawsandplay",followers:"36K",fol:36000,score:77,img:"closet",brand:"",len:"0:19",views:"880K",likes:"104K",comments:"3.1K",shares:"16K",posted:"Sep 12, 2026",days:3,sound:"Original sound",cat:"Pets",product:"Lick mat",hook:"My dog stopped barking at the door after this.",setting:"living room"},
+  {id:"v17",sample:true,handle:"sample.tinyroutine",followers:"58K",fol:58000,score:70,img:"face",brand:"",len:"0:24",views:"720K",likes:"81K",comments:"2.6K",shares:"11K",posted:"Sep 10, 2026",days:5,sound:"Original sound",cat:"Baby",product:"Baby carrier",hook:"The carrier I wish I had with baby number one.",setting:"nursery"},
+  {id:"v18",sample:true,handle:"sample.scrubclub",followers:"19K",fol:19000,score:68,img:"tripod",brand:"",len:"0:21",views:"530K",likes:"62K",comments:"1.8K",shares:"9.9K",posted:"Sep 13, 2026",days:2,sound:"Original sound",cat:"Cleaning",product:"Cleaning paste",hook:"I scrubbed my oven door for ten seconds. Look.",setting:"kitchen"},
+  {id:"v19",sample:true,handle:"sample.dailystack",followers:"142K",fol:142000,score:62,img:"flatlay",brand:"",len:"0:26",views:"1.1M",likes:"96K",comments:"2.9K",shares:"8.7K",posted:"Sep 7, 2026",days:8,sound:"Original sound",cat:"Supplements",product:"Magnesium gummies",hook:"What I take before bed, in the order I take it.",setting:"bathroom"},
+  {id:"v20",sample:true,handle:"sample.knifeandboard",followers:"24K",fol:24000,score:66,img:"fries",brand:"",len:"0:18",views:"460K",likes:"55K",comments:"1.5K",shares:"7.4K",posted:"Sep 11, 2026",days:4,sound:"Original sound",cat:"Kitchen",product:"Knife sharpener",hook:"Your knives are not dull. You are cutting wrong.",setting:"kitchen"}
+];
 var OWN = [
   {id:"r1",own:true,x:12,handle:"sample.raefilms",followers:"18K",fol:18000,score:91,img:"oil",brand:"",len:"0:22",views:"112K",likes:"14K",comments:"410",shares:"2.6K",posted:"Aug 14, 2026",days:49,sound:"Original sound",cat:"Beauty",product:"Lip gloss",hook:"I stopped buying lip gloss after this."},
   {id:"r2",own:true,x:7,handle:"sample.raefilms",followers:"18K",fol:18000,score:78,img:"face",brand:"",len:"0:27",views:"64K",likes:"7.9K",comments:"260",shares:"1.1K",posted:"Sep 2, 2026",days:30,sound:"Original sound",cat:"Beauty",product:"Foundation",hook:"Hour one vs hour six. No touch-ups."},
@@ -970,7 +1015,7 @@ AN.r3={hook:"Everything in my purse, ranked by how often I use it.",
   tries:[["Ranking","My makeup bag, ranked from never to every day."],["Confession","What's in my purse that I never use."],["Question","What's the one thing always in your bag?"]],
   why:["A ranking gives people a reason to watch to number one.","Flat lay from above is fast to read, item by item.","Everyday items make it easy to relate, so it gets saves."],
   next:["Rank another everyday set: your makeup bag or desk.","Shoot it flat lay from above again, one item per beat.","Save the most used item for last."]};
-var ALLV = VIDEOS.concat(EXTRA,OWN);
+var ALLV = VIDEOS.concat(EXTRA,SAMPLES,OWN);
 function nextFor(a){return a.next||a.shots.map(function(x){return x[1];});}
 function termFor(v){return v.cat==="Beauty"?S.query:v.product;}
 var CHIPSETS=[["GRWM","Lip oil","OOTD","#momtok","Air fryer","get ready with me","#booktok","Hair mask","SPF"],["Day in my life","Retinol serum","#cleangirl","Protein powder","POV","Tinted moisturizer","#fitness","LED mask","Matcha"],["Storytime","Nail polish","#skincare","Cold brew","Outfit check","Foam roller","#beauty","Lip balm","Yoga mat"]];
@@ -994,7 +1039,7 @@ function fresh(){
     libTab:"searches",chipSet:0,affLink:false,affReward:"cash",infoOpen:false,menu:false,toast:null,playing:null,
     view:"home",params:{},stack:[],railKey:"home-out",focusSearch:false,
     topCat:"All",sort:"score",filters:{},sortSheet:false,emailErr:"",emailDraft:"",sharedQ:"",
-    sellV:"v1",sellHook:0,sellInfo:false};
+    sellV:"v1",sellHook:0,sellInfo:false,navOpt:"",anRuns:[],anAsk:null};
 }
 S = fresh();
 
@@ -1008,7 +1053,7 @@ function pending(){return S.searches.filter(function(s){return !s.done;});}
 function readyUnseen(){return S.searches.filter(function(s){return s.done&&!s.seen&&!s.empty;});}
 
 /* ---------------- navigation ---------------- */
-function resetUi(){S.howto=false;S.infoOpen=false;S.menu=false;S.sortSheet=false;S.emailErr="";S.playing=null;}
+function resetUi(){S.howto=false;S.infoOpen=false;S.menu=false;S.sortSheet=false;S.emailErr="";S.playing=null;S.anAsk=null;}
 function go(view,params,opt){
   opt=opt||{};
   if(!opt.replace && S.view) S.stack.push({view:S.view,params:S.params});
@@ -1045,6 +1090,13 @@ setInterval(function(){
     if(s.el>=s.need){finish(s);justDone.push(s);}
     changed=true;
   });
+  var anDone=0;
+  S.anRuns.forEach(function(r){
+    if(r.done)return;
+    r.el+=1;
+    if(r.el>=r.need){r.done=true;S.analyzed[r.v]=true;anDone++;}
+    changed=true;
+  });
   if(!changed)return;
   if(S.view==="proc"){
     var cur=findSearch(S.params.id);
@@ -1054,8 +1106,43 @@ setInterval(function(){
     if(justDone.length)renderChrome();
     return;
   }
-  if(justDone.length && (S.view==="home"||S.view==="library"))render(false);
+  if(S.view==="home"||S.view==="library"){if(justDone.length||anDone)render(false);else updProg();}
+  else if(anDone)renderChrome();
 },1000);
+/* running searches and analyses (Ivan, 1 Oct item 15) */
+function anPending(){return S.anRuns.filter(function(r){return !r.done;});}
+function anReadyUnseen(){return S.anRuns.filter(function(r){return r.done&&!r.seen;});}
+function pct(o){return Math.min(99,Math.round(o.el/o.need*100));}
+function progHtml(word,o){return '<span class="prog"><span class="pct">'+(word?word+' · ':'')+pct(o)+'%</span><span class="pbar" aria-hidden="true"><i style="width:'+pct(o)+'%"></i></span></span>';}
+function updProg(){
+  [].forEach.call(scr.querySelectorAll("[data-prog]"),function(el){
+    var k=el.getAttribute("data-prog").split(":"),o=null;
+    if(k[0]==="s")o=findSearch(+k[1]);else S.anRuns.forEach(function(r){if(r.v===k[1])o=r;});
+    if(!o||o.done)return;
+    var t=el.querySelector(".pct"),b=el.querySelector(".pbar i");
+    if(t)t.textContent=t.textContent.replace(/\d+%$/,pct(o)+"%");
+    if(b)b.style.width=pct(o)+"%";
+  });
+}
+function recentSearchRows(max){
+  var rows=[],used={};
+  readyUnseen().forEach(function(s){used[s.q.toLowerCase()]=1;rows.push('<button class="hrow ready" data-act="open-ready" data-id="'+s.id+'"><span class="hi">'+ic("star")+'</span><span class="tx"><b>'+esc(s.q)+'</b><small>Ready · '+countFor(s.q)+' breakouts</small></span><span class="go2">Open</span></button>');});
+  pending().forEach(function(s){used[s.q.toLowerCase()]=1;rows.push('<button class="hrow run" data-act="view-search" data-id="'+s.id+'" data-prog="s:'+s.id+'"><span class="hi"><span class="dot"></span></span><span class="tx"><b>'+esc(s.q)+'</b>'+progHtml("Searching",s)+'</span>'+ic("chev","chev")+'</button>');});
+  S.history.forEach(function(h){if(rows.length>=max||!h.n||used[h.q.toLowerCase()])return;used[h.q.toLowerCase()]=1;rows.push('<button class="hrow" data-act="results" data-q="'+esc(h.q)+'"><span class="hi">'+ic("search")+'</span><span class="tx"><b>'+esc(h.q)+'</b><small>'+h.n+' breakouts · '+esc(h.when.split(",")[0])+'</small></span>'+ic("chev","chev")+'</button>');});
+  return rows;
+}
+function recentVideoRows(max){
+  var rows=[],used={};
+  anReadyUnseen().forEach(function(r){var v=vid(r.v);used[v.id]=1;rows.push('<button class="hrow ready" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span class="tx"><b>@'+v.handle+'</b><small>Ready · Breakout Score <b class="s">'+v.score+'</b></small></span><span class="go2">View</span></button>');});
+  anPending().forEach(function(r){var v=vid(r.v);used[v.id]=1;rows.push('<button class="hrow run" data-act="an-wait" data-prog="a:'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span class="tx"><b>@'+v.handle+'</b>'+progHtml("Analyzing",r)+'</span>'+ic("chev","chev")+'</button>');});
+  Object.keys(S.analyzed).reverse().forEach(function(id){if(rows.length>=max||used[id])return;var v=vid(id);used[id]=1;rows.push('<button class="hrow" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span class="tx"><b>@'+v.handle+'</b><small>'+esc(v.product)+' · <b class="s">'+v.score+'</b></small></span>'+ic("chev","chev")+'</button>');});
+  return rows;
+}
+function homeLists(){
+  var sr=recentSearchRows(4),vr=recentVideoRows(3);
+  return ['<section class="peek" aria-label="Recent search terms"><div class="hdr">Recent search terms <button data-act="lib" data-k="searches">See all</button></div><div class="hlist">'+sr.join("")+'</div></section>',
+    '<section class="peek" aria-label="Recent videos analyzed"><div class="hdr">Recent videos analyzed <button data-act="lib" data-k="analyzed">See all</button></div><div class="hlist">'+(vr.length?vr.join(""):'<p class="emptyl" style="padding:12px">No analyzed videos yet.</p>')+'</div></section>'];
+}
 function addHistory(q,n){var was=false;S.history=S.history.filter(function(h){if(h.q.toLowerCase()===q.toLowerCase()){was=h.saved;return false;}return true;});S.history.unshift({q:q,when:"Just now",n:n,saved:was});}
 function findSearch(id){for(var k=0;k<S.searches.length;k++)if(S.searches[k].id===id)return S.searches[k];return null;}
 
@@ -1086,6 +1173,7 @@ function vtile(v,opts){
   var playing=S.playing===(opts.key||v.id);
   return '<button class="vt'+(opts.sm?' sm':'')+(playing?' playing':'')+'" data-act="play" data-key="'+(opts.key||v.id)+'" aria-label="Play video by @'+v.handle+'" style="'+bg(v.img)+';'+(opts.style||'')+'">'+
     (opts.brand?'<span class="br">'+ic("search")+esc(termFor(v))+'</span>':'')+
+    ((opts.tag||v.sample)?'<span class="br'+(v.sample?' smp':'')+'">'+(opts.tag?esc(opts.tag):'')+(v.sample?(opts.tag?' · ':'')+'SAMPLE':'')+'</span>':'')+
     (opts.analyzed?'<span class="anb">'+ic("check")+'Analyzed</span>':'')+(opts.len?'<span class="du'+(opts.analyzed?' low':'')+'">'+v.len+'</span>':'')+
     '<span class="pl">'+ic("play")+'</span>'+
     (opts.score?'<span class="sb"><b>'+v.score+'</b><span>Breakout Score</span></span>':'')+
@@ -1240,14 +1328,11 @@ V.home=function(){
     '<h2 class="tag1"><span>Find Viral Breakouts.</span><span>Get the creative strategy to make your own.</span></h2>'+
     '<p class="aud">An app for TikTok creators</p>'+searchField("q-out")+chipBlock()+'</div>'+sellPage();
   }
-  var recent=[];S.history.forEach(function(h){if(h.n>0&&recent.indexOf(h.q)<0&&recent.length<4)recent.push(h.q);});
-  var lib=ALLV.filter(function(v){return S.saved[v.id];}).slice(0,2);
   return '<div class="tb"><button class="logo" data-act="home">UGC <b>Breakouts</b></button><span class="sp"></span>'+countPill()+menuBtn()+'</div>'+
-  '<div class="pb">'+banners()+
+  '<div class="pb">'+
   '<div class="stack" style="gap:2px"><h1 class="h1" style="font-size:26px">What are you filming next?</h1></div>'+
   searchField("q-in")+chipBlock()+
-  (recent.length?'<div class="stack"><p class="lbl">Recent</p><div class="chips">'+recent.map(function(c){return '<button class="chip ghost" data-act="results" data-q="'+esc(c)+'">'+esc(c)+'</button>';}).join("")+'</div></div>':'')+
-  (lib.length?'<div class="peek"><div class="hdr">Library <button data-act="library">See all</button></div><div class="pk">'+lib.map(function(v){return '<button class="pki" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span><b>@'+v.handle+'</b><br><b class="s">'+v.score+'</b></span></button>';}).join("")+'</div></div>':'')+
+  homeLists().join("")+
   paEntry()+
   '</div>';
 };
@@ -1332,23 +1417,42 @@ function savedRow(){
   var P=S.params;if(!P.saved)return "";
   return '<div class="savedrow"><span>'+(P.refreshed?'Refreshed just now':'Saved '+esc(P.when||""))+'</span>'+(P.refreshed?'':'<button class="lnkb" data-act="refresh-saved">Refresh · uses 1 search</button>')+'</div>';
 }
-function resultCard(v){
+function resultCard(v,o){
+  o=o||{};
   var an=!!S.analyzed[v.id];
-  return '<article class="cd">'+vtile(v,{len:true,score:true,analyzed:an,style:"aspect-ratio:4/5"})+
+  return '<article class="cd">'+vtile(v,{len:true,score:true,analyzed:an,tag:o.tag,style:"aspect-ratio:4/5"})+
   '<div class="meta"><div class="hd">@'+v.handle+' <small>· '+v.followers+'</small></div>'+stats(v)+'</div>'+
-  '<div class="row">'+(an?'<button class="b b1 grow" data-act="detail" data-v="'+v.id+'">View analysis'+ic("chev")+'</button>':'<button class="b b4 grow" data-act="analyze" data-v="'+v.id+'">'+ic("spark")+'Analyze video</button>')+
+  '<div class="row">'+(an?'<button class="b b1 grow" data-act="detail" data-v="'+v.id+'">View analysis'+ic("chev")+'</button>':'<button class="b b4 grow" data-act="'+(o.ask?'analyze-ask':'analyze')+'" data-v="'+v.id+'">'+ic("spark")+'Analyze video</button>')+
   '<button class="b b2 bi'+(S.saved[v.id]?' on':'')+'" data-act="save" data-v="'+v.id+'" aria-pressed="'+!!S.saved[v.id]+'" aria-label="Save">'+ic(S.saved[v.id]?"saved":"save")+'</button>'+
   '<button class="b b2 bi" data-act="share" data-v="'+v.id+'" aria-label="Share">'+ic("share")+'</button></div></article>';
 }
 
-function feedList(cat){return ALLV.filter(function(v){return !v.own&&(cat==="All"||v.cat===cat);}).sort(function(a,b){return b.score-a.score;});}
+/* samples (proposed categories) stay out of the sales page strip */
+function feedList(cat,withSamples){return ALLV.filter(function(v){return !v.own&&(withSamples||!v.sample)&&(cat==="All"||v.cat===cat);}).sort(function(a,b){return b.score-a.score;});}
+/* first six agreed 3 Oct; the last five are proposals for Ivan (ASK) */
+var TOPCATS=["All","Beauty","Food","Home","Fashion","Fitness","Tech","Pets","Baby","Cleaning","Supplements","Kitchen"];
+function topList(){
+  var list=feedList(S.topCat,true);
+  if(S.filters.small)list=list.filter(function(v){return v.fol<100000;});
+  if(S.filters.week)list=list.filter(function(v){return v.days<=7;});
+  if(S.filters.analyzed)list=list.filter(function(v){return S.analyzed[v.id];});
+  var key={score:function(v){return v.score;},views:function(v){return num(v.views);},newest:function(v){return -v.days;}}[S.sort];
+  return list.sort(function(a,b){return key(b)-key(a);});
+}
+function topCtrls(){
+  var sortLabel={score:"Top score",views:"Most views",newest:"Newest"}[S.sort];
+  function fchip(k,label){return '<button class="chip'+(S.filters[k]?' on':'')+'" data-act="filter" data-k="'+k+'" aria-pressed="'+!!S.filters[k]+'">'+label+'</button>';}
+  return '<div class="ctrls cats" role="toolbar" aria-label="Category">'+TOPCATS.map(function(c){return '<button class="chip'+(S.topCat===c?' on':'')+'" data-act="top-cat" data-k="'+c+'" aria-pressed="'+(S.topCat===c)+'">'+c+'</button>';}).join("")+'</div>'+
+  '<div class="ctrls" role="toolbar" aria-label="Sort and filter"><button class="chip" data-act="sort-open" aria-haspopup="dialog">'+ic("sort")+'Sort: '+sortLabel+'</button>'+fchip("small","Under 100K followers")+fchip("week","Past 7 days")+fchip("analyzed","Analyzed")+'</div>';
+}
+var NOMATCH='<div class="nomatch"><b style="color:var(--ink)">No videos match these filters</b><button class="b b2" data-act="clear-filters">Clear filters</button></div>';
 V.top=function(){
-  var cats=["All","Beauty","Food","Home","Fashion","Fitness","Tech"],list=feedList(S.topCat);
+  var list=topList();
   return '<div class="tb"><button class="logo" data-act="home" aria-label="Home">UGC <b>B</b></button><button class="qp" data-act="focus-search">'+ic("search")+'<span>Search</span></button>'+countPillShort()+menuBtn()+'</div>'+
   '<div class="pb" style="gap:14px">'+
   '<div class="stack" style="gap:4px"><h1 class="h1" style="font-size:26px">Top Breakouts</h1><p class="upd">Updated today</p></div>'+
-  '<div class="ctrls" role="toolbar" aria-label="Category">'+cats.map(function(c){return '<button class="chip'+(S.topCat===c?' on':'')+'" data-act="top-cat" data-k="'+c+'" aria-pressed="'+(S.topCat===c)+'">'+c+'</button>';}).join("")+'</div>'+
-  '<div class="tgrid">'+list.map(function(v){var an=!!S.analyzed[v.id];return '<button class="tt2" data-act="top-open" data-v="'+v.id+'" aria-label="'+esc(v.product)+' by @'+v.handle+', Breakout Score '+v.score+'"><span class="th2" style="'+bg(v.img)+'">'+(an?'<span class="anb">'+ic("check")+'Analyzed</span>':'')+'<span class="sb"><b>'+v.score+'</b><span>Breakout Score</span></span></span><span class="tmeta"><b>'+esc(v.product)+'</b><small>@'+v.handle+'</small></span></button>';}).join("")+'</div>'+
+  topCtrls()+
+  (list.length?list.map(function(v,i){var h=resultCard(v,{tag:v.product,ask:true});return i?h.replace('<span>Breakout Score</span></span>','</span>'):h;}).join(""):NOMATCH)+
   '</div>';
 };
 
@@ -1465,17 +1569,33 @@ V.library=function(){
   }
   var body;
   if(t==="videos")body=vids.length?vids.map(vrow).join(""):'<p class="emptyl">No saved videos yet.</p>';
-  else if(t==="analyzed")body=ans.length?ans.map(vrow).join(""):'<p class="emptyl">No analyzed videos yet.</p>';
+  else if(t==="analyzed"){
+    var runs=anPending(),fresh2=anReadyUnseen().map(function(r){return r.v;});
+    var arow=function(r){var v=vid(r.v);return '<button class="li run" data-act="an-wait" data-prog="a:'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span class="t"><b><span class="badge">Analyzing</span></b><b>@'+v.handle+'</b>'+esc(v.product)+progHtml("",r)+'</span><span></span></button>';};
+    var done=ans.slice().sort(function(a,b){return fresh2.indexOf(b.id)-fresh2.indexOf(a.id);});
+    body=(runs.length||done.length)?runs.map(arow).join("")+done.map(function(v){var h=vrow(v);return fresh2.indexOf(v.id)>-1?h.replace('<span class="t">','<span class="t"><span class="badge gold">Ready</span>'):h;}).join(""):'<p class="emptyl">No analyzed videos yet.</p>';
+  }
   else{
     var sv=S.history.filter(function(h){return h.saved;}),rest=S.history.filter(function(h){return !h.saved;});
     body=(sv.length?'<p class="lsec">Saved</p>'+sv.map(srow).join(""):'')+(rest.length?'<p class="lsec">Recent</p>'+rest.map(srow).join(""):'');
   }
   return '<div class="tb">'+backBtn()+'<span class="tt">Library</span><span class="sp"></span>'+menuBtn()+'</div>'+
   '<div class="pb" style="gap:12px">'+banners()+
-  '<div class="tabs" role="tablist" aria-label="Library">'+tab("searches","Searches",S.history.length)+tab("videos","Videos",vids.length)+tab("analyzed","Analyzed",ans.length)+'</div>'+
+  '<div class="tabs" role="tablist" aria-label="Library">'+tab("searches","Searches",S.history.length)+tab("videos","Videos",vids.length)+tab("analyzed","Analyzed",ans.length+anPending().length)+'</div>'+
   '<div class="stack" role="tabpanel" aria-labelledby="tab-'+t+'">'+body+'</div></div>';
 };
 
+/* 404 (Ivan, 1 Oct item 19) */
+V.notfound=function(){
+  var tops=feedList("All").slice(0,3);
+  return '<div class="tb"><button class="logo" data-act="home">UGC <b>Breakouts</b></button><span class="sp"></span>'+countPill()+menuBtn()+'</div>'+
+  '<div class="pb" style="gap:16px">'+
+  '<h1 class="h1" style="padding-top:28px">Page not found</h1>'+
+  searchField("q-404")+
+  '<button class="b b1 full-w" data-act="home">Home</button>'+
+  '<section class="peek" aria-label="Top Breakouts"><div class="hdr">Top Breakouts <button data-act="top">See all</button></div><div class="trow">'+tops.map(function(t){return '<button class="tt2" data-act="top" aria-label="Top Breakouts: '+esc(t.product)+' by @'+t.handle+', Breakout Score '+t.score+'"><span class="th2" style="'+bg(t.img)+'"><span class="sb"><b>'+t.score+'</b><span>Breakout Score</span></span></span><span class="tmeta"><b>'+esc(t.product)+'</b><small>@'+t.handle+'</small></span></button>';}).join("")+'</div></section>'+
+  '</div>';
+};
 function ttCard(){
   if(S.tt==="loading")return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><div class="ttload" role="status"><i></i>Reading @'+esc(S.ttHandle)+'</div></section>';
   if(!S.tt)return '<section class="ttc" aria-label="Your breakouts"><h3>Your breakouts</h3><p>See which of your own TikToks broke out.</p>'+
@@ -1522,7 +1642,7 @@ function dtb(o){
   var navs=o.nav?'<nav class="dnav" aria-label="Main">'+(S.plan==="pro"?'':nav("paid","Upgrade"))+nav("top","Top Breakouts")+nav("library","Library")+nav("analyzer","Profile analyzer")+nav("account","Account")+'</nav>':'';
   return '<div class="dtb">'+logo+search+'<span class="sp"></span>'+navs+(o.pill?countPill():'')+'</div>';
 }
-var DTB={analyzer:{nav:1},proc:{pill:1},paid:{},pro:{pill:1},affiliate:{},account:{},library:{nav:1},empty:{search:1,pill:1,nav:1}};
+var DTB={notfound:{pill:1,nav:1},analyzer:{nav:1},proc:{pill:1},paid:{},pro:{pill:1},affiliate:{},account:{},library:{nav:1},empty:{search:1,pill:1,nav:1}};
 function stripTb(h){return h.replace(/^<div class="tb">[\s\S]*?<\/div>/,'');}
 function between(h,a,b){var i=h.indexOf(a),j=b?h.indexOf(b,i+a.length):h.length;return h.slice(i,j);}
 var DV={};
@@ -1531,14 +1651,10 @@ DV.home=function(){
     return '<div class="mos" aria-hidden="true">'+["flatlay","neon","palette","oil","face","brushes"].map(function(k){return '<div style="'+bg(k)+'"></div>';}).join("")+'</div>'+
     '<div class="hero dhero"><p class="wm">UGC <b>Breakouts</b></p><h2 class="tag1"><span>Find Viral Breakouts.</span><span>Get the creative strategy to make your own.</span></h2><p class="aud">An app for TikTok creators</p>'+searchField("q-out")+chipBlock()+'</div>'+sellPage();
   }
-  var recent=[];S.history.forEach(function(h){if(h.n>0&&recent.indexOf(h.q)<0&&recent.length<4)recent.push(h.q);});
-  var lib=ALLV.filter(function(v){return S.saved[v.id];}).slice(0,2);
-  return dtb({pill:1,nav:1})+'<div class="dpage" style="max-width:1000px">'+banners()+
+  return dtb({pill:1,nav:1})+'<div class="dpage" style="max-width:1000px">'+
   '<div class="stack" style="gap:2px"><h1 class="h1 big">What are you filming next?</h1></div>'+
   '<div style="max-width:720px;width:100%">'+searchField("q-in")+'</div>'+chipBlock()+
-  '<div class="dgrid2">'+
-  '<div class="peek"><div class="hdr">Recent</div><div class="chips">'+recent.map(function(c){return '<button class="chip ghost" data-act="results" data-q="'+esc(c)+'">'+esc(c)+'</button>';}).join("")+'</div></div>'+
-  '<div class="peek"><div class="hdr">Library <button data-act="library">See all</button></div><div class="pk">'+lib.map(function(v){return '<button class="pki" data-act="detail" data-v="'+v.id+'"><span class="th" style="'+bg(v.img)+'"></span><span><b>@'+v.handle+'</b><br><b class="s">'+v.score+'</b></span></button>';}).join("")+'</div></div>'+
+  '<div class="dgrid2">'+homeLists().join("")+
   '</div><div style="max-width:480px;width:100%">'+paEntry()+'</div></div>';
 };
 DV.teaser=function(){
@@ -1547,11 +1663,12 @@ DV.teaser=function(){
   '<div class="stack" style="gap:18px"><h1 class="h1 big">See the <em>'+esc(S.query)+'</em> videos worth remaking</h1><p class="sub">Free: 3 searches and 3 video analyses.</p><button class="b bg" data-act="auth" style="max-width:360px">'+gicon()+'Continue with Google</button></div>'+
   sample+'</div></div>';
 };
-function dcard(v){
+function dcard(v,o){
+  o=o||{};
   var an=!!S.analyzed[v.id];
-  return '<article class="dcard">'+vtile(v,{len:true,analyzed:an,style:"aspect-ratio:9/16"})+
+  return '<article class="dcard">'+vtile(v,{len:true,analyzed:an,tag:o.tag,style:"aspect-ratio:9/16"})+
   '<div class="dmeta"><div class="bigs"><b>'+v.score+'</b><span>Breakout Score</span></div><div class="hd">@'+v.handle+' <small>· '+v.followers+'</small></div>'+stats(v)+
-  '<div class="row">'+(an?'<button class="b b1 grow" data-act="detail" data-v="'+v.id+'">View analysis'+ic("chev")+'</button>':'<button class="b b4 grow" data-act="analyze" data-v="'+v.id+'">'+ic("spark")+'Analyze video</button>')+
+  '<div class="row">'+(an?'<button class="b b1 grow" data-act="detail" data-v="'+v.id+'">View analysis'+ic("chev")+'</button>':'<button class="b b4 grow" data-act="'+(o.ask?'analyze-ask':'analyze')+'" data-v="'+v.id+'">'+ic("spark")+'Analyze video</button>')+
   '<button class="b b2 bi'+(S.saved[v.id]?' on':'')+'" data-act="save" data-v="'+v.id+'" aria-pressed="'+!!S.saved[v.id]+'" aria-label="Save">'+ic(S.saved[v.id]?"saved":"save")+'</button>'+
   '<button class="b b2 bi" data-act="share" data-v="'+v.id+'" aria-label="Share">'+ic("share")+'</button></div></div></article>';
 }
@@ -1598,10 +1715,9 @@ DV.shared=function(){
   return dtb()+'<div class="dpage" style="max-width:1100px">'+msg+'<div class="dsplit" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)"><div class="stack" style="gap:16px">'+left+'</div><div class="dsticky">'+cta+'</div></div></div>';
 };
 DV.top=function(){
-  var h=V.top();
-  var head=between(h,'<div class="stack" style="gap:4px">','<div class="tgrid">');
-  var grid=h.slice(h.indexOf('<div class="tgrid">'),h.length-6).replace('class="tgrid"','class="dfeed"');
-  return dtb({search:"Search",pill:1,nav:1})+'<div class="dpage" style="max-width:1200px">'+head.replace('font-size:26px','font-size:40px')+grid+'</div>';
+  var list=topList();
+  var cards=list.length?'<div class="dgrid2">'+list.map(function(v,i){var h=dcard(v,{tag:v.product,ask:true});return i?h.replace('<span>Breakout Score</span></div>','</div>'):h;}).join("")+'</div>':NOMATCH;
+  return dtb({search:"Search",pill:1,nav:1})+'<div class="dpage" style="max-width:1100px"><div class="stack" style="gap:4px"><h1 class="h1 big">Top Breakouts</h1><p class="upd">Updated today</p></div>'+topCtrls()+cards+'</div>';
 };
 var DESK_WIDTH={analyzer:560,proc:560,paid:560,pro:560,account:560,empty:640,library:760,affiliate:600};
 var DESK_BACK={analyzer:1,proc:1,paid:1,affiliate:1,library:1,account:1};
@@ -1632,13 +1748,21 @@ document.getElementById("dev-desk").addEventListener("click",function(){setDevic
 /* ---------------- rail + notes ---------------- */
 var RAIL=[
   {g:"Logged out",items:[["home-out","01","Home"],["sales","01","Home, sales page"],["teaser","01b","Sign in"]]},
-  {g:"Search",items:[["proc","01c","Processing"],["proc-slow","01c","Processing after 1:00"],["proc-ready","01c","Ready"],["home-in","01","Home, signed in"],["home-searching","01","Home, 2 searches running"],["home-ready","01","Home, ready banner"]]},
-  {g:"Breakouts",items:[["results","02","Results"],["results-saved","02","Results, saved search"],["empty","02","No breakouts"],["top","02b","Top Breakouts feed"],["detail","03","Detail"]]},
+  {g:"Search",items:[["proc","01c","Processing"],["proc-slow","01c","Processing after 1:00"],["proc-ready","01c","Ready"],["home-in","01","Home, signed in"],["home-searching","01","Home, 2 searches running"],["home-ready","01","Home, ready banner"],["home-busy","01","Home, searches and analyses running"]]},
+  {g:"Breakouts",items:[["results","02","Results"],["results-saved","02","Results, saved search"],["empty","02","No breakouts"],["top","02b","Top Breakouts feed"],["top-confirm","02b","Top Breakouts, analyze confirm"],["top-cat-new","02b","Top Breakouts, proposed category"],["detail","03","Detail"]]},
   {g:"Sharing",items:[["share","04","Share video"],["shared","05","Shared with you"]]},
   {g:"Money",items:[["paid","07","Paid, search cap"],["paid-videos","07","Paid, video cap"],["paid-analyses","07","Paid, analysis cap"],["pro","09","Pro success"],["affiliate","12","Affiliate"]]},
-  {g:"Account",items:[["library","08","Library"],["account","11","Account, free"],["account-pro","11","Account, Pro"]]},
-  {g:"UGC Profile Analyzer",items:[["pa-account","PA","Button on Account"],["pa-home","PA","Button on Home"],["pa-menu","PA","Button in the menu"],["pa-empty","PA","Add your TikTok"],["pa-story","PA","Your breakout story"],["pa-done","PA","After the story"],["own-detail","PA","One breakout"]]}
+  {g:"Account",items:[["library","08","Library"],["library-analyzing","08","Library, analyzing"],["account","11","Account, free"],["account-pro","11","Account, Pro"]]},
+  {g:"UGC Profile Analyzer",items:[["pa-account","PA","Button on Account"],["pa-home","PA","Button on Home"],["pa-menu","PA","Button in the menu"],["pa-empty","PA","Add your TikTok"],["pa-story","PA","Your breakout story"],["pa-done","PA","After the story"],["own-detail","PA","One breakout"]]},
+  {g:"Menu options",items:[["nav-a","A","Menu with quick access"],["nav-b","B","Bottom bar, Home"],["nav-b-results","B","Bottom bar, Results"]]},
+  {g:"Other",items:[["notfound","404","Page not found"]]}
 ];
+function busy(){
+  S.loggedIn=true;
+  mk("Air fryer",24,60);mk("GRWM",8,64);var d=mk("Lip oil",0,9);finish(d);S.left=2;
+  S.analyzed={v1:true,v2:true};
+  S.anRuns=[{v:"v3",el:30,need:50},{v:"v9",el:12,need:56},{v:"v2",el:40,need:40,done:true,seen:false}];
+}
 function mk(q,el,need){var s={id:S.nextId++,q:q,el:el,need:need,done:false,seen:false,empty:isEmptyQ(q),first:S.plan==="free"&&S.left===3&&!S.searches.length};S.searches.push(s);return s;}
 function jump(key){
   S=fresh();revealSeen={};
@@ -1676,7 +1800,15 @@ function jump(key){
     "pa-story":function(){S.loggedIn=true;S.left=2;S.tt="done";S.ttHandle="sample.raefilms";S.stack=[{view:"home",params:{}},{view:"account",params:{}},{view:"analyzer",params:{}}];S.view="story";},
     "pa-done":function(){S.loggedIn=true;S.left=2;S.stack=[{view:"home",params:{}},{view:"account",params:{}}];S.view="analyzer";S.tt="done";S.ttHandle="sample.raefilms";},
     "own-detail":function(){S.loggedIn=true;S.left=2;S.tt="done";S.ttHandle="sample.raefilms";S.stack=[{view:"home",params:{}},{view:"account",params:{}},{view:"analyzer",params:{}}];S.view="detail";S.params={v:"r1"};},
-    "questions":function(){S.loggedIn=true;S.left=2;S.view="home";}
+    "questions":function(){S.loggedIn=true;S.left=2;S.view="home";},
+    "home-busy":function(){busy();S.view="home";},
+    "library-analyzing":function(){busy();S.stack=home;S.libTab="analyzed";S.view="library";},
+    "top-confirm":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="top";S.anAsk="v9";},
+    "top-cat-new":function(){S.loggedIn=true;S.left=2;S.stack=home;S.view="top";S.topCat="Pets";},
+    "nav-a":function(){busy();S.navOpt="A";S.view="home";S.menu=true;},
+    "nav-b":function(){S.loggedIn=true;S.left=2;S.navOpt="B";S.view="home";},
+    "nav-b-results":function(){S.loggedIn=true;S.left=2;S.navOpt="B";S.stack=home;S.view="results";S.params={q:"Lip oil"};},
+    "notfound":function(){S.loggedIn=true;S.left=2;S.view="notfound";}
   };
   (setups[key]||setups["home-out"])();
   S.railKey=key;
@@ -1686,6 +1818,13 @@ function currentKey(){
   if(S.railKey==="questions")return "questions";
   if(S.railKey==="sales"&&S.view==="home"&&!S.loggedIn)return "sales";
   var v=S.view;
+  if(S.navOpt==="A"&&S.menu)return "nav-a";
+  if(S.navOpt==="B"&&v==="home")return "nav-b";
+  if(S.navOpt==="B"&&v==="results"&&!S.params.saved)return "nav-b-results";
+  if(v==="top"&&S.anAsk)return "top-confirm";
+  if(v==="top"&&S.railKey==="top-cat-new"&&TOPCATS.indexOf(S.topCat)>6)return "top-cat-new";
+  if(v==="library"&&(anPending().length||(S.libTab==="analyzed"&&anReadyUnseen().length)))return "library-analyzing";
+  if(v==="home"&&S.loggedIn&&(anPending().length||anReadyUnseen().length))return "home-busy";
   if(S.railKey==="pa-account"&&v==="account")return "pa-account";
   if((S.railKey==="pa-home"&&v==="home"&&!S.menu)||(S.railKey==="pa-menu"&&v==="home"&&S.menu))return S.railKey;
   if(v==="home"){if(!S.loggedIn)return "home-out";if(readyUnseen().length)return "home-ready";if(pending().length)return "home-searching";return "home-in";}
@@ -1727,18 +1866,18 @@ var NOTES={
     ["f","TikTok only, Breakout language throughout, and no dash asides."]]},
   "teaser":{id:"01b · 01b-teaser-auth",h:"Sign in",li:[["r","Ivan agreed 3 Oct: Terms and Privacy linked under Continue with Google."],["v","Veejay, 3 Oct: the example shows only the score and the hook. The rest sits behind a single locked line."],["r","Polish: cut “Sign in to run your search.” and “What you get for every video”. The free allowance line stays. Ivan: “too many subtext and repeating elements on some pages.”"],["q","No TikTok sign in. TikTok's API returns no email (checked the docs), so it's Google. Ivan: “if no, then we go google.”"],["q","Free is 3 searches and 3 video analyses. Ivan: “yes, 3?”"]]},
   "proc":{id:"01c · 01c-processing",h:"Processing",li:[["r","Ivan, 1 Oct: first search only, a how-to video sits under the steps, so the wait teaches how to read the results and what to pull out. Tap it to open full screen with sound on. The poster is a placeholder until the video is made. Ivan: “add a video explainer on how to use the app, what to pull out… this should help with the 1-2m loading.”"],["a","Ivan asked whether to remove Browse while you wait, especially for the first search. It stays as it is until you decide."],["a","If results arrive before the video ends, should it keep playing or stop at Breakouts ready? The prototype keeps playing."],["r","Polish: one heading, “Finding Lip oil breakouts”, instead of three “Searching” lines. Cut “Watch examples while you wait.” The example scores now sit on a dark chip so they read on light thumbnails. Ivan: “too many subtext and repeating elements on some pages.”"],["q","A search counts when results arrive. Ivan: “search counts when it arrives.”"],["r","Round 3: wait copy is “Usually 15 seconds to a minute.” Ivan: “will be between 15 seconds and 1min.” Browse while you wait now appears at 1:00, once the wait runs past the usual."],["a","When a video is played: does it play in the box, or open a popup with the analysis? The prototype plays it in the box."]]},
-  "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",li:[["r","Polish: cut the line under the heading (it repeated the search box) and the “Open ›” on every recent search. Ivan: “too many subtext and repeating elements on some pages.”"],["r","The headline is now “What are you filming next?” instead of “Welcome back.” Ivan: “welcome back, that can get old?”"],["a","Idea: rotate the headline between a few lines so it stays fresh, like “What are you filming next?”, “Find your next remake.”, and “What's breaking out in your niche?” OK to rotate?"],["c","The menu links to the Top Breakouts feed."]]},
+  "home-in":{id:"01 · 01-home-signed-in",h:"Home, signed in",li:[["r","Ivan, 1 Oct: “change ‘library’ to ‘Recent - Videos analyzed’” and “should be a clear ‘recent search terms’ and ‘recent videos analyzed’”. Home had Recent (chips) and Library (saved videos). They are now Recent search terms and Recent videos analyzed, and the second list shows analyzed videos instead of saved ones."],["r","Searches and analyses that are running or just finished show at the top of these two lists. See Home, searches and analyses running."],["r","Polish: cut the line under the heading (it repeated the search box) and the “Open ›” on every recent search. Ivan: “too many subtext and repeating elements on some pages.”"],["r","The headline is now “What are you filming next?” instead of “Welcome back.” Ivan: “welcome back, that can get old?”"],["a","Idea: rotate the headline between a few lines so it stays fresh, like “What are you filming next?”, “Find your next remake.”, and “What's breaking out in your niche?” OK to rotate?"],["c","The menu links to the Top Breakouts feed."]]},
   "results-saved":{id:"02 · saved search",h:"Results, saved search",li:[["r","Ivan agreed 3 Oct: a saved search shows when it was saved and a Refresh that says it uses 1 search. After a refresh, a New since last run filter appears."]]},
   "results":{id:"02 · 02-results",h:"Results",li:[["r","Ivan agreed 3 Oct: sort Top score, Most views, Newest; filters Under 100K followers, Past 7 days, Analyzed. Videos play inline in the card."],["v","Veejay, 3 Oct: Breakout Score is labeled on the first card only, and the Pro wall is a heading plus the button."],["r","Polish: the “Lip oil” tag on every video is gone, since the search is already at the top. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Paywall after the top 10, saying there are dozens more with Pro. Ivan (follow up): “yeah, let's do 10.” Ivan: “showing only 8 or 10 videos and saying they can see dozens of videos (if they pay).”"],["r","Persistent search on top, unchanged. Ivan: “LOVE the persistent search on the top!”"],["r","Sort and filter. Ivan: “we'll probably need a sort/filter?”"],["r","Analyze, Save, and Share buttons unchanged. Ivan: “love the analyze, save, share buttons.”"],["r","View analysis and Analyze video look different: analyzed videos have a teal Analyzed badge and a solid button, the rest have an outlined Analyze video button."],["q","Free users get 3 analyses. Analyzing a fourth video opens Paid (analysis cap)."],["c","The paywall opens the video cap version of Paid. Ivan: “we need paid cap hit video.”"],["a","Which sort and filter options? Ivan asked whether to keep or remove Under 100K followers."]]},
   "empty":{id:"02 · 02-results-empty",h:"No breakouts",li:[["v","Veejay, 3 Oct: shorter. “Not enough breakouts here. Try another search. This one is free.”"],["q","Shows when a search finds fewer than 25 breakouts, and doesn't use a search. Ivan: “25?” and “if they have a bad search… we tell them to search again.”"]]},
-  "top":{id:"02b · new screen",h:"Top Breakouts feed",li:[["r","Ivan agreed 3 Oct: six categories, updated daily, “Updated today” under the heading."],["v","Veejay, 3 Oct: fixed a bug where the profile analyzer’s sample creator showed in this feed."],["r","Polish: cut the line under the heading. Ivan: “too many subtext and repeating elements on some pages.”"],["c","A feed of every video we've sourced, top scores first, with category chips to pick from. Ivan: “a menu that says top breakouts and then a list of all the breakouts across all categories… chip, you know, the little selector things.”"],["a","Which categories at launch, and how often does the feed update?"]]},
+  "top":{id:"02b · new screen",h:"Top Breakouts feed",li:[["r","Ivan, 1 Oct: “should the video cards here resemble the rest of the app?” The cards are now the Results card: video, Breakout Score, handle, followers, views, likes, comments, shares, then Analyze, Save, and Share. The product name sits on the video, since the feed mixes categories."],["r","Ivan, 1 Oct: “should we add some filters and sorts to the ‘Top Breakouts’?” Same set you agreed for Results on 3 Oct: sort by Top score, Most views, or Newest; filter by Under 100K followers, Past 7 days, or Analyzed."],["r","Ivan, 1 Oct: “should we add more categories to the ‘top breakouts’?” The category row now scrolls sideways, so it can take more."],["a","Which categories to add? Proposed here: Pets, Baby, Cleaning, Supplements, and Kitchen. Their videos are SAMPLE data with placeholder photos."],["r","Ivan, 1 Oct: “selecting to play a video, initiates an analysis - we should require confirmation to analyze?” Before, tapping a tile here started an analysis. Now tapping the video plays it, and Analyze video asks first: “Analyze this video? Uses 1 analysis.”"],["a","Results still analyzes on one tap. Add the same confirm there?"],["r","Ivan agreed 3 Oct: six categories, updated daily, “Updated today” under the heading."],["v","Veejay, 3 Oct: fixed a bug where the profile analyzer’s sample creator showed in this feed."],["r","Polish: cut the line under the heading. Ivan: “too many subtext and repeating elements on some pages.”"],["c","A feed of every video we've sourced, top scores first, with category chips to pick from. Ivan: “a menu that says top breakouts and then a list of all the breakouts across all categories… chip, you know, the little selector things.”"],["a","How often does the feed update?"]]},
   "detail":{id:"03 · 03-detail",h:"Detail",li:[["r","Ivan agreed 3 Oct: the Breakout Score popover uses the same explanation as everywhere else."],["v","Veejay, 3 Oct: the analysis sits behind three tabs (Hook, Why, What next), one sentence per point."],["r","Polish: cut the line under Hooks and the “Lip oil” tag on the video (the search is in the header). Ivan: “too many subtext and repeating elements on some pages.”"],["r","New short Breakout Score explainer, no “punched above.” Ivan: “need a new, shorter description of breakout score (eli10).”"],["q","The explainer says 0 to 100. Ivan: “a combo of a few variables, but the range is 0-100.”"],["r","Watch on TikTok removed. Ivan: “remove watch in tiktok for now?”"],["r","Round 3: views, likes, comments, and shares are now the big numbers, with posted date, length, and network small underneath. Ivan: “the data points that are bigger aren't the important ones, it should be flipped.”"],["r","Round 3: followers shows once, next to the handle. Ivan: “followers is displayed twice.”"],["q","Paid and Spark ad videos stay in the rankings, unlabeled. No change for MVP."]]},
   "share":{id:"04 · 04-share",h:"Share video",li:[["r","Polish: cut the line under the heading. Ivan: “too many subtext and repeating elements on some pages.”"],["r","The note locks when the link is copied, so the note that was copied is the note that gets sent. Ivan: “what if someone types, copies, then changes the note, which note will be sent.”"],["r","Round 3: Edit note unlocks it. Copying again makes a new link with the new note, and the earlier link keeps its old note. Ivan: “should be a way to edit note?”"]]},
   "shared":{id:"05 · 05-shared",h:"Shared with you",li:[["v","Veejay, 3 Oct: same three tabs as Detail. The line under the sign up heading is gone."],["r","Polish: cut the line under Hooks. Ivan: “too many subtext and repeating elements on some pages.”"],["r","More CTA at the bottom: try it on your own brand, product, or style, with a search box and “Free. Just your email.” Ivan: “convince them to sign on, try us out, search a brand or product or style of their own, free, just your email.”"],["r","Round 3: the heading is “Find Breakouts of your own!”"],["q","Sign up with Google or email (no TikTok, since it gives no email)."],["q","The sender line shows first name and email. Ivan: “first name and email?”"],["q","The recipient sees the sender's analysis as it is. Ivan: “yes.”"]]},
   "paid":{id:"07 · 07-paid",h:"Paid",li:[["r","Polish: price shows once (the button says Upgrade). One line per feature, and the fourth feature is gone because it repeated the first. Ivan: “too many subtext and repeating elements on some pages.”"],["c","Three versions: search cap, video cap, and analysis cap. Ivan: “this is paid cap hit search. We need paid cap hit video.”"],["q","Analysis cap reads “You used your 3 free video analyses.”"],["r","Round 3: all three versions say you get dozens of Viral Breakouts per search, and list the analysis and the creative director as features. Ivan: “add that you get dozens of videos per search, maybe add more features, like our analysis and creative director (better copy).”"],["f","Earlier fix: removed the internal note “Your hero benefit. Not unlimited.” from the customer copy."]]},
   "pro":{id:"09 · 09-pro-success",h:"Pro success",li:[["r","Polish: the three steps keep their titles only. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Round 3: the first step reads “Search a new product or video style.” Ivan: “call out search new product or video style.”"],["r","Round 3: added See Top Breakouts. Ivan: “add? top breakout.”"],["r","Round 3: all three steps are tappable. Ivan: “make those buttons clickable.”"]]},
   "affiliate":{id:"12 · 12-affiliate",h:"Affiliate",li:[["v","Veejay, 3 Oct: $49 shows once. Steps read Share your link, They upgrade to Pro, You get paid."],["r","Polish: cut the line under the heading. The three steps already say it. Ivan: “too many subtext and repeating elements on some pages.”"],["r","Looks different from Paid: dark earnings card on the left and the steps in a row. Ivan: “this page should look a little different than the paid cap hit.”"],["r","Round 3: $49 only, no reward selector. Ivan: “they wont be able to select, let's keep it $49 for now.”"],["f","Earlier fix: the link screen no longer says “Mock affiliate link.”"]]},
-  "library":{id:"08 · 08-library",h:"Library",li:[["r","Searches vs History merged into one Searches tab: saved searches at the top, every other search under Recent. Ivan: “what's the difference between searches and history, is it saved searches vs all searches.”"],["q","Saved searches are snapshots. Refreshing one would cost a search. Ivan: “refresh costs another ‘search’ credit.”"],["a","Where should Refresh go?"]]},
+  "library":{id:"08 · 08-library",h:"Library",li:[["r","Ivan, 1 Oct: running analyses show in the Analyzed tab with an Analyzing badge. See Library, analyzing."],["r","Searches vs History merged into one Searches tab: saved searches at the top, every other search under Recent. Ivan: “what's the difference between searches and history, is it saved searches vs all searches.”"],["q","Saved searches are snapshots. Refreshing one would cost a search. Ivan: “refresh costs another ‘search’ credit.”"],["a","Where should Refresh go?"]]},
   "account":{id:"11 · 11-account",h:"Account",li:[["v","Veejay, 3 Oct: the Profile analyzer button sits here, under your name. The analyzer itself is its own screen (UGC Profile Analyzer group in the rail)."]]},
   "pa-account":{id:"PA · entry",h:"Button on Account",li:[["c","Ivan, 2 Oct call: “add the UGC profile analyzer to the profile.” The profile analyzer is the breakout story (Spotify Wrapped style), opened from the profile."],["r","Ivan, 30 Sep: “basically like spotify but it’s more addictive… we’ll find the breakouts for your thing for free.” Ivan, 1 Oct: “we pull their profile analysis with breakouts” and “keep it the profile story.”"]]},
   "pa-home":{id:"PA · entry",h:"Button on Home",li:[["a","Same button at the bottom of Home, signed in. Keep it here too, or only on Account?"]]},
@@ -1746,11 +1885,17 @@ var NOTES={
   "pa-empty":{id:"PA · the analyzer",h:"Add your TikTok",li:[["v","Every button leads here. Type a handle and the story plays."],["a","Does reading one handle cost a search, or is it free?"]]},
   "pa-story":{id:"PA · the analyzer",h:"Your breakout story",li:[["v","The same story we DM to creators who say yes (outreach version in the link at the top of the rail). Tap or wait to move through, X goes back."],["a","Signed in, the last card says “Search a new product or video style” (Ivan’s Pro success wording) and opens Home with the search ready."]]},
   "pa-done":{id:"PA · the analyzer",h:"After the story",li:[["v","Closing the story lands here: the biggest breakout, the breakout rate, Play your story again, and the other two behind See all 3. Each breakout opens its analysis."]]},
-  "own-detail":{id:"PA · the analyzer",h:"One breakout",li:[["v","Veejay, 2 Oct: less overwhelming. Smaller video, one line of stats instead of four boxes, and the analysis behind three tabs. What next opens first, since that is what you act on."],["v","Tapping a breakout on Account opens this. Same analysis as any search result: hooks, why it worked, what to do next, written for your own video."],["a","Header says Your breakout instead of the search, and the score line adds “12x your usual views”. The info popover uses the settled wording: against your account’s own average."],["a","Save and Share work as on any breakout. Back returns to Account."]]}
+  "own-detail":{id:"PA · the analyzer",h:"One breakout",li:[["v","Veejay, 2 Oct: less overwhelming. Smaller video, one line of stats instead of four boxes, and the analysis behind three tabs. What next opens first, since that is what you act on."],["v","Tapping a breakout on Account opens this. Same analysis as any search result: hooks, why it worked, what to do next, written for your own video."],["a","Header says Your breakout instead of the search, and the score line adds “12x your usual views”. The info popover uses the settled wording: against your account’s own average."],["a","Save and Share work as on any breakout. Back returns to Account."]]},
+  "home-busy":{id:"01 · running searches and analyses",h:"Home, searches and analyses running",li:[["r","Ivan, 1 Oct: “you can initiate a lot of them… If you initiate a bunch, it's hard to keep track what is ready when? … maybe add a processing visual on the home page for search terms and videos? expand the home screen search terms and videos that are processing and complete?”"],["r","Home now has two lists. Anything that just finished sits at the top with Ready, then anything running with its progress, then the rest by date. Tap a running search to see its progress screen."],["r","Ivan, 1 Oct: “change ‘library’ to ‘Recent - Videos analyzed’” and “should be a clear ‘recent search terms’ and ‘recent videos analyzed’”. Home had Recent (chips) and Library (saved videos). They are now Recent search terms and Recent videos analyzed, and the second list shows analyzed videos instead of saved ones."],["a","The In progress and Ready banners are gone from Home, since these lists show the same thing. They stay on the Library. OK?"],["a","Sample state: 2 searches running and 1 done, 2 analyses running and 1 done. Finish running (above the screen) completes them."],["a","Analysis is instant everywhere else in this prototype. If a real analysis takes time, Analyze video would start it and you keep browsing while it runs here. Is that how it works?"]]},
+  "library-analyzing":{id:"08 · analyzing",h:"Library, analyzing",li:[["r","Ivan, 1 Oct: “maybe add ‘analyzing’ in the analyzed portion of the library?”"],["r","The Analyzed tab lists running analyses first, with an Analyzing badge and progress. A finished one shows Ready until you open it. The tab count includes the running ones."],["a","Sample state: 2 analyses running and 1 just finished."]]},
+  "nav-a":{id:"14 · option A",h:"Menu with quick access",li:[["r","Ivan, 1 Oct: “menu system - should we move searches, videos bookmarked and videos analyzed to the hamburger for quick access - or even quicker access as a persistent bar on the bottom? with search?”"],["r","Option A: the menu opens on Searches, Bookmarked, and Analyzed, each with its count (Analyzed also shows how many are running). Each one opens that tab of the Library. Top Breakouts, Profile analyzer, and Account follow."],["r","Top bar unchanged: UGC Breakouts top left goes Home, the menu sits top right, no Pro tag."],["r","Desktop: the top links stay as they are. Library there already opens the same three tabs, so option A changes nothing on desktop."],["a","Library is no longer its own row, since its three tabs are now in the menu. Keep a Library row too?"],["a","The Library tab is called Videos, but the menu says Bookmarked (your word). Rename the tab to Bookmarked so they match?"],["a","Option A or option B? Option B is in the rail just below."]]},
+  "nav-b":{id:"14 · option B",h:"Bottom bar",li:[["r","Ivan, 1 Oct: “menu system - should we move searches, videos bookmarked and videos analyzed to the hamburger for quick access - or even quicker access as a persistent bar on the bottom? with search?”"],["r","Option B: a bar fixed to the bottom of the signed in screens, with Home (where the search box is), Searches, Bookmarked, Analyzed, and Top. The tab you are on is underlined. Tap through Home, Results, Top Breakouts, and Library to see it stay."],["r","The menu keeps what does not fit in the bar: searches left, Upgrade, Profile analyzer, and Account. Top bar unchanged, no Pro tag."],["a","Top Breakouts moves out of the menu into the bar as Top, so the feed stays one tap away. Keep it there?"],["a","Detail and Share already have Save and Share fixed at the bottom, so the bar is hidden on those two. OK?"],["a","Desktop keeps its top links for now. With option B they would become Home, Searches, Bookmarked, Analyzed, and Top Breakouts, with Profile analyzer and Account under your name. Want that built if you pick B?"],["a","Option A or option B?"]]},
+  "notfound":{id:"404 · new screen",h:"Page not found",li:[["r","Ivan, 1 Oct: “better 404 page?”"],["r","Replaces the generic page (“This page slipped off the radar”, links to Dashboard, Bookmarks, and Login, then a 7 second redirect to login). Now it has the usual top bar, one plain headline, the search box, a Home button, and Top Breakouts to get back in. No redirect."],["a","Someone who is logged out: same page without the menu and search count, or straight to the logged out Home?"]]}
 };
 ["proc-slow","proc-ready"].forEach(function(k){NOTES[k]=NOTES.proc;});
+["top-confirm","top-cat-new"].forEach(function(k){NOTES[k]=NOTES.top;});
 ["home-searching","home-ready"].forEach(function(k){NOTES[k]=NOTES["home-in"];});
-NOTES["account-pro"]=NOTES.account;NOTES["account-tt"]=NOTES["pa-done"];NOTES["paid-videos"]=NOTES.paid;NOTES["paid-analyses"]=NOTES.paid;
+NOTES["nav-b-results"]=NOTES["nav-b"];NOTES["account-pro"]=NOTES.account;NOTES["account-tt"]=NOTES["pa-done"];NOTES["paid-videos"]=NOTES.paid;NOTES["paid-analyses"]=NOTES.paid;
 
 function notesHtml(key){
   var legend='<div class="legend"><span><span class="tag r">IVAN</span> his notes</span><span><span class="tag q">ANSWER</span> his answers</span><span><span class="tag c">CALL</span> Ivan calls</span><span><span class="tag f">LOCK</span> fix to his own locks</span><span><span class="tag v">VEEJAY</span> Veejay asked for it</span><span><span class="tag a">ASK</span> needs Ivan</span></div>';
@@ -1775,7 +1920,7 @@ function renderChrome(){
   document.getElementById("where").textContent=NOTES[key]?NOTES[key].id:"Questions";
   var ctl="";
   if(S.view==="proc"){var s=findSearch(S.params.id);if(s&&!s.done)ctl='<button data-ctl="slow">Jump to 1:00</button><button data-ctl="ready">Jump to Ready</button>';}
-  if(pending().length&&S.view!=="proc")ctl='<button data-ctl="finish-all">Finish running searches</button>';
+  if((pending().length||anPending().length)&&S.view!=="proc")ctl='<button data-ctl="finish-all">'+(anPending().length?'Finish running':'Finish running searches')+'</button>';
   document.getElementById("ctl").innerHTML=ctl+'<button data-ctl="restart">Restart</button>';
 }
 document.getElementById("ctl").addEventListener("click",function(e){
@@ -1783,7 +1928,7 @@ document.getElementById("ctl").addEventListener("click",function(e){
   if(c==="restart"){jump("home-out");return;}
   if(c==="slow"){var s=findSearch(S.params.id);if(s){s.el=Math.max(s.el,60);s.need=Math.max(s.need,s.el+20);render(false);}return;}
   if(c==="ready"){var s2=findSearch(S.params.id);if(s2)s2.el=s2.need-1;return;}
-  if(c==="finish-all"){pending().forEach(function(s){s.el=s.need-1;});}
+  if(c==="finish-all"){pending().forEach(function(s){s.el=s.need-1;});anPending().forEach(function(r){r.el=r.need-1;});}
 });
 
 var scr=document.getElementById("scr"),ovl=document.getElementById("ovl");
@@ -1803,26 +1948,53 @@ function wireReveal(){
     if(revealSeen[i])el.classList.add("in");else revealObs.observe(el);
   });
 }
+/* option B: persistent bottom bar on signed in screens (Ivan, 1 Oct item 14) */
+var BBAR_VIEWS={home:1,results:1,top:1,library:1,empty:1,account:1,analyzer:1,notfound:1};
+function hasBbar(){return DEVICE==="phone"&&S.navOpt==="B"&&S.loggedIn&&!!BBAR_VIEWS[S.view];}
+function bbar(){
+  var cur=S.view==="home"?"home":(S.view==="top"?"top":(S.view==="library"?S.libTab:""));
+  return '<nav class="bbar" aria-label="Quick access">'+[["home","home","home","Home"],["lib","searches","clock","Searches"],["lib","videos","save","Bookmarked"],["lib","analyzed","spark","Analyzed"],["top","top","star","Top"]].map(function(b){
+    return '<button data-act="'+b[0]+'" data-k="'+b[1]+'"'+(cur===b[1]?' aria-current="page"':'')+'>'+ic(b[2])+'<span>'+b[3]+'</span></button>';}).join("")+'</nav>';
+}
 function render(nav,keepScroll){
   var top=scr.scrollTop;
   var sp0=scr.querySelector(".strip"),stripLeft=sp0?sp0.scrollLeft:0;
   var keepStory=S.view==="story"&&scr.querySelector("iframe.storyf")&&scr.getAttribute("data-dev")===DEVICE;
-  if(!keepStory)scr.innerHTML=DEVICE==="desk"?(DV[S.view]?DV[S.view]():deskGeneric()):(V[S.view]||V.home)();
+  if(!keepStory)scr.innerHTML=(DEVICE==="desk"?(DV[S.view]?DV[S.view]():deskGeneric()):(V[S.view]||V.home)())+(hasBbar()?bbar():'');
+  phone.classList.toggle("navb",hasBbar());
   scr.setAttribute("data-dev",DEVICE);
   scr.scrollTop=(nav&&!keepScroll)?0:top;
   if(S.scrollTo){var se=scr.querySelector("#"+S.scrollTo);if(se)scr.scrollTop=se.offsetTop-10;S.scrollTo=null;}
   if(stripLeft){var sp2=scr.querySelector(".strip");if(sp2)sp2.scrollLeft=stripLeft;}
+  /* keep the chosen Top Breakouts category in view after a re-render */
+  var oc=scr.querySelector(".ctrls.cats .chip.on");
+  if(oc){var pc=oc.parentNode,cr=pc.getBoundingClientRect(),orr=oc.getBoundingClientRect();if(orr.right>cr.right||orr.left<cr.left)pc.scrollLeft+=orr.left-cr.left-16;}
   wireReveal();
   lockSampleHeight();
   renderOverlay();renderChrome();
   if(S.focusSearch){S.focusSearch=false;var inp=scr.querySelector(".sf input");if(inp){inp.focus();try{inp.setSelectionRange(inp.value.length,inp.value.length);}catch(e){}}}
+}
+function menuItems(){
+  var mi=function(a,l,k,n){return '<button class="mi" data-act="'+a+'"'+(k?' data-k="'+k+'"':'')+'>'+l+' <small>'+(n===undefined?'':n)+'</small></button>';};
+  var more=mi("analyzer","Profile analyzer")+mi("account","Account");
+  if(S.navOpt==="A"){
+    var run=anPending().length,nSaved=ALLV.filter(function(v){return S.saved[v.id];}).length,nAn=Object.keys(S.analyzed).length;
+    return '<p class="mlbl">Quick access</p>'+mi("lib","Searches","searches",S.history.length)+mi("lib","Bookmarked","videos",nSaved)+mi("lib","Analyzed","analyzed",nAn+(run?' · '+run+' analyzing':''))+
+      '<p class="mlbl">More</p>'+mi("top","Top Breakouts")+more;
+  }
+  if(S.navOpt==="B")return more;
+  return mi("top","Top Breakouts")+mi("library","Library")+more;
 }
 function renderOverlay(){
   var h="";
   if(S.menu){
     h+='<button class="scrim" data-act="close-menu" aria-label="Close menu"></button><div class="sheet" role="dialog" aria-label="Menu"><span class="grab"></span>'+
     (S.plan==="pro"?'':'<button class="mi" data-act="paid">Searches left <small>'+S.left+' of 3</small></button><button class="mi up" data-act="paid">Upgrade <small>$49/mo</small></button>')+
-    '<button class="mi" data-act="top">Top Breakouts <small></small></button><button class="mi" data-act="library">Library <small></small></button><button class="mi" data-act="analyzer">Profile analyzer <small></small></button><button class="mi" data-act="account">Account <small></small></button></div>';
+    menuItems()+'</div>';
+  }
+  if(S.anAsk){
+    h+='<button class="scrim" data-act="analyze-no" aria-label="Cancel"></button><div class="sheet" role="dialog" aria-label="Analyze this video?"><span class="grab"></span><h3>Analyze this video?</h3><p>Uses 1 analysis.</p>'+
+    '<button class="b b1 full-w" data-act="analyze-yes">'+ic("spark")+'Analyze</button><button class="b b3" data-act="analyze-no">Cancel</button></div>';
   }
   if(S.sortSheet){
     h+='<button class="scrim" data-act="sort-close" aria-label="Close sort"></button><div class="sheet" role="dialog" aria-label="Sort by"><span class="grab"></span><h3>Sort by</h3>'+
@@ -1833,11 +2005,16 @@ function renderOverlay(){
   ovl.innerHTML=h;
 }
 
-document.addEventListener("keydown",function(e){if(e.key==="Escape"&&S.howto){e.stopImmediatePropagation();S.howto=false;renderOverlay();}});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&S.howto){e.stopImmediatePropagation();S.howto=false;renderOverlay();}if(e.key==="Escape"&&S.anAsk){e.stopImmediatePropagation();S.anAsk=null;renderOverlay();}});
 /* ---------------- actions ---------------- */
 function signIn(q){
   S.loggedIn=true;S.left=3;S.anLeft=3;S.stack=[];S.view="";
   if(q)startSearch(q);else go("home");
+}
+function doAnalyze(av){
+  if(S.analyzed[av]){go("detail",{v:av});return;}
+  if(S.plan==="free"&&S.anLeft<=0){go("paid",{reason:"analyses"});return;}
+  S.analyzed[av]=true;if(S.plan==="free")S.anLeft--;go("detail",{v:av});
 }
 function act(a,el){
   var d=function(k){return el.getAttribute("data-"+k);};
@@ -1861,13 +2038,14 @@ function act(a,el){
       if(S.plan==="free")S.left--;
       S.params.when="Just now";S.params.refreshed=true;render(false);toast("<b>Refreshed.</b> 1 search used.");break;
     case "empty": go("empty",{q:d("q")}); break;
-    case "detail": go("detail",{v:d("v")}); break;
+    case "detail": var dv=d("v"); S.anRuns.forEach(function(r){if(r.v===dv&&r.done)r.seen=true;}); go("detail",{v:dv}); break;
     case "analyze":
-    case "top-open":
-      var av=d("v");
-      if(S.analyzed[av]){go("detail",{v:av});break;}
-      if(S.plan==="free"&&S.anLeft<=0){go("paid",{reason:"analyses"});break;}
-      S.analyzed[av]=true;if(S.plan==="free")S.anLeft--;go("detail",{v:av}); break;
+    case "top-open": doAnalyze(d("v")); break;
+    case "analyze-ask": if(S.analyzed[d("v")]){go("detail",{v:d("v")});break;} S.anAsk=d("v"); renderOverlay(); var ay=ovl.querySelector("[data-act='analyze-yes']"); if(ay)ay.focus(); break;
+    case "analyze-yes": var aa=S.anAsk; S.anAsk=null; if(aa)doAnalyze(aa); break;
+    case "analyze-no": S.anAsk=null; renderOverlay(); break;
+    case "an-wait": toast("<b>Still analyzing.</b> It shows Ready here when it is done."); break;
+    case "lib": S.libTab=d("k"); if(S.view==="library"){S.menu=false;render(false);}else go("library"); break;
     case "sell-search": startSearch(d("q")); break;
     case "sell-ex": S.sellV=d("v"); S.sellHook=0; S.sellInfo=false; render(false); break;
     case "sell-hook": S.sellHook=+d("k"); render(false); break;
