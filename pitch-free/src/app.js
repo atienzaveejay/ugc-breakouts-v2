@@ -74,7 +74,7 @@ var CARD={
   c9:{t:"t-cyan",n:"Find Breakouts of your own",h:function(){return '<i class="shp sq bob" style="width:30cqw;height:30cqw;left:-8cqw;top:40cqw;rotate:18deg;opacity:.9"></i>'+
     '<div class="cin"><div class="fill"><div class="fan">'+
     ['112K','64K','41K'].map(function(n,k){return '<div class="sl s'+(k+1)+'"><i class="c"></i><i class="h"></i><i></i><i style="width:80%"></i><div class="n"><b>'+n+'</b></div></div>';}).join("")+
-    '</div></div><p class="cta-h rise d1">Find Breakouts of your own!</p><p class="body rise d2">Try it on your own brand, product, or style. See what’s breaking out on TikTok and how to remake it.</p>'+
+    '</div></div><p class="cta-h long rise d1">Type in any keyword of your own and find viral video breakouts</p><p class="body rise d2">See what’s breaking out on TikTok and how to remake it.</p>'+
     '<div class="cbtns rise d3">'+(APP?'<button type="button" class="cbtn" data-act="appsearch">Search a new product or video style</button>':'<a class="cbtn" href="../#teaser" target="_blank" rel="noopener">Start free '+ic("arrow").replace('<svg','<svg style="width:5cqw;height:5cqw"')+'</a>')+'<button type="button" class="cbtn alt" data-act="replay">Watch again</button></div>'+
     '<div class="cfoot"><span>'+(APP?'':'Free. Just your email.')+'</span>'+SMP+'</div></div>';}},
   /* edge cases */
@@ -135,7 +135,7 @@ var V={
   reading:function(){
     var steps=["Finding your usual views","Scoring every video","Picking your breakouts"];
     return '<div class="read"><i class="glow"></i><div class="deal">'+["oil","face","palette","flatlay"].map(function(k,j){return '<div class="th" style="'+bg(k)+';--r:'+([-6,4,-2,7][j])+'deg;animation-delay:'+(j*.6)+'s"></div>';}).join("")+'</div>'+
-    '<div><div class="cnt" id="rcnt">'+S.rc+'</div><p class="cl">videos read on @'+esc(S.handle)+'</p></div>'+
+    '<div><div class="cnt" id="rcnt">'+S.rc+'</div><p class="cl">of your videos checked for breakouts</p></div>'+
     '<ol>'+steps.map(function(s,k){return '<li class="'+(S.rs>k?'on':'')+'"><i></i>'+s+'</li>';}).join("")+'</ol></div>';
   },
   story:function(){return player(S.set,S.i,{play:S.play,still:S.still});},
@@ -179,7 +179,8 @@ var NOTES={
   reading:{id:"L2 · reading the account",h:"Reading your account",li:[
     ["v","The short “reading your account” moment from the brief. The count runs up while videos deal across the screen."],
     ["a","How long a read takes is a guess. Searches take 15 seconds to a minute, and this scrapes one account. Expect the short end. Lester to confirm."],
-    ["d","Needs: public videos with views and length, the account’s average, a Breakout Score per video. Same pipeline as a search on one handle."]]},
+    ["d","Needs: public videos with views and length, the account’s average, a Breakout Score per video. Same pipeline as a search on one handle."],
+    ["r","Ivan, Slack 7 Oct: “videos read on…” wasn’t clear, needs new copy. The count now reads “42 of your videos checked for breakouts.”"]]},
   c1:{id:"Card 1 of 9 · free",h:"Videos we read",li:[
     ["a","Opens on the count and the date range, which makes the numbers after it read as fair. The lit tiles hint at the 8 breakouts to come."],
     ["f","SAMPLE on every card, and every handle starts with “sample.” Nothing here is a real account."]]},
@@ -212,7 +213,7 @@ var NOTES={
     ["v","The second line is now their usual views. “I open on the product” came from the hook analysis, which is sign up only."],
     ["q","Spotify reports 500M+ Wrapped shares in the first 24 hours (company claim). Duolingo saw share rates go up when the flattering number moved onto the share card."+src("https://blog.duolingo.com/year-in-review-behind-the-scenes","Duolingo Blog")]]},
   c9:{id:"Card 5 of 5 · the ask",h:"Find Breakouts of your own",li:[
-    ["r","Replaces the pitch deck ask. Heading, line and “Free. Just your email.” are Ivan’s own copy from the Shared screen CTA."]
+    ["r","Ivan, Slack 7 Oct: new title “Type in any keyword of your own and find viral video breakouts”, subtitle “See what’s breaking out on TikTok and how to remake it.” “Free. Just your email.” stays from the Shared screen CTA."]
     ]},
   "private":{id:"E1 · edge case",h:"Private account",li:[
     ["a","One card, then back to the handle box. Nothing is read."]]},

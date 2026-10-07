@@ -158,6 +158,7 @@
 .fan .s2{left:8cqw;top:4cqw;transform:rotate(-2deg)}
 .fan .s3{left:16cqw;top:0;transform:rotate(5deg)}
 .cta-h{font-size:11cqw;font-weight:800;letter-spacing:-.05em;line-height:.95;text-wrap:balance}
+.cta-h.long{font-size:8cqw;letter-spacing:-.04em;line-height:1}
 
 /* motion */
 @media (prefers-reduced-motion:no-preference){
