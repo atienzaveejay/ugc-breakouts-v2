@@ -104,10 +104,10 @@ ITEMS = {
   "Signed out. Tap each example search in One search, one video.", "Each example gets its own reasons.", "COPY", [], []),
  (24, "Top Breakouts: “No preview” on every card", FIXED,
   "Checked 11 Oct: every card shows its thumbnail. Nothing to build.", "", "", "BUG", [], []),
- (25, "Breakout Score explained by follower count", LIVE,
-  "11 Oct: still “views relative to follower count, engagement, and how recently the video was posted”, on the sales page and in the analysis info.",
-  "Open the score info on an analysis, or the sales page score card.",
-  "Use the agreed line: how much a video beat the average of what that account usually gets.", "COPY", [], []),
+ (25, "Breakout Score: the formula and its copy still use follower count", LIVE,
+  "11 Oct: the info text still reads “views relative to follower count, engagement, and how recently the video was posted”, and the numbers follow it. A mousepad video at 730 times its creator's usual views scores 62, while a dog video at 260 times scores 91, because the score leans on followers.",
+  "Compare any result's score with the creator's usual views on their TikTok profile. Test cases: @tulip6942 (desk essentials) 730x, score 62; @winston.cavapoo (dog car seat) 260x, score 91; @kenyewest (costco finds) 3,700x, score 79.",
+  "Score the video against its own account, as agreed: usual views = median views of the creator's 15 latest non-pinned posts, leaving this one out. Then a 0 to 100 scale, for example 25 × log10(views ÷ usual views), capped at 100, so 10x = 25, 100x = 50, 1,000x = 75 and 10,000x = 100. On the test cases above that gives 72, 60 and 89, in the same order as the multiples, and it spreads the Top Breakouts scores out (item 22). The 60+ breakout line (5 Oct) needs a recheck on the new scale. Then use the agreed line wherever the score is explained.", "BUG + COPY", [], []),
 ]),
 }
 
