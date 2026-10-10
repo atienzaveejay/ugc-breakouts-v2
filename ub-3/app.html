@@ -59,6 +59,7 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .tag.call{color:var(--t-ivan);background:var(--t-ivan-bg)}
 .tag.bb{color:var(--t-bb);background:var(--t-bb-bg)}
 .tag.ask{color:var(--t-ask);background:var(--t-ask-bg)}
+.tag.veejay{color:var(--t-bb);background:var(--t-bb-bg)}
 .mnav{display:none}
 @media (max-width:820px){
   .shell{grid-template-columns:minmax(0,1fr)}
@@ -448,7 +449,7 @@ var S={};
 S["home-new"]={g:"First visit",n:"1",l:"Home, first visit",bar:"home",
  body:function(){return topbar({left:"3 free searches"})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox(null,false,"first-wait")+
   '<div class="chips"><button class="chip" data-go="first-wait">Lip oil</button><button class="chip">Air fryer</button><button class="chip">GRWM</button><button class="chip">OOTD</button></div></div>';},
- notes:[["call","Ivan, 1 Oct: searches, bookmarked and analyzed videos in the hamburger or a bottom bar. Shown here: the bottom bar from the first screen. The hamburger is option A."],["call","Ivan, 1 Oct: no suggestions dropdown when the search box is tapped. The chips are the live app’s suggestions."],["ask","Not built: a 4 step Get started checklist on Home, as planned for BrandBeacon 3.0. Want it on UB too?"],["ask","Suggestion chips only show terms that return breakouts, so a tap never lands on No breakouts. Can Lester build that list?"]]};
+ notes:[["call","Ivan, 1 Oct: searches, bookmarked and analyzed videos in the hamburger or a bottom bar. Shown here: the bottom bar from the first screen. The hamburger is option A."],["call","Ivan, 1 Oct: no suggestions dropdown when the search box is tapped. The chips are the live app’s suggestions."],["veejay","No Get started checklist. The first search and the how-to video already teach the app, and a checklist would compete with the search box."],["veejay","Dev: suggestion chips only show terms that already return breakouts, so a tap never lands on No breakouts."]]};
 
 S["first-wait"]={g:"First visit",n:"2",l:"First search running, how-to video",bar:"home",
  body:function(){return topbar({back:"home-new",title:"Your first search",left:false})+'<div class="pb" style="gap:14px">'+
@@ -456,14 +457,14 @@ S["first-wait"]={g:"First visit",n:"2",l:"First search running, how-to video",ba
   '<button class="howto" aria-label="Play How to read your results, 1:07"><span class="hw-h">How to read your results</span><span class="hw-p">'+play()+'</span><span class="ph"><i style="width:70%"></i><i style="width:52%"></i></span><span class="hw-d">1:07</span><span class="hw-bar"><i style="width:0"></i></span></button>'+
   '<p class="fine">Leave anytime. We’ll tell you when it’s ready.</p></div>';},
  badge:{home:{n:1}},
- notes:[["call","Ivan, 1 Oct: consider removing Browse while you wait, especially for the first search. The how-to video takes that spot (outline approved 7 Oct)."],["call","The bottom bar stays, so leaving is one tap. The search keeps running and follows them."],["ask","Video poster is a placeholder until the video is made."]]};
+ notes:[["call","Ivan, 1 Oct: consider removing Browse while you wait, especially for the first search. The how-to video takes that spot (outline approved 7 Oct)."],["call","The bottom bar stays, so leaving is one tap. The search keeps running and follows them."],["veejay","Video poster is a placeholder until the video is made."]]};
 
 S["first-ready"]={g:"First visit",n:"3",l:"First search ready, video keeps playing",bar:"home",
  body:function(){return topbar({back:"home-new",title:"Your first search",left:false})+'<div class="pb" style="gap:14px">'+
   '<div class="rdy"><span class="tile">'+ic("star")+'</span><span><b>Lip oil is ready</b><small>38 breakouts</small></span><button class="b b1" data-go="results">See breakouts</button></div>'+
   '<button class="howto playing" aria-label="How to read your results, playing"><span class="hw-h">How to read your results</span><span class="hw-p"><svg class="i f" viewBox="0 0 24 24" aria-hidden="true" style="margin-left:0"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg></span><span class="ph"><i style="width:70%"></i><i style="width:52%"></i></span><span class="hw-k">0:31 / 1:07</span><span class="hw-bar"><i style="width:46%"></i></span></button></div>';},
  badge:{home:{n:1,g:1}},
- notes:[["ask","Open question on Feedback: does the video keep playing when results land? Shown: it keeps playing and a ready card slides in above it with one button."],["ask","Auto open results when ready, or wait for the tap? My pick: wait, so the video is not cut off."]]};
+ notes:[["veejay","The video keeps playing when results land, and a ready card slides in above it with one button."],["veejay","Results wait for the tap instead of opening on their own, so the video is not cut off."]]};
 
 S["started"]={g:"Searching",n:"4",l:"Search started, stay on Home",bar:"home",
  body:function(){return topbar({left:"1 search left"})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox()+
@@ -483,19 +484,19 @@ S["ready-toast"]={g:"Searching",n:"6",l:"Ready toast, anywhere",bar:"top",
  body:function(){return topbar({left:"1 search left"})+'<div class="pb">'+topFeed()+'</div>';},
  overlay:function(){return toast("star","Lip oil is ready","38 breakouts","View","results",true);},
  badge:{home:{n:1,g:1}},
- notes:[["call","The bar turns into a toast with one button. It stays until tapped or swiped, and Home keeps a gold Ready row."],["ask","Email when ready if they closed the tab? My pick: yes, one email per search, with an off switch in Account."]]};
+ notes:[["call","The bar turns into a toast with one button. It stays until tapped or swiped, and Home keeps a gold Ready row."],["veejay","One email when the first search is ready and they have left the tab, the same as Ivan asked for BrandBeacon on 10 Oct. Later searches get the toast only. The email has an unsubscribe link, so Account needs no switch."]]};
 
 S["home-busy"]={g:"Searching",n:"7",l:"Home, running and ready",bar:"home",
  body:function(){return topbar({left:"Pro"})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox()+
   '<section class="card"><div class="hdr">Recent search terms<button data-go="library">See all</button></div>'+srow("Lip oil","ready",38)+srow("Air fryer","run",60)+srow("GRWM","run",16)+srow("Tinted moisturizer","",'27 breakouts · Yesterday')+'</section>'+
   '<section class="card"><div class="hdr">Recent videos analyzed<button data-go="library">See all</button></div>'+arow("v2","ready")+arow("v3","run",62)+arow("v4","run",30)+arow("v1","")+'</section></div>';},
  badge:{home:{n:5}},
- notes:[["call","Ivan, 1 Oct: hard to track several at once. Ready rows go first, then running ones with progress, then the rest."],["call","The Home tab badge counts running plus unopened Ready, so it is visible from any tab."],["ask","Desktop is not designed yet. BrandBeacon 3.0 uses a sidebar with running and saved searches; same for UB once the phone version is agreed?"]]};
+ notes:[["call","Ivan, 1 Oct: hard to track several at once. Ready rows go first, then running ones with progress, then the rest."],["call","The Home tab badge counts running plus unopened Ready, so it is visible from any tab."],["veejay","Desktop comes after the phone version is agreed. It will use a left sidebar with running and saved searches, like BrandBeacon 3.0."]]};
 
 S["results"]={g:"Results",n:"8",l:"Results",bar:"home",
- body:function(){return topbar({left:"1 search left"})+'<div class="pb" style="gap:14px"><h1 class="h2">Breakouts for <em>Lip oil</em></h1>'+
+ body:function(){return topbar({left:"1 search left"})+'<div class="pb" style="gap:14px"><h1 class="h2">Breakouts for <em>Lip oil</em></h1><p class="lbl" style="margin-top:-8px">38 breakouts</p>'+
   sorts()+vcard("v1",{label:1,analyzed:1,saved:1})+vcard("v2")+'</div>';},
- notes:[["call","Sorts and filters as agreed 3 Oct: Top score, Under 100K followers, Past 7 days."],["ask","Not built: three numbers above the results (breakouts, median score, median views), as planned for BrandBeacon 3.0. Want them on UB too?"]]};
+ notes:[["call","Sorts and filters as agreed 3 Oct: Top score, Under 100K followers, Past 7 days."],["veejay","One quiet count under the heading instead of the three BrandBeacon 3.0 numbers. Every card already shows its score, and Ivan flagged repeated elements."]]};
 
 S["results-analyzing"]={g:"Results",n:"9",l:"Analyze, no wait screen",bar:"home",
  body:function(){return topbar({left:"1 search left"})+'<div class="pb" style="gap:14px"><h1 class="h2">Breakouts for <em>Lip oil</em></h1>'+
@@ -509,7 +510,7 @@ S["saved-updating"]={g:"Results",n:"10",l:"Saved search, Updating bar",bar:"lib"
   '<div class="upd"><div class="r"><span class="dot" style="width:8px;height:8px"></span>Updating<span class="u">Uses 1 search</span></div><div class="bar"><i></i></div></div>'+
   sorts()+vcard("v1",{label:1,analyzed:1,saved:1,stale:1})+'</div>';},
  badge:{home:{n:1}},
- notes:[["call","Refresh on a saved search costs 1 search (agreed 3 Oct)."],["ask","Shown: old results stay readable, slightly faded, under an Updating bar until the new run lands, the way BrandBeacon 3.0 handles it. OK for UB?"]]};
+ notes:[["call","Refresh on a saved search costs 1 search (agreed 3 Oct)."],["veejay","Old results stay readable, slightly faded, under an Updating bar until the new run lands, the way BrandBeacon 3.0 handles it."]]};
 
 S["library"]={g:"Tabs",n:"11",l:"Library, Analyzing rows",bar:"lib",
  body:function(){var r=function(id,st,p){var v=V[id];return '<button class="li"><span class="th" style="'+bg(v.img)+'"></span><span class="t"><b>@'+v.h+'</b>'+(st==="run"?prog("Analyzing",p):st==="ready"?'<span><b class="rd">Ready</b> · '+v.p+' · <b class="s">'+v.s+'</b></span>':'<span>'+v.p+' · <b class="s">'+v.s+'</b></span>')+'</span>'+ic("chev","chev")+'</button>';};
@@ -523,13 +524,13 @@ S["account"]={g:"Tabs",n:"12",l:"Account",bar:"account",
   '<div class="plan"><div class="mrow"><b style="font-size:17px">Free</b><span>1 of 3 searches left</span></div><div class="meter"><i style="width:33%"></i></div><button class="b b1" data-go="home">Upgrade · $49/mo</button></div>'+
   '<div class="list"><button>Profile analyzer'+ic("chev")+'</button><button>Affiliate'+ic("chev")+'</button><button>Help'+ic("chev")+'</button></div>'+
   '<button class="b b3">Log out</button></div>';},
- notes:[["call","Everything that was only in the hamburger lives here: plan, Upgrade, Profile analyzer, Affiliate."],["ask","If Ivan wants ready emails, an Email me when ready switch goes here. Not built."]]};
+ notes:[["call","Everything that was only in the hamburger lives here: plan, Upgrade, Profile analyzer, Affiliate."],["veejay","No email switch here: only the first search sends an email, and it has an unsubscribe link."]]};
 
-S["nav-alt"]={g:"Alternative",n:"A",l:"Hamburger instead of the bar",bar:null,
+S["nav-alt"]={g:"Alternative",n:"A",l:"Hamburger (not chosen)",bar:null,
  body:function(){return topbar({left:false,run:"2",menu:true})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox()+
   '<section class="card"><div class="hdr">Recent search terms</div>'+srow("Air fryer","run",60)+srow("GRWM","run",16)+'</section></div>';},
  overlay:function(){return '<div class="scrim"></div><div class="sheet"><span class="grab"></span><button class="mi up">Upgrade<small>$49/mo</small></button><p class="eb">Quick access</p><button class="mi">Searches<small class="r">6 · 2 running</small></button><button class="mi">Bookmarked<small>2</small></button><button class="mi">Analyzed<small>4</small></button><p class="eb">More</p><button class="mi">Top Breakouts</button><button class="mi">Profile analyzer</button><button class="mi">Account</button></div>';},
- notes:[["call","Option A from 1 Oct, kept for comparison. Running work has to squeeze into the top bar as a small “2” chip."],["ask","Not my pick: everything is two taps away and there is no room for the bar that follows a running search."]]};
+ notes:[["call","Option A from 1 Oct, kept for comparison. Running work has to squeeze into the top bar as a small “2” chip."],["veejay","Not chosen: everything is two taps away and there is no room for the bar that follows a running search. Kept for comparison only."]]};
 
 S["notfound"]={g:"Other",n:"404",l:"Page not found",bar:"home",
  body:function(){return topbar({left:"1 search left"})+'<div class="pb" style="gap:16px"><p class="nf">404</p><h1 class="h1" style="margin-top:-8px">Page not found</h1>'+sbox()+
@@ -552,7 +553,7 @@ function render(){
   ORDER.forEach(function(x){var g=S[x].g;if(!groups[g]){groups[g]=[];gorder.push(g);}groups[g].push(x);});
   document.getElementById("groups").innerHTML=gorder.map(function(g){return '<div class="grp"><h2>'+g+'</h2>'+groups[g].map(function(x){return '<button data-nav="'+x+'" class="'+(x===k?'on':'')+'"><span>'+S[x].n+'</span>'+S[x].l+'</button>';}).join("")+'</div>';}).join("");
   document.getElementById("msel").innerHTML=ORDER.map(function(x){return '<option value="'+x+'"'+(x===k?' selected':'')+'>'+S[x].n+'  '+S[x].l+'</option>';}).join("");
-  var tagName={call:"CALL",bb:"BB 3.0",ask:"ASK"};
+  var tagName={call:"CALL",bb:"BB 3.0",ask:"ASK",veejay:"VEEJAY"};
   document.getElementById("notes").innerHTML='<h2>'+(st.l||"")+'</h2><ul>'+(st.notes||[]).map(function(n){return '<li><span class="tag '+n[0]+'">'+tagName[n[0]]+'</span><span>'+n[1]+'</span></li>';}).join("")+'</ul>';
 }
 document.addEventListener("click",function(e){
