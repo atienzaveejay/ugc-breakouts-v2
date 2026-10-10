@@ -31,9 +31,9 @@ ITEMS = {
   "Signed in. Run a search, open a video that isn't analyzed yet, tap Analyze video, wait.",
   "Check the analysis job for this video. If it fails, show an error and give the analysis back, so a user isn't charged for nothing.", "BUG", [], []),
  (27, "Shared page shows the sender's full email", NEW,
-  "Found 11 Oct: the shared page reads “Veejay (atienzaveejay@gmail.com) sent you a breakout”.",
+  "Found 11 Oct: the shared page shows the sender's first name followed by their full email address in brackets, then “sent you a breakout”.",
   "Signed in. Share any analyzed video and open the link.",
-  "Show first name and last initial only (agreed 15 Sept), e.g. “Veejay A. sent you a breakout”. Never the email.", "BUG", [], ["today-shared.jpg"]),
+  "Show first name and last initial only (agreed 15 Sept), e.g. “Veejay A. sent you a breakout”. Never the email.", "BUG", [], []),
 ]),
 "build": ("Ready to build", [
  (4, "Videos play with sound on", PART,
