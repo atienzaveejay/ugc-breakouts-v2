@@ -433,7 +433,7 @@ function vcard(id,o){o=o||{};var v=V[id];
   '<div class="acts">'+btn+'<button class="sq'+(o.saved?' on':'')+'" aria-label="Bookmark">'+ic("mark")+'</button><button class="sq" aria-label="Share">'+ic("share")+'</button></div></article>';
 }
 function bar(cur,badge){
-  var t=[["home","Home","home"],["top","Top","top"],["lib","Library","library"],["user","Account","account"]];
+  var t=[["home","Home","home"],["star","Top","top"],["lib","Library","library"],["user","Account","account"]];
   return '<nav class="bar4" aria-label="Main">'+t.map(function(x){
     var b=badge&&badge[x[2]]?'<span class="bd'+(badge[x[2]].g?' g':'')+'">'+badge[x[2]].n+'</span>':'';
     return '<button data-go="'+x[2]+'"'+(cur===x[2]?' aria-current="page"':'')+'>'+ic(x[0])+x[1]+b+'</button>';}).join("")+'</nav>';
@@ -448,8 +448,9 @@ function topFeed(){return '<div class="feedhd"><h1 class="h2">Top Breakouts</h1>
 var S={};
 S["home-new"]={g:"First visit",n:"1",l:"Home, first visit",bar:"home",
  body:function(){return topbar({left:"3 free searches"})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox(null,false,"first-wait")+
-  '<div class="chips"><button class="chip" data-go="first-wait">Lip oil</button><button class="chip">Air fryer</button><button class="chip">GRWM</button><button class="chip">OOTD</button></div></div>';},
- notes:[["call","Ivan, 1 Oct: searches, bookmarked and analyzed videos in the hamburger or a bottom bar. Shown here: the bottom bar from the first screen. The hamburger is option A."],["call","Ivan, 1 Oct: no suggestions dropdown when the search box is tapped. The chips are the live app’s suggestions."],["veejay","No Get started checklist. The first search and the how-to video already teach the app, and a checklist would compete with the search box."],["veejay","Dev: suggestion chips only show terms that already return breakouts, so a tap never lands on No breakouts."]]};
+  '<div style="display:flex;flex-direction:column;gap:10px"><p class="lbl">Try a product, style, or tag</p><div class="chips"><button class="chip" data-go="first-wait">Lip oil</button><button class="chip">Air fryer</button><button class="chip">GRWM</button><button class="chip">OOTD</button></div></div>'+
+  '<section class="card" style="padding-bottom:14px"><div class="hdr">Breaking out today<button data-go="top">See all</button></div><div class="trow" style="row-gap:14px">'+["v9","v1","v10","v13","v11","v3"].map(function(id){var v=V[id];return '<button class="tt2" data-go="top"><span class="th2" style="'+bg(v.img)+'"><span class="sb"><b>'+v.s+'</b></span></span><b>'+v.p+'</b><small>@'+v.h+'</small></button>';}).join("")+'</div></section></div>';},
+ notes:[["call","Ivan, 1 Oct: searches, bookmarked and analyzed videos in the hamburger or a bottom bar. Shown here: the bottom bar from the first screen. The hamburger is option A."],["call","Ivan, 1 Oct: no suggestions dropdown when the search box is tapped. The chips are the live app’s suggestions."],["veejay","Breaking out today: six tiles from Top Breakouts, so a new user sees what a breakout looks like before the first search. Tap goes to Top."],["veejay","No Get started checklist. The first search and the how-to video already teach the app, and a checklist would compete with the search box."],["veejay","Dev: suggestion chips only show terms that already return breakouts, so a tap never lands on No breakouts."]]};
 
 S["first-wait"]={g:"First visit",n:"2",l:"First search running, how-to video",bar:"home",
  body:function(){return topbar({back:"home-new",title:"Your first search",left:false})+'<div class="pb" style="gap:14px">'+
