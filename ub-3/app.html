@@ -60,6 +60,7 @@ body{background:var(--ground);color:var(--wink);font-family:var(--sans);font-siz
 .tag.bb{color:var(--t-bb);background:var(--t-bb-bg)}
 .tag.ask{color:var(--t-ask);background:var(--t-ask-bg)}
 .tag.veejay{color:var(--t-bb);background:var(--t-bb-bg)}
+.tag.ivan{color:var(--t-ivan);background:var(--t-ivan-bg)}
 .mnav{display:none}
 @media (max-width:820px){
   .shell{grid-template-columns:minmax(0,1fr)}
@@ -99,6 +100,11 @@ body.shot .phone{border-radius:0;box-shadow:none}
 .ib svg{width:22px;height:22px}
 .cp{height:30px;padding:0 11px;border-radius:999px;background:var(--pill);color:#4C433F;font-size:12.5px;font-weight:700;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex:none;border:0;cursor:pointer}
 .cp .dot{width:7px;height:7px;box-shadow:0 0 0 3px rgba(45,212,216,.25)}
+.cp svg{width:14px;height:14px}
+.cp.pro{background:var(--gold-soft);color:#7A5F0C;box-shadow:inset 0 0 0 1px #EAD9A4}
+.intro{margin:0;font-size:15.5px;line-height:1.45;color:var(--mid);text-wrap:pretty}
+.sech{display:flex;justify-content:space-between;align-items:baseline;font-weight:800;font-size:16px;letter-spacing:-.01em}
+.sech button{color:var(--coral-d);background:none;border:0;font:700 14px var(--sans);cursor:pointer;padding:0}
 .h1{font-size:28px;font-weight:800;letter-spacing:-.04em;line-height:1.1;margin:0;text-wrap:balance}
 .h1 em{font-style:normal;color:var(--coral)}
 .h2{font-size:22px;font-weight:800;letter-spacing:-.035em;line-height:1.15;margin:0}
@@ -279,6 +285,8 @@ body.shot .phone{border-radius:0;box-shadow:none}
 .sheet .mi small.r{color:var(--teal)}
 .sheet .mi.up{background:var(--coral);color:#fff}
 .sheet .mi.up small{color:#FFE3E6}
+.sheet .mi.earn{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;min-height:64px;background:var(--coral);color:#fff}
+.sheet .mi.earn small{color:#FFE3E6}
 .sheet .eb{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);margin:8px 4px 2px}
 
 /* library */
@@ -350,7 +358,7 @@ body.shot .phone{border-radius:0;box-shadow:none}
 <body>
 <div class="shell">
   <aside class="rail">
-    <div class="brand"><p class="kicker">9 Oct call · for Ivan’s review</p><h1>UGC Breakouts <b>3.0</b></h1><p class="railnote">Top Breakouts cards, the analyze confirm and the score info stay as designed in v2.</p></div>
+    <div class="brand"><p class="kicker">9 Oct call, 11 Oct notes · for Ivan’s review</p><h1>UGC Breakouts <b>3.0</b></h1><p class="railnote">Top Breakouts cards, the analyze confirm and the score info stay as designed in v2.</p></div>
     <div id="groups"></div>
     <div class="mnav"><select id="msel" aria-label="State"></select></div>
   </aside>
@@ -405,9 +413,14 @@ var V={
 /* ---------- building blocks ---------- */
 function topbar(o){o=o||{};
   var left=o.back?'<button class="ib" data-go="'+o.back+'" aria-label="Back">'+ic("back")+'</button><span class="tt">'+o.title+'</span>':'<button class="logo" data-go="home">UGC <b>Breakouts</b></button>';
-  var right=(o.run?'<span class="cp"><span class="dot"></span>'+o.run+'</span>':'')+(o.left!==false?'<span class="cp">'+(o.left||"2 searches left")+'</span>':'')+(o.menu?'<button class="ib" data-go="nav-alt" aria-label="Menu">'+ic("menu")+'</button>':'');
+  var right=(o.run?'<span class="cp"><span class="dot"></span>'+o.run+'</span>':'')+(o.left!==false?plan(o.left||"2 searches left"):'')+(o.menu?'<button class="ib" data-go="nav-alt" aria-label="Menu">'+ic("menu")+'</button>':'');
   return '<div class="tb">'+left+'<span class="sp"></span>'+right+'</div>';
 }
+function plan(l){
+  if(l==="Pro")return '<button class="cp pro" data-go="pro-menu" aria-label="Pro, open menu">'+ic("star")+'Pro</button>';
+  return '<button class="cp" data-href="../#paid" aria-label="'+l+', upgrade">'+l+'</button>';
+}
+function suggest(list,go){return '<div style="display:flex;flex-direction:column;gap:10px"><p class="lbl">Try a product, style, or tag</p><div class="chips">'+list.map(function(c){return '<button class="chip" data-go="'+(go||"started")+'">'+c+'</button>';}).join("")+'</div></div>';}
 function sbox(txt,focus,go){go=go||"started";
   var t=txt?'<span class="in typed">'+txt+(focus?'<span class="cur"></span>':'')+'</span>':'<span class="in">Search a product or format</span>';
   return '<div class="sf'+(focus?' focus':'')+'" data-go="'+go+'">'+ic("search")+t+'<button class="go" data-go="'+go+'" aria-label="Search">'+ic("arrow")+'</button></div>';
@@ -447,18 +460,17 @@ function topFeed(){return '<div class="feedhd"><h1 class="h2">Top Breakouts</h1>
 /* ---------- states ---------- */
 var S={};
 S["home-new"]={g:"First visit",n:"1",l:"Home, first visit",bar:"home",
- body:function(){return topbar({left:"3 free searches"})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox(null,false,"first-wait")+
-  '<div style="display:flex;flex-direction:column;gap:10px"><p class="lbl">Try a product, style, or tag</p><div class="chips"><button class="chip" data-go="first-wait">Lip oil</button><button class="chip">Air fryer</button><button class="chip">GRWM</button><button class="chip">OOTD</button></div></div>'+
-  '<section class="card" style="padding-bottom:14px"><div class="hdr">Breaking out today<button data-go="top">See all</button></div><div class="trow" style="row-gap:14px">'+["v9","v1","v10","v13","v11","v3"].map(function(id){var v=V[id];return '<button class="tt2" data-go="top"><span class="th2" style="'+bg(v.img)+'"><span class="sb"><b>'+v.s+'</b></span></span><b>'+v.p+'</b><small>@'+v.h+'</small></button>';}).join("")+'</div></section></div>';},
- notes:[["call","Ivan, 1 Oct: searches, bookmarked and analyzed videos in the hamburger or a bottom bar. Shown here: the bottom bar from the first screen. The hamburger is option A."],["call","Ivan, 1 Oct: no suggestions dropdown when the search box is tapped. The chips are the live app’s suggestions."],["veejay","Breaking out today: six tiles from Top Breakouts, so a new user sees what a breakout looks like before the first search. Tap goes to Top."],["veejay","No Get started checklist. The first search and the how-to video already teach the app, and a checklist would compete with the search box."],["veejay","Dev: suggestion chips only show terms that already return breakouts, so a tap never lands on No breakouts."]]};
+ body:function(){return topbar({left:"3 free searches"})+'<div class="pb" style="gap:26px;padding-top:44px"><div style="display:flex;flex-direction:column;gap:10px"><h1 class="h1">What are you filming next?</h1><p class="intro">A Breakout is a TikTok that did far better than that creator’s usual videos.</p></div>'+sbox(null,false,"first-wait")+
+  suggest(["Lip oil","Air fryer","GRWM","OOTD"],"first-wait")+'</div>';},
+ notes:[["ivan","11 Oct: “spaced out above the fold, dont really need to show the videos below.” The Breaking out today tiles are gone and the top half has more room."],["ivan","11 Oct: first time someone sees UGC Breakouts, so a short intro. One sentence says what a Breakout is: a TikTok that did far better than that creator’s usual videos."],["ivan","11 Oct: top right shows the free searches left. Tap it for the upgrade page (v2 Paid)."],["call","Ivan, 1 Oct: searches, bookmarked and analyzed videos in the hamburger or a bottom bar. Shown here: the bottom bar from the first screen. The hamburger is option A."],["call","Ivan, 1 Oct: no suggestions dropdown when the search box is tapped. The chips are the live app’s suggestions."],["veejay","No Get started checklist. The first search and the how-to video already teach the app, and a checklist would compete with the search box."],["veejay","Dev: suggestion chips only show terms that already return breakouts, so a tap never lands on No breakouts."]]};
 
 S["first-wait"]={g:"First visit",n:"2",l:"First search running, how-to video",bar:"home",
- body:function(){return topbar({back:"home-new",title:"Your first search",left:false})+'<div class="pb" style="gap:14px">'+
-  '<div class="wait"><div class="r"><b>Finding <em>Lip oil</em> breakouts</b><span>0:12</span></div><div class="bar"><i style="width:22%"></i></div><small>Usually 15 seconds to a minute.</small></div>'+
+ body:function(){return topbar({back:"started",title:"Your first search",left:false})+'<div class="pb" style="gap:14px">'+
+  '<div class="wait"><div class="r"><b>Finding <em>Lip oil</em> breakouts</b><span>0:12</span></div><div class="bar"><i style="width:22%"></i></div><small>Hang tight, this takes about 1 min</small></div>'+
   '<button class="howto" aria-label="Play How to read your results, 1:07"><span class="hw-h">How to read your results</span><span class="hw-p">'+play()+'</span><span class="ph"><i style="width:70%"></i><i style="width:52%"></i></span><span class="hw-d">1:07</span><span class="hw-bar"><i style="width:0"></i></span></button>'+
   '<p class="fine">Leave anytime. We’ll tell you when it’s ready.</p></div>';},
  badge:{home:{n:1}},
- notes:[["call","Ivan, 1 Oct: consider removing Browse while you wait, especially for the first search. The how-to video takes that spot (outline approved 7 Oct)."],["call","The bottom bar stays, so leaving is one tap. The search keeps running and follows them."],["veejay","Video poster is a placeholder until the video is made."]]};
+ notes:[["ivan","11 Oct: “Usually…” is now “Hang tight, this takes about 1 min”, his wording."],["ivan","11 Oct: back goes to Home, where the search keeps running under Processing."],["call","Ivan, 1 Oct: consider removing Browse while you wait, especially for the first search. The how-to video takes that spot (outline approved 7 Oct)."],["call","The bottom bar stays, so leaving is one tap. The search keeps running and follows them."],["veejay","Video poster is a placeholder until the video is made."]]};
 
 S["first-ready"]={g:"First visit",n:"3",l:"First search ready, video keeps playing",bar:"home",
  body:function(){return topbar({back:"home-new",title:"Your first search",left:false})+'<div class="pb" style="gap:14px">'+
@@ -468,12 +480,13 @@ S["first-ready"]={g:"First visit",n:"3",l:"First search ready, video keeps playi
  notes:[["veejay","The video keeps playing when results land, and a ready card slides in above it with one button."],["veejay","Results wait for the tap instead of opening on their own, so the video is not cut off."]]};
 
 S["started"]={g:"Searching",n:"4",l:"Search started, stay on Home",bar:"home",
- body:function(){return topbar({left:"1 search left"})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox()+
-  '<section class="card"><div class="hdr">Recent search terms<button data-go="library">See all</button></div>'+srow("Lip oil","run",8)+srow("Tinted moisturizer","",'27 breakouts · Yesterday')+srow("GRWM","",'29 breakouts · Sep 9')+'</section>'+
-  '<section class="card"><div class="hdr">Recent videos analyzed<button data-go="library">See all</button></div>'+arow("v1","")+arow("v2","")+'</section></div>';},
+ body:function(){return topbar({left:"1 search left"})+'<div class="pb" style="gap:22px;padding-top:24px"><h1 class="h1">What are you filming next?</h1>'+sbox()+
+  suggest(["Air fryer","GRWM","OOTD"])+
+  '<section class="card"><div class="hdr">Processing<button data-go="library">See all</button></div>'+srow("Lip oil","run",8)+arow("v3","run",62)+'</section>'+
+  '<section class="card"><div class="hdr">Recently completed<button data-go="library">See all</button></div>'+srow("Tinted moisturizer","",'27 breakouts · Yesterday')+arow("v1","")+srow("GRWM","",'29 breakouts · Sep 9')+'</section></div>';},
  overlay:function(){return toast("search","Searching Lip oil","We’ll tell you when it’s ready.");},
- badge:{home:{n:1}},
- notes:[["call","Ivan, 9 Oct: don’t keep people on the processing screen, put them somewhere else. So after the first search there is no processing screen. The search drops into Recent search terms with live progress, and a toast confirms it started."],["call","They can search again or move anywhere. Nothing blocks."]]};
+ badge:{home:{n:2}},
+ notes:[["ivan","11 Oct: more space above the fold. More room around the heading and between sections."],["ivan","11 Oct: suggestion bubbles under the search box, the same chips as the first visit."],["ivan","11 Oct: a Processing section with the searches and analyses still running, each with its progress."],["ivan","11 Oct: a Recently completed section with finished searches and analyses, newest first."],["call","Ivan, 9 Oct: don’t keep people on the processing screen. After the first search there is no processing screen: the search drops into Processing and a toast confirms it started."],["call","They can search again or move anywhere. Nothing blocks."]]};
 
 S["browsing"]={g:"Searching",n:"5",l:"Browsing Top, search follows",bar:"top",
  body:function(){return topbar({left:"1 search left"})+'<div class="pb">'+topFeed()+'</div>';},
@@ -488,11 +501,18 @@ S["ready-toast"]={g:"Searching",n:"6",l:"Ready toast, anywhere",bar:"top",
  notes:[["call","The bar turns into a toast with one button. It stays until tapped or swiped, and Home keeps a gold Ready row."],["veejay","One email when the first search is ready and they have left the tab, the same as Ivan asked for BrandBeacon on 10 Oct. Later searches get the toast only. The email has an unsubscribe link, so Account needs no switch."]]};
 
 S["home-busy"]={g:"Searching",n:"7",l:"Home, running and ready",bar:"home",
- body:function(){return topbar({left:"Pro"})+'<div class="pb"><h1 class="h1" style="padding-top:8px">What are you filming next?</h1>'+sbox()+
-  '<section class="card"><div class="hdr">Recent search terms<button data-go="library">See all</button></div>'+srow("Lip oil","ready",38)+srow("Air fryer","run",60)+srow("GRWM","run",16)+srow("Tinted moisturizer","",'27 breakouts · Yesterday')+'</section>'+
-  '<section class="card"><div class="hdr">Recent videos analyzed<button data-go="library">See all</button></div>'+arow("v2","ready")+arow("v3","run",62)+arow("v4","run",30)+arow("v1","")+'</section></div>';},
- badge:{home:{n:5}},
- notes:[["call","Ivan, 1 Oct: hard to track several at once. Ready rows go first, then running ones with progress, then the rest."],["call","The Home tab badge counts running plus unopened Ready, so it is visible from any tab."],["veejay","Desktop comes after the phone version is agreed. It will use a left sidebar with running and saved searches, like BrandBeacon 3.0."]]};
+ body:function(){return topbar({left:"Pro"})+'<div class="pb" style="gap:22px;padding-top:24px"><h1 class="h1">What are you filming next?</h1>'+sbox()+
+  suggest(["OOTD","Wide leg jeans","Closet organizer"])+
+  '<section class="card"><div class="hdr">Processing<button data-go="library">See all</button></div>'+srow("Air fryer","run",60)+srow("GRWM","run",16)+arow("v3","run",62)+arow("v4","run",30)+'</section>'+
+  '<section class="card"><div class="hdr">Recently completed<button data-go="library">See all</button></div>'+srow("Lip oil","ready",38)+arow("v2","ready")+srow("Tinted moisturizer","",'27 breakouts · Yesterday')+arow("v1","")+'</section></div>';},
+ badge:{home:{n:6}},
+ notes:[["ivan","11 Oct: Pro users see a Pro badge top right instead of a counter. Tap it for the affiliate program and their plan (#pro-menu)."],["ivan","11 Oct: same Home as #started, with Processing and Recently completed. Ready rows lead Recently completed until opened."],["call","Ivan, 1 Oct: hard to track several at once. Running work sits in its own section with progress."],["call","The Home tab badge counts running plus unopened Ready, so it is visible from any tab."],["veejay","Desktop comes after the phone version is agreed. It will use a left sidebar with running and saved searches, like BrandBeacon 3.0."]]};
+
+S["pro-menu"]={g:"Searching",n:"7b",l:"Pro badge menu",bar:"home",
+ body:function(){return S["home-busy"].body();},
+ overlay:function(){return '<div class="scrim" data-go="home-busy"></div><div class="sheet"><span class="grab"></span><button class="mi earn" data-href="../#affiliate">Earn by sharing UGC Breakouts<small>Get $49 for each friend who goes Pro</small></button><button class="mi" data-href="../#account-pro">Plan and account<small>Pro</small></button></div>';},
+ badge:{home:{n:6}},
+ notes:[["ivan","11 Oct: “what better options are there for that to goto? maybe affiliate program?” His idea, our build: the Pro badge opens a small sheet led by the affiliate program."],["call","Two items only. The affiliate row opens the v2 Affiliate screen and Plan and account opens v2 Account, Pro."]]};
 
 S["results"]={g:"Results",n:"8",l:"Results",bar:"home",
  body:function(){return topbar({left:"1 search left"})+'<div class="pb" style="gap:14px"><h1 class="h2">Breakouts for <em>Lip oil</em></h1><p class="lbl" style="margin-top:-8px">38 breakouts</p>'+
@@ -535,8 +555,8 @@ S["nav-alt"]={g:"Alternative",n:"A",l:"Hamburger (not chosen)",bar:null,
 
 S["notfound"]={g:"Other",n:"404",l:"Page not found",bar:"home",
  body:function(){return topbar({left:"1 search left"})+'<div class="pb" style="gap:16px"><p class="nf">404</p><h1 class="h1" style="margin-top:-8px">Page not found</h1>'+sbox()+
-  '<section class="card" style="padding-bottom:14px"><div class="hdr">Top Breakouts<button data-go="top">See all</button></div><div class="trow">'+["v9","v10","v13"].map(function(id){var v=V[id];return '<button class="tt2" data-go="top"><span class="th2" style="'+bg(id==="v9"?"fries":v.img)+'"><span class="sb"><b>'+v.s+'</b></span></span><b>'+v.p+'</b><small>@'+v.h+'</small></button>';}).join("")+'</div></section></div>';},
- notes:[["call","Earlier feedback: better 404. One headline, the search box as the one action, and the bar to get anywhere else."]]};
+  '<div class="sech">Top Breakouts<button data-go="top">See all</button></div>'+vcard("v9",{cat:1,label:1})+'</div>';},
+ notes:[["ivan","11 Oct: the small tiles were not our usual video card, so the one video here now uses it."],["call","Earlier feedback: better 404. One headline, the search box as the one action, and the bar to get anywhere else."]]};
 
 S["top"]={g:"Tabs",n:"T",l:"Top Breakouts tab",bar:"top",hideRail:true,
  body:function(){return topbar({left:"1 search left"})+'<div class="pb">'+topFeed()+'</div>';},notes:[]};
@@ -554,11 +574,12 @@ function render(){
   ORDER.forEach(function(x){var g=S[x].g;if(!groups[g]){groups[g]=[];gorder.push(g);}groups[g].push(x);});
   document.getElementById("groups").innerHTML=gorder.map(function(g){return '<div class="grp"><h2>'+g+'</h2>'+groups[g].map(function(x){return '<button data-nav="'+x+'" class="'+(x===k?'on':'')+'"><span>'+S[x].n+'</span>'+S[x].l+'</button>';}).join("")+'</div>';}).join("");
   document.getElementById("msel").innerHTML=ORDER.map(function(x){return '<option value="'+x+'"'+(x===k?' selected':'')+'>'+S[x].n+'  '+S[x].l+'</option>';}).join("");
-  var tagName={call:"CALL",bb:"BB 3.0",ask:"ASK",veejay:"VEEJAY"};
+  var tagName={call:"CALL",bb:"BB 3.0",ask:"ASK",veejay:"VEEJAY",ivan:"IVAN"};
   document.getElementById("notes").innerHTML='<h2>'+(st.l||"")+'</h2><ul>'+(st.notes||[]).map(function(n){return '<li><span class="tag '+n[0]+'">'+tagName[n[0]]+'</span><span>'+n[1]+'</span></li>';}).join("")+'</ul>';
 }
 document.addEventListener("click",function(e){
   var n=e.target.closest("[data-nav]");if(n){location.hash=n.getAttribute("data-nav");return;}
+  var h=e.target.closest("[data-href]");if(h){e.stopPropagation();location.href=h.getAttribute("data-href");return;}
   var g=e.target.closest("[data-go]");if(g){e.stopPropagation();location.hash=g.getAttribute("data-go");}
 },true);
 document.getElementById("msel").addEventListener("change",function(e){location.hash=e.target.value;});
