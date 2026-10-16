@@ -386,6 +386,100 @@ input{font:inherit;color:inherit}
 :root[data-look="signal"] .rc .vw .up,:root[data-look="signal"] .verdict .up,:root[data-look="signal"] .tile .m .up{color:var(--ink);font-weight:600}
 :root[data-look="signal"] .t1,:root[data-look="signal"] .t2{font-weight:600;letter-spacing:-.02em}
 
+
+/* ---------- layout variants ---------- */
+/* B · Feed: media first, like TikTok's own feed and Letterboxd posters */
+.feed{display:flex;flex-direction:column;gap:12px;margin:0 -20px}
+.fc{position:relative;display:block;width:100%;aspect-ratio:4/5;overflow:hidden;text-align:left;background:#111}
+.fc .img{position:absolute;inset:0;background-size:cover;background-position:center}
+.fc.lock .img{filter:blur(10px);transform:scale(1.1)}
+.fc .ov{position:absolute;left:0;right:0;bottom:0;padding:64px 20px 18px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;display:flex;flex-direction:column;gap:4px}
+.fc .hk{margin:0;font-size:20px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.fc .hd{font-size:14px;color:#CFCFCA}
+.fc .vw{font-size:14px;color:#E8E8E4;font-variant-numeric:tabular-nums}
+.fc .vw .up{color:#3DD68C}
+.fc .rk{position:absolute;left:16px;top:16px;font-size:14px;font-weight:600;color:#fff;background:rgba(0,0,0,.6);padding:2px 8px;border-radius:4px}
+.fc .sc{position:absolute;right:16px;top:16px;font-size:28px;font-weight:600;line-height:1;color:#3DD68C;background:rgba(0,0,0,.6);padding:6px 10px;border-radius:4px;font-variant-numeric:tabular-nums}
+.feed .unlock{margin:0 20px;border-radius:8px}
+.heroB{position:relative;margin-top:-1px;padding:120px 20px 28px!important;gap:16px;background-size:cover;background-position:center;color:#fff}
+.heroB::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.88))}
+.heroB>*{position:relative}
+.heroB .sub,.heroB .cap{color:#E2E2DE}
+.heroB .t1{font-size:36px;color:#fff}
+:root[data-look="dark"] .minirow .tile{width:150px}
+:root[data-look="dark"] .dhero{aspect-ratio:3/4}
+/* C · Magazine: Substack, the NYT, Are.na */
+.elist{display:flex;flex-direction:column;border-top:2px solid var(--ink);margin:0}
+.er{display:grid;grid-template-columns:44px minmax(0,1fr) 56px;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);text-align:left;width:100%;align-items:start}
+.er .num{font-family:var(--serif);font-size:36px;line-height:1;font-weight:500}
+.er .bd{display:flex;flex-direction:column;gap:8px;min-width:0}
+.er .hk{margin:0;font-family:var(--serif);font-size:20px;line-height:1.25;font-weight:500}
+.er.lock .hk{color:var(--ink-3);font-style:italic}
+.er .meta{font-size:14px;color:var(--ink-2);line-height:1.45}
+.er .th{width:56px;aspect-ratio:9/16;border-radius:2px}
+.er.lock .th{filter:blur(5px)}
+.elist .unlock{background:none;border-bottom:1px solid var(--line);padding:18px 0}
+.art{gap:16px}
+.art .kick{margin:0;font-size:14px;color:var(--ink-3)}
+.art .ah{margin:0;font-family:var(--serif);font-size:30px;line-height:1.15;font-weight:500;letter-spacing:-.01em}
+.art .by{margin:0;font-size:14px;color:var(--ink-2)}
+.art .dhero{margin:8px -20px;width:auto;aspect-ratio:4/5}
+.art .lead{margin:0;font-family:var(--serif);font-size:19px;line-height:1.5}
+.art .lead .lnk{font-family:var(--sans);font-size:14px}
+.art .ah2{margin:16px 0 0;font-family:var(--serif);font-size:22px;font-weight:500}
+:root[data-look="edit"] .sf{border:0;border-bottom:2px solid var(--ink);border-radius:0;padding-left:0;box-shadow:none}
+:root[data-look="edit"] .sf .go{background:none;color:var(--ink)}
+:root[data-look="edit"] .tagb{border:0;padding:0 4px;height:28px;text-decoration:underline;text-underline-offset:4px;color:var(--ink-2)}
+:root[data-look="edit"] .tagb.on{background:none;color:var(--ink);font-weight:600}
+:root[data-look="edit"] .tb .wm{font-family:var(--serif);font-size:20px;font-weight:600}
+:root[data-look="edit"] .tier{border-radius:0;border-width:0 0 1px 0;padding:16px 0}
+:root[data-look="edit"] .tier.on{box-shadow:none;border-bottom:2px solid var(--ink)}
+:root[data-look="edit"] .tier .hd b,:root[data-look="edit"] .tier .pr b{font-family:var(--serif);font-weight:500}
+/* D · Dashboard: Apple Stocks, Robinhood, Strava */
+.sumst{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -20px}
+.sumst div{padding:12px 16px;border-left:1px solid var(--line);display:flex;flex-direction:column}
+.sumst div:first-child{border-left:0;padding-left:20px}
+.sumst b{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
+.sumst span{font-size:12px;color:var(--ink-3)}
+.tbl{display:flex;flex-direction:column;margin:0 -20px}
+.thd,.trw{display:grid;grid-template-columns:16px 30px minmax(0,1fr) 44px 58px 42px;white-space:nowrap;gap:8px;align-items:center;padding:0 20px}
+.thd{font-size:12px;color:var(--ink-3);height:32px;border-bottom:1px solid var(--line)}
+.thd span:nth-child(n+4){text-align:right}
+.trw{min-height:60px;border-bottom:1px solid var(--line);width:100%;text-align:left;font-variant-numeric:tabular-nums}
+.trw .n{font-size:13px;color:var(--ink-3)}
+.trw .th{width:30px;aspect-ratio:9/16;border-radius:2px}
+.trw.lock .th{filter:blur(4px)}
+.trw .v{display:flex;flex-direction:column;min-width:0}
+.trw .v b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trw .v small{font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trw .c{font-size:14px;text-align:right}
+.trw .sb{justify-self:end;min-width:40px;text-align:center;background:var(--acc);color:#fff;font-weight:600;font-size:15px;border-radius:4px;padding:5px 0}
+.trw.lock .sb{background:var(--bg-2);color:var(--ink-3)}
+.thd.s3,.trw.s3{grid-template-columns:minmax(0,1fr) 80px 70px}
+.tbl .unlock{margin:0}
+.dhero.wide{aspect-ratio:16/10}
+.sbig{font-size:56px;line-height:1;font-weight:600;background:var(--acc);color:#fff;border-radius:4px;padding:8px 14px;font-variant-numeric:tabular-nums}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bars div{display:grid;grid-template-columns:76px minmax(0,1fr) 48px;gap:10px;align-items:center;font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.bars i{height:10px;background:var(--bg-2);display:block}
+.bars i b{display:block;height:100%;background:var(--line-2)}
+.bars .me i b{background:var(--acc)}
+.bars div span:last-child{text-align:right;color:var(--ink);font-weight:600}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin:0 -20px}
+.sgrid div{padding:12px 16px 12px 20px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);display:flex;flex-direction:column}
+.sgrid div:nth-child(3n+1){border-left:0}
+.sgrid b{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.sgrid span{font-size:12px;color:var(--ink-3)}
+.ctab{display:flex;flex-direction:column;margin:0 -20px}
+.cr{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid var(--line);font-size:13px;text-align:center}
+.cr span:first-child{text-align:left;color:var(--ink-2)}
+.cr .no{color:var(--ink-3)}
+.cr.ch{padding:8px 20px;border-bottom:1px solid var(--line-2)}
+.cr .pc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0;border-radius:4px;font-size:13px;font-weight:600}
+.cr .pc b{font-size:20px;font-variant-numeric:tabular-nums}
+.cr .pc.on{background:var(--acc);color:#fff}
+.ctab .cap{padding:8px 20px 0}
+
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 @media (max-width:1180px){.shell{grid-template-columns:220px minmax(0,1fr)}.notes{grid-column:2;position:static;max-height:none;max-width:420px;justify-self:center;width:100%}}
@@ -615,11 +709,35 @@ function freeRow(cur){return '<div class="free" id="tier-free"><b>Free, $0</b><s
 function priceLabel(){var T=TIERS[ST.tier];return T.n+', '+(ST.plan==="year"?'$'+T.y+' a year':'$'+T.m+' a month');}
 function emailRow(id){var v=V[id];return '<div class="emr"><span class="th" style="'+bg(v.img)+'"></span><span><b>@'+v.h+'</b>, '+esc(v.p)+'<br><small>'+v.views+' views, '+v.x+' usual</small></span></div>';}
 
+/* ---------- layout variants per look (17 Oct): B feed, C magazine, D dashboard ---------- */
+function LK(){return document.documentElement.dataset.look||"light";}
+function fcard(id,rank){var v=V[id],open=isOpen(id);return '<button class="fc'+(open?'':' lock')+'" data-a="'+(open?'open:':'lock:')+id+'"><span class="img" style="'+bg(v.img)+'"></span><span class="rk">'+rank+'</span><span class="sc">'+v.s+'</span><span class="ov"><p class="hk">'+(open?'“'+esc(hookOf(v))+'”':'Unlock to see the hook and script')+'</p><span class="hd">@'+v.h+'</span><span class="vw">'+v.views+' views, <b class="up">'+v.x+'</b> usual</span></span></button>';}
+function erow(id,rank){var v=V[id],open=isOpen(id);return '<button class="er'+(open?'':' lock')+'" data-a="'+(open?'open:':'lock:')+id+'"><span class="num">'+rank+'</span><span class="bd"><p class="hk">'+(open?'“'+esc(hookOf(v))+'”':'Unlock to read the hook and script.')+'</p><span class="meta">@'+v.h+'. '+v.views+' views, '+v.x.replace("x"," times")+' usual. Score '+v.s+'.</span></span><span class="th" style="'+bg(v.img)+'"></span></button>';}
+function trow(id,rank){var v=V[id],open=isOpen(id);return '<button class="trw'+(open?'':' lock')+'" data-a="'+(open?'open:':'lock:')+id+'"><span class="n">'+rank+'</span><span class="th" style="'+bg(v.img)+'"></span><span class="v"><b>@'+v.h+'</b><small>'+(open?esc(hookOf(v)):'Locked on Free')+'</small></span><span class="c">'+v.views+'</span><span class="c up">'+v.x+'</span><span class="sb">'+v.s+'</span></button>';}
+function resultsVariant(s,ids){var lk=LK(),open=ids.filter(isOpen),lkd=ids.filter(function(id){return !isOpen(id);}),rank=function(id){return s.order.indexOf(id)+1;};
+ var unl=lkd.length?'<div class="unlock" id="unl"><b>'+lkd.length+' more breakouts</b><p>Free opens 5 per search. Creator and Pro open every one.</p><button class="btn p" data-a="sheet" id="unlockAll">See plans</button></div>':'';
+ if(lk==="dark")return '<div class="feed">'+open.map(function(id){return fcard(id,rank(id));}).join("")+unl+lkd.map(function(id){return fcard(id,rank(id));}).join("")+'</div>';
+ if(lk==="edit")return '<div class="elist">'+open.map(function(id){return erow(id,rank(id));}).join("")+unl+lkd.map(function(id){return erow(id,rank(id));}).join("")+'</div>';
+ if(lk==="signal"){var top=V[s.order[0]],best=s.order.reduce(function(m,id){return parseInt(V[id].x,10)>parseInt(m,10)?V[id].x:m;},"0x");
+  return '<div class="sumst"><div><b>'+s.order.length+'</b><span>breakouts</span></div><div><b>'+top.s+'</b><span>top score</span></div><div><b>'+best+'</b><span>best vs usual</span></div></div><div class="tbl"><div class="thd"><span>#</span><span></span><span>Video</span><span>Views</span><span>vs usual</span><span>Score</span></div>'+open.map(function(id){return trow(id,rank(id));}).join("")+unl+lkd.map(function(id){return trow(id,rank(id));}).join("")+'</div>';}
+ return null;}
+function detailVariant(v,T){var lk=LK(),s=curS(),rank=s?s.order.indexOf(ST.vid)+1:1;if(rank<1)rank=1;
+ var why='<ul class="why">'+T.why.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>';
+ var script='<div class="tl">'+T.script.map(function(x,i){return '<div class="st"><span class="tm"><b>'+x[0]+'</b>'+["0–3s","3–10s","10–16s","16–18s"][i]+'</span><span>'+x[1]+'</span></div>';}).join("")+'</div>';
+ var better='<ul class="chk">'+T.better.map(function(x,i){var on=ST.done[ST.vid+i];return '<li class="'+(on?"on":"")+'" data-a="tick:'+i+'"><span class="bx"></span><span>'+x+'</span></li>';}).join("")+'</ul>';
+ if(lk==="edit")return '<article class="art pad"><p class="kick">'+esc(s?s.q:v.p)+', ranked '+rank+' of '+(s?s.order.length:9)+'</p><h1 class="ah">“'+esc(hookOf(v))+'”</h1><p class="by">@'+v.h+', '+v.f+' followers, '+v.len+'</p><div class="dhero" style="'+bg(v.img)+'"><span class="pl"><span>'+playI()+'</span></span></div><p class="lead">This video got '+v.views+' views, '+v.x.replace("x"," times")+' the '+v.u+' this account usually gets. That gives it a Breakout Score of '+v.s+' out of 100. <button class="lnk" data-a="scoreinfo">What the score means</button></p><h2 class="ah2">Why it worked</h2>'+why+'<h2 class="ah2">Script to film your own</h2>'+script+'<h2 class="ah2">Make yours better</h2>'+better+'</article>';
+ if(lk==="signal"){var vn=parseFloat(v.views)*(v.views.indexOf("M")>0?1000:1),un=parseFloat(v.u)*(v.u.indexOf("M")>0?1000:1),pct=Math.max(1.5,un/vn*100);
+  return '<div class="dhero wide" style="'+bg(v.img)+'"><span class="pl"><span>'+playI()+'</span></span><span class="du">'+v.len+'</span></div><div class="pad"><div class="row"><b>@'+v.h+'</b><span class="cap">'+v.f+' followers</span></div><div class="row" style="align-items:flex-end;gap:16px"><span class="sbig">'+v.s+'</span><span class="cap" style="padding-bottom:6px">Breakout Score out of 100<br><button class="lnk" data-a="scoreinfo">What’s this?</button></span></div><div class="bars"><div><span>Usual</span><i><b style="width:'+pct.toFixed(1)+'%"></b></i><span>'+v.u+'</span></div><div class="me"><span>This video</span><i><b style="width:100%"></b></i><span>'+v.views+'</span></div></div><div class="sgrid"><div><b>'+v.x+'</b><span>vs usual</span></div><div><b>'+v.likes+'</b><span>likes</span></div><div><b>'+v.cm+'</b><span>comments</span></div><div><b>'+v.sh+'</b><span>shares</span></div><div><b>'+v.er+'</b><span>engagement</span></div><div><b>'+v.len+'</b><span>length</span></div></div><div class="dtabs"><div class="utabs" id="dtabs">'+DSEC.map(function(x,i){return '<button class="'+(i===ST.sec?"on":"")+'" data-a="dsec:'+i+'">'+x+'</button>';}).join("")+'</div></div><section class="dsec" id="ds0"><p class="sec-l">Hook</p><p class="hookq">“'+esc(hookOf(v))+'”</p></section><section class="dsec" id="ds1"><p class="sec-l">Why it worked</p>'+why+'</section><section class="dsec" id="ds2"><p class="sec-l">Script to film your own</p>'+script+'</section><section class="dsec" id="ds3"><p class="sec-l">Make yours better</p>'+better+'</section></div>';}
+ return null;}
+function plansTable(){var y=ST.plan==="year",C=TIERS.creator,Pp=TIERS.pro,ck='<svg class="ic s" viewBox="0 0 24 24">'+P.check+'</svg>',no='<span class="no">No</span>';
+ var rows=[["Searches","3","Set later","More, set later"],["Full breakdowns","5 a search",ck,ck],["Starter breakouts",ck,ck,ck],["Weekly email",ck,ck,ck],["Top breakouts",no,ck,ck],["Library",no,ck,ck],["Same-day alerts",no,no,ck],["Score your own videos",no,no,ck]];
+ return '<div class="ctab" id="tier-free"><div class="cr ch"><span></span><span class="pc">Free<b>$0</b></span><button data-a="tier:creator" id="tier-creator" class="pc'+(ST.tier==="creator"?" on":"")+'">Creator<b>$'+(y?C.ym:C.m)+'</b></button><button data-a="tier:pro" id="tier-pro" class="pc'+(ST.tier==="pro"?" on":"")+'">Pro<b>$'+(y?Pp.ym:Pp.m)+'</b></button></div>'+rows.map(function(r){return '<div class="cr"><span>'+r[0]+'</span><span>'+r[1]+'</span><span>'+r[2]+'</span><span>'+r[3]+'</span></div>';}).join("")+'<p class="cap" style="padding-top:8px">Prices per month'+(y?', billed yearly: Creator $'+C.y+', Pro $'+Pp.y+' a year.':', billed monthly.')+'</p></div>';}
+
 /* ---------- screens ---------- */
 var R={};
 R.sales=function(){var v=V.a,T=TOPIC.Beauty,tops=["h","e","k","a","g","i"];
  return {body:'<div class="tb">'+wm()+'<span class="sp"></span><button class="lnk" data-a="google">Log in</button></div>'+
- '<section class="pad" style="padding-top:28px;gap:16px"><h1 class="t1">See which UGC videos are breaking out right now</h1><p class="sub">Find TikToks that got far more views than the creator usually gets. See why they worked, and get a script to film your own.</p>'+gBtn("google")+'<p class="cap">Free, no card. Includes 3 searches.</p></section>'+
+ '<section class="pad hero'+(LK()==="dark"?' heroB" style="'+bg("face"):'" style="padding-top:28px;gap:16px')+'"><h1 class="t1">See which UGC videos are breaking out right now</h1><p class="sub">Find TikToks that got far more views than the creator usually gets. See why they worked, and get a script to film your own.</p>'+gBtn("google")+'<p class="cap">Free, no card. Includes 3 searches.</p></section>'+
  '<section class="sx"><p class="sec-l">Example from a lip oil search</p><div class="row" style="align-items:flex-start;gap:16px"><span class="th" style="'+bg(v.img)+';width:96px;aspect-ratio:9/16;flex:none"><span class="du">'+v.len+'</span></span><div class="stack" style="gap:6px"><span class="score" style="font-size:44px;line-height:1;font-weight:500">86<small style="font-size:16px">/100</small></span><span class="cap">Breakout Score</span><p class="verdict">1.4M views, <span class="up">78 times</span> the 18K this account usually gets.</p><span class="cap">@'+v.h+', '+v.f+' followers</span></div></div>'+
  '<p class="sec-l" style="margin-top:8px">Hook</p><p class="hookq">“'+esc(T.hook.replace(/[“”]/g,""))+'”</p><p class="sec-l">Why it worked</p><ul class="why">'+T.why.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><p class="sec-l">Script to film your own</p><div class="tl">'+T.script.map(function(x,i){return '<div class="st"><span class="tm"><b>'+x[0]+'</b>'+["0–3s","3–10s","10–16s","16–18s"][i]+'</span><span>'+x[1]+'</span></div>';}).join("")+'</div></section>'+
  '<section class="sx"><p class="t3">Top breakouts this week</p><div class="grid3">'+tops.map(function(id,i){return tile(id,"google",i+1);}).join("")+'</div></section>'+
@@ -649,9 +767,11 @@ R.results=function(){var s=curS();if(!s)return R.home();var rd=s.ready==null?9:s
  var h=open.map(function(id){return rrow(id,s.order.indexOf(id)+1);}).join("");
  if(lk.length)h+='<div class="unlock" id="unl"><b>'+lk.length+' more breakouts</b><p>Free opens 5 per search. Creator and Pro open every one.</p><button class="btn p" data-a="sheet" id="unlockAll">See plans</button></div>'+lk.map(function(id){return rrow(id,s.order.indexOf(id)+1);}).join("");
  if(rd<9)h+='<div class="li"><span class="spin"></span><span class="tx"><small>Finding more breakouts</small></span></div>';
- return {bar:"home",body:topbar()+'<div class="pad fade"><div class="stack"><h1 class="t2">'+esc(s.q)+'</h1><p class="cap">'+s.order.length+' breakouts, sorted by Breakout Score.'+(ST.pro?'':' 5 open on Free.')+'</p></div><div class="list">'+h+'</div>'+againBox()+'</div>'};};
+ var vr=resultsVariant(s,ids);
+ return {bar:"home",body:topbar()+'<div class="pad fade"><div class="stack"><h1 class="t2">'+esc(s.q)+'</h1><p class="cap">'+s.order.length+' breakouts, sorted by Breakout Score.'+(ST.pro?'':' 5 open on Free.')+'</p></div>'+(vr||'<div class="list">'+h+'</div>')+againBox()+'</div>'};};
 var DSEC=["Hook","Why it worked","Script","Improve"];
-R.detail=function(){var v=V[ST.vid],T=TOPIC[v.t]||TOPIC.Beauty,saved=ST.saved.indexOf(ST.vid)>=0;
+R.detail=function(){var a=R.detailA(),v=V[ST.vid],T=TOPIC[v.t]||TOPIC.Beauty,dv=detailVariant(v,T);if(!dv)return a;var title=ST.vid.charAt(0)==="w"?v.t:(curS()?curS().q:v.p);return {bar:"home",body:topbar({back:"back",title:esc(title)})+'<div class="fade" style="padding-bottom:72px">'+dv+'</div>',extra:a.extra};};
+R.detailA=function(){var v=V[ST.vid],T=TOPIC[v.t]||TOPIC.Beauty,saved=ST.saved.indexOf(ST.vid)>=0;
  var title=ST.vid.charAt(0)==="w"?v.t:(curS()?curS().q:v.p);
  return {bar:"home",body:topbar({back:"back",title:esc(title)})+'<div class="fade" style="padding-bottom:72px"><div class="dhero" style="'+bg(v.img)+'"><span class="pl"><span>'+playI()+'</span></span><span class="du">'+v.len+'</span></div>'+
  '<div class="pad"><div class="stack"><div class="row"><b>@'+v.h+'</b><span class="cap">'+v.f+' followers</span></div><div class="dnum"><span class="score">'+v.s+'<small>/100</small></span><span class="lab">Breakout Score <button data-a="scoreinfo">What’s this?</button></span></div><p class="verdict">'+v.views+' views, <span class="up">'+v.x.replace("x"," times")+'</span> the '+v.u+' this account usually gets.</p></div>'+
@@ -668,7 +788,7 @@ R.home=function(){var j=ST.job,chips=[];ST.areas.forEach(function(a){var T=TOPIC
   :'<div class="meter" id="softnote"><div class="row"><span><b>'+ST.left+' of 3</b> free searches left</span><span class="sp"></span><button class="lnk" data-a="go:plans">See plans</button></div><div class="segs">'+[0,1,2].map(function(i){return '<i class="'+(i<3-ST.left?"":"u")+'"></i>';}).join("")+'</div><small>'+(ST.left===1?"Use it on something you’ll film soon. It still opens 5 full breakdowns.":"Each search opens 5 full breakdowns with scripts.")+'</small></div>';
  var proc=j&&!j.done?'<div class="stack"><p class="sec-l">Running</p><div class="rows"><button class="li" data-a="go:explainer"><span class="spin"></span><span class="tx"><b>‘'+esc(j.q)+'’</b><small data-live="stgtxt">'+STG[Math.min(2,stageIdx())]+'</small></span><small class="cap" data-live="left">'+jleft()+'</small></button></div></div>':'';
  var done=ST.searches.filter(function(s,i){return !(j&&!j.done&&j.idx===i);});
- var past=done.length?'<div class="stack"><p class="sec-l">Your searches</p><div class="rows">'+ST.searches.map(function(s,i){if(j&&!j.done&&j.idx===i)return "";return '<button class="li" data-a="past:'+i+'">'+stack3(s.order)+'<span class="tx"><b>'+esc(s.q)+'</b><small>'+s.order.length+' breakouts, '+(ST.pro?"all open":s.open.length+" open")+'</small></span>'+ic("chev","s")+'</button>';}).reverse().join("")+'</div></div>':'';
+ var past=done.length&&LK()==="signal"?'<div class="stack"><p class="sec-l">Your searches</p><div class="tbl"><div class="thd s3"><span>Search</span><span>Breakouts</span><span>Top score</span></div>'+ST.searches.map(function(s,i){if(j&&!j.done&&j.idx===i)return "";return '<button class="trw s3" data-a="past:'+i+'"><span class="v"><b>'+esc(s.q)+'</b><small>'+(ST.pro?"all open":s.open.length+" open")+'</small></span><span class="c">'+s.order.length+'</span><span class="sb">'+V[s.order[0]].s+'</span></button>';}).reverse().join("")+'</div></div>':done.length?'<div class="stack"><p class="sec-l">Your searches</p><div class="rows">'+ST.searches.map(function(s,i){if(j&&!j.done&&j.idx===i)return "";return '<button class="li" data-a="past:'+i+'">'+stack3(s.order)+'<span class="tx"><b>'+esc(s.q)+'</b><small>'+s.order.length+' breakouts, '+(ST.pro?"all open":s.open.length+" open")+'</small></span>'+ic("chev","s")+'</button>';}).reverse().join("")+'</div></div>':'';
  var starter=ST.w?'<div class="stack"><p class="sec-l">Starter breakouts</p><div class="minirow">'+ST.w.all.map(function(id){return tile(id);}).join("")+'</div></div>':'';
  return {bar:"home",body:topbar()+'<div class="pad fade"><h1 class="t2">What are you filming next?</h1><form class="sf" data-form="search">'+ic("search")+'<input id="q" placeholder="A product, format or #hashtag" value="'+esc(ST.q)+'" autocomplete="off"'+(out?' disabled':'')+'><button class="go" type="submit" aria-label="Search"'+(out?' disabled':'')+'>'+ic("arrow")+'</button></form>'+(out?'':'<div class="hs">'+chips.map(function(c){return '<button class="tagb" data-a="q:'+esc(c)+'">'+esc(c)+'</button>';}).join("")+'</div>')+meter+proc+past+starter+'</div>'};};
 function lockPage(title,lead,items,veil){return '<div class="locked"><div class="veil" aria-hidden="true">'+veil+'</div><div class="lockcard"><p class="t3" style="margin:0">'+title+'</p><p>'+lead+'</p><ul>'+items.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul><button class="btn p" data-a="go:plans">See plans</button></div></div>';}
@@ -688,7 +808,7 @@ R.library=function(){var head='<h1 class="t2">Library</h1><div class="seg"><butt
 R.account=function(){var plan=ST.pro?'<div class="stack"><p class="sec-l">Plan</p><div class="row"><b>'+tierName()+'</b><span class="sp"></span><span class="cap">'+(ST.paidPlan==="month"?"Monthly":"Yearly")+'</span></div><p class="cap">Every breakdown is open.'+(ST.paid==="pro"?' Breakout alerts are on.':' Alerts come with Pro.')+'</p></div>'
  :'<div class="stack" id="acct-plan"><p class="sec-l">Plan</p><div class="row"><b>Free</b><span class="sp"></span><span class="cap">'+ST.left+' of 3 searches left</span></div><div class="meter"><div class="segs">'+[0,1,2].map(function(i){return '<i class="'+(i<3-ST.left?"":"u")+'"></i>';}).join("")+'</div></div><button class="btn p" data-a="go:plans" id="acctPlans">See plans</button></div>';
  return {bar:"account",body:topbar()+'<div class="pad fade"><div class="row"><span class="av">M</span><div><b>Maya Jones</b><div class="cap">maya.example@gmail.com</div></div></div>'+plan+'<div class="rows"><button class="li" data-a="go:email" id="m-email">'+ic("mail")+'<span class="tx"><b>Weekly email</b></span><span class="cap">On</span></button><button class="li" data-a="toast:Help opens the FAQ">'+ic("help")+'<span class="tx"><b>Help</b></span></button><button class="li" data-a="signout" id="signout">'+ic("out")+'<span class="tx"><b>Sign out</b></span></button></div></div>'};};
-R.plans=function(){return {body:topbar({back:"back",title:"Plans",nocount:true})+'<div class="pad fade"><div class="stack"><h1 class="t2">Keep finding breakouts</h1><p class="cap">'+(ST.left===0&&!ST.pro?'You’ve used your 3 free searches. ':'')+'Open every breakdown and script.</p></div>'+bill(true)+tiers(true)+freeRow(!ST.pro)+'<div class="stick"><button class="btn p" data-a="go:checkout" id="upgrade">Continue with '+priceLabel()+'</button><button class="btn g" data-a="back">Not now</button></div></div>'};};
+R.plans=function(){return {body:topbar({back:"back",title:"Plans",nocount:true})+'<div class="pad fade"><div class="stack"><h1 class="t2">Keep finding breakouts</h1><p class="cap">'+(ST.left===0&&!ST.pro?'You’ve used your 3 free searches. ':'')+'Open every breakdown and script.</p></div>'+bill(true)+(LK()==="signal"?plansTable():tiers(true)+freeRow(!ST.pro))+'<div class="stick"><button class="btn p" data-a="go:checkout" id="upgrade">Continue with '+priceLabel()+'</button><button class="btn g" data-a="back">Not now</button></div></div>'};};
 R.checkout=function(){var y=ST.plan==="year",T=TIERS[ST.tier],tot=y?T.y:T.m;return {body:'<div class="tb"><button class="row" data-a="go:plans" style="gap:6px;font-size:14px;color:var(--ink-2)">'+ic("back","s")+'UGC Breakouts</button></div><div class="pad fade"><div class="stack"><span class="cap">Subscribe to UGC Breakouts '+T.n+'</span><div class="row" style="align-items:baseline;gap:6px"><b style="font-size:36px;letter-spacing:-.02em" class="score">$'+tot+'</b><span class="cap">'+(y?"per year":"per month")+'</span></div></div><div class="sum"><span>'+T.n+', '+(y?'yearly':'monthly')+'</span><span>$'+tot+'</span>'+(y?'<span>Saved against monthly</span><span class="up">$'+T.sv+'</span>':'')+'<span class="t">Due today</span><span class="t">$'+tot+'</span></div><p class="sec-l">Card</p><div class="stack"><div class="fld">'+ic("card","s")+'4242 4242 4242 4242<small>Test</small></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="fld">12 / 30</div><div class="fld">123</div></div><div class="fld">Maya Jones</div></div><div class="stick"><button class="btn p" data-a="pay" id="pay">Subscribe for $'+tot+'</button><p class="cap" style="text-align:center">Powered by Stripe. Prototype, nothing is charged.</p></div></div>'};};
 R.success=function(){var v=ST.pending?V[ST.pending]:null;return {body:'<div class="pad fade" style="padding-top:40px"><span class="okc">'+ic("check")+'</span><div class="stack"><h1 class="t2" id="succT">You’re on '+tierName()+'</h1><p class="sub" id="succP">Every breakdown is open.'+(ST.paid==="pro"?' Breakout alerts are on, and you can score your own videos.':' Top breakouts and your Library are open too.')+'</p></div>'+(v?'<div class="stack"><p class="sec-l">The breakout you picked</p><div class="list">'+rrow(ST.pending,1)+'</div></div><button class="btn p" data-a="open:'+ST.pending+'" id="openUnlocked">Open this breakdown</button>':'<button class="btn p" data-a="go:home" id="openUnlocked">Start searching</button>')+'<button class="btn g" data-a="go:top">See top breakouts</button></div>'};};
 R.readymail=function(){var q=(ST.job&&ST.job.q)||"Lip oil",ids=ST.job?ST.searches[ST.job.idx].order.slice(0,3):["a","c","b"];return {body:topbar({back:"back",title:"Inbox",nocount:true})+'<div class="pad fade"><div class="mail"><div class="mh"><b>Your ‘'+esc(q)+'’ breakouts are ready</b>UGC Breakouts, just now</div><div class="mb"><p class="t3">We found 9 breakouts for ‘'+esc(q)+'’</p><p class="cap">5 come with a full breakdown and script.</p>'+ids.map(emailRow).join("")+'<button class="btn p" data-a="'+(ST.job?"view":"go:home")+'">See results</button><p class="cap">You asked us to email you when this search was ready.</p></div></div></div>'};};
@@ -847,9 +967,9 @@ document.addEventListener("scroll",scrollSpy,true);
 window.addEventListener("hashchange",function(){var h=(location.hash||"").slice(1);if(J.some(function(x){return x[0]===h;})&&h!==ST.jk){jump(h);ST.jk=h;shell();}});
 window.__ST=function(){return ST;};window.__V=function(id){return V[id];};window.__look=function(k){setLook(k);};
 
-var LOOKS=[["light","A · Light"],["dark","B · Dark"],["edit","C · Editorial"],["signal","D · Signal"]];
+var LOOKS=[["light","A · List"],["dark","B · Feed"],["edit","C · Magazine"],["signal","D · Dashboard"]];
 function setLook(k){if(!LOOKS.some(function(l){return l[0]===k;}))k="light";if(k==="light")delete document.documentElement.dataset.look;else document.documentElement.dataset.look=k;try{localStorage.setItem("ubLook2",k);}catch(e){}
- document.querySelectorAll("#looks button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-look")===k?"true":"false");});var ls=document.getElementById("lsel");if(ls)ls.value=k;}
+ document.querySelectorAll("#looks button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-look")===k?"true":"false");});var ls=document.getElementById("lsel");if(ls)ls.value=k;if(phone&&ST)render();}
 function buildLooks(){var row=document.querySelector("#looks .lk-row");if(row)row.innerHTML=LOOKS.map(function(l){return '<button type="button" data-look="'+l[0]+'">'+l[1]+'</button>';}).join("");
  var ls=document.getElementById("lsel");if(ls){ls.innerHTML=LOOKS.map(function(l){return '<option value="'+l[0]+'">'+l[1]+'</option>';}).join("");ls.addEventListener("change",function(){setLook(this.value);});}
  document.addEventListener("click",function(e){var b=e.target.closest("#looks button");if(b)setLook(b.getAttribute("data-look"));});
