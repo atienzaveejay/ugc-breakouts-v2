@@ -7,8 +7,12 @@ U3 = V2 + "ub-3/app.html"
 DOC = "https://docs.google.com/document/d/1Be5sm_H_oVBx_5a__ytGc9H6-RlKbzsbAzo7jrgCoPY/edit"
 HOWTO = "https://docs.google.com/document/d/1Gkhq7KIne1rpBlTxj9PtsrFIsCj4gX5qtotu7rs_B-c/edit"
 
-LIVE, PART, FIXED, NOT, NEW = "live", "part", "fixed", "notchecked", "new"
-LABEL = {LIVE: "Still live 11 Oct", PART: "Partly done", FIXED: "Fixed", NOT: "Not rechecked", NEW: "New 11 Oct"}
+LIVE, PART, FIXED, NOT, NEW, NEW19 = "live", "part", "fixed", "notchecked", "new", "new19"
+LABEL = {LIVE: "Still live", PART: "Partly done", FIXED: "Fixed", NOT: "Not rechecked", NEW: "New 11 Oct", NEW19: "New 19 Oct"}
+
+# 19 Oct: what Lester fixes on the live site now vs what the UB 3.1 redesign replaces
+NOW = {1, 2, 3, 4, 19, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32}
+SIGNED_IN_19 = {1, 2, 3, 4, 26, 27}  # need a signed-in recheck; 19 Oct pass was signed out
 
 # (no, title, status, check note, reproduce, build, type, links[(label,url)], images[file])
 ITEMS = {
@@ -66,7 +70,7 @@ ITEMS = {
   "11 Oct: the confirm text isn't in the live code. Not tapped, since a tap uses an analysis.",
   "Signed in. Open Top Breakouts and tap a video.", "Ask first: “Analyze this video? Uses 1 analysis.”", "DEV",
   [("Design (v2)", V2 + "#top-confirm")], []),
- (13, "Sales page: hero copy", LIVE, "11 Oct: still “Find Viral Breakouts.” with “An app for TikTok creators”.",
+ (13, "Sales page: hero copy", LIVE, "Still live 19 Oct, signed out: “Find Viral Breakouts.” with “An app for TikTok creators”.",
   "Signed out. Open ugcbreakouts.com.", "“Find Viral TikTok Breakouts”. Remove “An app for TikTok creators”.", "COPY", [], ["m-out-home.jpg"]),
 ]),
 "design": ("Designed, then to Lester", [
@@ -87,7 +91,7 @@ ITEMS = {
   "11 Oct: Try these are still labels with reasons, not lines a creator can say.",
   "Signed in. Open a few analyses and scroll to Try these and the shot list.", "Real hook lines, and a richer shot list (design plus the prompt behind it).", "DESIGN + DEV", [], ["m-detail.jpg"]),
  (19, "Better 404 page", LIVE,
-  "Checked 11 Oct, signed in: still “This page slipped off the radar”, then a redirect after 7 seconds.",
+  "Still live 19 Oct, signed out: “This page slipped off the radar”, then “Redirecting to login in 7 seconds”. The UB 3.1 prototype drops its 404 screen, so this one is fixed on the live site.",
   "Open any wrong address.", "UGC Breakouts branded: one headline, the search box, the bar to get anywhere.", "DESIGN",
   [("UB 3.0 404", U3 + "#notfound")], []),
  (20, "Top Breakouts: cards, categories, filters", LIVE, "11 Oct: cards still differ from Results.",
@@ -98,16 +102,38 @@ ITEMS = {
 ]),
 "found": ("Found by Veejay", [
  (22, "Top Breakouts: nearly every score reads 100", LIVE,
-  "11 Oct: 50 of the first 60 show 100, the other 10 show 99. Search results look right (100 down to 26).",
+  "Still live 19 Oct: 12 of the 12 cards shown signed out read 100. On 11 Oct, 50 of the first 60 showed 100 and the other 10 showed 99. Search results look right (100 down to 26).",
   "Open Top Breakouts and look at the scores.", "Check whether the score caps out in this feed.", "BUG", [], ["item22-top-scores.jpg"]),
  (23, "Sales page: example searches repeat the same reasons", NOT, "",
   "Signed out. Tap each example search in One search, one video.", "Each example gets its own reasons.", "COPY", [], []),
- (24, "Top Breakouts: “No preview” on every card", FIXED,
-  "Checked 11 Oct: every card shows its thumbnail. Nothing to build.", "", "", "BUG", [], []),
+ (24, "Top Breakouts: “No preview” on every card", LIVE,
+  "Back on 19 Oct: all 12 cards shown signed out read “No preview” with no thumbnail. On 11 Oct every card had its thumbnail.",
+  "Signed out or in. Open ugcbreakouts.com/top-breakouts.", "Load each card's TikTok thumbnail again, and keep a frame as a fallback when TikTok's image link has expired.", "BUG", [], ["oct19-out-top-breakouts-phone.jpg"]),
  (25, "Breakout Score: the formula and its copy still use follower count", LIVE,
-  "11 Oct: the info text still reads “views relative to follower count, engagement, and how recently the video was posted”, and the numbers follow it. A mousepad video at 730 times its creator's usual views scores 62, while a dog video at 260 times scores 91, because the score leans on followers.",
+  "Still live 19 Oct on the sales page (“views relative to follower count, engagement, and how recently the video was posted”). 11 Oct: the info text still reads “views relative to follower count, engagement, and how recently the video was posted”, and the numbers follow it. A mousepad video at 730 times its creator's usual views scores 62, while a dog video at 260 times scores 91, because the score leans on followers.",
   "Compare any result's score with the creator's usual views on their TikTok profile. Test cases: @tulip6942 (desk essentials) 730x, score 62; @winston.cavapoo (dog car seat) 260x, score 91; @kenyewest (costco finds) 3,700x, score 79.",
   "Score the video against its own account, as agreed: usual views = median views of the creator's 15 latest non-pinned posts, leaving this one out. Then a 0 to 100 scale, for example 25 × log10(views ÷ usual views), capped at 100, so 10x = 25, 100x = 50, 1,000x = 75 and 10,000x = 100. On the test cases above that gives 72, 60 and 89, in the same order as the multiples, and it spreads the Top Breakouts scores out (item 22). The 60+ breakout line (5 Oct) needs a recheck on the new scale. Then use the agreed line wherever the score is explained.", "BUG + COPY", [], []),
+]),
+"new19": ("Found 19 Oct, signed out", [
+ (28, "Footer pages still use the old name and break the TikTok only rule", NEW19,
+  "19 Oct: Terms, Privacy and Product Suggestions say “Viral Video Finder” in the text, and Contact and Suggestions have it in the tab title. The Blog intro says “TikTok, YouTube Shorts, and Instagram Reels” and “outlier signals from the VVF workflow”. Footer Pricing still links to #vvf-pricing. (Also in the 9 Oct polish review; still live.)",
+  "Signed out. Open /terms, /privacy, /contact, /suggestions and /blog from the footer.",
+  "Replace “Viral Video Finder” and “VVF” with “UGC Breakouts” everywhere, page titles included. Blog intro: TikTok only, “breakout” not “outlier”. Pricing link goes to the pricing section by its own name.", "COPY", [], ["oct19-out-blog-phone.jpg", "oct19-out-contact-phone.jpg"]),
+ (29, "Library opens for signed-out visitors, with “outlier” labels", NEW19,
+  "19 Oct: /bookmarks redirects to /my-library and shows an empty library (“0 videos found, Sorted by highest outlier score”, sort “Outlier Score”) instead of asking the visitor to sign in.",
+  "Signed out. Open ugcbreakouts.com/bookmarks.",
+  "Signed-out visitors to any library page go to Sign in, then back. In the library, “Outlier Score” becomes “Breakout Score”.", "BUG + COPY", [], ["oct19-out-bookmarks-phone.jpg"]),
+ (30, "Legal pages show today's date as the effective date", NEW19,
+  "19 Oct: Terms, Privacy, DPA and Security all read “Effective date: Oct 19, 2026”, the day of the check, so the date looks generated on page load. DPA and Security also say on the page that they are drafts pending legal review.",
+  "Signed out. Open /terms and /dpa on two different days.",
+  "Set a fixed effective date per page. Ivan decides whether the DPA and Security drafts stay public until reviewed.", "BUG + ASK", [], []),
+ (31, "Create account page copy", NEW19,
+  "19 Oct: /register reads “Search trending creators, preview viral videos, and track what's working in your niche - all in one place.” That describes the old product and uses a dash aside. /login has no page title.",
+  "Signed out. Open /register and /login.",
+  "Use the sales page line: “Find Viral Breakouts. Get the creative strategy to make your own.” Give /login the title “Log in · UGC Breakouts”.", "COPY", [], ["oct19-out-register-phone.jpg"]),
+ (32, "Contact page: the AI Analysis line", NEW19,
+  "19 Oct: Contact still says “If you're asking about AI Analysis, tell us what unlimited access would help you do.” Pro is 100 analyses, not unlimited. (Also in the polish review.)",
+  "Signed out. Open /contact.", "Cut the line, or say “If you're asking about video analyses, tell us what you'd use more of.”", "COPY", [], []),
 ]),
 }
 
@@ -181,9 +207,17 @@ def item(it):
     if ls: body += f'<div class="lks">{links(ls)}</div>'
     if ims: body += f'<div class="shots">{imgs(ims)}</div>'
     return (f'<article class="it {st}" id="item-{no}"><header><span class="no">{no}</span><h3>{e(title)}</h3>'
-            f'<span class="ty">{e(typ)}</span><span class="pill {st}">{LABEL[st]}</span></header>{body}</article>')
+            f'<span class="ty">{e(typ)}</span><span class="pill {st}">{LABEL[st]}</span>'
+            f'<span class="plan {"now" if no in NOW else "v31"}">{"Fix now" if no in NOW else "Covered by 3.1"}</span></header>{body}</article>')
 
 counts = {k: 0 for k in LABEL}
+all_items = [it for _, (_, its) in ITEMS.items() for it in its]
+now_items = sorted((it for it in all_items if it[0] in NOW), key=lambda it: it[0])
+v31_items = sorted((it for it in all_items if it[0] not in NOW), key=lambda it: it[0])
+def plan_list(its): return "".join(f'<li><a href="#item-{it[0]}"><span class="no">{it[0]}</span>{e(it[1])}</a>{" <em>needs a signed-in recheck</em>" if it[0] in SIGNED_IN_19 else ""}</li>' for it in its)
+plan = (f'<section id="plan"><h2>Before 3.1, and what 3.1 replaces</h2><div class="plan2">'
+        f'<div><h3>Fix on the live site now <small>{len(now_items)}</small></h3><p class="cap2">Bugs, the score, and pages the 3.1 redesign does not touch.</p><ol>{plan_list(now_items)}</ol></div>'
+        f'<div><h3>Covered by UB 3.1 <small>{len(v31_items)}</small></h3><p class="cap2">The 3.1 prototype redesigns these screens. No live work for Lester; the polish review below goes with them.</p><ol>{plan_list(v31_items)}</ol></div></div></section>')
 for _, (_, its) in ITEMS.items():
     for it in its: counts[it[2]] += 1
 
@@ -230,7 +264,11 @@ h2 small{{font:600 13px var(--mono);color:var(--mid)}}
 .pill{{font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}}
 .pill.live{{background:var(--red-bg);color:var(--coral)}}.pill.part{{background:var(--gold-bg);color:var(--gold)}}
 .pill.fixed{{background:var(--teal-bg);color:var(--teal)}}.pill.notchecked{{background:var(--gray-bg);color:var(--mid)}}
-.pill.new{{background:var(--coral);color:#fff}}
+.pill.new,.pill.new19{{background:var(--coral);color:#fff}}
+.plan{{font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap;border:1px solid var(--hair)}}.plan.now{{color:var(--ink)}}.plan.v31{{color:var(--mid)}}
+.plan2{{display:grid;grid-template-columns:1fr 1fr;gap:14px}}.plan2>div{{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:16px 18px}}
+.plan2 h3{{margin:0;font-size:16.5px}}.plan2 h3 small{{font:600 13px var(--mono);color:var(--mid)}}.cap2{{margin:4px 0 10px;font-size:13.5px;color:var(--mid)}}
+.plan2 ol{{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}}.plan2 li a{{color:var(--ink);text-decoration:none;font-size:14.5px;display:flex;gap:8px;align-items:baseline}}.plan2 li em{{font-style:normal;font-size:12px;font-weight:700;color:var(--coral);margin-left:38px}}
 .chk{{margin:10px 0 0;font-size:14px;color:var(--mid)}}
 .two{{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px}}
 .two h4{{margin:0 0 3px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mid)}}
@@ -249,17 +287,18 @@ h2 small{{font:600 13px var(--mono);color:var(--mid)}}
 .cap{{flex-basis:100%;margin:2px 0 0;font-size:12px;color:var(--mid)}}
 img.tall{{width:150px!important;object-fit:cover;object-position:top}}
 footer{{margin-top:40px;color:var(--mid);font-size:13px}}
-@media (max-width:700px){{h1{{font-size:28px}}.two{{grid-template-columns:1fr}}.ps{{grid-template-columns:1fr}}.shots.sm{{max-width:none}}.shots img{{height:220px}}}}
+@media (max-width:700px){{h1{{font-size:28px}}.two,.plan2{{grid-template-columns:1fr}}.ps{{grid-template-columns:1fr}}.shots.sm{{max-width:none}}.shots img{{height:220px}}}}
 </style></head><body><div class="wrap">
 <h1>UGC Breakouts: live site fixes</h1>
-<p class="lead">For Lester. Items 1 to 25 are from Ivan's 1 Oct review of ugcbreakouts.com plus four found while checking. Every item was rechecked on the live site on 11 Oct, signed in on a Pro account, and two new bugs came out of that. The polish review at the bottom is the smaller copy and layout list. The <a href="{DOC}" target="_blank" rel="noopener">Doc version ↗</a> has the same items 1 to 25.</p>
-<nav class="toc"><a href="#bugs">Bugs</a><a href="#build">Ready to build</a><a href="#design">Designed</a><a href="#found">Found by Veejay</a><a href="#polish">Polish review</a></nav>
-<p class="tally"><span><b>{counts[LIVE]}</b> still live</span><span><b>{counts[PART]}</b> partly done</span><span><b>{counts[FIXED]}</b> fixed</span><span><b>{counts[NEW]}</b> new</span><span><b>{counts[NOT]}</b> not rechecked</span></p>
+<p class="lead">For Lester. Items 1 to 25 are from Ivan's 1 Oct review of ugcbreakouts.com plus four found while checking, rechecked signed in on 11 Oct (two new bugs). On 19 Oct the site was checked again signed out, at phone and desktop width: five new items, and Top Breakouts lost its thumbnails again. Since UB 3.1 redesigns most screens, each item now says whether to fix it on the live site now or leave it to 3.1. The polish review at the bottom is the smaller copy and layout list. The <a href="{DOC}" target="_blank" rel="noopener">Doc version ↗</a> has the same items 1 to 25.</p>
+<nav class="toc"><a href="#plan">Now vs 3.1</a><a href="#bugs">Bugs</a><a href="#build">Ready to build</a><a href="#design">Designed</a><a href="#found">Found by Veejay</a><a href="#new19">New 19 Oct</a><a href="#polish">Polish review</a></nav>
+<p class="tally"><span><b>{counts[LIVE]}</b> still live</span><span><b>{counts[PART]}</b> partly done</span><span><b>{counts[FIXED]}</b> fixed</span><span><b>{counts[NEW]}</b> new</span><span><b>{counts[NEW19]}</b> new 19 Oct</span><span><b>{counts[NOT]}</b> not rechecked</span></p>
+{plan}
 {sections}
 <section id="polish"><h2>Polish review <small>{npol}</small></h2>
 <p class="lead">Veejay, 9 Oct, rechecked 11 Oct where marked. Ivan's two notes: “there seems to be something missing, more polish?” and “too many subtext and repeating elements on some pages.” Tags: SUBTEXT and REPEAT are cuts, POLISH is a layout or style change, LOCK breaks a product rule, ASK needs a call.</p>
 {pol}</section>
-<footer>Live site checked 11 Oct 2026 at 390 by 844, signed in on Pro, plus signed out for the sales page. Price is $49 a month.</footer>
+<footer>Live site checked 11 Oct 2026 at 390 by 844, signed in on Pro, and 19 Oct signed out at 390 by 844 and 1280 by 900 (no console errors, no failed requests, no sideways scroll). Price is $49 a month.</footer>
 </div><script>document.querySelectorAll(".shots img").forEach(function(i){{function f(){{if(i.naturalHeight>2.1*i.naturalWidth)i.classList.add("tall");}}if(i.complete)f();else i.addEventListener("load",f);}});</script></body></html>'''
 
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "index.html")
