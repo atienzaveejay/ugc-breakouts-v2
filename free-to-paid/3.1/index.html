@@ -1075,6 +1075,9 @@ canvas.conf{position:absolute;inset:0;pointer-events:none;z-index:45}
 .bchart.b3{height:260px}
 .tsel .selb>span{display:none}
 .tsel .selb select{padding-left:10px}
+
+/* very small phones (320px, iPhone SE 1st gen): keep 16px text (no iOS zoom), trim side space so search placeholders fit */
+@media (max-width:340px){.pad{padding-left:14px;padding-right:14px}.nextm{margin-left:10px;margin-right:10px;padding:14px 12px}.sf{gap:8px;padding-left:12px}.ob .sf.qsf input{font-size:16px}}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
