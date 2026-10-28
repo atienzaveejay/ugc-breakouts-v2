@@ -1852,6 +1852,9 @@ button.lnk{min-height:44px;display:inline-flex;align-items:center}
 .wcard .wn{font-size:12.5px;color:var(--mid)}.wcard .wn b{color:var(--ink);font-weight:700}
 /* script from an analysis: pretext + how we write it */
 #scPre{margin:-4px 0 2px}
+
+/* 28 Oct: ring track visible on teal-soft pills */
+.runpill .ring .rb,.prog .ring .rb{stroke:rgba(11,123,127,.25)}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
@@ -2930,7 +2933,7 @@ function paJump(k){ST.pa.hold=true;ST.pa.holdT=null;ST.pa.g=false;
  if(k==="pa-reading"||k==="pa-done"){ST.pa.h=PA.h;ST.pa.from="out";ST.pa.holdT=k==="pa-done"?3:1;ST.scr="pareading";return true;}
  var m=k.match(/^pa-c(\d+)$/);if(m){ST.pa.from="out";ST.pa.i=+m[1]-1;ST.pa.play=false;ST.scr="pastory";return true;}
  if(k==="pa-home"){seed(1);ST.ans.tt=PA.h;ST.pa.h=PA.h;ST.pa.done=true;ST.firstHome=true;ST.scDot=true;HIST=[];ST.scr="home";return true;}
- if(k==="pa-home-run"){seed(0);ST.ans.tt=PA.h;ST.pa.h=PA.h;DEMO_MS=600000;search("Lip oil","ob");DEMO_MS=24000;ST.job.start=Date.now()-30000;ST.pa.done=true;ST.firstHome=true;ST.scDot=true;HIST=[];ST.scr="home";return true;}
+ if(k==="pa-home-run"){seed(0);ST.ans.tt=PA.h;ST.pa.h=PA.h;DEMO_MS=90000;search("Lip oil","ob");DEMO_MS=24000;ST.job.start=Date.now()-9000;ST.pa.done=true;ST.firstHome=true;ST.scDot=true;HIST=[];ST.scr="home";return true;}
  if(k==="pa-acct"||k==="pa-sum"||k==="pa-in5"){seed(1);ST.ans.tt=PA.h;ST.pa.h=PA.h;ST.pa.done=k!=="pa-home";
   if(k==="pa-in5"){ST.pa.from="in";ST.pa.i=PA_N-1;ST.pa.play=false;ST.scr="pastory";}else if(k==="pa-home"){ST.pa.hk=true;ST.scr="home";}else if(k==="pa-acct"){ST.pa.ak=true;ST.scr="account";}else ST.scr="profile";return true;}
  return false;}
@@ -3089,7 +3092,7 @@ function jump(k){reset();lastScr=null;AN_MS=9000;var s;
  case "sales-a":case "sales-b":case "sales-c":case "sales-d":case "sales-e":case "sales-f":case "sales-g":case "sales-h":case "sales-i":ST.salesV=k.charAt(6);ST.lsq=null;ST.demo=0;ST.salesStop=true;break;
  case "google":ST.scr="google";break;
  case "ob1":ST.nq="Lip oil";ST.scr="ob1";break;
- case "ob2":case "ob3":case "ob4":case "ob5":case "ob6":case "ob7":case "ob8":ST.areas=[];DEMO_MS=600000;search("Lip oil","ob");DEMO_MS=24000;ST.job.start=Date.now()-60000;var on=OBS.indexOf(k)+1;if(on>2){ST.ans.topics=["Beauty & skincare","Food & cooking"];ST.areas=q2areas();}if(on>3)ST.ans.aud=["Women 25-34"];if(on>4)ST.ans.style=["Talking head","Product demo"];if(on>5)ST.ans.paid="Sometimes, a few gigs";if(on>6)ST.ans.week="5-7";ST.scr=k;HIST=[];break;
+ case "ob2":case "ob3":case "ob4":case "ob5":case "ob6":case "ob7":case "ob8":ST.areas=[];DEMO_MS=90000;search("Lip oil","ob");DEMO_MS=24000;ST.job.start=Date.now()-9000;var on=OBS.indexOf(k)+1;if(on>2){ST.ans.topics=["Beauty & skincare","Food & cooking"];ST.areas=q2areas();}if(on>3)ST.ans.aud=["Women 25-34"];if(on>4)ST.ans.style=["Talking head","Product demo"];if(on>5)ST.ans.paid="Sometimes, a few gigs";if(on>6)ST.ans.week="5-7";ST.scr=k;HIST=[];break;
  case "vidslow":case "vidfast":seed(0);ST.wDone=false;DEMO_MS=k==="vidfast"?9000:60000;search("Lip oil");DEMO_MS=24000;return;
  case "vidready":seed(0);ST.wDone=false;search("Lip oil");finishJob();ST.readyAt=Date.now()+600000;return;
  case "welcome":seed(0);ST.wDone=false;DEMO_MS=50000;search("Lip oil");ST.job.start=Date.now()-12000;DEMO_MS=24000;ST.scr="welcome";HIST=[];break;
