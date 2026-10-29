@@ -2027,6 +2027,17 @@ button.scw2,.scw2 .hd{min-height:72px}
 .p12cta>b{color:var(--ink)}
 .scfor .tx small{white-space:normal;overflow:visible}
 .sales .hero .spick{align-self:stretch;align-items:center}
+/* sales pick switch: full width, roomier, clearer label */
+.sales .hero .spick{width:100%;max-width:400px;margin-inline:auto;gap:10px}
+.sales .hero .spick .lbl{font-size:15px;font-weight:600;color:var(--ink)}
+.sales .hero .spick .seg2{width:100%;padding:5px;border-radius:12px}
+.sales .hero .spick .seg2 button{height:46px;padding:0 10px;font-size:15px;white-space:nowrap;color:var(--ink);opacity:.62}
+.sales .hero .spick .seg2 button.on{opacity:1}
+.sales .hero .spick .seg2 button svg{flex:none}
+/* Results, free: 4 grayed-out locked breakouts in full, unlock card after them */
+.lkwrap{max-height:none;overflow:visible;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent)}
+.lkwrap .rc.lock{filter:grayscale(1);opacity:.5;pointer-events:none}
+.lkwrap+.unlock{margin-top:-56px}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
