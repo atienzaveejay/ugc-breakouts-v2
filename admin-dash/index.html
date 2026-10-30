@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UGCB Admin Mockup</title>
+<style>
+@font-face{font-family:"Public Sans";src:url(publicsans-latin.woff2) format("woff2");font-weight:100 900}
+:root{--bg:#F7F6F4;--card:#fff;--ink:#171312;--mid:#6B625D;--soft:#8A807A;--hair:#E4DFDA;--teal:#0B7B7F;--tealsoft:#DCEEEE;--red:#B4232F;--bar:#0B7B7F;--track:#EDEAE6}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 "Public Sans",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+a{color:inherit}
+.app{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+aside{background:#fff;border-right:1px solid var(--hair);padding:20px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{font-weight:700;padding:0 10px 16px}
+.group{margin-top:18px}.group>b{display:block;font-size:13px;font-weight:600;color:var(--soft);padding:0 10px 4px}
+aside button{display:block;width:100%;text-align:left;border:0;background:none;font:inherit;font-size:14px;padding:7px 10px;border-radius:4px;color:var(--ink);cursor:pointer}
+aside button:hover{background:var(--bg)}aside button.on{background:var(--tealsoft);font-weight:600}
+aside .ex{color:var(--mid);cursor:default}aside .ex:hover{background:none}
+main{padding:28px 36px 64px;max-width:1120px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:6px}
+h1{font-size:26px;line-height:1.2;margin:0;font-weight:700;letter-spacing:-.01em}
+select{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--hair);border-radius:4px;background:#fff;color:var(--ink)}
+.ex-note{color:var(--mid);font-size:13px;margin:0 0 22px}
+.stats{display:flex;flex-wrap:wrap;gap:12px 40px;padding:6px 0 22px}
+.stat b{display:block;font-size:30px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.stat span{font-size:13px;color:var(--mid)}.stat em{font-style:normal;color:var(--soft)}
+section{background:var(--card);border:1px solid var(--hair);border-radius:6px;padding:18px 20px;margin-bottom:16px}
+h2{font-size:16px;margin:0 0 12px;font-weight:650}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.two section{margin-bottom:16px;min-width:0}
+.fn{display:grid;grid-template-columns:150px minmax(0,1fr) 56px 48px;gap:10px;align-items:center;padding:6px 0;font-size:14px}
+.fn .tr{height:18px;background:var(--track);border-radius:2px}.fn .tr i{display:block;height:100%;background:var(--bar);border-radius:2px}
+.fn b{text-align:right;font-weight:600}.fn span{text-align:right;color:var(--mid);font-size:13px}
+.fn.worst .lb{font-weight:600}.fn.worst span{color:var(--red);font-weight:600}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:440px}
+th{text-align:right;font-weight:500;color:var(--mid);font-size:13px;padding:6px 8px;border-bottom:1px solid var(--hair);white-space:nowrap}
+td{text-align:right;padding:9px 8px;border-bottom:1px solid var(--hair);white-space:nowrap}
+tr:last-child td{border-bottom:0}th:first-child,td:first-child{text-align:left;padding-left:0}
+tfoot td{font-weight:600;border-top:1px solid var(--ink);border-bottom:0}
+.sub{color:var(--mid);font-size:13px}.red{color:var(--red);font-weight:600}
+.list{margin:0;padding:0;list-style:none}.list li{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--hair);font-size:14px}.list li:last-child{border-bottom:0}
+.list b{font-weight:600}
+.alert{display:flex;justify-content:space-between;gap:16px;border-left:3px solid var(--red);padding:2px 0 2px 12px;margin-bottom:22px;font-size:14px}
+.link{color:var(--teal);font-weight:600;text-decoration:none;white-space:nowrap}
+.scr{display:none}.scr.on{display:block}
+.mnav{display:none}
+@media (max-width:820px){
+ .app{display:block}aside{display:none}
+ .mnav{display:flex;gap:4px;overflow-x:auto;background:#fff;border-bottom:1px solid var(--hair);padding:8px 12px;position:sticky;top:0;z-index:2}
+ .mnav button{border:0;background:none;font:inherit;font-size:14px;padding:6px 10px;border-radius:4px;white-space:nowrap;color:var(--ink)}.mnav button.on{background:var(--tealsoft);font-weight:600}
+ main{padding:18px 16px 48px}.two{display:block}
+ .fn{grid-template-columns:104px minmax(0,1fr) 46px 40px;gap:8px;font-size:13px}
+ .stats{gap:12px 28px}.stat b{font-size:26px}section{padding:16px}
+}
+</style></head><body>
+<div class="mnav" id="mnav"></div>
+<div class="app">
+<aside>
+ <div class="brand">UGC Breakouts admin</div>
+ <div class="group"><b>Numbers</b><div id="nav"></div></div>
+ <div class="group"><b>System</b><button class="ex">Error Monitor</button></div>
+ <div class="group"><b>Library</b><button class="ex">Breakouts</button><button class="ex">Keyword suggestions</button><button class="ex">Hook templates</button><button class="ex">Import videos</button></div>
+ <div class="group"><b>Customers</b><button class="ex">Users</button><button class="ex">Subscriptions</button><button class="ex">Coupons</button><button class="ex">Inquiries</button></div>
+ <div class="group"><b>Settings</b><button class="ex">Plans</button><button class="ex">Email templates</button><button class="ex">Blog</button><button class="ex">Admin users</button><button class="ex">API keys</button></div>
+</aside>
+<main>
+
+<div class="scr" id="overview">
+ <div class="top"><h1>Overview</h1><select aria-label="Time frame"><option>Last 30 days</option><option>Last 7 days</option><option>Last 90 days</option></select></div>
+ <p class="ex-note">Example numbers.</p>
+ <div class="stats">
+  <div class="stat"><b>$1,070</b><span>MRR <em>· +$469</em></span></div>
+  <div class="stat"><b>30</b><span>Paying <em>· +11</em></span></div>
+  <div class="stat"><b>380</b><span>Sign ups <em>· +42</em></span></div>
+ </div>
+ <div class="alert"><span><b>Biggest drop:</b> only 15% of people who reach the paywall pay.</span><a class="link" href="#funnels">See funnels</a></div>
+ <section><h2>Main funnel</h2><div id="f1a"></div></section>
+ <section><h2>Best channels by money</h2><div class="wrap"><table><thead><tr><th>Channel</th><th>Sign ups</th><th>Paying</th><th>New MRR</th></tr></thead><tbody>
+  <tr><td>TikTok ads</td><td>150</td><td>6</td><td>$224</td></tr><tr><td>Meta ads</td><td>70</td><td>3</td><td>$87</td></tr><tr><td>Profile Checker</td><td>85</td><td>3</td><td>$87</td></tr></tbody></table></div><p style="margin:10px 0 0"><a class="link" href="#channels">All channels</a></p></section>
+</div>
+
+<div class="scr" id="funnels">
+ <div class="top"><h1>Funnels</h1><select aria-label="Channel"><option>All channels</option><option>TikTok ads</option><option>Meta ads</option><option>Profile Checker</option><option>Cold email</option><option>Referral</option><option>Brand brief</option><option>X</option><option>Instagram</option></select></div>
+ <p class="ex-note">Example numbers. The percent is against the step before.</p>
+ <section><h2>Main funnel</h2><div id="f1b"></div></section>
+ <section><h2>Profile Checker funnel</h2><div id="f2"></div></section>
+ <section><h2>Profile Checker, also</h2><ul class="list"><li><span>Profiles that failed</span><b>74</b></li><li><span class="sub">Private 31, bad handle 28, too few videos 15</span><span></span></li><li><span>Results shared</span><b>58</b></li></ul></section>
+</div>
+
+<div class="scr" id="channels">
+ <div class="top"><h1>Channels</h1><select aria-label="Time frame"><option>Last 30 days</option><option>Last 7 days</option><option>Last 90 days</option></select></div>
+ <p class="ex-note">Example numbers. Each person counts for the first link they arrived from.</p>
+ <section><div class="wrap"><table style="min-width:640px"><thead><tr><th>Channel</th><th>Visits</th><th>Sign ups</th><th>Sign up %</th><th>Paying</th><th>New MRR</th><th>Cancelled</th></tr></thead><tbody>
+  <tr><td>TikTok ads</td><td>1,800</td><td>150</td><td>8%</td><td>6</td><td>$224</td><td>1</td></tr>
+  <tr><td>Meta ads</td><td>900</td><td>70</td><td>8%</td><td>3</td><td>$87</td><td>1</td></tr>
+  <tr><td>Profile Checker</td><td>600</td><td>85</td><td>14%</td><td>3</td><td>$87</td><td>0</td></tr>
+  <tr><td>Cold email</td><td>300</td><td>25</td><td>8%</td><td>1</td><td>$79</td><td>0</td></tr>
+  <tr><td>Referral</td><td>150</td><td>25</td><td>17%</td><td>1</td><td>$29</td><td>0</td></tr>
+  <tr><td>Brand brief</td><td>200</td><td>15</td><td>8%</td><td>0</td><td>$0</td><td>0</td></tr>
+  <tr><td>Instagram</td><td>150</td><td>5</td><td>3%</td><td>0</td><td>$0</td><td>0</td></tr>
+  <tr><td>X</td><td>100</td><td>5</td><td>5%</td><td>0</td><td>$0</td><td>1</td></tr>
+ </tbody><tfoot><tr><td>Total</td><td>4,200</td><td>380</td><td>9%</td><td>14</td><td>$506</td><td>3</td></tr></tfoot></table></div></section>
+ <section><h2>Top referrers</h2><div class="wrap"><table><thead><tr><th>Sent by</th><th>Sent</th><th>Signed up</th><th>Paid</th></tr></thead><tbody><tr><td>Creator A</td><td>62</td><td>11</td><td>1</td></tr><tr><td>Creator B</td><td>40</td><td>8</td><td>0</td></tr><tr><td>Creator C</td><td>48</td><td>6</td><td>0</td></tr></tbody></table></div></section>
+</div>
+
+<div class="scr" id="use">
+ <div class="top"><h1>Product use</h1><select aria-label="Time frame"><option>Last 30 days</option><option>Last 7 days</option><option>Last 90 days</option></select></div>
+ <p class="ex-note">Example numbers.</p>
+ <div class="stats">
+  <div class="stat"><b>900</b><span>Scripts written</span></div>
+  <div class="stat"><b>1,450</b><span>Searches</span></div>
+  <div class="stat"><b>97%</b><span>Scripts that loaded</span></div>
+ </div>
+ <div class="two">
+  <section><h2>Free scripts used before leaving or paying</h2><ul class="list"><li><span>1 of 3</span><b>62</b></li><li><span>2 of 3</span><b>52</b></li><li><span>3 of 3, saw the paywall</span><b>96</b></li></ul></section>
+  <section><h2>Paid users near their limit</h2><ul class="list"><li><span>Creator over 80% of scripts</span><b>4</b></li><li><span>Creator over 80% of searches</span><b>2</b></li><li><span>Pro over 80% of either</span><b>0</b></li></ul></section>
+ </div>
+ <section><h2>Searches with few or zero results</h2><div class="wrap"><table><thead><tr><th>Search term</th><th>Times searched</th><th>Results</th></tr></thead><tbody><tr><td>dog dental chews</td><td>14</td><td>0</td></tr><tr><td>menopause skincare</td><td>11</td><td>3</td></tr><tr><td>camping gear for kids</td><td>9</td><td>2</td></tr></tbody></table></div></section>
+</div>
+
+<div class="scr" id="money">
+ <div class="top"><h1>Money</h1><select aria-label="Time frame"><option>Last 30 days</option><option>Last 7 days</option><option>Last 90 days</option></select></div>
+ <p class="ex-note">Example numbers. MRR leaves out free plans, trials and comped accounts.</p>
+ <div class="stats">
+  <div class="stat"><b>$1,070</b><span>MRR</span></div>
+  <div class="stat"><b>$550</b><span>Running costs</span></div>
+  <div class="stat"><b>49%</b><span>Margin</span></div>
+ </div>
+ <div class="two">
+  <section><h2>How MRR changed</h2><ul class="list"><li><span>Start of period</span><b>$601</b></li><li><span>New customers (14)</span><b>+$506</b></li><li><span>Creator to Pro (1)</span><b>+$50</b></li><li><span>Cancelled (3)</span><b class="red">-$87</b></li><li><span><b>End of period</b></span><b>$1,070</b></li></ul></section>
+  <section><h2>Who's paying</h2><ul class="list"><li><span>Creator</span><b>26</b></li><li><span>Pro</span><b>4</b></li><li><span>Paying yearly</span><b>11</b></li><li><span>Refunds</span><b>1</b></li><li><span>Comped, not in MRR</span><b>8</b></li></ul></section>
+ </div>
+ <section><h2>What each feature costs</h2><div class="wrap"><table><thead><tr><th>Feature</th><th>Times used</th><th>Cost</th><th>Each</th></tr></thead><tbody>
+  <tr><td>Searches</td><td>1,450</td><td>$340</td><td>$0.23</td></tr><tr><td>Analyses</td><td>310</td><td>$110</td><td>$0.35</td></tr><tr><td>Scripts</td><td>900</td><td>$60</td><td>$0.07</td></tr><tr><td>Profile checks</td><td>520</td><td>$40</td><td>$0.08</td></tr>
+ </tbody><tfoot><tr><td>Total</td><td></td><td>$550</td><td></td></tr></tfoot></table></div></section>
+</div>
+</main></div>
+<script>
+var S=[["overview","Overview"],["funnels","Funnels"],["channels","Channels"],["use","Product use"],["money","Money"]];
+function bars(rows,worst){var m=rows[0][1];return rows.map(function(r,i){var p=i?Math.round(r[1]/rows[i-1][1]*100)+"%":"";return '<div class="fn'+(i===worst?' worst':'')+'"><div class="lb">'+r[0]+'</div><div class="tr"><i style="width:'+Math.max(r[1]/m*100,.6)+'%"></i></div><b>'+r[1].toLocaleString("en-US")+'</b><span>'+p+'</span></div>';}).join("");}
+var F1=[["Lands on page",4200],["First search",1260],["Signs up",380],["First script",210],["Hits paywall",96],["Pays",14]];
+var F2=[["Lands",600],["Enters TikTok",520],["Results show",446],["Taps into UGCB",190],["Signs up",85],["First script",60],["Pays",3]];
+document.getElementById("f1a").innerHTML=bars(F1,5);document.getElementById("f1b").innerHTML=bars(F1,5);document.getElementById("f2").innerHTML=bars(F2,6);
+function btns(el){el.innerHTML=S.map(function(s){return '<button data-s="'+s[0]+'">'+s[1]+'</button>';}).join("");el.addEventListener("click",function(e){var s=e.target.getAttribute("data-s");if(s)location.hash=s;});}
+btns(document.getElementById("nav"));btns(document.getElementById("mnav"));
+function show(){var h=location.hash.slice(1)||"overview";if(!document.getElementById(h))h="overview";document.querySelectorAll(".scr").forEach(function(x){x.classList.toggle("on",x.id===h);});document.querySelectorAll("[data-s]").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-s")===h);});window.scrollTo(0,0);}
+addEventListener("hashchange",show);show();
+</script>
+</body></html>
