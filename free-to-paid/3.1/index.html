@@ -3092,6 +3092,27 @@ html.dk .s3cta{max-width:600px;margin:0 auto}
 .s3msc span .ic{width:14px;height:14px;color:var(--teal)}
 .s3msc span i{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--hair);display:inline-block}
 .s4share .apps i .ic{width:20px;height:20px;color:#fff}
+.s5how{display:flex;flex-direction:column;gap:12px;margin-top:4px;padding-top:20px;border-top:1px solid var(--hair)}
+.s5how .lb{font-size:12px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;color:var(--soft)}
+.s5how ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+.s5how li{position:relative;display:flex;gap:12px;padding-bottom:16px}
+.s5how li:last-child{padding-bottom:0}
+.s5how li:not(:last-child)::before{content:"";position:absolute;left:11px;top:24px;bottom:0;width:1.5px;background:var(--hair)}
+.s5how .n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--hair);background:var(--paper);font-size:12px;font-weight:750;color:var(--mid)}
+.s5how .tx{display:flex;flex-direction:column;gap:2px;padding-top:2px}
+.s5how b{font-size:14.5px;color:var(--ink)}
+.s5how small{font-size:13px;line-height:1.4;color:var(--mid)}
+/* idea card, older style + format */
+.icd3{position:relative;display:flex;flex-direction:column;gap:10px;padding:22px 20px 18px;border-radius:18px;background:var(--card);box-shadow:var(--sh-2,0 6px 24px rgba(0,0,0,.08));border:2px solid transparent;touch-action:pan-y;user-select:none}
+.icd3.sel{border-color:var(--ink)}
+.icd3 .kk{font-size:13px;font-weight:650;color:var(--mid)}
+.icd3 .hl{font-size:26px;line-height:1.18;letter-spacing:-.015em;color:var(--ink)}
+.icd3 .ds{margin:0;font-size:16px;line-height:1.45;color:var(--mid)}
+.icd3 .ff{display:flex;flex-direction:column;gap:6px;margin-top:4px;padding-top:14px;border-top:1px solid var(--hair)}
+.icd3 .ff p{margin:0;font-size:14px;line-height:1.45;color:var(--mid)}
+.icd3 .ff b{color:var(--teal);font-weight:700}
+.icd3 .selk{position:absolute;top:16px;right:16px;display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;color:var(--teal)}
+.icd3.sel .kk{padding-right:80px}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
@@ -5450,6 +5471,32 @@ var _s3sh6=s3Sheets;s3Sheets=function(P,t,l,s){return _s3sh6(P,t,l,s).replace(/<
  if(a==="bh:again"&&b){b.counted=false;}
  return a0(a);};})();
 (function(){var a0=scAct;scAct=function(k,v){if(k==="scnext"||k==="scfrom"||k==="scideas"||k==="scown"||k==="s3write"){var c=sc();c.baseHk=null;if(k!=="s3write")c.hkOpts=null;}return a0(k,v);};})();
+
+/* Script start: a quiet How it works under the three ways in (Veejay, 4 Nov) */
+var _s3st10=R.script;R.script=function(){var r=_s3st10();if(r.body.indexOf('id="scHow2"')>=0||r.body.indexOf('s5c pri')<0)return r;
+ var steps=[["Pick an idea","From the Idea Generator, your own idea or a brand’s brief."],["Choose your hook","The first line you say. We write the rest in your style."],["Film it","Refine any part, save it, then read it off the teleprompter."]];
+ var how='<section class="s5how" id="scHow2"><span class="lb">How it works</span><ol>'+steps.map(function(s,k){return '<li><span class="n">'+(k+1)+'</span><span class="tx"><b>'+s[0]+'</b><small>'+s[1]+'</small></span></li>';}).join("")+'</ol></section>';
+ r.body=r.body.replace(/(<small class="fine s3fine" id="scLeft">[^<]*<\/small>)/,'$1'+how);return r;};
+
+/* Idea card in the older card style (Veejay, 4 Nov) + what the format is and what it's good for (Ivan: "a complete thought... why choose this one") */
+var S3_FMT={lip:["Half and half","Use the product on one half and leave the other half bare, so the difference is the proof.","Showing a visible result fast. People stay to compare the two sides."],
+ dupe:["Price guess","Two products side by side with the labels hidden, then the price reveal at the end.","Comments. Everyone wants to guess, and the reveal keeps them to the end."],
+ wear:["Wear test","One product checked at set times through a real day, opening on the final result.","Trust. A long test is proof you can’t fake in one take."],
+ rank:["Ranking","Several products scored worst to best, one swatch each, with number 1 saved for last.","Watch time. People wait for number 1, then argue about it in the comments."],
+ grwm:["Get ready with me","Your normal routine while you talk to camera, with the product as one natural step.","Followers and trust. It feels like time with you, not an ad."],
+ mist:["Mistakes list","A short list of common mistakes, each one fixed on camera.","Saves. People keep it to check their own routine later."],
+ reply:["Reply to a comment","A real comment on screen, answered with a quick test.","Comments. A real question brings more questions."],
+ ways:["One product, 3 ways","The same product used three different ways in one video.","Showing value. One product doing three jobs makes it feel worth buying."],
+ hype:["Honest first try","Open the product and try it for the first time on camera, with a straight verdict.","Trust before buying. People want an honest answer first."],
+ pov:["POV","No talking: text on screen sets the scene and the product does the work.","Easy to film, and it works with the sound off, which is how many people scroll."]};
+function s3Card(i,k,n,sel){var E=s3E(i),F=S3_FMT[i.k]||["Format","",""];
+ return '<div class="icd3'+(sel?' sel':'')+'" id="idCard"><small class="kk">'+(n?'Idea '+(k+1)+' of '+n+' · ':'')+esc(F[0])+'</small><b class="hl">'+esc(E.t)+'</b><p class="ds">'+esc(E.d)+'</p>'+
+  '<div class="ff"><p><b>The format:</b> '+esc(F[1])+'</p><p><b>Good for:</b> '+esc(F[2])+'</p></div>'+(sel?'<span class="selk">'+ic("check","s")+'Selected</span>':'')+'</div>';}
+var _s3idB=R.scideas;R.scideas=function(){var r=_s3idB(),c=sc(),n=SC_IDEAS.length,k=c.ii||0;if(k>=n)return r;
+ r.body=r.body.replace(/<div class="icd2" id="idCard">[\s\S]*?<\/div>(?=<button class="s2l s3chg2"|<div class="icn2")/,s3Card(SC_IDEAS[k],k,n,!!c.idSel));return r;};
+var _s3setB=R.scsetup;R.scsetup=function(){var r=_s3setB(),c=sc();if(c.idea)r.body=r.body.replace(/<div class="icd2" id="idCard">[\s\S]*?<\/div>(?=<button class="s2l s3chg2"|<\/section>)/,s3Card(c.idea,0,0,true));return r;};
+/* the card's top line already says Idea n of 10 and the format: drop the row above it */
+(function(){["scideas","scsetup"].forEach(function(k){var o=R[k];R[k]=function(){var r=o();if(r.body.indexOf('class="icd3')>=0)r.body=r.body.replace(/<div class="hdr"><span class="lb">Video idea<\/span>(<small>[^<]*<\/small>)?<\/div>/,'');return r;};});})();
 
 /* ---------- review shell ---------- */
 var J=window.UB_SCREENS,NOTES=window.UB_NOTES;
