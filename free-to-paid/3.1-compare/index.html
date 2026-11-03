@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>UB 3.1 before and after</title>
+<style>
+:root{--ink:#171312;--mid:#5f5752;--soft:#958b84;--hair:#e4dcd3;--paper:#f6f1ea;--card:#fff;--act:#d8304a;--teal:#0a8a86}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif}
+header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;padding:18px 24px;border-bottom:1px solid var(--hair);background:var(--card)}
+header h1{margin:0;font-size:19px;letter-spacing:-.01em}
+header p{margin:0;color:var(--mid);font-size:14px}
+header a{color:var(--mid);font-size:14px}
+.wrap{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 62px)}
+nav{border-right:1px solid var(--hair);padding:12px 0 40px;overflow:auto;max-height:calc(100vh - 62px);position:sticky;top:0;background:var(--card)}
+nav h2{margin:16px 20px 6px;font-size:12px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.06em}
+nav button{display:flex;gap:10px;width:100%;padding:8px 20px;border:0;background:none;text-align:left;font:inherit;font-size:14px;color:var(--mid);cursor:pointer}
+nav button i{font-style:normal;width:20px;flex:none;color:var(--soft);font-variant-numeric:tabular-nums}
+nav button:hover{background:var(--paper);color:var(--ink)}
+nav button.on{background:var(--paper);color:var(--ink);font-weight:650;box-shadow:inset 3px 0 0 var(--act)}
+main{padding:20px 24px 40px;display:flex;flex-direction:column;gap:16px;align-items:center}
+.what{max-width:860px;width:100%;display:flex;gap:16px;align-items:flex-start;justify-content:space-between}
+.what b{display:block;font-size:18px;letter-spacing:-.01em}
+.what span{color:var(--mid)}
+.step{display:flex;gap:8px;flex:none}
+.step button{height:36px;padding:0 14px;border:1px solid var(--hair);border-radius:8px;background:var(--card);font:inherit;font-size:14px;cursor:pointer}
+.step button:disabled{opacity:.4;cursor:default}
+.pair{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.col{display:flex;flex-direction:column;gap:8px;align-items:center}
+.col .lb{font-size:14px;font-weight:700}
+.col .lb small{display:block;font-weight:500;color:var(--mid);font-size:13px;text-align:center}
+.col.now .lb{color:var(--act)}
+.ph{position:relative;width:351px;height:760px;border-radius:30px;border:6px solid #1d1918;overflow:hidden;background:var(--paper)}
+.ph iframe{position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform:scale(.9);transform-origin:0 0}
+.none{position:absolute;inset:0;display:grid;place-items:center;padding:32px;text-align:center;color:var(--mid);font-size:15px}
+.none[hidden]{display:none}
+.none b{display:block;color:var(--ink);font-size:16px;margin-bottom:6px}
+.tip{color:var(--soft);font-size:13px}
+@media (max-width:900px){
+ .wrap{grid-template-columns:1fr}
+ nav{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--hair);display:flex;overflow-x:auto;padding:8px}
+ nav h2{display:none}
+ nav button{white-space:nowrap;width:auto;padding:8px 12px;border-radius:8px}
+ nav button.on{box-shadow:inset 0 -3px 0 var(--act)}
+ main{padding:16px}
+ .pair{gap:16px}
+ .ph{width:300px;height:650px}.ph iframe{transform:scale(.77)}
+}
+</style>
+</head>
+<body>
+<header>
+ <h1>UGC Breakouts 3.1: before and after our 3 Nov call</h1>
+ <p>Left is what we went through on the call. Right is the new version. Pick a step and both phones go to it.</p>
+ <a href="../3.1/">Open the full new prototype</a>
+</header>
+<div class="wrap">
+ <nav id="nav" aria-label="Steps"></nav>
+ <main>
+  <div class="what"><div><b id="wT"></b><span id="wD"></span></div><div class="step"><button id="prev">Previous</button><button id="next">Next</button></div></div>
+  <div class="pair">
+   <div class="col"><div class="lb">Before<small id="oN"></small></div><div class="ph" id="oPh"><iframe id="oF" title="Before our call" src="../3.1-before-our-call/?embed=1#script"></iframe><div class="none" id="oNone" hidden><div><b>Not in the earlier version</b>This one is new.</div></div></div></div>
+   <div class="col now"><div class="lb">Now<small id="nN"></small></div><div class="ph"><iframe id="nF" title="New version" src="../3.1/?embed=1#script"></iframe></div></div>
+  </div>
+  <p class="tip">Both phones work: tap around in either one. The arrow keys move between steps.</p>
+ </main>
+</div>
+<script>
+var S=[
+ ["Script writer"],
+ ["Script start","script","script","Give me ideas is the main way in. My own idea and Brief Buddy sit below as quieter rows."],
+ ["Pick how it opens","scideas","scideas","The 3 hooks are the main thing on the page. The idea is a small row above, with Next idea."],
+ ["Hook picked","scideas","scideas-picked","Pick a hook, then Write my script, pinned at the bottom. The ingredients show as 3 rows under the hooks."],
+ ["Ingredients","scsetup","scsetup","Ingredients now live on the hook page instead of their own step. This is where Change takes her."],
+ ["Starting from a breakout","scsetup-from","scsetup-from","Same hook page, with the breakout as the small row on top."],
+ ["Writing the script","scbuild","scbuild","The 3 ingredients go in while it writes."],
+ ["Approve each part","scout","scout","One part at a time. Approve moves to the next part by itself."],
+ ["Approving part 3","scout","scout-p3","The timeline shows what's approved (dark), where you are (red) and what's left."],
+ ["All parts approved","scout","scout-done","Then one button: See my full script."],
+ ["Refine one part","scshot","scshot","Only this part changes."],
+ ["After a refine","screfined","screfined","The new line comes first. What changed sits under it, with Undo."],
+ ["Full script","scout","scfinal","The whole script together. Save is the big button."],
+ ["Saved","scout","scfinal-saved","After Save, the main button is Film it."],
+ ["Teleprompter","scout-read","scout-read","Full screen, scrolls at talking speed."],
+ ["3 rewrites used","sclast","sclast","The message is at the top now, with Start over."],
+ ["Out of free scripts","scnone","scnone","The upgrade card comes first, then her saved scripts."],
+ ["Brief Buddy"],
+ ["Brief Buddy page (free)","bh-check","bh-check","New name: Brief Buddy."],
+ ["TikTok handle, then Google or email","bh-email","bh-acct","Your order: brief, then her TikTok handle and email."],
+ ["Reading the brief and her TikTok","bh-reading","bh-reading","One processing step for both."],
+ ["Ingredients: brief, you, your input","bh-read","bh-ing","The ingredients page from our call, with Write my script pinned."],
+ ["The script","bh-script","bh-script","Every must-say highlighted in the line that covers it. Save is the big button."],
+ ["Brief Buddy in the app","scbrief","scbrief","Signed in, it uses the same Brief Buddy screens, minus the account step."],
+ ["Profile Rewind"],
+ ["Profile Rewind page (free)","pa-check","pa-check","New name: Profile Rewind."],
+ ["Sharing"],
+ ["A friend's Profile Rewind","","sh-rewind","What a friend sees. Ends with Make your own Profile Rewind."],
+ ["A video breakdown someone sent","","sh-video","Ends with Find breakouts like this, free."],
+ ["A script someone sent","","sh-script","Ends with Write my own script, free."]
+];
+var steps=[],nav=document.getElementById("nav"),cur=0,n=0;
+S.forEach(function(s){if(s.length===1){var h=document.createElement("h2");h.textContent=s[0];nav.appendChild(h);return;}
+ var i=steps.length;steps.push(s);n++;var b=document.createElement("button");b.innerHTML="<i>"+n+"</i><span>"+s[0]+"</span>";b.onclick=function(){show(i);};nav.appendChild(b);});
+var oF=document.getElementById("oF"),nF=document.getElementById("nF");
+function lab(f,k){try{var L=f.contentWindow.UB_SCREENS;for(var i=0;i<L.length;i++)if(L[i][0]===k)return ("0"+(i+1)).slice(-2)+" · "+L[i][1];}catch(e){}return "";}
+function go(f,k){try{if(f.contentWindow.location.hash==="#"+k)f.contentWindow.dispatchEvent(new HashChangeEvent("hashchange"));else f.contentWindow.location.hash=k;}catch(e){f.src=f.src.split("#")[0]+"#"+k;}}
+function show(i){cur=i;var s=steps[i];
+ [].forEach.call(nav.querySelectorAll("button"),function(b,j){b.classList.toggle("on",j===i);if(j===i)b.scrollIntoView({block:"nearest",inline:"nearest"});});
+ document.getElementById("wT").textContent=s[0];document.getElementById("wD").textContent=s[3];
+ var none=!s[1];document.getElementById("oNone").hidden=!none;oF.style.visibility=none?"hidden":"visible";
+ if(!none)go(oF,s[1]);go(nF,s[2]);
+ setTimeout(function(){document.getElementById("oN").textContent=none?"":lab(oF,s[1]);document.getElementById("nN").textContent=lab(nF,s[2]);},300);
+ document.getElementById("prev").disabled=i===0;document.getElementById("next").disabled=i===steps.length-1;
+ try{history.replaceState(null,"","#"+(i+1));}catch(e){}}
+document.getElementById("prev").onclick=function(){if(cur>0)show(cur-1);};
+document.getElementById("next").onclick=function(){if(cur<steps.length-1)show(cur+1);};
+document.addEventListener("keydown",function(e){if(e.key==="ArrowRight"||e.key==="ArrowDown"){e.preventDefault();document.getElementById("next").click();}if(e.key==="ArrowLeft"||e.key==="ArrowUp"){e.preventDefault();document.getElementById("prev").click();}});
+var ready=0;function start(){if(++ready<2)return;var h=parseInt(location.hash.slice(1),10);show(h>0&&h<=steps.length?h-1:0);}
+oF.addEventListener("load",start);nF.addEventListener("load",start);
+</script>
+</body>
+</html>
