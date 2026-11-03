@@ -2805,6 +2805,54 @@ html.dk .s3cta{max-width:600px;margin:0 auto}
 .s3cp{margin:0;font-size:13px;line-height:1.45;color:var(--mid);text-align:center}
 .bhout .s3pt mark{background:var(--teal-soft);color:var(--ink);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 var(--teal)}
 .bhout .s3pt .bhtick{margin-left:auto}
+.s3prac{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:0;border:0;background:none;font:inherit;font-size:14px;font-weight:650;color:var(--ink);cursor:pointer}
+.s3prac .ic{width:14px;height:14px}
+.s3rw{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 16px;border-radius:12px;border:1.5px dashed var(--hair);text-align:center}
+.s3rw b{font-size:15px}
+.s3rw .btn{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 18px}
+.s3rw small{font-size:12.5px;color:var(--mid)}
+
+/* Veejay 4 Nov */
+.s3upd{display:flex;align-items:center;gap:6px;padding-top:8px;font-size:13px;font-weight:650;color:var(--teal)}
+.s3upd .ic{width:14px;height:14px}
+.s3upd .s2l{margin-left:auto;padding:0;font-size:13px;color:var(--ink)}
+.s3note#scLast{background:#FDECEE;border:1px solid #F5C2CA}
+.s3note#scLast b{color:#B4233A}
+.s3note#scLast .s2l{color:#B4233A}
+.s3inl{display:flex;flex-direction:column;gap:10px;padding:12px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.s3inl .hd{display:flex;align-items:center;gap:12px}
+.s3inl .tx{flex:1;display:flex;flex-direction:column;gap:1px}
+.s3inl b{font-size:14px}
+.s3inl small{font-size:13px;color:var(--mid)}
+.s3inl .ic3{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--pill);color:var(--mid)}
+.s3inl .s2l{font-size:13px;align-self:flex-start}
+.s3inl .hd .s2l{align-self:center}
+.s3inl .scta{min-height:60px}
+/* reading the brief */
+.s3rd{gap:16px}
+.s3rd .rcard{display:flex;flex-direction:column;gap:10px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);transition:opacity .3s}
+.s3rd .rcard.dim{opacity:.45}
+.s3rd .cap{font-size:12px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;color:var(--night-mid)}
+.s3rd .rbr{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:start}
+.s3rd .rbr .lb{font-size:13px;font-weight:650;color:var(--night-mid);padding-top:4px}
+.s3rd .rbr .vs{display:flex;flex-wrap:wrap;gap:6px}
+.s3rd .rbr i{font-style:normal;font-size:13px;font-weight:600;padding:4px 9px;border-radius:8px;background:rgba(255,255,255,.1);color:var(--night-ink);animation:s3pop .35s ease both}
+.s3rd .rbr i.ok{background:rgba(94,214,217,.18)}
+.s3rd .rbr i.no{background:rgba(255,120,140,.16)}
+.s3rd .rbr i.sk{width:90px;height:24px;padding:0;background:rgba(255,255,255,.07);animation:none}
+.s3rd .rbr i.sk.s{width:54px}
+@keyframes s3pop{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.s3rd .tvs{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;overflow:hidden;border-radius:8px}
+.s3rd .tv{aspect-ratio:9/16;border-radius:6px;background-size:cover;background-position:center;filter:grayscale(1) brightness(.6);transition:filter .4s calc(var(--k)*.12s)}
+.s3rd .tv.rd{filter:none}
+.s3rd .tvs.scan::after{content:"";position:absolute;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,rgba(94,214,217,.35),transparent);animation:s3scan 1.4s linear infinite}
+@keyframes s3scan{from{left:-30%}to{left:100%}}
+.s3rd .rres{margin:0;font-size:14px;color:var(--night-ink)}
+/* shared script: the hook is the focal point */
+.shhero{display:flex;flex-direction:column;gap:10px;padding:20px 18px;border-radius:16px;background:var(--ink);color:#fff}
+.shhero .lb{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.shhero p{margin:0;font-size:24px;font-weight:750;line-height:1.25;letter-spacing:-.01em}
+.shhero small{font-size:13px;color:rgba(255,255,255,.7)}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
@@ -4793,6 +4841,45 @@ var _s3ty=sc2Types;sc2Types=function(){var c=sc();return (c.idea&&c.idea.ht)||_s
 function s3Home(b){return b.replace('<span class="sp"></span>','<span class="sp"></span><button class="ib" data-a="go:home" aria-label="Home" id="s3Home">'+ic("home")+'</button>');}
 var _s3sc2=R.scout;R.scout=R.scfinal=function(){var r=_s3sc2();r.body=s3Home(r.body);return r;};
 var _s3bhs2=R.bhscript;R.bhscript=function(){var r=_s3bhs2();r.body=s3Home(r.body);return r;};
+
+/* ---------- script page footer (Veejay, 4 Nov: "needs improving"): no explainer paragraph; Copy/Share say what they did
+   when tapped; Practice it sits by the title; rewrite is a quiet card at the end ---------- */
+function s3Foot(saved,rl,last){return (last?'':'<div class="s3rw" id="s3Rw"><b>Not quite right?</b><button class="btn s" data-a="scno" id="scRfAll">'+ic("redo","s")+'Rewrite the whole script</button><small>'+rl+' of '+SC_REW+' rewrites left · refining one part is free</small></div>');}
+var _s3sc3=R.scout;R.scout=R.scfinal=function(){var r=_s3sc3(),c=sc(),rl=SC_REW-c.rew,last=c.rew>=SC_REW;
+ r.body=r.body.replace(/<p class="s3cp">[\s\S]*?<\/p><p class="s2alt">[\s\S]*?<\/p><\/div>$/,s3Foot(c.saved,rl,last)+'</div>');
+ r.body=r.body.replace(/(<div class="s3sh">[\s\S]*?<\/p>)/,'$1<button class="s3prac" data-a="scprompt" id="scPrompt">'+ic("play","s")+'Practice it full screen</button>');
+ r.extra=r.extra.replace('data-a="toast:Link copied. Send it to a friend"','data-a="toast:Link copied. Your friend sees this script, then Make your own"');
+ return r;};
+var _s3bhs3=R.bhscript;R.bhscript=function(){var r=_s3bhs3();r.body=r.body.replace(/<p class="s3cp">[\s\S]*?<\/p>/,'');r.extra=r.extra.replace('data-a="toast:Link copied. Send it to a friend"','data-a="toast:Link copied. Your friend sees this script, then Make your own"').replace('data-a="toast:Script copied"','data-a="toast:Copied: every part, what to say and what to film"');return r;};
+(function(){var a0=scAct;scAct=function(k,v){var r=a0(k,v);if(k==="sccopy"&&(ST.scr==="scout"||ST.scr==="scfinal")){var n=sc().s.shots.length;toast("Copied: all "+n+" parts, what to say and what to film");}return r;};})();
+
+/* ---------- Veejay, 4 Nov notes ---------- */
+/* 1. no previous version on screen: one line, Updated, with Undo */
+s3Diff=function(){var c=sc(),d=c.diff;if(!d||!d.length)return "";return '<div class="s3upd" id="scDiff">'+ic("check","s")+'<span>Updated</span>'+(c.undo?sc2Lnk("scundo","scUndo","Undo"):'')+'</div>';};
+/* 4. ingredients without the explicit formula: page 2 keeps one input line */
+s3Ing=function(open){var c=sc(),note=c.noteOpen||(c.thoughts||"").trim();
+ return '<div class="s3inl" id="s3Ing"><div class="hd"><span class="ic3">'+ic("pen","s")+'</span><span class="tx"><b>Your input</b><small>'+esc(sc2InTxt())+'</small></span>'+(open?'':sc2Lnk("s3inopen","s3InOpen",(c.inp||[]).length?"Change":"Add"))+'</div>'+
+  (open?'<div class="chips" id="s2In">'+SC_IN.map(function(x){var on=(c.inp||[]).indexOf(x[0])>=0;return '<button class="chip'+(on?' on':'')+'" data-a="sc2in:'+x[0]+'">'+(on?ic("check","s"):'')+x[1]+'</button>';}).join("")+'</div>'+(note?'<textarea id="scth" class="scta" rows="2" placeholder="Where you’ll film, a joke you want in">'+esc(c.thoughts||"")+'</textarea>':sc2Lnk("sc2note","s2Note","+ Add a note")):'')+'</div>';};
+var _s3b4=R.scbuild;R.scbuild=function(){var r=_s3b4();r.body=r.body.replace(/<div class="s3fx"[\s\S]*?<\/div>/,'');return r;};
+var _s3ing4=R.bhing;R.bhing=function(){var r=_s3ing4();r.body=r.body.replace(/<div class="s2fx"[\s\S]*?<\/div>/,'').replace('<h1 class="h2">Your script’s ingredients</h1>','<h1 class="h2">Before we write</h1><p class="lede" style="margin:0">What we’ll use from the brief and your TikTok. Add your input if you like.</p>');return r;};
+/* 5. trim the subtitles */
+var _s3sc4=R.scout;R.scout=R.scfinal=function(){var r=_s3sc4();r.body=r.body.replace(/(\d+) seconds · \d+ parts · you say the big lines, word for word or in your own words/,'$1 seconds');return r;};
+var _s3bh4=R.bhscript;R.bhscript=function(){var r=_s3bh4();r.body=r.body.replace(/<p>\d+ parts · every must-say covered[^<]*<\/p>/,'');return r;};
+/* 3. reading the brief: the brief's details fill in as labelled chips, then her videos get read */
+R.bhreading=function(){var b=bh(),t=Math.min(4,bhStage()),B=SC_BRIEF,h=esc(bhH());
+ var F=[["Product",[B.product],""],["Must say",B.must,"ok"],["Don’ts",B.dont,"no"],["Due",["Nov 6"],""]];
+ var rows=F.map(function(f,k){var on=t>k||(k===3&&t>2);return '<div class="rbr'+(on?' on':'')+'"><span class="lb">'+f[0]+'</span><span class="vs">'+(on?f[1].map(function(v){return '<i class="'+f[2]+'">'+esc(v)+'</i>';}).join(""):'<i class="sk"></i><i class="sk s"></i>')+'</span></div>';}).join("");
+ var vids=["a","b","c","d","e","g"].map(function(id,k){var v=V[id]||V.a;return '<span class="tv'+(t>=3?' rd':'')+'" style="'+bg(v.img)+';--k:'+k+'"></span>';}).join("");
+ return {dark:true,body:'<div class="pard bhrd s3rd"><h1 class="h2">Reading the brief and your TikTok</h1>'+
+  '<section class="rcard"><span class="cap">From the brief</span>'+rows+'</section>'+
+  '<section class="rcard'+(t>=3?'':' dim')+'"><span class="cap">From @'+h+'’s TikTok</span><div class="tvs'+(t===3?' scan':'')+'">'+vids+'</div><p class="rres">'+(t>=4?'Your best videos open on a close-up and get straight to it.':t>=3?'Reading your last 30 videos…':'Next: your last 30 videos')+'</p></section></div>'};};
+/* 7. a script someone sent: the hook is the focal point */
+R.shscript=function(){var P=BH_PARTS,n=P.length;
+ return {extra:s3Cta('<button class="btn p" data-a="go:sales" id="shMake">Write my own script, free</button>','3 free scripts · built from your own TikTok'),
+  body:'<div class="sales">'+shTop()+'<div class="pad in s3pad shpad">'+shFrom(SH_FRIEND,'a script')+
+  '<section class="shhero"><span class="lb">Glow Oil in Rose · 30 seconds</span><p>“'+esc(P[0][2])+'”</p><small>The hook @'+SH_FRIEND+' will open with</small></section>'+
+  '<div class="s3pts">'+P.slice(1).map(function(x,i){return '<section class="s3pt"><div class="ph"><span class="no">'+(i+2)+'</span><b>'+(x[1]==="Call to action"?"Ending":esc(x[1]))+'</b><span class="tm">'+x[0]+'</span></div><p class="say">'+esc(x[2])+'</p><dl><div><dt>Film</dt><dd>'+esc(x[3])+'</dd></div></dl></section>';}).join("")+'</div>'+
+  '<p class="s3cp">Written with UGC Breakouts in @'+SH_FRIEND+'’s style.</p></div></div>'};};
 
 /* ---------- review shell ---------- */
 var J=window.UB_SCREENS,NOTES=window.UB_NOTES;
