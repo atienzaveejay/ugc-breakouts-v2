@@ -97,7 +97,16 @@ var S=[
  ["Sharing"],
  ["A friend's Profile Rewind","","sh-rewind","What a friend sees. Ends with Make your own Profile Rewind."],
  ["A video breakdown someone sent","","sh-video","Ends with Find breakouts like this, free."],
- ["A script someone sent","","sh-script","Ends with Write my own script, free."]
+ ["A script someone sent","","sh-script","Ends with Write my own script, free."],
+ ["Playful animations"],
+ ["Analyzing a video","","analyzing","A magnifying glass sweeps her video’s frames, and a tag pops for each thing it finds."],
+ ["Reading her profile","","pa-reading","A scan line runs over her videos, the one being read wiggles, and each breakout gets its label stamped on."],
+ ["Profile read: done","","pa-done","The check bounces in with a few sparkles."],
+ ["Reading the brief","","bh-reading","A marker underlines each part of the brief as it’s read, and her videos get dealt in like cards."],
+ ["Rewriting or refining","","scbuild-rew","A pencil scribbles out the old lines and writes the new ones, with her change on a tag above."],
+ ["Pulling in her videos","","home-pull","Her videos hop into the profile card while we pull them in."],
+ ["Search still running","","pa-home-run","The running search pings like a radar."],
+ ["Saved","","scfinal-saved","The script card hops into the check, which bounces with sparkles."]
 ];
 var steps=[],nav=document.getElementById("nav"),cur=0,n=0;
 S.forEach(function(s){if(s.length===1){var h=document.createElement("h2");h.textContent=s[0];nav.appendChild(h);return;}
