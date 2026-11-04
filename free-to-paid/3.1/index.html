@@ -3345,8 +3345,8 @@ html.dk .s3cta{max-width:600px;margin:0 auto}
 @media (prefers-reduced-motion:reduce){.s3gch.drop,.s3bowl.stir .pile,.s3bowl .spoon,.s3bowl .sp{animation:none}}
 .s3gic.br{background:var(--teal)}.s3gic.br .ic{width:15px;height:15px}
 /* ---------- Playful animations (Ivan, 4 Nov) ---------- */
-.s3sp{position:absolute;font-style:normal;color:var(--coral);pointer-events:none;animation:s3tw 1.1s ease-in-out infinite}
-.s3sp.a{left:-14px;top:6px;font-size:18px}.s3sp.b{right:-12px;top:-6px;font-size:14px;color:var(--teal);animation-delay:.35s}.s3sp.c{right:-18px;bottom:6px;font-size:11px;animation-delay:.7s}
+.s3spk{position:absolute;font-style:normal;color:var(--coral);pointer-events:none;animation:s3tw 1.1s ease-in-out infinite}
+.s3spk.a{left:-14px;top:6px;font-size:18px}.s3spk.b{right:-12px;top:-6px;font-size:14px;color:var(--teal);animation-delay:.35s}.s3spk.c{right:-18px;bottom:6px;font-size:11px;animation-delay:.7s}
 /* 1 analyzing */
 .s3an{position:relative;padding:6px 0 4px}
 .s3an .film{display:flex;gap:4px;padding:6px;border-radius:10px;background:#1d1918}
@@ -3409,7 +3409,7 @@ html.dk .s3cta{max-width:600px;margin:0 auto}
 .s3svw .card{position:absolute;z-index:2;width:22px;height:28px;border-radius:4px;background:var(--card);border:2px solid var(--teal);animation:s3cardin .7s ease-in both}
 @keyframes s3cardin{0%{opacity:1;transform:translate(-70px,-50px) rotate(-30deg)}80%{opacity:1;transform:translate(0,0) rotate(0) scale(.7)}100%{opacity:0;transform:scale(.3)}}
 .s3hopin .ck{animation:s3bounce .8s cubic-bezier(.3,1.7,.5,1) both}
-@media (prefers-reduced-motion:reduce){.s3an .mag,.s3an em.pop,.s3prg .beam,.s3prg .pv.now,.s3prg .pv.hit em,.s3okw .okr,.rbr.nw .vs i,.s3deal .tv,.s3pn *,.s3hop span,.s3radar .ring:before,.s3radar .ring:after,.s3svw *,.s3hopin .ck,.s3sp{animation:none!important}.rbr.nw .vs i{background-size:calc(100% - 16px) 3px}}
+@media (prefers-reduced-motion:reduce){.s3an .mag,.s3an em.pop,.s3prg .beam,.s3prg .pv.now,.s3prg .pv.hit em,.s3okw .okr,.rbr.nw .vs i,.s3deal .tv,.s3pn *,.s3hop span,.s3radar .ring:before,.s3radar .ring:after,.s3svw *,.s3hopin .ck,.s3spk{animation:none!important}.rbr.nw .vs i{background-size:calc(100% - 16px) 3px}}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
@@ -5913,7 +5913,7 @@ R.bhwriting=function(){var b=bh(),P=bhParts(),B=SC_BRIEF,t=Math.min(5,bhStage())
  var pct=Math.round(Math.min(1,t/n)*100);
  return {body:'<div class="pad in s3pad s3gw" style="padding-top:28px"><h1 class="h2">Putting your script together</h1>'+bowl+'<div class="s3pb"><i style="width:'+pct+'%"></i></div>'+list+'</div>'};};
 /* ---------- Playful animations on the other waiting screens (Ivan, 4 Nov 10:29 PM: "all animations should be playful like that") ---------- */
-var S3_SPK='<i class="s3sp a">✦</i><i class="s3sp b">✦</i><i class="s3sp c">✦</i>';
+var S3_SPK='<i class="s3spk a">✦</i><i class="s3spk b">✦</i><i class="s3spk c">✦</i>';
 /* 1. Analyzing a video: a magnifying glass sweeps her video's frames, and a tag pops for each thing it finds */
 (function(){var f=preAnalysis;preAnalysis=function(v,T,title){var r=f(v,T,title),a=ST.anl[ST.vid];if(!a||anState(ST.vid)!=="run")return r;
  var p=Math.min(1,(Date.now()-a.start)/AN_MS),k=p<.34?0:p<.7?1:2,tags=["Hook spotted","Views jump here","Why it worked"];
