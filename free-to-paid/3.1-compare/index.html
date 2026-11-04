@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>UB 3.1 before and after</title>
+<title>UB 3.1 new features</title>
 <style>
 :root{--ink:#171312;--mid:#5f5752;--soft:#958b84;--hair:#e4dcd3;--paper:#f6f1ea;--card:#fff;--act:#d8304a;--teal:#0a8a86}
 *{box-sizing:border-box}
@@ -52,8 +52,8 @@ main{padding:20px 24px 40px;display:flex;flex-direction:column;gap:16px;align-it
 </head>
 <body>
 <header>
- <h1>UGC Breakouts 3.1: before and after our 3 Nov call</h1>
- <p>Left is what we went through on the call. Right is the new version. Pick a step and both phones go to it.</p>
+ <h1>UGC Breakouts 3.1: new features</h1>
+ <p>Pick a step and the phone goes to it.</p>
  <a href="../3.1/">Open the full new prototype</a>
 </header>
 <div class="wrap">
@@ -61,10 +61,9 @@ main{padding:20px 24px 40px;display:flex;flex-direction:column;gap:16px;align-it
  <main>
   <div class="what"><div><b id="wT"></b><span id="wD"></span></div><div class="step"><button id="prev">Previous</button><button id="next">Next</button></div></div>
   <div class="pair">
-   <div class="col"><div class="lb">Before<small id="oN"></small></div><div class="ph" id="oPh"><iframe id="oF" title="Before our call" src="../3.1-before-our-call/?embed=1#script"></iframe><div class="none" id="oNone" hidden><div><b>Not in the earlier version</b>This one is new.</div></div></div></div>
-   <div class="col now"><div class="lb">Now<small id="nN"></small></div><div class="ph"><iframe id="nF" title="New version" src="../3.1/?embed=1#script"></iframe></div></div>
+   <div class="col"><div class="lb"><small id="nN"></small></div><div class="ph"><iframe id="nF" title="New version" src="../3.1/?embed=1#script"></iframe></div></div>
   </div>
-  <p class="tip">Both phones work: tap around in either one. The arrow keys move between steps.</p>
+  <p class="tip">The phone works: tap around in it. The arrow keys move between steps.</p>
  </main>
 </div>
 <script>
@@ -102,22 +101,21 @@ var S=[
 var steps=[],nav=document.getElementById("nav"),cur=0,n=0;
 S.forEach(function(s){if(s.length===1){var h=document.createElement("h2");h.textContent=s[0];nav.appendChild(h);return;}
  var i=steps.length;steps.push(s);n++;var b=document.createElement("button");b.innerHTML="<i>"+n+"</i><span>"+s[0]+"</span>";b.onclick=function(){show(i);};nav.appendChild(b);});
-var oF=document.getElementById("oF"),nF=document.getElementById("nF");
+var nF=document.getElementById("nF");
 function lab(f,k){try{var L=f.contentWindow.UB_SCREENS;for(var i=0;i<L.length;i++)if(L[i][0]===k)return ("0"+(i+1)).slice(-2)+" · "+L[i][1];}catch(e){}return "";}
 function go(f,k){try{if(f.contentWindow.location.hash==="#"+k)f.contentWindow.dispatchEvent(new HashChangeEvent("hashchange"));else f.contentWindow.location.hash=k;}catch(e){f.src=f.src.split("#")[0]+"#"+k;}}
 function show(i){cur=i;var s=steps[i];
  [].forEach.call(nav.querySelectorAll("button"),function(b,j){b.classList.toggle("on",j===i);if(j===i)b.scrollIntoView({block:"nearest",inline:"nearest"});});
  document.getElementById("wT").textContent=s[0];document.getElementById("wD").textContent=s[3];
- var none=!s[1];document.getElementById("oNone").hidden=!none;oF.style.visibility=none?"hidden":"visible";
- if(!none)go(oF,s[1]);go(nF,s[2]);
- setTimeout(function(){document.getElementById("oN").textContent=none?"":lab(oF,s[1]);document.getElementById("nN").textContent=lab(nF,s[2]);},300);
+ go(nF,s[2]);
+ setTimeout(function(){document.getElementById("nN").textContent=lab(nF,s[2]);},300);
  document.getElementById("prev").disabled=i===0;document.getElementById("next").disabled=i===steps.length-1;
  try{history.replaceState(null,"","#"+(i+1));}catch(e){}}
 document.getElementById("prev").onclick=function(){if(cur>0)show(cur-1);};
 document.getElementById("next").onclick=function(){if(cur<steps.length-1)show(cur+1);};
 document.addEventListener("keydown",function(e){if(e.key==="ArrowRight"||e.key==="ArrowDown"){e.preventDefault();document.getElementById("next").click();}if(e.key==="ArrowLeft"||e.key==="ArrowUp"){e.preventDefault();document.getElementById("prev").click();}});
-var ready=0;function start(){if(++ready<2)return;var h=parseInt(location.hash.slice(1),10);show(h>0&&h<=steps.length?h-1:0);}
-oF.addEventListener("load",start);nF.addEventListener("load",start);
+var ready=0;function start(){if(++ready<1)return;var h=parseInt(location.hash.slice(1),10);show(h>0&&h<=steps.length?h-1:0);}
+nF.addEventListener("load",start);
 </script>
 </body>
 </html>
