@@ -3221,6 +3221,13 @@ html.dk .s3cta{max-width:600px;margin:0 auto}
 .acf{padding:0 18px 14px}
 .acf .s2l,.acf .s3rfx{padding:0;font-size:13.5px}
 .acx{margin:4px 0 0;text-align:center;font-size:12.5px;color:var(--soft)}
+/* hook rows: each one gets its own colour (left edge + type label) so the three don't read as one block; selected stays teal */
+.s3pg .s2ho{position:relative;overflow:hidden;--hc:#B7791F}
+.s3pg .s2ho:nth-child(3n+2){--hc:#5B5BD6}
+.s3pg .s2ho:nth-child(3n+3){--hc:#C2410C}
+.s3pg .s2ho::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--hc)}
+.s3pg .s2ho small{color:var(--hc);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:11px}
+.s3pg .s2ho.on::before{background:var(--teal)}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
