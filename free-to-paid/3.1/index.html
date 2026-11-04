@@ -3294,6 +3294,14 @@ html.dk .s3cta{max-width:600px;margin:0 auto}
 .s5j dd{margin:2px 0 0;font-size:14px;line-height:1.4;color:var(--mid)}
 .s5k .s4f div{gap:6px}
 .s5k .s4f dt{align-self:flex-start;padding:3px 9px;border-radius:7px;background:#E8F5F3;color:#0B6B67;font-size:11.5px;letter-spacing:.04em}
+.s5k .s4pt .ph{background:var(--teal)!important;color:#fff;border-bottom:0}
+.s5k .s4pt .ph b{color:#fff}
+.s5k .s4pt .ph .sb{color:rgba(255,255,255,.88)}
+.s5k .s4pt .ph .tm{color:rgba(255,255,255,.72)}
+.s5k .s4pt .ph .s5kb{display:inline-flex;align-items:center;gap:6px;padding:6px 11px!important;border-radius:8px;background:#fff;color:#0B6B67;font-size:13px;font-weight:700;border:0}
+.s5k .s4pt .ph .s5kb .ic{width:14px;height:14px}
+.s5k .s4pt .ph .s3rfx.s5kb{background:rgba(255,255,255,.25);color:rgba(255,255,255,.8)}
+.s5k .s4pt.fx{box-shadow:0 0 0 2px var(--teal),var(--sh-1)}
 </style></head><body>
 <div class="mobbar"><select id="msel" aria-label="Jump to screen"></select><button id="notesBtn" type="button">Notes</button></div>
 <div class="shell">
@@ -5737,6 +5745,10 @@ var _s3brS=R.bhreading;R.bhreading=function(){var r=_s3brS();if(bh().slow)r.body
 var s3OptA1=s3OptA;s3OptA=function(P,fix){if(ST.s3opt==="k")return s3OptA0(P,fix).replace('<div class="s4pts" id="scShots">','<div class="s4pts s5k" id="scShots">');return s3OptA1(P,fix);};
 (function(){var j0=scJump;scJump=function(k){if(k==="scopt-k"){var r=j0("scout");ST.s3opt="k";return r;}return j0(k);};
  var k0=scKey;scKey=function(){var r=k0();if(r==="scout"&&ST.s3opt==="k")return "scopt-k";return r;};})();
+/* K: solid header bar; Refine / Change as a rectangle button with an icon */
+(function(){var o=s3OptA;s3OptA=function(P,fix){var h=o(P,fix);if(ST.s3opt!=="k")return h;
+ return h.replace(/<button class="s2l" data-a="(sc2rehook|scshot:\d+)" id="(scRf\d+)">(Change|Refine)<\/button>/g,function(m,a,id,t){return '<button class="s2l s5kb" data-a="'+a+'" id="'+id+'">'+ic(t==="Change"?"redo":"pen","s")+t+'</button>';})
+  .replace(/<span class="s3rfx"([^>]*)>(Change|Refine)<\/span>/g,'<span class="s3rfx s5kb"$1>'+ic("pen","s")+'$2</span>');};})();
 
 /* ---------- review shell ---------- */
 var J=window.UB_SCREENS,NOTES=window.UB_NOTES;
