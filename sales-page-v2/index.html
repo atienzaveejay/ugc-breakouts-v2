@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>UGC Breakouts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#171312;--mid:#6F6560;--soft:#746A64;--bg:#F4F1EC;--card:#FFFFFF;--line:#E4DED6;
+  --teal:#0B7B7F;--teal-d:#0A6763;--teal-soft:#DDF0EE;--coral:#FF4F5E;--act:#D8304A;
+  --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* header */
+.top{position:sticky;top:0;z-index:5;background:rgba(244,241,236,.92);backdrop-filter:blur(8px);border-bottom:1px solid transparent}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;letter-spacing:-.02em;text-decoration:none}
+.logo i{width:26px;height:26px;border-radius:6px;background:var(--coral);display:grid;place-items:center}
+.logo b{color:var(--coral);font-weight:800}
+.login{font-weight:700;font-size:15px;text-decoration:none;padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+
+/* buttons */
+.gbtn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:360px;height:54px;border-radius:8px;background:var(--ink);color:#fff;font:700 17px var(--sans);text-decoration:none;border:0;cursor:pointer}
+.gbtn .g{width:20px;height:20px;border-radius:50%;background:conic-gradient(#EA4335 0 25%,#FBBC05 0 50%,#34A853 0 75%,#4285F4 0);position:relative}
+.gbtn .g:after{content:"";position:absolute;inset:6px;border-radius:50%;background:#fff}
+.ticks{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;margin:14px 0 0;padding:0;list-style:none;color:var(--soft);font-size:14px;font-weight:500}
+.ticks li:before,.chk li:before{content:"";display:inline-block;width:11px;height:6px;border-left:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(-45deg) translateY(-3px);margin-right:9px}
+
+/* hero */
+.hero{background:linear-gradient(180deg,#D7EBEA 0%,var(--bg) 78%);padding:44px 0 40px;text-align:center}
+.hero h1{margin:0 auto;max-width:12ch;font-size:38px;line-height:1.04;letter-spacing:-.045em;font-weight:800;text-wrap:balance}
+.hero p{margin:18px auto 26px;max-width:36ch;color:var(--mid);font-size:17px;line-height:1.5}
+.hero .gbtn{margin:0 auto}
+.inside{margin:34px auto 0;max-width:520px;border-top:1px solid var(--line);padding-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;text-align:left}
+.inside a{text-decoration:none;font-size:14px;font-weight:700;line-height:1.3;display:flex;gap:8px}
+.inside a span{color:var(--teal);font-variant-numeric:tabular-nums}
+
+/* pillars */
+.pil{padding:48px 0;border-top:1px solid var(--line)}
+.pil .wrap{display:grid;gap:28px}
+.num{font-size:14px;font-weight:700;color:var(--teal)}
+.pil h2{margin:6px 0 0;font-size:30px;line-height:1.08;letter-spacing:-.035em;font-weight:800}
+.pil .line{margin:12px 0 0;font-size:19px;line-height:1.4;font-weight:600;max-width:30ch}
+.chk{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:12px;max-width:44ch}
+.chk li{display:flex;align-items:baseline;color:var(--mid);font-size:15px;line-height:1.5}
+.chk li:before{flex:none}
+.more{display:inline-block;margin-top:22px;font-weight:700;font-size:15px;color:var(--act);text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:1px}
+.phone{justify-self:center;width:min(300px,82vw);border-radius:30px;border:8px solid #fff;box-shadow:0 1px 0 var(--line),0 18px 40px rgba(23,19,18,.12);overflow:hidden;background:#fff;aspect-ratio:390/790}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* how it works */
+.how{padding:56px 0;border-top:1px solid var(--line);background:var(--card)}
+.how h2,.sec h2{margin:0;font-size:28px;line-height:1.1;letter-spacing:-.035em;font-weight:800;max-width:22ch}
+.how .intro{margin:14px 0 0;color:var(--mid);font-size:16px;line-height:1.5;max-width:52ch}
+.flow{margin:30px 0 0;padding:0;list-style:none;display:grid;gap:0;counter-reset:f}
+.flow li{counter-increment:f;display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+.flow li:before{content:counter(f);width:28px;height:28px;border-radius:50%;border:1.5px solid var(--teal);color:var(--teal);font-weight:700;font-size:14px;display:grid;place-items:center}
+.flow li.end:before{background:var(--teal);color:#fff}
+.flow b{display:block;font-size:16px;font-weight:700}
+.flow span{display:block;margin-top:3px;color:var(--mid);font-size:15px;line-height:1.5}
+.how .close{margin:22px 0 0;font-size:17px;font-weight:700}
+
+/* breakout example */
+.sec{padding:56px 0;border-top:1px solid var(--line)}
+.ex{margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;max-width:520px}
+.ex .who{display:flex;align-items:center;gap:10px;font-size:14px}
+.ex .who i{width:34px;height:34px;border-radius:50%;background:var(--teal-soft);color:var(--teal-d);display:grid;place-items:center;font-style:normal;font-weight:800}
+.ex .who b{display:block;font-size:15px}
+.ex .who small{color:var(--soft)}
+.ex p{margin:14px 0;color:var(--mid);font-size:15px;line-height:1.5}
+.bars{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--line)}
+.bars div{flex:1;background:#E9E3DC;border-radius:3px 3px 0 0;position:relative}
+.bars div.hit{background:var(--teal)}
+.bars div span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:10px;color:var(--soft);padding-bottom:3px;white-space:nowrap}
+.bars div.hit span{color:var(--teal-d);font-weight:800;font-size:12px}
+.ex .res{margin:14px 0 0;font-weight:700;font-size:15px;line-height:1.45;color:var(--ink)}
+
+/* quote */
+.quote{padding:48px 0;border-top:1px solid var(--line)}
+.quote blockquote{margin:0;font-size:22px;line-height:1.35;letter-spacing:-.02em;font-weight:700;max-width:32ch}
+.quote cite{display:block;margin-top:14px;font-style:normal;color:var(--soft);font-size:14px}
+
+/* who */
+.who4{margin:24px 0 0;display:grid;gap:0}
+.who4 div{padding:14px 0;border-top:1px solid var(--line)}
+.who4 b{display:block;font-size:16px}
+.who4 span{color:var(--mid);font-size:15px}
+
+/* pricing */
+.tog{display:inline-flex;margin-top:20px;border:1px solid var(--line);border-radius:8px;background:var(--card);padding:3px}
+.tog button{border:0;background:none;font:600 14px var(--sans);padding:8px 14px;border-radius:6px;cursor:pointer;color:var(--mid)}
+.tog button.on{background:var(--teal-soft);color:var(--teal-d)}
+.tog small{font-weight:600;color:var(--teal)}
+.plans{margin-top:20px;display:grid;gap:14px}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px}
+.plan.pro{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal)}
+.plan h3{margin:0;font-size:18px;display:flex;justify-content:space-between;align-items:baseline}
+.plan h3 small{font-size:12px;color:var(--teal-d);font-weight:700}
+.price{margin-top:8px;font-size:36px;font-weight:800;letter-spacing:-.03em}
+.price small{font-size:15px;color:var(--soft);font-weight:500;letter-spacing:0}
+.billed{color:var(--soft);font-size:13px;min-height:18px}
+.plan p{margin:10px 0 0;color:var(--mid);font-size:14px}
+.plan .chk{margin-top:14px;gap:8px}
+.plan .chk li{font-size:14px}
+.pbtn{display:block;margin-top:18px;text-align:center;padding:13px;border-radius:8px;font-weight:700;text-decoration:none;border:1px solid var(--line);font-size:15px}
+.plan.pro .pbtn{background:var(--act);color:#fff;border-color:var(--act)}
+
+/* faq */
+.faq{margin-top:20px;max-width:720px}
+.faq details{border-top:1px solid var(--line);padding:16px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:700;font-size:16px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--teal);font-weight:600;font-size:20px;line-height:1}
+.faq details[open] summary:after{content:"\2212"}
+.faq p{margin:10px 0 0;color:var(--mid);font-size:15px;line-height:1.55;max-width:60ch}
+
+/* final */
+.final{padding:56px 0 44px;border-top:1px solid var(--line);text-align:center}
+.final h2{margin:0 auto 22px;font-size:30px;letter-spacing:-.035em;line-height:1.1;font-weight:800;max-width:16ch}
+.final .gbtn{margin:0 auto}
+.final .small{margin-top:14px;color:var(--soft);font-size:14px}
+footer{padding:24px 0 40px;border-top:1px solid var(--line);font-size:14px;color:var(--soft)}
+footer .wrap{display:flex;gap:20px}
+footer a{text-decoration:none}
+
+@media (min-width:860px){
+  .hero{padding:72px 0 56px}
+  .hero h1{font-size:60px;max-width:13ch}
+  .hero p{font-size:19px}
+  .inside{grid-template-columns:repeat(4,1fr);max-width:900px}
+  .pil{padding:80px 0}
+  .pil .wrap{grid-template-columns:1fr 1fr;align-items:center;gap:64px}
+  .pil.flip .txt{order:2}
+  .pil h2{font-size:40px}
+  .pil .line{font-size:21px}
+  .phone{width:320px}
+  .how .wrap,.sec.split .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
+  .how h2,.sec h2{font-size:36px}
+  .flow{margin-top:0}
+  .plans{grid-template-columns:repeat(3,1fr);align-items:start}
+  .who4{grid-template-columns:1fr 1fr;column-gap:32px}
+  .final h2{font-size:40px}
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap">
+  <a class="logo" href="#"><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/></svg></i>UGC <b>Breakouts</b></a>
+  <a class="login" href="#">Log in</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>Get More Views and Brand Deals on TikTok</h1>
+  <p>The ultimate UGC creator toolbox. Find what's working, see why it worked, and get scripts that sound like you.</p>
+  <a class="gbtn" href="#"><span class="g"></span>Continue with Google</a>
+  <ul class="ticks"><li>Free</li><li>No card</li><li>3 free searches</li><li>3 free analyses</li><li>3 free scripts</li></ul>
+  <nav class="inside" aria-label="What’s inside">
+    <a href="#rewind"><span>1</span>TikTok Profile Rewind</a>
+    <a href="#script"><span>2</span>$1M Script Writer</a>
+    <a href="#brief"><span>3</span>Brief Buddy</a>
+    <a href="#breakouts"><span>4</span>Top Breakouts + $100M Content Library</a>
+  </nav>
+</div></section>
+
+<section class="pil" id="rewind"><div class="wrap">
+  <div class="txt">
+    <div class="num">1</div>
+    <h2>TikTok Profile Rewind</h2>
+    <p class="line">Find patterns in your own TikTok videos.</p>
+    <ul class="chk">
+      <li>Find patterns in your strongest content, including hooks, video length and structure.</li>
+      <li>12 stories about your account, plus a card you can share.</li>
+    </ul>
+    <a class="more" href="#">Rewind my TikTok, free</a>
+  </div>
+  <div class="phone"><img src="img/rewind.png" alt="TikTok Profile Rewind: your usual views and your breakout"></div>
+</div></section>
+
+<section class="pil flip" id="script"><div class="wrap">
+  <div class="txt">
+    <div class="num">2</div>
+    <h2>$1M Script Writer</h2>
+    <p class="line">Scripts that sound like you, using your data, breakouts and briefs.</p>
+    <ul class="chk">
+      <li>A hook, the points to make and a call to action, with what to say and what to film for each.</li>
+      <li>Read it off the teleprompter and hit record.</li>
+    </ul>
+    <a class="more" href="#">Write your first script, free</a>
+  </div>
+  <div class="phone"><img src="img/script.png" alt="A script with hook and body parts"></div>
+</div></section>
+
+<section class="pil" id="brief"><div class="wrap">
+  <div class="txt">
+    <div class="num">3</div>
+    <h2>Brief Buddy</h2>
+    <p class="line">Turn brand briefs into scripts without digging through every requirement yourself.</p>
+    <ul class="chk">
+      <li>Pull out the requirements, dos and don’ts so you know what to include and avoid.</li>
+      <li>You’re ready for a brand deal faster, going from brief to script in seconds.</li>
+    </ul>
+    <a class="more" href="#">Paste a brief, free</a>
+  </div>
+  <div class="phone"><img src="img/brief.png" alt="A script written from a brand brief"></div>
+</div></section>
+
+<section class="pil flip" id="breakouts"><div class="wrap">
+  <div class="txt">
+    <div class="num">4</div>
+    <h2>Top Breakouts + $100M Content Library</h2>
+    <p class="line">Find what’s breaking out in your niche and study hooks and formats from videos that sell.</p>
+    <ul class="chk">
+      <li>Breakouts are videos that beat the creator’s usual views.</li>
+      <li>Viral videos from smaller creators hold more weight. They broke out on the idea, not on the follower count.</li>
+    </ul>
+    <a class="more" href="#">Find breakouts, free</a>
+  </div>
+  <div class="phone"><img src="img/breakouts.png" alt="Top Breakouts for your niche"></div>
+</div></section>
+
+<section class="how"><div class="wrap">
+  <div>
+    <h2>How it works</h2>
+    <p class="intro">UGCB doesn’t write from a prompt alone. It brings together your content, your audience, what’s working on TikTok and what the brand needs.</p>
+  </div>
+  <div>
+    <ol class="flow">
+      <li><div><b>Learn from your videos</b><span>Find patterns in your strongest content, including hooks, video length and structure.</span></div></li>
+      <li><div><b>Understand you</b><span>Learn who you are, who you create for and how you speak.</span></div></li>
+      <li><div><b>Find breakouts</b><span>Discover TikTok videos performing far above that creator’s usual views. Use their hooks and formats as inspiration.</span></div></li>
+      <li><div><b>Read the brand brief</b><span>Pull out the requirements, dos and don’ts so you know what to include and avoid.</span></div></li>
+      <li class="end"><div><b>Bring it together</b><span>Turn that context into a script that sounds like you, fits the brief and gives you a clear plan to film.</span></div></li>
+    </ol>
+    <p class="close">Spend less time piecing everything together and more time creating.</p>
+  </div>
+</div></section>
+
+<section class="sec split"><div class="wrap">
+  <h2>What a breakout looks like</h2>
+  <div class="ex">
+    <div class="who"><i>S</i><div><b>@softfocus.kai</b><small>84K followers · Beauty</small></div></div>
+    <p>Her last 9 videos. Most land between 8K and 38K views. One got 1.4M.</p>
+    <div class="bars">
+      <div style="height:9%"><span>11K</span></div><div style="height:14%"><span>26K</span></div><div style="height:7%"><span>8K</span></div>
+      <div style="height:12%"><span>21K</span></div><div style="height:18%"><span>38K</span></div><div class="hit" style="height:92%"><span>1.4M</span></div>
+      <div style="height:10%"><span>13K</span></div><div style="height:11%"><span>19K</span></div><div style="height:7%"><span>8K</span></div>
+    </div>
+    <p class="res">78x her usual views. That’s a breakout, and it’s the one worth copying.</p>
+  </div>
+</div></section>
+
+<section class="quote"><div class="wrap">
+  <blockquote>“I built UGC Breakouts because most creators guess what to film next. The videos that break out leave clues, and now you can read them.”</blockquote>
+  <cite>Ivan, founder of UGC Breakouts</cite>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <h2>Who it’s for</h2>
+  <div class="who4">
+    <div><b>New UGC creators</b><span>Know what to film before your first brand deal.</span></div>
+    <div><b>Working creators</b><span>Bring proven ideas to every brief.</span></div>
+    <div><b>TikTok Shop affiliates</b><span>See which product videos sell the click.</span></div>
+    <div><b>Small accounts</b><span>Breakouts come from accounts your size too.</span></div>
+  </div>
+</div></section>
+
+<section class="sec" id="pricing"><div class="wrap">
+  <h2>Start free. Upgrade when you need.</h2>
+  <div class="tog" role="group" aria-label="Billing">
+    <button class="on" data-b="y">Yearly <small>save 20%</small></button>
+    <button data-b="m">Monthly</button>
+  </div>
+  <div class="plans">
+    <div class="plan">
+      <h3>Free</h3>
+      <div class="price">$0<small>/mo</small></div>
+      <div class="billed"></div>
+      <p>For trying it out.</p>
+      <ul class="chk">
+        <li>3 free scripts</li><li>3 searches, 5 breakouts each</li><li>3 analyses</li>
+        <li>See why each video worked (hook, format, topic)</li><li>1 free Profile Rewind</li>
+        <li>Weekly email with new ideas</li><li>No card needed</li>
+      </ul>
+      <a class="pbtn" href="#">Get my free script</a>
+    </div>
+    <div class="plan">
+      <h3>Creator</h3>
+      <div class="price" data-y="$29" data-m="$36.25">$29<small>/mo</small></div>
+      <div class="billed" data-y="Billed $348 yearly" data-m="Billed monthly">Billed $348 yearly</div>
+      <p>For posting a few times a week.</p>
+      <ul class="chk">
+        <li>50 scripts a month, made for your style</li><li>100 searches a month</li>
+        <li>See what’s going viral in any niche</li><li>See why every breakout worked</li>
+        <li>Save breakouts and scripts in your Library</li>
+      </ul>
+      <a class="pbtn" href="#">Choose Creator</a>
+    </div>
+    <div class="plan pro">
+      <h3>Pro <small>Most popular</small></h3>
+      <div class="price" data-y="$79" data-m="$98.75">$79<small>/mo</small></div>
+      <div class="billed" data-y="Billed $948 yearly" data-m="Billed monthly">Billed $948 yearly</div>
+      <p>For UGC and brand deals.</p>
+      <ul class="chk">
+        <li>Everything in Creator</li><li>250 scripts a month</li><li>300 searches a month</li>
+        <li>Brand deal? Get the script in seconds</li>
+      </ul>
+      <a class="pbtn" href="#">Choose Pro</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="faq"><div class="wrap">
+  <h2>Questions</h2>
+  <div class="faq">
+    <details open><summary>What is a breakout?</summary><p>A TikTok that did far better than that creator’s usual videos.</p></details>
+    <details><summary>What is the Breakout Score?</summary><p>A score from 0 to 100. It shows how much a video beat the average of what that account usually gets.</p></details>
+    <details><summary>Why not ChatGPT?</summary><p>UGCB uses your profile, video data, breakouts and briefs. You don’t start from scratch.</p></details>
+    <details><summary>There are already so many tools. Why another one?</summary><p>Script writers, viral video finders, hook generators, profile analyzers, brief readers and teleprompters solve separate tasks. UGCB connects your data, research and briefs to your next script.</p></details>
+    <details><summary>Why not scroll TikTok for free?</summary><p>Find videos beating the creator’s usual views, learn why and turn them into ideas.</p></details>
+    <details><summary>Will it work in my niche?</summary><p>Try your niche first. Some will have fewer results.</p></details>
+    <details><summary>Will scripts sound like me?</summary><p>We use your content as context. You review and adjust.</p></details>
+    <details><summary>Will it get me sales or deals?</summary><p>It helps you make better content, more content.</p></details>
+    <details><summary>Is this copying?</summary><p>Learn from the hook and format. Use your own story and experience.</p></details>
+    <details><summary>Is it worth paying?</summary><p>Test whether it saves time or gives you something you’d actually film.</p></details>
+    <details><summary>Why connect TikTok?</summary><p>To personalize your recap and scripts.</p></details>
+    <details><summary>Do I need a card to start?</summary><p>No. Sign in with Google and you get 3 free searches, 3 free analyses and 3 free scripts.</p></details>
+    <details><summary>Is it only TikTok?</summary><p>Yes. Every breakout comes from TikTok.</p></details>
+  </div>
+</div></section>
+
+<section class="final"><div class="wrap">
+  <h2>Find Breakouts of your own!</h2>
+  <a class="gbtn" href="#"><span class="g"></span>Continue with Google</a>
+  <div class="small">Free · No card · 3 free searches · 3 free analyses</div>
+</div></section>
+
+<footer><div class="wrap"><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Help</a></div></footer>
+
+<script>
+document.querySelectorAll('.tog button').forEach(function(b){b.addEventListener('click',function(){
+  var k=b.dataset.b;document.querySelectorAll('.tog button').forEach(function(x){x.classList.toggle('on',x===b)});
+  document.querySelectorAll('.price[data-y]').forEach(function(p){p.firstChild.nodeValue=p.dataset[k]});
+  document.querySelectorAll('.billed[data-y]').forEach(function(p){p.textContent=p.dataset[k]});
+})});
+</script>
+</body>
+</html>
