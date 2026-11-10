@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Script Writer v4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#ECE7E2; --page-ink:#2A2321; --page-mid:#6F6560; --page-line:#D6CDC5;
+  --paper:#F6F2EE; --card:#FFFFFF; --ink:#171312; --mid:#6F6560; --soft:#9A908A; --hair:#E8E0D9; --pill:#EFE8E2; --track:#ECE5DF;
+  --coral:#FF4F5E; --red:#D8304A; --coral-soft:#FFE6E8; --teal:#0B7B7F; --teal-soft:#E2F3F3; --gold:#B8901A;
+  --night:#15110F; --night-ink:#F5EFEA; --night-mid:#B4A9A2;
+  --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --out:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--page);color:var(--page-ink);font-family:var(--sans);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+input,textarea{font:inherit;color:inherit}
+.ic{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.s{width:16px;height:16px}
+
+/* ---------- review page ---------- */
+.wrap{max-width:1480px;margin:0 auto;padding:36px 16px 80px}
+.intro{max-width:760px}
+.intro h1{font-size:32px;line-height:1.12;letter-spacing:-.025em;margin:0 0 12px}
+.intro p{margin:0 0 10px;color:var(--page-mid)}
+.intro p b{color:var(--page-ink)}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.jump a{min-height:36px;display:inline-flex;align-items:center;padding:0 14px;border:1px solid var(--page-line);background:#fff;border-radius:999px;font-weight:600;font-size:14px;color:var(--page-ink);text-decoration:none}
+.sec{border-top:1px solid var(--page-line);margin-top:40px;padding-top:30px}
+.sec>h2{margin:0 0 6px;font-size:24px;letter-spacing:-.02em}
+.sec>p.d{margin:0 0 22px;color:var(--page-mid);max-width:760px}
+.proto{display:flex;flex-wrap:wrap;gap:28px 40px;align-items:flex-start}
+.side{flex:1 1 300px;max-width:520px}
+.side h3{margin:0 0 8px;font-size:17px}
+.side ol{margin:0 0 18px;padding-left:20px;color:var(--page-mid)}
+.side li{margin:0 0 6px}
+.side li b{color:var(--page-ink)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.ctl button{min-height:40px;padding:0 14px;border:1px solid var(--page-line);background:#fff;border-radius:8px;font-weight:600;font-size:14px}
+.ctl button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ctl .lb{width:100%;font-size:13px;font-weight:700;color:var(--page-mid)}
+.grid{display:flex;flex-wrap:wrap;gap:30px 28px;align-items:flex-start}
+figure{margin:0;width:414px;max-width:100%}
+figcaption{margin-top:12px;font-size:14px;color:var(--page-mid);max-width:414px}
+figcaption b{display:block;color:var(--page-ink);font-size:15px;margin-bottom:2px}
+figcaption .n{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:12px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;margin-right:6px;padding:0 6px}
+.why{margin-top:10px;padding:12px 14px;background:#fff;border:1px solid var(--page-line);border-radius:10px;font-size:14px;color:var(--page-ink)}
+.why b{display:block}
+.pick{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--teal);color:#fff;font-size:12px;font-weight:700;vertical-align:2px}
+.chg{max-width:860px;margin:0;padding:0;list-style:none}
+.chg li{padding:12px 0;border-bottom:1px solid var(--page-line)}
+.chg li b{display:block}
+.chg li span{color:var(--page-mid)}
+
+/* ---------- phone ---------- */
+.phone{width:414px;height:868px;padding:12px;border-radius:52px;background:#111;box-shadow:0 1px 0 #333 inset;flex:none}
+.screen{position:relative;width:390px;height:844px;border-radius:40px;overflow:hidden;background:var(--paper)}
+.phone.tall{height:auto}.phone.tall .screen{height:auto;min-height:844px}
+.phone.tall .app{position:relative}.phone.tall .bd{overflow:visible;flex:none}
+@media (max-width:460px){
+  .phone{width:100%;height:auto;padding:0;border-radius:18px;background:none;box-shadow:none}
+  .screen{width:100%;height:780px;border-radius:18px;border:1px solid var(--page-line)}
+  figure{width:100%}
+  .intro h1{font-size:27px}
+}
+
+/* ---------- app ---------- */
+.app{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.app.dark{background:var(--night);color:var(--night-ink)}
+.sb{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px 0 34px;font-size:15px;font-weight:600}
+.sb i{display:inline-block;width:24px;height:11px;border:1.5px solid currentColor;border-radius:3px;position:relative}
+.sb i::after{content:"";position:absolute;inset:1.5px;right:5px;background:currentColor;border-radius:1px}
+.bd{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;scrollbar-width:none}
+.bd::-webkit-scrollbar{display:none}
+.nav{flex:none;height:72px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--hair);background:#fff;padding-bottom:14px}
+.nav span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11.5px;font-weight:600;color:var(--soft);position:relative}
+.nav span.on{color:var(--ink)}
+.nav span.on::before{content:"";position:absolute;top:-1px;left:50%;width:28px;margin-left:-14px;height:3px;background:var(--coral)}
+.nav .ic{width:22px;height:22px;stroke-width:1.8}
+.brand{display:flex;align-items:center;justify-content:space-between;padding:4px 20px 6px;height:48px}
+.logo{display:flex;align-items:center;gap:7px;font-weight:700;font-size:18px;letter-spacing:-.02em}
+.logo .mk{width:24px;height:24px;border-radius:6px;background:var(--coral);display:grid;place-items:center}
+.logo .mk .ic{width:14px;height:14px;stroke:#fff;stroke-width:2.6}
+.logo b{color:var(--coral);font-weight:700}
+.av{width:34px;height:34px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex:none}
+.tb{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 10px;min-height:48px}
+.tb .bk{width:40px;height:40px;display:grid;place-items:center;border-radius:20px}
+.tb b{font-size:17px;font-weight:700;letter-spacing:-.01em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb .ib{width:40px;height:40px;display:grid;place-items:center;border-radius:20px;color:var(--mid)}
+.pad{padding:8px 20px 24px}
+h1.t{font-size:30px;line-height:1.1;letter-spacing:-.03em;font-weight:800;margin:6px 0 18px}
+h2.t{font-size:24px;line-height:1.15;letter-spacing:-.025em;font-weight:800;margin:4px 0 6px}
+.lede{margin:0;color:var(--mid);font-size:15px}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)}
+.btn{min-height:52px;width:100%;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:17px;padding:0 18px}
+.btn.p{background:var(--red);color:#fff;box-shadow:0 6px 16px rgba(216,48,74,.25)}
+.btn.p[disabled]{background:#E6DED7;color:#A2978F;box-shadow:none;cursor:default}
+.btn.s{background:#fff;border:1px solid var(--hair);color:var(--ink)}
+.lnk{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px}
+.foot{flex:none;padding:12px 20px 12px;background:linear-gradient(rgba(246,242,238,0),var(--paper) 14px);display:flex;flex-direction:column;gap:8px;align-items:center}
+.foot small{font-size:13px;color:var(--mid);text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:38px;padding:0 14px;border:1px solid var(--hair);background:#fff;border-radius:999px;font-weight:600;font-size:14px;display:inline-flex;align-items:center}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* start */
+.ent{background:#fff;border:1.5px solid var(--ink);border-radius:20px;padding:18px 16px 16px;box-shadow:0 6px 24px rgba(23,19,18,.08)}
+.ent label{display:block;font-size:19px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+.ent p{margin:0 0 12px;color:var(--mid);font-size:14px}
+.fld{display:flex;align-items:center;gap:10px;min-height:56px;border:1.5px solid var(--hair);border-radius:14px;padding:0 14px;background:#fff}
+.fld.on{border-color:var(--teal);box-shadow:0 0 0 4px var(--teal-soft)}
+.fld input{flex:1;min-width:0;border:0;outline:0;background:none;font-size:18px;font-weight:600}
+.fld input::placeholder{color:#A39890;font-weight:500}
+.fld .x{width:28px;height:28px;border-radius:14px;background:var(--pill);display:grid;place-items:center;color:var(--mid)}
+.ent .from{margin:14px 0 8px;font-size:13px;font-weight:600;color:var(--mid)}
+.ent .btn{margin-top:16px}
+.left{margin:10px 0 0;text-align:center;font-size:13px;color:var(--mid)}
+.alt{margin-top:26px}
+.alt .lbl{display:block;margin-bottom:8px}
+.row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 4px;border-top:1px solid var(--hair)}
+.row:last-child{border-bottom:1px solid var(--hair)}
+.row .oi{width:40px;height:40px;border-radius:12px;background:var(--pill);display:grid;place-items:center;color:var(--ink);flex:none}
+.row .tx{flex:1;min-width:0}
+.row .tx b{display:block;font-size:16px}
+.row .tx small{display:block;font-size:13.5px;color:var(--mid);line-height:1.35}
+.row>.ic{color:var(--soft)}
+.how{margin:28px 0 0;padding:0;list-style:none;counter-reset:h}
+.how li{display:flex;gap:12px;padding:0 0 12px;font-size:14px;color:var(--mid)}
+.how li::before{counter-increment:h;content:counter(h);width:24px;height:24px;border-radius:12px;border:1.5px solid var(--hair);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--ink);flex:none;background:#fff}
+.how li b{color:var(--ink);display:block;font-size:15px}
+
+/* processing (from Magic moments v2) */
+.pr{padding:14px 20px 0}
+.ptok{display:flex;align-items:center;gap:10px;height:44px;font-size:15px;color:var(--mid);font-weight:600;white-space:nowrap;overflow:hidden}
+.ptok .ti{width:36px;height:36px;border-radius:6px;background:#fff;border:1px solid var(--hair);display:grid;place-items:center;color:var(--ink);flex:none}
+.ptok b{color:var(--ink);font-size:16px}
+.pline{display:flex;align-items:center;gap:10px;margin:14px 0;min-height:40px}
+.pline h2{margin:0;font-size:30px;line-height:1.12;letter-spacing:-.025em;font-weight:800}
+.pdone{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;flex:none;opacity:0;transform:scale(.6);transition:all .22s cubic-bezier(.2,.9,.3,1)}
+.pr.s3 .pdone{opacity:1;transform:none}
+.pbar{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;height:12px}
+.pbar span{background:var(--track);border-radius:3px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--teal);transform:scaleX(0);transform-origin:0 50%}
+.pbar span.dn i{transform:none}
+.pbar span.cur i{animation:fill .55s cubic-bezier(.45,0,.25,1) both}
+.pbar span.cur.still i{animation:none;transform:scaleX(.55)}
+@keyframes fill{from{transform:scaleX(0)}to{transform:none}}
+.plab{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:10px 0 0;padding:0;list-style:none}
+.plab li{display:flex;flex-direction:column;gap:5px;min-width:0}
+.plab .dot{position:relative;width:18px;height:18px;border-radius:50%;border:2px solid #D6CDC5;display:grid;place-items:center}
+.plab li.cur .dot{border-color:var(--teal)}
+.plab li.dn .dot{border-color:var(--teal);background:var(--teal);color:#fff}
+.plab .dot .ic{width:11px;height:11px;stroke-width:3.4;opacity:0}
+.plab li.dn .dot .ic{opacity:1}
+.plab .t{font-size:14px;line-height:1.25;font-weight:700;color:var(--soft)}
+.plab li.cur .t,.plab li.dn .t{color:var(--ink)}
+.prd{display:flex;align-items:baseline;justify-content:space-between;margin:16px 0 0;padding:0 2px}
+.prd span{font-size:14px;color:var(--mid);font-weight:600}
+.prd b{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+.pmat{position:relative;margin-top:12px;background:#fff;border:1px solid var(--hair);border-radius:8px;padding:6px 12px;overflow:hidden}
+.pmat .r{display:flex;align-items:center;gap:12px;min-height:42px;border-top:1px solid var(--hair);opacity:0;transform:translateY(6px);transition:opacity .25s var(--out),transform .25s var(--out)}
+.pmat .r:first-child{border-top:0}
+.pmat .r.on{opacity:1;transform:none}
+.pmat .r b{flex:1;font-size:15px;min-width:0}
+.pmat .r small{display:block;font-size:12.5px;color:var(--mid);font-weight:500}
+.pmat .r .ck{width:22px;height:22px;border-radius:11px;background:var(--teal);color:#fff;display:grid;place-items:center;flex:none}
+.pmat .r .ck .ic{width:12px;height:12px;stroke-width:3.2}
+.pmat .r .oi{width:34px;height:34px;border-radius:8px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center;flex:none}
+.pmat.ing .r{min-height:58px}
+.pmat.ing .r b{font-size:16px}
+.pnote{margin:16px 20px 0;font-size:14px;color:var(--mid)}
+.pslow{margin:16px 20px 0;padding:12px 14px;border-radius:12px;background:#fff;border:1px solid var(--hair);font-size:14px}
+.pslow b{display:block}
+
+/* empty / error states */
+.msg{padding:28px 20px 10px;text-align:left}
+.msg .mi{width:48px;height:48px;border-radius:14px;background:var(--pill);display:grid;place-items:center;margin-bottom:14px}
+.msg h2{margin:0 0 6px;font-size:24px;letter-spacing:-.025em;font-weight:800;line-height:1.15}
+.msg p{margin:0 0 18px;color:var(--mid)}
+.msg .btn{margin-top:6px}
+
+/* formats carousel */
+.fhd{padding:2px 20px 12px}
+.fhd h2{margin:0;font-size:24px;line-height:1.15;letter-spacing:-.025em;font-weight:800}
+.fhd p{margin:4px 0 0;color:var(--mid);font-size:14.5px}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;padding:4px 20px 10px;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab;touch-action:pan-x pan-y}
+.car::-webkit-scrollbar{display:none}
+.car.drag{scroll-snap-type:none;cursor:grabbing}
+.fc{flex:0 0 calc(100% - 16px);scroll-snap-align:start;background:#fff;border:1px solid var(--hair);border-radius:20px;padding:18px 18px 16px;box-shadow:0 1px 2px rgba(23,19,18,.06),0 6px 20px rgba(23,19,18,.06);display:flex;flex-direction:column;user-select:none}
+.fc .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fc .fmt{font-size:13px;font-weight:700;color:var(--teal);letter-spacing:.02em}
+.fc .k{font-size:13px;color:var(--mid);font-weight:600;font-variant-numeric:tabular-nums}
+.fc h3{margin:8px 0 0;font-size:25px;line-height:1.12;letter-spacing:-.025em;font-weight:800}
+.fc .eg{margin:14px 0 0;padding:12px 14px;background:var(--paper);border-radius:12px}
+.fc .eg small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);margin-bottom:3px}
+.fc .eg q{display:block;font-size:17px;font-weight:700;line-height:1.3;quotes:"“" "”"}
+.fc .wh{margin:14px 0 0;font-size:15px;line-height:1.45}
+.fc .gf{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--hair);font-size:14px;color:var(--mid)}
+.fc .gf b{color:var(--teal)}
+.fc.end{align-items:flex-start;justify-content:center;background:var(--paper);border-style:dashed;box-shadow:none}
+.fc.end h3{margin:0 0 6px}
+.fc.end p{margin:0 0 16px;color:var(--mid)}
+.fc.end .btn{margin-top:8px}
+.pg{display:flex;align-items:center;justify-content:center;gap:14px;padding:4px 20px 0}
+.pg .ar{width:40px;height:40px;border-radius:20px;border:1px solid var(--hair);background:#fff;display:grid;place-items:center}
+.pg .ar[disabled]{opacity:.35;cursor:default}
+.dots{display:flex;gap:6px;align-items:center}
+.dots i{width:6px;height:6px;border-radius:3px;background:#D6CDC5;transition:width .2s,background .2s}
+.dots i.on{width:18px;background:var(--ink)}
+.more{margin:14px 20px 0;text-align:center;font-size:14px;color:var(--mid)}
+
+/* hook */
+.sel{margin:0 20px;padding:14px 16px;background:#fff;border:1.5px solid var(--teal);border-radius:16px;display:flex;gap:12px;align-items:flex-start}
+.sel .tx{flex:1;min-width:0}
+.sel small{display:block;font-size:12.5px;font-weight:700;color:var(--teal)}
+.sel b{display:block;font-size:17px;line-height:1.25;margin-top:2px}
+.sel .tx{color:var(--ink)}.sel .tx>span{display:block;font-size:13.5px;color:var(--mid);margin-top:3px;line-height:1.35}
+.sel .ch{font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap;padding:2px 0}
+.sel .thb{width:44px;height:58px;border-radius:8px;background:linear-gradient(160deg,#C9A27E,#7A4E3A);flex:none;display:grid;place-items:end center;color:#fff;font-size:11px;font-weight:800;padding-bottom:4px}
+.hq{padding:22px 20px 0}
+.hks{display:flex;flex-direction:column;gap:10px;padding:14px 20px 0}
+.ho{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:#fff;border:1.5px solid var(--hair);border-radius:14px;padding:14px 14px 14px 16px}
+.ho .tx{flex:1;min-width:0}
+.ho small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)}
+.ho b{display:block;font-size:17px;line-height:1.3;margin:3px 0 4px}
+.ho .tx{color:var(--ink)}.ho .tx>span{font-size:13px;color:var(--mid)}
+.ho .rd{width:22px;height:22px;border-radius:11px;border:2px solid #CFC5BD;flex:none;margin-top:2px;display:grid;place-items:center}
+.ho.on{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.ho.on .rd{border-color:var(--teal);background:var(--teal);color:#fff}
+.ho.on small{color:var(--teal)}
+.hmore{display:flex;justify-content:space-between;align-items:center;padding:12px 20px 0;font-size:14px}
+.hmore small{color:var(--mid)}
+.add{margin:18px 20px 0;border-top:1px solid var(--hair);padding-top:14px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.add small{color:var(--mid);font-weight:500}
+
+/* script output: shared */
+.smeta{padding:2px 20px 0}
+.smeta small{display:block;font-size:13px;color:var(--mid);font-weight:600}
+.smeta h1{margin:2px 0 2px;font-size:26px;line-height:1.12;letter-spacing:-.025em;font-weight:800}
+.smeta .len{font-size:14px;color:var(--mid)}
+.smeta .len b{color:var(--ink)}
+.acts{flex:none;display:flex;gap:8px;padding:10px 16px 10px;border-top:1px solid var(--hair);background:#fff}
+.acts .btn{flex:1;min-height:50px}
+.acts .sq{width:56px;min-height:50px;border-radius:14px;border:1px solid var(--hair);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11.5px;font-weight:600;flex:none}
+.acts .sq .ic{width:18px;height:18px}
+.rw{margin:22px 20px 8px;padding:14px 0 0;border-top:1px solid var(--hair);font-size:14px}
+.rw b{display:block;margin-bottom:8px}
+.rw .btn{min-height:46px;font-size:15px}
+.rw small{display:block;margin-top:8px;color:var(--mid);font-size:13px}
+.rf{font-size:13.5px;font-weight:700;color:var(--ink);display:inline-flex;align-items:center;gap:4px;padding:6px 10px;border-radius:999px;background:var(--pill);flex:none}
+.rf .ic{width:14px;height:14px}
+.tag{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.tm{font-size:13px;color:var(--mid);font-weight:600;font-variant-numeric:tabular-nums}
+.ost{display:inline-block;background:var(--ink);color:#fff;font-weight:700;font-size:14px;padding:3px 9px;border-radius:5px;line-height:1.35}
+
+/* A: read */
+.la-tools{display:flex;gap:8px;padding:12px 20px 4px;flex-wrap:wrap}
+.pill{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--hair);background:#fff;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.pill.dk{background:var(--ink);border-color:var(--ink);color:#fff}
+.la{padding:0 20px}
+.la-p{padding:18px 0 18px;border-bottom:1px solid var(--hair)}
+.la-p:last-child{border-bottom:0}
+.la-h{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.la-h .tag{color:var(--mid)}
+.la-h .sp{flex:1}
+.la-p.hk .la-h .tag{color:var(--red)}
+.la-say{margin:0;font-size:23px;line-height:1.28;font-weight:700;letter-spacing:-.015em}
+.la-p.hk .la-say{font-size:27px;font-weight:800;letter-spacing:-.025em}
+.la-say.mute{color:var(--mid);font-style:italic;font-weight:600;font-size:19px}
+.la-n{margin:10px 0 0;display:grid;grid-template-columns:78px 1fr;gap:4px 8px;font-size:14px;line-height:1.4;color:var(--mid)}
+.la-n dt{font-weight:700;color:var(--ink);font-size:12.5px;padding-top:1px}
+.la-n dd{margin:0}
+.la.nonotes .la-n{display:none}
+
+/* B: shots */
+.lb-sum{padding:10px 20px 2px;font-size:14px;color:var(--mid)}
+.lb{padding:8px 16px 0;display:flex;flex-direction:column;gap:10px}
+.lb-p{display:grid;grid-template-columns:92px 1fr;gap:12px;background:#fff;border:1px solid var(--hair);border-radius:16px;padding:10px}
+.lb-fr{position:relative;width:92px;height:150px;border-radius:10px;background:linear-gradient(170deg,#3A2E2A,#171312);overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:8px}
+.lb-fr .n{position:absolute;top:6px;left:7px;font-size:11px;font-weight:700;color:rgba(255,255,255,.75);font-variant-numeric:tabular-nums}
+.lb-fr em{font-style:normal;background:#fff;color:var(--ink);font-weight:800;font-size:11.5px;line-height:1.2;padding:3px 6px;border-radius:4px;text-align:center;max-width:100%;overflow-wrap:anywhere}
+.lb-fr.hk{background:linear-gradient(170deg,#FF6B77,#B8263D)}
+.lb-tx{min-width:0;display:flex;flex-direction:column;gap:5px}
+.lb-h{display:flex;align-items:center;gap:6px}
+.lb-h .tag{color:var(--mid);font-size:11.5px}
+.lb-h .sp{flex:1}
+.lb-p.hk .lb-h .tag{color:var(--red)}
+.lb-say{margin:0;font-size:17px;line-height:1.3;font-weight:700}
+.lb-say.mute{color:var(--mid);font-style:italic;font-weight:600}
+.lb-film{margin:0;font-size:14px;line-height:1.38;color:var(--ink)}
+.lb-film b{font-weight:700;color:var(--mid);font-size:12.5px;margin-right:4px}
+.lb-dir{margin:0;font-size:13px;color:var(--mid);line-height:1.35}
+
+/* C: timeline */
+.lc-bar{margin:14px 20px 0}
+.lc-seg{display:flex;gap:3px;height:34px}
+.lc-seg span{border-radius:5px;background:var(--teal);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;min-width:0;overflow:hidden}
+.lc-seg span.h{background:var(--red)}
+.lc-ticks{position:relative;height:18px;margin-top:4px;font-size:11.5px;color:var(--mid);font-variant-numeric:tabular-nums}
+.lc-ticks i{position:absolute;top:0;font-style:normal;transform:translateX(-50%)}
+.lc-ticks i:first-child{transform:none}
+.lc-ticks i:last-child{transform:translateX(-100%)}
+.lc{padding:10px 20px 0}
+.lc-p{display:grid;grid-template-columns:44px 1fr;gap:0 10px;position:relative}
+.lc-t{position:relative;padding-top:1px;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
+.lc-t::after{content:"";position:absolute;left:10px;top:24px;bottom:0;width:2px;background:var(--hair)}
+.lc-t .d{position:absolute;left:4px;top:24px}
+.lc-b{padding:0 0 22px;min-width:0}
+.lc-h{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.lc-h .tag{color:var(--mid);font-size:11.5px}
+.lc-h .sp{flex:1}
+.lc-p.hk .lc-h .tag{color:var(--red)}
+.lc-say{margin:0 0 8px;font-size:18px;line-height:1.3;font-weight:700}
+.lc-say.mute{color:var(--mid);font-style:italic;font-weight:600}
+.lc-ln{display:grid;grid-template-columns:72px 1fr;gap:6px;font-size:14px;line-height:1.4;margin-top:4px}
+.lc-ln dt{font-size:12.5px;font-weight:700;color:var(--mid);padding-top:2px}
+.lc-ln dd{margin:0}
+.lc-end{display:grid;grid-template-columns:44px 1fr;gap:10px;font-size:14px;font-weight:800;color:var(--mid);padding-bottom:6px}
+
+/* teleprompter */
+.tp{flex:1;display:flex;flex-direction:column;padding:12px 22px 0;min-height:0}
+.tp .top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--night-mid)}
+.tp .lines{flex:1;display:flex;flex-direction:column;justify-content:center;gap:18px;overflow:hidden}
+.tp .lines p{margin:0;font-size:29px;line-height:1.22;font-weight:700;letter-spacing:-.015em}
+.tp .lines p.dim{color:#7C716B}
+.tp .ctlbar{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 0 26px;font-size:14px;color:var(--night-mid)}
+.tp .ctlbar button{width:44px;height:44px;border-radius:22px;border:1.5px solid #4A403B;display:grid;place-items:center;color:#fff}
+
+/* sheet */
+.shade{position:absolute;inset:0;background:rgba(23,19,18,.4);display:flex;align-items:flex-end;z-index:5}
+.sheet{width:100%;background:#fff;border-radius:22px 22px 0 0;padding:10px 20px 26px}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:var(--hair);margin:0 auto 12px}
+.sheet h3{margin:0 0 4px;font-size:20px;letter-spacing:-.02em}
+.sheet p{margin:0 0 10px;color:var(--mid);font-size:14px}
+.br{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:12px 0;border-top:1px solid var(--hair)}
+.br .th{width:42px;height:56px;border-radius:8px;flex:none;background:linear-gradient(160deg,#C9A27E,#7A4E3A)}
+.br .tx{flex:1;min-width:0}
+.br b{display:block;font-size:15px;line-height:1.3}
+.br small{display:block;font-size:13px;color:var(--mid)}
+.br .x{font-weight:800;color:var(--teal);font-size:15px;flex:none}
+.toast{position:absolute;left:50%;bottom:150px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;white-space:nowrap;z-index:9}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <h1>Script Writer v4: start from your own idea</h1>
+    <p>From the call with Ivan on 10 Nov (to-dos 6 and 8). <b>The Idea Generator is gone.</b> The creator types a product or topic first, swipes through 10 video ideas built on formats for that keyword, picks one, chooses a hook, then gets the script. Brief Buddy and starting from a breakout stay as second options.</p>
+    <p><b>The script page gets 3 new layouts</b> so the lines she says on camera are the easiest thing to read. All sample data comes from UB 3.1 (lip oil, @maya.creates).</p>
+    <nav class="jump"><a href="#proto">Try the flow</a><a href="#flow">Every screen</a><a href="#states">States</a><a href="#layouts">Script layouts</a><a href="#changes">What changed vs 3.1</a></nav>
+  </header>
+
+  <section class="sec" id="proto">
+    <h2>Try the flow</h2>
+    <p class="d">Tap through it like the app. Type a product (or tap a chip), swipe the ideas left and right, pick one, choose a hook, write the script.</p>
+    <div class="proto">
+      <div class="phone"><div class="screen" id="pApp"></div></div>
+      <div class="side">
+        <div class="ctl" role="group" aria-label="Script layout">
+          <span class="lb">Script layout</span>
+          <button data-lay="a" aria-pressed="true">A · Read</button>
+          <button data-lay="b" aria-pressed="false">B · Shots</button>
+          <button data-lay="c" aria-pressed="false">C · Timeline</button>
+        </div>
+        <div class="ctl" role="group" aria-label="Jump">
+          <span class="lb">Jump or test a state</span>
+          <button data-go="start">Start over</button>
+          <button data-go="ideas">Ideas</button>
+          <button data-go="out">Script</button>
+          <button data-go="fail">Ideas fail to load</button>
+          <button data-go="slow">Ideas are slow</button>
+          <button data-go="none">No ideas found</button>
+        </div>
+        <h3>The flow</h3>
+        <ol>
+          <li><b>Type a product or topic.</b> One box, chips from her TikTok to fill it.</li>
+          <li><b>Finding ideas.</b> The shared processing screen from Magic moments v2.</li>
+          <li><b>10 ideas, swipe left and right.</b> Each one is a format applied to her keyword, with a sample hook.</li>
+          <li><b>Choose a hook.</b> Same as 3.1, with the picked idea shrunk to one line on top.</li>
+          <li><b>Writing your script.</b> Same processing screen.</li>
+          <li><b>Your script</b> in layout A, B or C (switch above).</li>
+        </ol>
+        <h3>Second ways in</h3>
+        <ol>
+          <li><b>Brief Buddy</b> opens its 3.1 flow, unchanged.</li>
+          <li><b>From a breakout</b> picks a saved breakout, skips the ideas and goes straight to hooks (as 3.1 does from a video analysis).</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="flow">
+    <h2>Every screen, in order</h2>
+    <p class="d">The main path with lip oil.</p>
+    <div class="grid" id="gFlow"></div>
+  </section>
+
+  <section class="sec" id="states">
+    <h2>States</h2>
+    <p class="d">What each screen shows when it is empty, loading, slow, failed or has nothing to show.</p>
+    <div class="grid" id="gStates"></div>
+  </section>
+
+  <section class="sec" id="layouts">
+    <h2>Script layouts: 3 ways to read the same script</h2>
+    <p class="d">Ivan on the current script page: it doesn’t call out, and the font sizes, bolding and format are hard to read. In 3.1 every part is a teal box with 4 labels of the same size (Direction, Say, Visuals, Text on screen), so the line she says competes with everything around it. Each layout below is built for one job.</p>
+    <div class="grid" id="gLay"></div>
+  </section>
+
+  <section class="sec" id="changes">
+    <h2>What changed vs 3.1</h2>
+    <ul class="chg">
+      <li><b>Idea Generator removed</b><span>It was slow and its ideas came straight from the format database, so many had nothing to do with the creator. The card on the Script start screen is gone.</span></li>
+      <li><b>“My own idea” is now the main entry</b><span>In 3.1 it was a collapsed second card that went straight to hooks. Now it is the first thing on the page and leads to 10 ideas for that keyword.</span></li>
+      <li><b>Swiping browses instead of deciding</b><span>3.1: swipe right to use, left to skip, one card at a time. v4: swipe either way to move through all 10, dots show where you are, one button picks the idea on screen. You can go back to an idea you passed.</span></li>
+      <li><b>Hook screen: picked idea shrinks to one line</b><span>The big selected card in 3.1 pushed the hooks below the fold. Now the hooks start in the top half.</span></li>
+      <li><b>Processing screens use the Magic moments v2 style</b><span>One line, a 3-part bar, 3 steps that tick, one panel. Replaces the bowl animation on Writing your script.</span></li>
+      <li><b>Script page: 3 layouts instead of teal boxes</b><span>The line she says is the biggest text on the page in every layout. Refine, Change, rewrites, Save, Share and Copy work the same as 3.1.</span></li>
+    </ul>
+  </section>
+</div>
+
+<script>
+/* ================= icons ================= */
+var P={pen:'<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M14 6l4 4"/>',back:'<path d="M15 5l-7 7 7 7"/>',chev:'<path d="M9 5l7 7-7 7"/>',check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',x:'<path d="M6 6l12 12M18 6L6 18"/>',fire:'<path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5.3 2 1.2 3 2 3.2C10.5 9 11 6 12 3z"/>',film:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 3v18M16 3v18M4 8h4M4 16h4M16 8h4M16 16h4"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',doc:'<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16"/>',home:'<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>',lib:'<path d="M6 3h12v18l-6-4-6 4z"/>',arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',redo:'<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/>',share:'<path d="M12 15V3M7 8l5-5 5 5"/><path d="M5 13v7h14v-7"/>',copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>',save:'<path d="M6 3h12v18l-6-4-6 4z"/>',play:'<path d="M7 4l13 8-13 8z"/>',pause:'<path d="M8 5v14M16 5v14"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',spark:'<path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/>',alert:'<circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/>',bulb:'<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/>',notes:'<path d="M5 6h14M5 12h14M5 18h9"/>'};
+function ic(n,c){return '<svg class="ic'+(c?' '+c:'')+'" viewBox="0 0 24 24" aria-hidden="true">'+(P[n]||'')+'</svg>';}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+/* ================= real sample data (UB 3.1: script.js, sc2.js, sc3.js) ================= */
+var ME={h:'maya.creates',style:'Talking head, Product demo',chips:['Lip oil','Cream blush','#grwm','#skincareroutine','#makeuptok'],left:3};
+var HK={lip:["I put lip oil on half my lips. Guess which half.","One swipe. Look at the difference.","Stop buying lip gloss until you see this."],
+ dupe:["The $8 lip oil vs the $38 one. Can you tell?","One of these is $30 cheaper. Guess which.","I found a dupe for the lip oil everyone’s buying."],
+ wear:["I wore one lip oil for 12 hours. This is hour 12.","Does lip oil last a whole day? I tested it.","9am to 9pm in one lip oil. No top-ups."],
+ rank:["Ranking every lip oil I own, worst to best.","I own 5 lip oils. Only one is worth it.","My lip oil tier list. Number 1 surprised me."],
+ grwm:["Getting ready for a first date. Lip oil goes on last.","GRWM for a first date, five products only.","Get ready with me, and the one step I never skip."],
+ mist:["3 lip oil mistakes that make your lips look dry.","You’re putting lip oil on wrong. Here’s why.","If your lip oil looks patchy, it’s one of these 3."],
+ reply:["Someone said lip oil is just expensive Vaseline. Let’s test it.","“It’s just Vaseline.” Okay, let’s see.","Is lip oil a scam? Testing it against Vaseline."],
+ ways:["One lip oil, three looks.","Three ways to wear one lip oil.","You only need one lip oil. Here’s why."],
+ hype:["This lip oil sat in my cart for 3 months. Is it worth it?","Everyone’s buying this lip oil. I finally tried it.","Is the viral lip oil worth it? Honest review."],
+ pov:["POV: you finally found a lip oil that isn’t sticky.","POV: your lip oil doesn’t move when you sip coffee.","POV: one swipe and you’re done."]};
+var HT={lip:["Guess game","Show it","Bold claim"],dupe:["Can you tell?","Guess game","Dupe find"],wear:["Start at the end","Question","Challenge"],rank:["Ranking","Bold claim","Surprise"],grwm:["Story","Challenge","Secret"],mist:["Mistakes","Call-out","Quick fix"],reply:["Reply to a comment","Quote","Question"],ways:["Show it","How-to","Bold claim"],hype:["Honest review","Everyone’s buying it","Question"],pov:["POV","Relatable","Show it"]};
+var HO={lip:["half and half","1 swipe","before you buy gloss"],dupe:["$8 vs $38","which is cheaper?","the dupe"],wear:["hour 12","does it last?","9am to 9pm"],rank:["worst to best","only 1 is worth it","my tier list"],grwm:["first date GRWM","5 products only","the step I never skip"],mist:["3 mistakes","you’re doing it wrong","patchy? read this"],reply:["just Vaseline?","“it’s just Vaseline”","scam or not?"],ways:["1 product, 3 looks","3 ways","you only need 1"],hype:["in my cart for 3 months","everyone’s buying it","worth the hype?"],pov:["POV: not sticky","POV: coffee-proof","POV: one swipe"]};
+var NM={lip:"the half-and-half test",dupe:"the $8 vs $38 test",wear:"a 12-hour wear test",rank:"my lip oil ranking",grwm:"my first date GRWM",mist:"these 3 mistakes",reply:"the Vaseline test",ways:"one lip oil, 3 ways",hype:"the viral lip oil",pov:"a lip oil that isn’t sticky"};
+var TPL=[["I tried {n} so you don’t have to.","I tried it"],["Wait for the end of {n}.","Wait for it"],["Nobody does {n} like this.","Bold claim"],["{N} in 20 seconds. Go.","Quick win"],["If you’ve never seen {n}, watch this.","Curiosity"],["My honest take on {n}.","Honest review"],["POV: you try {n} for the first time.","POV"],["Don’t scroll. {N} actually works.","Pattern break"],["Here’s what {n} taught me.","Story"]];
+function I1(k,t,d,w){return {k:k,t:t,d:d,w:w,hk:HK[k],ht:HT[k],os:HO[k],n:NM[k]};}
+function I2(t,d,w,k,n,hk,ht,os){return {k:k,t:t,d:d,w:w,hk:hk,ht:ht,os:os,n:n};}
+var SETS=[[
+ I1("lip","Half-and-half test","Put lip oil on one half of your lips only, then show both halves side by side in daylight.","People stay to guess which half, and the answer is the product working."),
+ I1("dupe","Cheap vs pricey","Test an $8 lip oil against a $38 one without labels, then reveal which is which.","Everyone has a guess, so the comments fill up."),
+ I1("wear","12-hour wear test","Wear one lip oil all day and check in at 9am, lunch, coffee and dinner.","Opening on hour 12 makes people want to see how it got there."),
+ I1("rank","Rank them all","Line up every lip oil you own and rank them worst to best, one swatch each.","People wait to see number 1, then argue about it."),
+ I1("grwm","Get ready with me","Do your normal get-ready routine while talking, and finish with the lip oil.","It feels like hanging out, so people watch to the end."),
+ I1("mist","3 lip oil mistakes","Show three mistakes people make with lip oil, and fix each one on camera.","People watch to check they’re not making them."),
+ I1("reply","Reply to a comment","Show a comment that doubts lip oil, then test the claim side by side.","A real comment turns it into a debate, and debates get comments."),
+ I1("ways","One lip oil, 3 ways","Wear the same lip oil three ways: sheer for day, over liner, then over lipstick.","Three looks from one product feels like good value."),
+ I1("hype","Worth the hype?","Open the lip oil everyone’s posting, try it for the first time and give an honest yes or no.","People want the answer before they buy it themselves."),
+ I1("pov","POV: not sticky","No talking: text on screen sets the scene and the lip oil does the work.","Easy to film, and the text does the selling.")],[
+ I2("Drugstore vs Sephora","Swatch a drugstore lip oil and a Sephora one, let people guess which is which, then show the prices.","A price guess pulls people into the comments.","dupe","a drugstore vs Sephora test",["Drugstore or Sephora? Guess before I tell you.","One of these cost $6. The other $34.","I bet you can’t tell which one is from Sephora."],["Guess game","Price reveal","Challenge"],["drugstore or Sephora?","$6 vs $34","bet you can’t tell"]),
+ I2("Coffee cup test","Put the lip oil on, take three sips of coffee, and show the cup and your lips after each one.","Everyone drinks coffee, so it’s a test they trust.","wear","the coffee cup test",["Does lip oil survive a latte? Let’s see.","Three sips in. Look at the cup.","Lip oil vs my morning coffee."],["Question","Show it","Versus"],["survive a latte?","look at the cup","lip oil vs coffee"]),
+ I2("Makeup bag cleanout","Empty your makeup bag, keep or toss every lip product on camera, and end on the lip oil you kept.","People love watching a big pile shrink to one winner.","rank","a makeup bag cleanout",["Cleaning out my makeup bag. Only one lip product stays.","Keep or toss: every lip product I own.","I had 14 lip products. I kept one."],["Story","Game","Surprise"],["only one stays","keep or toss","14 down to 1"]),
+ I2("Dry lips fix","Show your dry lips up close, do one simple routine with the lip oil, then show them the next day.","Dry lips are common, so people save the fix.","mist","this dry lips routine",["If your lips are always dry, try this.","Dry lips? Here’s the one thing that helped.","My lips were peeling. This is the next day."],["Relatable","Quick fix","Story"],["always dry?","the one thing","the next day"]),
+ I2("Gym bag check","Walk through what’s in your gym bag and finish on the lip oil you put on after a workout.","A peek into your routine feels personal.","grwm","my gym bag check",["What’s in my gym bag, and the one thing I never skip.","After the gym, 3 things only.","Gym bag check. The last one surprises people."],["Secret","Challenge","Surprise"],["the one I never skip","3 things only","gym bag check"]),
+ I2("You picked, I tried","Try the 3 lip oils your followers picked in the comments and give each one a score.","Followers come back to see if their pick won.","reply","your lip oil picks",["You picked 3 lip oils. I tried them all.","Your comments chose these. Here’s my score.","I let my followers pick my lip oil."],["Reply to comments","Ranking","Challenge"],["you picked these","my score","followers pick"]),
+ I2("Matte to glossy","Put lip oil over a matte lipstick and show how it turns glossy in one swipe.","A quick trick people can try tonight.","ways","this lip oil trick",["Turn any matte lipstick glossy in 2 seconds.","The lip oil trick I use every day.","Your matte lipstick is about to look new."],["How-to","Secret","Bold claim"],["matte to glossy","the trick","looks new"]),
+ I2("First impressions","Open the lip oil on camera, do the first swipe and react honestly in real time.","Real first reactions are hard to fake, so people trust them.","hype","my first impression",["First time trying the lip oil everyone’s posting.","Opening it live. No edits.","Is it actually that good? First swipe."],["Honest review","Real time","Question"],["first try","no edits","that good?"]),
+ I2("Can they tell?","Put lip oil on one side only and film a friend or partner guessing which side it is.","A guessing game with a friend keeps people watching.","lip","the can-they-tell test",["Can my partner tell which side has lip oil?","I made my sister guess. She got it wrong.","Guess which side. They had 3 seconds."],["Guess game","Story","Challenge"],["can they tell?","she got it wrong","3 seconds"]),
+ I2("Silent review","No talking: price, feel, wear and your verdict as text on screen while you use it.","Works with the sound off, which is how many people scroll.","pov","a silent review",["A lip oil review with zero talking.","Price. Feel. Wear. Verdict.","Silent review: would I buy it again?"],["POV","Show it","Question"],["zero talking","price, feel, wear","buy it again?"])],[
+ I2("Under $10","Try three lip oils under $10 side by side and crown one winner at the end.","Budget picks get saved and shared.","rank","this under-$10 test",["Three lip oils under $10. Only one is good.","Budget lip oil ranking.","You don’t need to spend $30 on lip oil."],["Ranking","Relatable","Bold claim"],["under $10","budget ranking","skip the $30"]),
+ I2("Day to night","Wear the same lip oil soft for day, then over liner for a night look.","Two looks in one video feels like value.","ways","the day to night look",["Same lip oil, day vs night.","From office to dinner with one lip oil.","Watch this lip oil go from day to night."],["Versus","Story","Show it"],["day vs night","office to dinner","day to night"]),
+ I2("Would I rebuy?","Show only lip oils you’ve finished, and say which ones you’d buy again and why.","Finished products are the most honest review.","rank","my empties",["Only products I finished. Would I buy them again?","Empties, lip edition.","I finished 4 lip oils this year. I’d rebuy one."],["Honest review","Show it","Surprise"],["would I rebuy?","empties","I’d rebuy 1"]),
+ I2("Windy day test","Go outside on a windy day and show whether your hair sticks to the lip oil.","A real-life test people haven’t seen before.","wear","the windy day test",["The real test: lip oil on a windy day.","Does your hair stick to lip oil? Let’s see.","Lip oil vs wind. Who wins?"],["Challenge","Question","Versus"],["windy day","hair stick?","lip oil vs wind"]),
+ I2("Myth or true","Test three things people say about lip oil on camera, one at a time.","Busting myths gets people arguing in the comments.","reply","these lip oil myths",["Lip oil myths. Let’s test 3.","Does lip oil actually plump? Testing it.","True or false: lip oil stains."],["Myth bust","Question","Game"],["3 myths","does it plump?","true or false"]),
+ I2("Weekend packing","Pack a small bag for a weekend away and show the lip oil making the cut.","Packing videos are easy to watch and save.","grwm","my weekend packing",["Packing for a weekend with one small bag.","Only 5 beauty things fit. Here they are.","Carry-on only. What made the cut."],["Story","Challenge","List"],["one small bag","5 things fit","carry-on only"]),
+ I2("No mirror","Put the lip oil on without a mirror, then check the result on camera.","A small challenge people want to see you pass or fail.","lip","the no-mirror test",["Putting on lip oil with no mirror.","No mirror, 2 seconds. Did I get it?","The lip oil you can put on without looking."],["Challenge","Question","Bold claim"],["no mirror","did I get it?","no looking"]),
+ I2("Friend tries it","Hand the lip oil to a friend and film their first swipe and honest verdict.","A second person’s reaction feels more honest.","hype","my friend’s first try",["My friend tries the lip oil I won’t stop talking about.","Her first reaction is the review.","I gave my friend my favorite lip oil."],["Story","Real time","Story"],["my friend tries it","first reaction","my favorite"]),
+ I2("How many coats?","Show one, two and three coats side by side and say where it becomes too much.","Answers a question people actually have.","mist","the layering test",["One coat, two coats, three. When is it too much?","How much lip oil is too much?","Stop at two coats. Here’s why."],["Show it","Question","Quick fix"],["1, 2, 3 coats","too much?","stop at two"]),
+ I2("Sound on","Film close up with the sound on: slow swipes and the sound of the wand, no talking.","Satisfying sounds keep people watching to the end.","pov","this lip oil sound test",["Lip oil ASMR. Turn your sound on.","Just the sound of a lip oil.","The most satisfying swipe."],["Pattern break","Sound","Show it"],["sound on","just the sound","satisfying swipe"])]];
+/* scripts per format key: [time, say, film, on screen], part names, directions (SC_SHOTS + the default half-and-half script) */
+var SH={
+ lip:{len:22,names:["Hook","Show it","Prove it","In daylight","Ask"],dirs:["Open on the result. No intro.","Show the difference side by side.","Prove it isn’t sticky.","Show it in real light, no filter.","Ask a two-choice question."],shots:[["0-3s","{hook}","Close-up. Half your lips done, half bare.",""],["3-8s","Left is bare. Right is one swipe of this.","Hold the bottle next to your lips.","1 swipe"],["8-14s","It’s not sticky. Watch.","Press your lips together, then pull apart slowly.","not sticky"],["14-19s","Here it is in daylight.","Step to a window. Turn side to side.","daylight, no filter"],["19-22s","Left or right? Tell me below.","Point to each side.","left or right?"]]},
+ dupe:{len:24,names:["Hook","Swatch","Coffee test","Reveal","Ask"],dirs:["Two products, labels hidden.","Same test on both.","Test them in real life.","Reveal which is which.","Ask if the price is worth it."],shots:[["0-3s","{hook}","Hold both up to the camera, labels hidden.",""],["3-9s","Left one, then right one. Same lips.","One swipe each, half and half.","which is which?"],["9-15s","Here’s how they wear after a coffee.","Sip, then close-up on both sides.","after coffee"],["15-21s","The left one is the $8.","Turn the labels around.","left = $8"],["21-24s","Would you pay $30 more? Tell me.","Point at the camera.","worth it?"]]},
+ wear:{len:26,names:["Hook","9am","Lunch","Coffee","Hour 12"],dirs:["Start at the end of the day.","Put it on in the morning.","Check in at lunch.","Do the hardest test.","Back to the start, ask."],shots:[["0-3s","{hook}","Close-up of your lips at night, phone flash on.",""],["3-8s","9am. One swipe, that’s it.","Apply it at the mirror.","9am"],["8-14s","Lunch. Still there.","Quick close-up after eating.","12pm"],["14-20s","Coffee. The real test.","Sip, then show the cup rim.","3pm"],["20-26s","Hour 12. Would you wear it?","Back to the flash close-up.","would you?"]]},
+ grwm:{len:28,names:["Hook","Base","Eyes","Lips","Ask"],dirs:["Set the scene, skin bare.","Base first, keep it quick.","Eyes, two steps.","Lip oil as the finish.","Ask a yes or no question."],shots:[["0-3s","{hook}","Sitting at your mirror, skin bare.",""],["3-10s","Skin first. Keep it light.","Quick cuts of your base going on.","light base"],["10-17s","Two coats of mascara, that’s it.","Close-up on your eyes.","mascara x2"],["17-24s","And the lip oil, last.","Slow swipe, then press your lips.","the finish"],["24-28s","Would you wear this on a first date?","Lean into the camera.","yes or no?"]]},
+ mist:{len:24,names:["Hook","Mistake 1","Mistake 2","Mistake 3","Ask"],dirs:["Show the problem first.","Mistake one, fixed on camera.","Mistake two, fixed.","Mistake three, fixed.","Ask which one they do."],shots:[["0-3s","{hook}","Close-up of dry, flaky lips.",""],["3-9s","One: putting it on dry lips. Balm first.","Balm, then the oil.","balm first"],["9-15s","Two: too much. One swipe.","Show a heavy coat, then wipe it back.","1 swipe"],["15-21s","Three: skipping the top-up after you eat.","Fork, then a quick swipe.","top up"],["21-24s","Which one were you doing?","Point at the camera.","1, 2 or 3?"]]},
+ reply:{len:22,names:["Hook","The test","Result","Ask"],dirs:["Show the comment.","Test it side by side.","Show the result.","Hand it back to them."],shots:[["0-3s","{hook}","The comment on screen, you reacting.",""],["3-11s","Vaseline on the left, lip oil on the right.","Half and half on your lips.","left vs right"],["11-18s","After an hour. Look at the right side.","Close-up in daylight.","1 hour later"],["18-22s","So, is it just Vaseline?","Raise an eyebrow at the camera.","you decide"]]},
+ ways:{len:21,names:["Hook","Look 1","Look 2","Look 3","Ask"],dirs:["One product, three looks.","Look one: on its own.","Look two: over a liner.","Look three: over lipstick.","Ask which look is theirs."],shots:[["0-3s","{hook}","Hold the lip oil up next to your face.",""],["3-8s","One. On its own, for day.","One swipe, natural light.","day"],["8-13s","Two. Over a liner.","Line, then the oil on top.","liner + oil"],["13-18s","Three. On top of a lipstick.","Lipstick, then the oil for shine.","lipstick + oil"],["18-21s","Which one is you?","Point at the camera.","1, 2 or 3?"]]},
+ hype:{len:23,names:["Hook","Unbox","First try","Verdict","Ask"],dirs:["Admit the wait.","Open it on camera.","First try, real reaction.","Give a straight answer.","Ask about their cart."],shots:[["0-3s","{hook}","Your cart on your phone, then the box.",""],["3-8s","Okay, opening it.","Hands only, unboxing.","unboxing"],["8-15s","First swipe. Oh, that’s nice.","Swipe it on, close-up.","first try"],["15-20s","Honest answer: yes, but only in Rose.","Talk to camera.","worth it? yes"],["20-23s","What’s in your cart right now?","Point at the camera.","your cart?"]]},
+ pov:{len:15,names:["Hook","The swipe","The test","Ask"],dirs:["Text-only opener.","Let the product show it.","The test, no words.","Short text question."],shots:[["0-3s","","Close-up, lip oil in your hand.",""],["3-7s","","One swipe, slow.","one swipe"],["7-12s","","Press your lips together, then pull apart.","not sticky"],["12-15s","","Smile at the camera.","link in bio?"]]},
+ rank:{len:25,names:["Hook","Last place","The middle","Number one","Ask"],dirs:["Line them all up.","Start with last place.","Move through the middle.","Reveal number one.","Ask for theirs."],shots:[["0-3s","{hook}","All of them lined up on the counter.",""],["3-10s","Last place. Sticky and it fades.","Swatch on your hand, thumbs down.","#5"],["10-16s","Fine, but nothing special.","Two quick swatches.","#4 · #3"],["16-22s","And my number one.","Slow push in on the winner.","#1"],["22-25s","What’s your number one?","Point at the camera.","your #1?"]]}};
+/* saved breakouts (UB 3.1 / Magic moments v2 sample rows) */
+var BRK=[{h:"softfocus.kai",x:"78x",u:"18K",v:"1.4M",hook:"Half my face has blush. Guess which half looks awake."},{h:"softglam.lu",x:"74x",u:"30K",v:"2.2M",hook:"One swipe. Look at the difference."},{h:"brushbyrae",x:"63x",u:"45K",v:"2.8M",hook:"I only did half my face. Can you tell?"}];
+
+function cap(t){return t.charAt(0).toUpperCase()+t.slice(1);}
+function hooksFor(f,more){var H=f.hk.slice(),T=f.ht.slice(),O=f.os.slice();for(var j=0;j<more*3&&j<TPL.length;j++){var x=TPL[j];H.push(x[0].replace("{n}",f.n).replace("{N}",cap(f.n)));T.push(x[1]);O.push(x[1].toLowerCase());}return {h:H,t:T,o:O};}
+function parts(f,hi,more){var s=SH[f.k],X=hooksFor(f,more||0),n=s.shots.length;
+ return s.shots.map(function(x,i){var se=x[0].replace('s','').split('-').map(Number);
+  var say=x[1]==="{hook}"?X.h[hi]:x[1],os=i===0?(X.o[hi]||x[3]):x[3];
+  if(f.k==="pov"&&i===0)os=f.os[hi]||x[3];
+  if(f.t==="Drugstore vs Sephora"){[["$8","$6"],["$38","$34"],["$30 more","$28 more"]].forEach(function(r){say=say.split(r[0]).join(r[1]);os=(os||"").split(r[0]).join(r[1]);});}
+  return {i:i,role:i===0?"Hook":i===n-1?"Call to action":"Body "+i,sub:(i===0||i===n-1)?"":s.names[i],tm:x[0],a:se[0],b:se[1],dir:s.dirs[i],say:say,vis:x[2],os:os};});}
+
+/* ================= shell pieces ================= */
+function sb(){return '<div class="sb"><span>9:41</span><i></i></div>';}
+function nav(on){var N=[["home","Home"],["fire","Breakouts"],["pen","Script"],["lib","Library"]];return '<div class="nav">'+N.map(function(n){return '<span class="'+(n[1]===on?'on':'')+'">'+ic(n[0])+n[1]+'</span>';}).join('')+'</div>';}
+function brand(){return '<div class="brand"><span class="logo"><span class="mk">'+ic('spark')+'</span>UGC <b>Breakouts</b></span><span class="av">M</span></div>';}
+function tb(back,title,right){return '<div class="tb"><button class="bk" data-a="'+back+'" aria-label="Back">'+ic('back')+'</button><b>'+title+'</b>'+(right||'')+'</div>';}
+function app(body,o){o=o||{};return '<div class="app'+(o.dark?' dark':'')+'">'+sb()+(o.top||'')+'<div class="bd">'+body+'</div>'+(o.foot||'')+(o.nav===false?'':nav('Script'))+(o.over||'')+'</div>';}
+
+/* ================= 1. Start ================= */
+function scrStart(q,focus){var has=!!(q||'').trim();
+ var body=brand()+'<div class="pad"><h1 class="t">Let’s make your next viral video</h1>'+
+  '<div class="ent"><label for="kw">What’s your video about?</label><p>Type a product or a topic. We’ll give you 10 video ideas for it.</p>'+
+  '<div class="fld'+(focus||has?' on':'')+'">'+ic('pen')+'<input id="kw" data-in="kw" placeholder="Like lip oil or skincare" value="'+esc(q||'')+'" autocomplete="off" enterkeyhint="go">'+(has?'<button class="x" data-a="clear" aria-label="Clear">'+ic('x','s')+'</button>':'')+'</div>'+
+  '<div class="from">From your TikTok</div><div class="chips">'+ME.chips.map(function(c){return '<button class="chip'+(q===c?' on':'')+'" data-a="chip:'+esc(c)+'">'+esc(c)+'</button>';}).join('')+'</div>'+
+  '<button class="btn p" data-a="getideas" id="goIdeas"'+(has?'':' disabled')+'>Get 10 ideas'+ic('arrow')+'</button></div>'+
+  '<p class="left">'+ME.left+' of 3 free scripts left</p>'+
+  '<div class="alt"><span class="lbl">Or start from</span>'+
+   '<button class="row" data-a="brief"><span class="oi">'+ic('doc')+'</span><span class="tx"><b>A brand’s brief</b><small>Brief Buddy writes to every must-say</small></span>'+ic('chev')+'</button>'+
+   '<button class="row" data-a="brk"><span class="oi">'+ic('fire')+'</span><span class="tx"><b>A breakout</b><small>Same structure as a video that beat its usual views</small></span>'+ic('chev')+'</button>'+
+  '</div>'+
+  '<ol class="how"><li><span><b>Type a product or topic</b>Or tap one from your TikTok.</span></li><li><span><b>Pick one of 10 ideas</b>Swipe through them, then use the one you like.</span></li><li><span><b>Choose your hook</b>The first line you say. We write the rest in your style.</span></li><li><span><b>Film it</b>Refine any part, save it, then read it off the teleprompter.</span></li></ol></div>';
+ return app(body);}
+
+/* ================= processing (Magic moments v2 pattern) ================= */
+function proc(o,step){/* step: 0..3, 3 = done. o.mode = still for static shots */
+ var cls=['','','',''];
+ var bars=[0,1,2].map(function(i){return '<span class="'+(i<step?'dn':i===step?'cur'+(o.still?' still':''):'')+'"><i></i></span>';}).join('');
+ var labs=o.labels.map(function(t,i){return '<li class="'+(i<step?'dn':i===step?'cur':'')+'"><span class="dot">'+ic('check')+'</span><span class="t">'+t+'</span></li>';}).join('');
+ return '<div class="pr s'+step+'"><div class="ptok"><span class="ti">'+ic(o.icon||'pen')+'</span><b>'+esc(o.tok)+'</b>'+(o.tok2?' · '+esc(o.tok2):'')+'</div>'+
+  '<div class="pline"><h2>'+o.line+'</h2><span class="pdone">'+ic('check')+'</span></div>'+
+  '<div class="pbar">'+bars+'</div><ol class="plab">'+labs+'</ol>'+(o.readout||'')+'<div class="pmat'+(o.ing?' ing':'')+'">'+o.mat+'</div></div>'+(o.after||'');}
+function scrFind(q,step,slow){var set=SETS[0],shown=step>=3?10:step===2?6:step===1?2:0;
+ var mat=set.map(function(f,i){return '<div class="r'+(i<shown?' on':'')+'" data-r="'+i+'"><b>'+esc(f.t)+'</b><span class="ck">'+ic('check')+'</span></div>';}).slice(0,6).join('');
+ return app(proc({tok:q,tok2:'your own idea',line:slow?'Still finding ideas':'Finding ideas',labels:['Reading breakouts','Matching your style','Picking 10 formats'],
+  readout:'<div class="prd"><span>Ideas ready</span><b id="pCount">'+shown+'</b></div>',mat:mat,still:true,
+  after:slow?'<div class="pslow"><b>Taking longer than usual</b>Stay on this screen. Your ideas show up as soon as they’re ready.</div>':''},slow?2:step),{top:tb('back:start','Video ideas')});}
+
+/* ================= 3. Ideas carousel ================= */
+function fCard(f,i,n){return '<article class="fc" data-i="'+i+'"><div class="top"><span class="fmt">Format</span><span class="k">'+(i+1)+' of '+n+'</span></div>'+
+ '<h3>'+esc(f.t)+'</h3><div class="eg"><small>Sample hook</small><q>'+esc(f.hk[0])+'</q></div>'+
+ '<p class="wh">'+esc(f.d)+'</p><p class="gf"><b>Good for:</b> '+esc(f.w)+'</p></article>';}
+function scrIdeas(q,setI,idx,gen){var set=SETS[setI],n=set.length,left=2-gen;
+ var end='<article class="fc end" data-i="'+n+'"><h3>That’s all 10</h3><p>Swipe back to see them again, or get a new set for '+esc(q)+'.</p>'+
+  (left>0?'<button class="btn s" data-a="regen">'+ic('redo','s')+'Show 10 new ideas</button><small style="display:block;margin-top:8px;color:var(--mid);font-size:13px">'+left+' of 2 new sets left today</small>':'<p style="margin:0">You’ve used today’s 2 new sets.</p>')+
+  '<button class="btn s" data-a="back:start">Try another product or topic</button></article>';
+ var body='<div class="fhd"><h2>10 ideas for '+esc(q)+'</h2><p>Swipe to see them all. Use the one you like.</p></div>'+
+  '<div class="car" id="car" data-n="'+(n+1)+'">'+set.map(function(f,i){return fCard(f,i,n);}).join('')+end+'</div>'+
+  '<div class="pg"><button class="ar" data-a="prev" aria-label="Previous idea"'+(idx<=0?' disabled':'')+'>'+ic('back')+'</button><div class="dots" id="dots">'+set.map(function(_,i){return '<i class="'+(i===idx?'on':'')+'"></i>';}).join('')+'</div><button class="ar" data-a="next" aria-label="Next idea"'+(idx>=n?' disabled':'')+'>'+ic('chev')+'</button></div>'+
+  (left>0?'<p class="more">Not seeing one you like? <button class="lnk" data-a="regen">Show 10 new ideas</button><br>'+left+' of 2 new sets left today</p>':'');
+ var foot='<div class="foot"><button class="btn p" data-a="use" id="useBtn"'+(idx>=n?' disabled':'')+'>Use this idea</button></div>';
+ return app(body,{top:tb('back:start',esc(q),'<button class="ib" data-a="back:start" aria-label="Change keyword">'+ic('pen')+'</button>'),foot:foot});}
+function scrIdeasMsg(kind,q){
+ var m=kind==='none'?{i:'search',h:'No ideas for “'+esc(q)+'” yet',p:'Try a product or a topic people film, like one from your TikTok.',b:'<div class="chips" style="margin-bottom:18px">'+ME.chips.slice(0,4).map(function(c){return '<button class="chip" data-a="chip2:'+esc(c)+'">'+esc(c)+'</button>';}).join('')+'</div><button class="btn p" data-a="back:start">Type something else</button>'}
+  :{i:'alert',h:'We couldn’t get your ideas',p:'Something went wrong on our side. Nothing was used, so you can try again.',b:'<button class="btn p" data-a="retry">Try again</button><p style="text-align:center;margin:14px 0 0"><button class="lnk" data-a="back:start">Change product or topic</button></p>'};
+ return app('<div class="msg"><div class="mi">'+ic(m.i)+'</div><h2>'+m.h+'</h2><p>'+m.p+'</p>'+m.b+'</div>',{top:tb('back:start','Video ideas')});}
+
+/* ================= 4. Choose a hook ================= */
+function scrHook(f,pick,more,from){var X=from?{h:HK.lip,t:HT.lip,o:HO.lip}:hooksFor(f,more),n=X.h.length,start=more*3;
+ var top=from?'<div class="sel"><span class="thb">'+BRK[0].x+'</span><span class="tx"><small>From a breakout</small><b>@'+BRK[0].h+'’s breakout</b><span>Same structure as their video, which beat their usual views by '+BRK[0].x+'. Your words, your product.</span></span><button class="ch" data-a="brk">Change</button></div>'
+  :'<div class="sel"><span class="tx"><small>Your idea</small><b>'+esc(f.t)+'</b><span>'+esc(f.d)+'</span></span><button class="ch" data-a="back:ideas">Change</button></div>';
+ var list='';for(var i=0;i<n;i++){var on=i===pick;list+='<button class="ho'+(on?' on':'')+'" data-a="hk:'+i+'" role="radio" aria-checked="'+on+'"><span class="tx"><small>'+esc(X.t[i]||'')+'</small><b>'+esc(X.h[i])+'</b><span>On screen: '+esc(X.o[i]||'')+'</span></span><span class="rd">'+(on?ic('check','s'):'')+'</span></button>';}
+ var body=top+'<div class="hq"><h2 class="t">Choose a Hook</h2><p class="lede">The first thing you say on camera.</p></div><div class="hks" role="radiogroup" aria-label="Hooks">'+list+'</div>'+
+  (from?'':'<div class="hmore">'+(more<3?'<button class="lnk" data-a="morehk">Show 3 new hooks</button><small>'+(3-more)+' of 3 left</small>':'<small>No new hooks left for this idea</small>')+'</div>')+
+  '<div class="add"><span>Anything to add?</span><small>Optional</small></div><div style="height:20px"></div>';
+ var foot='<div class="foot"><button class="btn p" data-a="write"'+(pick==null?' disabled':'')+'>'+ic('pen')+'Write my script</button><small>'+(pick==null?'Choose a hook first':'Uses 1 of your '+ME.left+' free scripts')+'</small></div>';
+ return app(body,{top:tb(from?'back:start':'back:ideas','Choose a Hook'),foot:foot});}
+
+/* ================= 5. Writing ================= */
+function scrWrite(f,hi,step,from,more){var h=from?HK.lip[hi||0]:(hooksFor(f,more||0).h[hi||0]);
+ var ing=[[from?'fire':'bulb',from?'Breakout':'Format',from?'@'+BRK[0].h+', '+BRK[0].x+' their usual':f.t],['film','Your style',ME.style],['user','Your hook',h]];
+ var mat=ing.map(function(x,i){return '<div class="r'+(i<=step?' on':'')+'"><span class="oi">'+ic(x[0],'s')+'</span><span style="flex:1;min-width:0"><small>'+x[1]+'</small><b>'+esc(x[2])+'</b></span>'+(i<step?'<span class="ck">'+ic('check')+'</span>':'')+'</div>';}).join('');
+ return app(proc({tok:from?'From a breakout':'Lip oil',tok2:from?'':f.t,icon:'pen',line:'Writing your script',labels:['Reading breakouts','Matching your style','Writing each part'],mat:mat,ing:true,still:true},step),{top:tb('back:hook','Writing your script')});}
+
+/* ================= 6. Script output ================= */
+function sayTxt(p){return p.say?(p.i===0?'“'+esc(p.say)+'”':esc(p.say)):'No talking';}
+function rfBtn(p){return p.i===0?'<button class="rf" data-a="toast:Opens Choose a new Hook">'+ic('redo')+'Change</button>':'<button class="rf" data-a="toast:Opens Refine this part (3 of 3 refines left)">'+ic('pen')+'Refine</button>';}
+function outHead(f,P,from){var len=P[P.length-1].b;return '<div class="smeta"><small>Written for @'+ME.h+'</small><h1>'+(from?'From @'+BRK[0].h+'’s breakout':esc(f.t))+'</h1><div class="len"><b>'+len+' seconds</b> · '+P.length+' parts</div></div>';}
+function outFoot(){return '<div class="rw"><b>Not quite right?</b><button class="btn s" data-a="toast:Opens Rewrite the whole script">'+ic('redo','s')+'Rewrite the whole script</button><small>3 of 3 rewrites left · 3 of 3 refines left</small></div><div style="height:12px"></div>';}
+function acts(saved){return '<div class="acts"><button class="btn p" data-a="save">'+ic(saved?'check':'save')+(saved?'Saved to Library':'Save script')+'</button><button class="sq" data-a="toast:Link copied. Your friend sees this script, then Make your own">'+ic('share')+'Share</button><button class="sq" data-a="toast:Copied: every part, what to say and what to film">'+ic('copy')+'Copy</button></div>';}
+function layA(P,notes){return '<div class="la-tools"><button class="pill dk" data-a="tp">'+ic('play','s')+'Teleprompter</button><button class="pill" data-a="notes" aria-pressed="'+(notes?'true':'false')+'">'+ic('notes','s')+(notes?'Hide filming notes':'Show filming notes')+'</button></div>'+
+ '<div class="la'+(notes?'':' nonotes')+'">'+P.map(function(p){return '<section class="la-p'+(p.i===0?' hk':'')+'"><div class="la-h"><span class="tag">'+(p.i===0?'Hook':p.i===P.length-1?'Call to action':'Part '+p.i)+'</span><span class="tm">'+p.tm+'</span><span class="sp"></span>'+rfBtn(p)+'</div>'+
+  '<p class="la-say'+(p.say?'':' mute')+'">'+sayTxt(p)+'</p><dl class="la-n">'+(p.dir?'<dt>Direction</dt><dd>'+esc(p.dir)+'</dd>':'')+'<dt>Film</dt><dd>'+esc(p.vis)+'</dd>'+(p.os?'<dt>On screen</dt><dd>'+esc(p.os)+'</dd>':'')+'</dl></section>';}).join('')+'</div>';}
+function layB(P){return '<p class="lb-sum">'+P.length+' shots. Set up each one before you hit record.</p><div class="lb">'+P.map(function(p){return '<section class="lb-p'+(p.i===0?' hk':'')+'"><div class="lb-fr'+(p.i===0?' hk':'')+'"><span class="n">'+p.tm+'</span>'+(p.os?'<em>'+esc(p.os)+'</em>':'')+'</div>'+
+  '<div class="lb-tx"><div class="lb-h"><span class="tag">'+(p.i+1)+' · '+(p.i===0?'Hook':p.i===P.length-1?'Call to action':esc(p.sub||'Body'))+'</span><span class="sp"></span>'+rfBtn(p)+'</div>'+
+  '<p class="lb-say'+(p.say?'':' mute')+'">'+sayTxt(p)+'</p><p class="lb-film"><b>Film</b>'+esc(p.vis)+'</p><p class="lb-dir">'+esc(p.dir)+'</p></div></section>';}).join('')+'</div>';}
+function layC(P){var L=P[P.length-1].b;
+ var seg=P.map(function(p){return '<span class="'+(p.i===0?'h':'')+'" style="flex:'+(p.b-p.a)+'">'+(p.i===0?'Hook':p.i===P.length-1?'CTA':p.i)+'</span>';}).join('');
+ var ticks=P.map(function(p){return '<i style="left:'+(p.a/L*100)+'%">'+p.a+'s</i>';}).join('')+'<i style="left:100%">'+L+'s</i>';
+ return '<div class="lc-bar"><div class="lc-seg">'+seg+'</div><div class="lc-ticks">'+ticks+'</div></div><div class="lc">'+P.map(function(p){return '<section class="lc-p'+(p.i===0?' hk':'')+'"><div class="lc-t">'+p.a+'s</div><div class="lc-b"><div class="lc-h"><span class="tag">'+(p.i===0?'Hook':p.i===P.length-1?'Call to action':esc(p.sub||'Part '+p.i))+'</span><span class="tm">'+(p.b-p.a)+'s</span><span class="sp"></span>'+rfBtn(p)+'</div>'+
+  '<p class="lc-say'+(p.say?'':' mute')+'">'+sayTxt(p)+'</p><dl class="lc-ln">'+(p.os?'<dt>On screen</dt><dd><span class="ost">'+esc(p.os)+'</span></dd>':'')+'<dt>Film</dt><dd>'+esc(p.vis)+'</dd></dl></div></section>';}).join('')+'<div class="lc-end"><span>'+L+'s</span><span>End</span></div></div>';}
+function scrOut(lay,f,hi,o){o=o||{};var P=parts(o.from?SETS[0][0]:f,hi||0,o.more||0);
+ var body=outHead(f,P,o.from)+(lay==='b'?layB(P):lay==='c'?layC(P):layA(P,o.notes!==false))+outFoot();
+ return app(body,{top:tb('back:hook','Your script','<button class="ib" data-a="back:start" aria-label="Home">'+ic('home')+'</button>'),foot:acts(o.saved),nav:o.nav});}
+
+/* teleprompter (3.1, unchanged) */
+function scrTp(f,hi){var P=parts(f,hi||0,0);return app('<div class="tp" style="height:100%"><div class="top"><span>Teleprompter · '+P[P.length-1].b+' seconds</span><button data-a="tpx" aria-label="Close">'+ic('x')+'</button></div><div class="lines">'+P.map(function(p,i){return '<p class="'+(i===P.length-1?'dim':'')+'">'+(p.say?esc(p.say):'(no talking)')+'</p>';}).join('')+'</div><div class="ctlbar"><button aria-label="Pause">'+ic('pause')+'</button><span>Speed</span><button aria-label="Slower">'+ic('minus')+'</button><b style="color:#fff">1x</b><button aria-label="Faster">'+ic('plus')+'</button></div></div>',{dark:true,nav:false});}
+
+/* Brief Buddy (3.1, unchanged) */
+function scrBrief(){return app('<div class="pad"><ol class="chips" style="list-style:none;padding:0;margin:0 0 16px"><li class="chip on">1 Brief</li><li class="chip">2 Check</li><li class="chip">3 Script</li></ol><h2 class="t">Paste the brand’s brief</h2><p class="lede" style="margin-bottom:14px">We pull out the must-say points, then write it in your style.</p><div class="fld" style="min-height:180px;align-items:flex-start;padding-top:14px;color:#A39890">Paste the brief here</div><div class="chips" style="margin-top:12px"><span class="chip">Upload a PDF</span><span class="chip">Try a sample brief</span></div><p style="margin:22px 0 0;font-size:13px;color:var(--mid)">Brief Buddy is unchanged from 3.1. This screen is here so the entry point has somewhere to go.</p></div>',{top:tb('back:start','Brief Buddy'),foot:'<div class="foot"><button class="btn p" disabled>Paste a brief first</button></div>'});}
+function brkSheet(){return '<div class="shade" data-a="closesheet"><div class="sheet" data-stop="1"><div class="grab"></div><h3>Start from a breakout</h3><p>Your saved breakouts. We use the structure, not the product.</p>'+BRK.map(function(b,i){return '<button class="br" data-a="usebrk:'+i+'"><span class="th"></span><span class="tx"><b>“'+esc(b.hook)+'”</b><small>@'+b.h+' · '+b.v+' views, usual '+b.u+'</small></span><span class="x">'+b.x+'</span></button>';}).join('')+'</div></div>';}
+
+/* ================= static gallery ================= */
+function phone(html,tall){return '<div class="phone'+(tall?' tall':'')+'"><div class="screen">'+html+'</div></div>';}
+function fig(n,title,cap,html,o){o=o||{};return '<figure id="f-'+o.id+'">'+phone(html,o.tall)+'<figcaption><b><span class="n">'+n+'</span>'+title+'</b>'+cap+'</figcaption>'+(o.why||'')+'</figure>';}
+var F0=SETS[0][0];
+document.getElementById('gFlow').innerHTML=[
+ fig('1','Script start: type a product or topic','Empty state. The keyword box is the main card; Brief Buddy and a breakout sit below as second options.',scrStart(''),{id:'start'}),
+ fig('1b','Script start: typed','Typing (or tapping a chip) turns on Get 10 ideas.',scrStart('Lip oil',true),{id:'start-typed'}),
+ fig('2','Finding ideas','Shared processing screen. Format names tick in as they come back.',scrFind('Lip oil',2),{id:'find'}),
+ fig('3','10 ideas, swipe left and right','One idea per card, the next one peeks in from the right. Dots and arrows for desktop.',scrIdeas('Lip oil',0,0,0),{id:'ideas'}),
+ fig('4','Choose a Hook','The picked idea shrinks to one card on top. 3 hooks, 3 more up to 3 times.',scrHook(F0,0,0),{id:'hook'}),
+ fig('5','Writing your script','Same processing screen: format, her style, her hook.',scrWrite(F0,0,2),{id:'write'}),
+ fig('6','Your script (layout A, our pick)','See the 3 layouts further down.',scrOut('a',F0,0),{id:'out'}),
+ fig('7','Teleprompter','Unchanged from 3.1. Opens from the Teleprompter button.',scrTp(F0,0),{id:'tp'})
+].join('');
+document.getElementById('gStates').innerHTML=[
+ fig('2a','Finding ideas: slow','After 8 seconds the line changes and a note says it’s still working.',scrFind('Lip oil',2,true),{id:'find-slow'}),
+ fig('2b','Finding ideas: failed','Nothing is used, so trying again is free.',scrIdeasMsg('err','Lip oil'),{id:'find-err'}),
+ fig('2c','No ideas found','When the keyword gives nothing usable (here a typo). Chips get her back on track.',scrIdeasMsg('none','asdfgh'),{id:'find-none'}),
+ fig('3a','End of the 10 ideas','The 11th card: a new set (2 a day, as 3.1) or another keyword.',scrIdeas('Lip oil',0,10,0),{id:'ideas-end'}),
+ fig('3b','New set of 10','After Show 10 new ideas. Same keyword, different formats.',scrIdeas('Lip oil',1,0,1),{id:'ideas-set2'}),
+ fig('4a','Hook: from a breakout','From a breakout skips the ideas. The breakout is the picked card.',scrHook(F0,0,0,true),{id:'hook-from'}),
+ fig('4b','Start from a breakout: pick one','The second entry opens her saved breakouts.',app(brand()+'<div class="pad"><h1 class="t">Let’s make your next viral video</h1></div>',{over:brkSheet()}),{id:'brk-sheet'}),
+ fig('4c','Brief Buddy entry','Opens the 3.1 Brief Buddy flow as it is today.',scrBrief(),{id:'brief'})
+].join('');
+var WHY={a:['A · Read: for filming','The lines she says are the biggest text, in order, so she can read one, look up and say it. Hook at 27px, every other line at 23px bold. Direction, Film and On screen sit underneath in small grey, and one tap hides them. No boxes or coloured headers. The Teleprompter button is right at the top.'],
+ b:['B · Shots: for planning the shoot','Each part is one shot card with a 9:16 frame showing its time and the text on screen. She can scan what to set up, where the text goes and what to say before she films. Better for b-roll heavy videos.'],
+ c:['C · Timeline: for editing','Parts sit on a time rail sized by seconds, with a bar at the top that shows how long each part runs. On screen text is shown as a caption sticker so she knows when each cut and caption lands while she edits.']};
+document.getElementById('gLay').innerHTML=['a','b','c'].map(function(k){return fig(k.toUpperCase(),WHY[k][0]+(k==='a'?'<span class="pick">Our pick</span>':''),'',scrOut(k,F0,0,{nav:false}),{id:'lay-'+k,why:'<div class="why">'+WHY[k][1]+'</div>'});}).join('')+
+ '<div class="why" style="flex:1 1 300px;max-width:520px;align-self:flex-start"><b>Why A</b>Ivan’s note was about reading: size, bold and format. A is the only layout where the spoken line is twice the size of everything else, which is also what read best on camera in the Magic moments research (short lines in big type read; paragraphs don’t). B and C are good second views if creators ask for them later, for example as a Shots tab next to Script.</div>';
+
+/* ================= clickable prototype ================= */
+var S={scr:'start',q:'',set:0,idx:0,gen:0,f:null,hk:0,more:0,from:false,lay:'a',notes:true,saved:false,sheet:false,step:0,slow:false};
+var root=document.getElementById('pApp'),timers=[];
+function clear(){timers.forEach(clearTimeout);timers=[];}
+function later(fn,ms){timers.push(setTimeout(fn,ms));}
+function toast(t){var el=document.createElement('div');el.className='toast';el.textContent=t;root.querySelector('.app').appendChild(el);setTimeout(function(){el.remove();},1800);}
+function render(){var h;
+ switch(S.scr){
+  case 'start':h=scrStart(S.q,true);if(S.sheet)h=h.replace(/<\/div>$/,brkSheet()+'</div>');break;
+  case 'find':h=scrFind(S.q||'Lip oil',S.step,S.slow);h=h.replace(/ still/g,'');break;
+  case 'ideas':h=scrIdeas(S.q||'Lip oil',S.set,S.idx,S.gen);break;
+  case 'err':h=scrIdeasMsg('err',S.q||'Lip oil');break;
+  case 'none':h=scrIdeasMsg('none',S.q||'asdfgh');break;
+  case 'hook':h=scrHook(S.f,S.hk,S.more,S.from);break;
+  case 'write':h=scrWrite(S.f,S.hk,S.step,S.from,S.more);h=h.replace(/ still/g,'');break;
+  case 'out':h=scrOut(S.lay,S.f,S.hk,{from:S.from,more:S.more,notes:S.notes,saved:S.saved});break;
+  case 'tp':h=scrTp(S.from?SETS[0][0]:S.f,S.hk);break;
+  case 'brief':h=scrBrief();break;}
+ root.innerHTML=h;
+ if(S.scr==='ideas'){var c=root.querySelector('#car');var card=c.children[S.idx];if(card)c.scrollLeft=card.offsetLeft-20;}
+ if(S.scr==='start'&&!S.sheet){var k=root.querySelector('#kw');}
+}
+function go(scr){clear();S.scr=scr;S.sheet=false;render();var bd=root.querySelector('.bd');if(bd)bd.scrollTop=0;}
+function runFind(){clear();S.scr='find';S.step=0;S.slow=false;render();
+ var q=(S.q||'').trim().toLowerCase();
+ [1,2,3].forEach(function(st,i){later(function(){S.step=st;render();},600*(i+1));});
+ later(function(){if(/^[a-z]{0,2}$|asdf|qwer|zxcv/.test(q)&&q!=='lip oil'){go('none');return;}S.set=0;S.idx=0;S.gen=0;go('ideas');},2300);}
+function runWrite(){clear();S.scr='write';S.step=0;render();[1,2,3].forEach(function(st,i){later(function(){S.step=st;render();},650*(i+1));});later(function(){S.saved=false;go('out');},2500);}
+function setIdx(i){var c=root.querySelector('#car');if(!c)return;var n=+c.dataset.n;i=Math.max(0,Math.min(n-1,i));var card=c.children[i];c.scrollTo({left:card.offsetLeft-20,behavior:'smooth'});}
+function syncIdx(c){var w=c.children[0].offsetWidth+12,i=Math.round(c.scrollLeft/w),n=+c.dataset.n;
+ var app=c.closest('.app');var dots=app.querySelectorAll('#dots i');dots.forEach(function(d,k){d.classList.toggle('on',k===i);});
+ var ar=app.querySelectorAll('.pg .ar');if(ar[0])ar[0].disabled=i<=0;if(ar[1])ar[1].disabled=i>=n-1;
+ var u=app.querySelector('#useBtn');if(u)u.disabled=i>=n-1;
+ if(c.closest('#pApp'))S.idx=i;}
+document.addEventListener('scroll',function(e){var c=e.target;if(c&&c.classList&&c.classList.contains('car'))syncIdx(c);},true);
+/* mouse drag on the carousel (touch uses native scroll) */
+(function(){var c=null,x0=0,s0=0,moved=false;
+ document.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;var t=e.target.closest('.car');if(!t||e.target.closest('button'))return;c=t;x0=e.clientX;s0=c.scrollLeft;moved=false;c.classList.add('drag');});
+ document.addEventListener('pointermove',function(e){if(!c)return;var dx=e.clientX-x0;if(Math.abs(dx)>4)moved=true;c.scrollLeft=s0-dx;});
+ document.addEventListener('pointerup',function(e){if(!c)return;var dx=e.clientX-x0,w=c.children[0].offsetWidth+12,i0=Math.round(s0/w),i=Math.abs(dx)>50?i0+(dx<0?1:-1):i0;i=Math.max(0,Math.min(+c.dataset.n-1,i));c.classList.remove('drag');c.scrollTo({left:c.children[i].offsetLeft-20,behavior:'smooth'});c=null;});
+})();
+root.addEventListener('input',function(e){if(e.target.dataset.in==='kw'){S.q=e.target.value;var b=root.querySelector('#goIdeas');b.disabled=!S.q.trim();var f=root.querySelector('.fld');f.classList.add('on');root.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.textContent===S.q);});}});
+root.addEventListener('keydown',function(e){if(e.target.dataset.in==='kw'&&e.key==='Enter'&&S.q.trim()){runFind();}});
+root.addEventListener('click',function(e){var t=e.target.closest('[data-a]');if(!t)return;if(e.target.closest('[data-stop]')&&t.dataset.a==='closesheet')return;
+ var a=t.dataset.a,v=a.indexOf(':')>0?a.slice(a.indexOf(':')+1):'',k=a.split(':')[0];
+ switch(k){
+  case 'chip':S.q=v;render();break;
+  case 'chip2':S.q=v;runFind();break;
+  case 'clear':S.q='';render();root.querySelector('#kw').focus();break;
+  case 'getideas':if(S.q.trim())runFind();break;
+  case 'retry':runFind();break;
+  case 'prev':setIdx(S.idx-1);break;
+  case 'next':setIdx(S.idx+1);break;
+  case 'use':S.f=SETS[S.set][S.idx];S.hk=0;S.more=0;S.from=false;go('hook');break;
+  case 'regen':S.gen++;S.set=Math.min(S.gen,2);S.idx=0;go('ideas');toast('10 new ideas');break;
+  case 'hk':S.hk=+v;var bd=root.querySelector('.bd'),st=bd.scrollTop;render();root.querySelector('.bd').scrollTop=st;break;
+  case 'morehk':if(S.more<3){S.more++;var bd2=root.querySelector('.bd'),st2=bd2.scrollTop;render();root.querySelector('.bd').scrollTop=st2;}break;
+  case 'write':runWrite();break;
+  case 'save':S.saved=true;render();toast('Saved to your Library');break;
+  case 'notes':S.notes=!S.notes;var bd3=root.querySelector('.bd'),st3=bd3.scrollTop;render();root.querySelector('.bd').scrollTop=st3;break;
+  case 'tp':go('tp');break;
+  case 'tpx':go('out');break;
+  case 'brief':go('brief');break;
+  case 'brk':S.scr='start';S.sheet=true;render();break;
+  case 'closesheet':S.sheet=false;render();break;
+  case 'usebrk':S.from=true;S.f=SETS[0][0];S.hk=0;S.more=0;go('hook');break;
+  case 'back':if(v==='start'){S.from=false;go('start');}else if(v==='ideas'){go('ideas');}else if(v==='hook'){go('hook');}break;
+  case 'toast':toast(v);break;}
+});
+document.querySelectorAll('[data-lay]').forEach(function(b){b.addEventListener('click',function(){S.lay=b.dataset.lay;document.querySelectorAll('[data-lay]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});if(!S.f)S.f=SETS[0][0];if(S.scr!=='out'){S.saved=false;go('out');}else render();});});
+document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){var g=b.dataset.go;
+ if(g==='start'){S.q='';S.from=false;go('start');}
+ else if(g==='ideas'){S.q=S.q||'Lip oil';S.set=0;S.idx=0;S.gen=0;go('ideas');}
+ else if(g==='out'){S.q=S.q||'Lip oil';S.f=S.f||SETS[0][0];S.saved=false;go('out');}
+ else if(g==='fail'){S.q=S.q||'Lip oil';clear();S.scr='find';S.step=0;S.slow=false;render();later(function(){S.step=1;render();},600);later(function(){go('err');},1400);}
+ else if(g==='slow'){S.q=S.q||'Lip oil';clear();S.scr='find';S.step=0;S.slow=false;render();later(function(){S.step=1;render();},600);later(function(){S.step=2;render();},1200);later(function(){S.slow=true;render();},2600);later(function(){S.step=3;S.slow=false;render();},5200);later(function(){S.set=0;S.idx=0;go('ideas');},5700);}
+ else if(g==='none'){S.q='asdfgh';runFind();}
+ document.getElementById('proto').scrollIntoView({behavior:'smooth',block:'start'});});});
+render();
+</script>
+</body>
+</html>
