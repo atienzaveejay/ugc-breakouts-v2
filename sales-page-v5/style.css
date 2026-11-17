@@ -299,3 +299,8 @@ footer a{text-decoration:none}
   .ex{max-width:none;margin-top:28px;padding:26px 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);grid-template-areas:"who bars" "txt bars" "res bars";column-gap:48px;align-items:start}
   .ex .who{grid-area:who}.ex>p:not(.res){grid-area:txt}.ex .bars{grid-area:bars;margin:0;align-self:stretch}.ex .res{grid-area:res;font-size:18px}
 }
+/* v5, 16 Nov: creator reviews under the founder quote. Role + follower count only, no avatar. .todo marks the follower count still to fill. */
+.qc .qby{margin-top:auto;font-size:14px;color:var(--soft)}
+.qc .qby b{color:var(--ink);font-weight:700}
+.qc .qby .todo{color:var(--act);font-weight:700}
+.qnote{margin:12px 0 0;color:var(--mid);font-size:14.5px;line-height:1.5}

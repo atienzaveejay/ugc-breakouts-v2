@@ -304,3 +304,8 @@ footer a{text-decoration:none}
 
 /* display face for headings and big numbers (font family only; sizes, weights and spacing unchanged) */
 h1,h2,h3,.logo,.price,.rb .x,.fq blockquote{font-family:var(--display)}
+/* v5, 16 Nov: creator reviews under the founder quote. Role + follower count only, no avatar. .todo marks the follower count still to fill. */
+.qc .qby{margin-top:auto;font-size:14px;color:var(--soft)}
+.qc .qby b{color:var(--ink);font-weight:700}
+.qc .qby .todo{color:var(--act);font-weight:700}
+.qnote{margin:12px 0 0;color:var(--mid);font-size:14.5px;line-height:1.5}
