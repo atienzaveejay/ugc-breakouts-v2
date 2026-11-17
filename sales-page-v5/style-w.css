@@ -309,3 +309,5 @@ h1,h2,h3,.logo,.price,.rb .x,.fq blockquote{font-family:var(--display)}
 .qc .qby b{color:var(--ink);font-weight:700}
 .qc .qby .todo{color:var(--act);font-weight:700}
 .qnote{margin:12px 0 0;color:var(--mid);font-size:14.5px;line-height:1.5}
+.qc .qby{display:flex;align-items:center;gap:10px}
+.qc .qav{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none}
