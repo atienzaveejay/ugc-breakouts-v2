@@ -72,6 +72,23 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .home .nav{position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;font-size:11px;font-weight:600;color:var(--mute);z-index:1}
 .home .nav b{color:var(--ink)}
 .home .sml{font-size:12.5px;font-weight:700;color:var(--mute);margin:14px 2px 6px}
+.home .sml.s{font-size:11px;font-weight:600;color:#8C827D;letter-spacing:.1px}
+.home .box.on{border-color:var(--red)}
+.home .chip.add{border-style:dashed;color:var(--mute)}
+.home .lift{position:relative;z-index:3}
+.home .fhead{display:flex;justify-content:space-between;align-items:center}
+.home .sug{background:#fff;border-radius:14px;border:1px solid var(--line);margin-top:10px}
+.home .sg{display:flex;gap:10px;align-items:center;padding:11px 14px;border-top:1px solid var(--line);font-size:15px;cursor:pointer}
+.home .sg:first-child{border-top:0}
+.home .sg em{font-style:normal;font-weight:800}
+.home .sg small{margin-left:auto;font-size:12px;color:var(--mute)}
+.home .thumbs{display:flex;gap:8px;margin-top:8px}
+.home .th{flex:1;height:128px;border-radius:12px;position:relative;overflow:hidden;cursor:pointer}
+.home .th span{position:absolute;left:6px;bottom:6px;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);padding:2px 6px;border-radius:6px}
+.home .hnote{font-size:13px;color:var(--mute);margin:8px 2px 0;line-height:1.45}
+.home .sec2{margin-top:26px}
+.home .li,.home .chip{cursor:pointer}
+.home .nav span{cursor:pointer}
 .home .q2{background:#fff;border-radius:16px;border:1px solid var(--line);padding:14px;margin-bottom:10px}
 .home .qt{font-size:14.5px;font-weight:800;margin-bottom:8px}
 .home .qt i{font-style:normal;font-weight:500;color:var(--mute);font-size:12.5px;margin-left:4px}
@@ -96,7 +113,7 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .out .label{font-size:15px;font-weight:700;margin:0 0 10px 4px}
 .out .note{font-size:13px;color:var(--mute);margin:10px 4px 0;max-width:390px;line-height:1.45}
 .out .note b{color:var(--ink)}
-.out .phone{width:390px;height:min(844px,calc(100dvh - 48px));background:var(--bg);border-radius:36px;border:10px solid #171312;overflow:hidden;position:relative}
+.out .phone{width:390px;height:844px;background:var(--bg);border-radius:36px;border:10px solid #171312;overflow:hidden;position:relative}
 .out .scr{height:100%;overflow:hidden;padding:20px 18px 96px}
 .out .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .out .back{font-size:13px;font-weight:700;color:var(--mute)}
@@ -168,21 +185,37 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 <div class="view home on" id="v-home"><div class="scr">
  <div class="top"><div class="logo">UGC<b>Breakouts</b></div><div class="pro">Pro</div></div>
  <div class="hi">Hi Veejay</div><h1>What are you filming next?</h1>
- <div class="card p"><div class="ct">Breakout Finder</div><div class="cs">High views from small accounts, in your niche</div>
-  <div class="box"><input placeholder="Search a product or #hashtag" disabled><div class="go r">→</div></div>
-  <div class="sml" style="margin-top:14px">Suggested searches</div><div class="chips" style="margin-top:8px"><div class="chip">Lip liner</div><div class="chip">Self tanner</div><div class="chip">Heatless curls</div><div class="chip">Fridge restock</div></div></div>
+ <div class="card p" id="fcard"><div class="fhead"><div class="ct">Breakout Finder</div><div class="x" id="fclose" style="display:none">Close</div></div><div class="cs" id="fcs">High views from small accounts, in your niche</div>
+  <div class="box" id="fbox"><input id="fq" placeholder="Search a product or #hashtag" autocomplete="off"><div class="go r" id="fgo">→</div></div>
+  <div id="fdef"><div class="sml s" style="margin-top:14px">Suggested searches</div><div class="chips srch" style="margin-top:8px"><div class="chip">Lip liner</div><div class="chip">Self tanner</div><div class="chip">Heatless curls</div><div class="chip">Fridge restock</div></div></div>
+  <div id="fopen" style="display:none"><div class="sug" id="fsug" style="display:none"></div>
+   <div class="sml">Popular this week</div>
+   <div class="chips srch" id="fpop" style="margin-top:0"></div></div></div>
  <div class="card t"><div class="ct">Write a script</div><div class="cs">Built from your profile</div>
   <div class="box" id="pbox"><input id="prod" placeholder="What's the product?" autocomplete="off"><div class="go g" id="pgo">→</div></div>
-  <div class="sml" style="margin-top:14px">Suggested products</div><div class="chips" style="margin-top:8px" id="pchips"><div class="chip tap">Moisturizer</div><div class="chip tap">Lip oil</div><div class="chip tap">Water bottle</div><div class="chip tap">Get ready with me</div></div>
+  <div class="sml s" style="margin-top:14px">Suggested products</div><div class="chips" style="margin-top:8px" id="pchips"><div class="chip tap">Moisturizer</div><div class="chip tap">Lip oil</div><div class="chip tap">Water bottle</div><div class="chip tap">Get ready with me</div></div>
   <div class="alt">Or start from <a>a brand brief</a></div></div>
- <div class="sec"><div class="sh"><h2>What creators are searching</h2><span>this week</span></div>
-  <div class="list">
+ <div class="sec2"><div class="sh"><h2>What creators are searching</h2><span>this week</span></div>
+  <div class="list srchl">
    <div class="li"><div class="n">1</div><div class="lt">lip liner<div class="lm">214 searches</div></div><div class="up">▲ 38%</div></div>
    <div class="li"><div class="n">2</div><div class="lt">get ready with me<div class="lm">171 searches</div></div><div class="up">▲ 12%</div></div>
    <div class="li"><div class="n">3</div><div class="lt">self tanner<div class="lm">96 searches</div></div><div class="up">new</div></div>
+   <div class="li"><div class="n">4</div><div class="lt">fridge restock<div class="lm">88 searches</div></div><div class="up">▲ 20%</div></div>
+   <div class="li"><div class="n">5</div><div class="lt">heatless curls<div class="lm">61 searches</div></div><div class="up">▲ 5%</div></div>
   </div></div>
+ <div class="sec2"><div class="sh"><h2>Most saved videos this week</h2><span>see all</span></div>
+  <div class="thumbs" id="thumbs">
+   <div class="th" style="background:#C9B8AE"><span>▶ lip liner</span></div>
+   <div class="th" style="background:#B9C7C2"><span>▶ skincare</span></div>
+   <div class="th" style="background:#C7B9CF"><span>▶ GRWM</span></div>
+  </div>
+  <div class="hnote">Tap a video to open its breakout. The tag is its search. Handles stay hidden.</div></div>
+ <div class="sec2"><div class="sh"><h2>Searched by creators like you</h2></div>
+  <div class="chips srch" style="margin-top:0"><div class="chip">Lip oil</div><div class="chip">Concealer</div><div class="chip">Water bottle</div><div class="chip">Mini fridge</div><div class="chip">Day in my life</div></div>
+  <div class="hnote">"Like you" = same niche and a similar follower count. Each chip starts a search.</div></div>
 </div>
-<div class="nav"><b>Home</b><span>Breakouts</span><span>Script</span><span>Library</span></div>
+<div class="dim" id="fdim" style="display:none"></div>
+<div class="nav" id="hnav"><b>Home</b><span>Breakouts</span><span>Script</span><span>Library</span></div>
 <div class="dim" id="dim" style="display:none"></div>
 <div class="sheet" id="sheet" style="display:none">
  <div class="grab"></div>
@@ -205,6 +238,13 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
  <div class="scta"><div class="btn o" id="skip">Skip</div><div class="btn g" style="flex:2" id="write">Write my script</div></div>
 </div>
 </div>
+
+<!-- SEARCH RESULTS PLACEHOLDER -->
+<div class="view home" id="v-res"><div class="scr">
+ <div class="top"><div class="x" id="rback">← Home</div><div class="pro">Pro</div></div>
+ <h1 id="rtitle">Breakouts for "lip oil"</h1>
+ <div class="hnote">Results open on the Breakouts page, like today. That page is not part of this mock.</div>
+</div></div>
 
 <!-- WRITING -->
 <div class="view" id="v-writing"><div class="writing"><div class="spin"></div><b>Writing your <span id="wprod">lip oil</span> script</b><span id="wsub"></span></div></div>
@@ -235,7 +275,7 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 
 <div class="side">
  <h3>Script Writer flow (clickable)</h3>
- <p>Tap through it like the user would: type a product in Write a script (or tap a suggested product), answer the pop-up, then Write my script.</p>
+ <p>Tap through it like the user would. Home: tap the Breakout Finder box or a suggested search to open it in place, scroll down for what creators are searching, most saved videos and searches by creators like you. Write a script: type a product (or tap a suggested product), answer the pop-up ("Add more detail" opens 6 more questions), then Write my script.</p>
  <p>The script layout follows "How will you film it?": Talking to camera opens layout 1, Voiceover and Hands and product open layout 2 (voiceover over clips), Text on screen opens layout 3 (silent). A brand deal opens layout 10 with the must-say checklist. If more than one is picked, the first in that list wins.</p>
  <p>On the script: tap a hook to use it, "3 new" swaps a group, tap any line for edit one line. Sample copy only, so the rewrite itself isn't simulated.</p>
  <div class="lbl">See every layout</div>
@@ -299,6 +339,28 @@ function resetHooks(){const hk=$('#obody .hook b');const cur_=hk?norm(hk.textCon
 $('#oback').onclick=()=>{show('v-home')};
 // layout switcher
 const lays=$('#lays');Object.keys(L).forEach(k=>{const b=document.createElement('button');b.dataset.n=k;b.textContent=k+'. '+L[k].label;b.onclick=()=>{render(+k);show('v-out')};lays.appendChild(b)});
-$('#restart').onclick=()=>{closeSheet();$('#prod').value='';show('v-home')};
+$('#restart').onclick=()=>{closeSheet();closeFinder();$('#prod').value='';show('v-home')};
+// finder (in place)
+const POP=[["Lip liner","Get ready with me","Self tanner","Fridge restock","Heatless curls","Advent calendar","Skincare routine"],["Lip oil","Concealer","Water bottle","Mini fridge","Day in my life","Moisturizer"]];let popi=0;
+function drawPop(){const f=$('#fpop');f.innerHTML=POP[popi].map(t=>'<div class="chip">'+t+'</div>').join('')+'<div class="chip add" id="fmore">↻ More</div>';
+ f.querySelectorAll('.chip:not(.add)').forEach(c=>c.onclick=()=>openRes(c.textContent));$('#fmore').onclick=()=>{popi=(popi+1)%POP.length;drawPop()}}
+function openFinder(){if($('#fopen').style.display==='block')return;$('#fcard').classList.add('lift');$('#fclose').style.display='';$('#fcs').style.display='none';$('#fdef').style.display='none';$('#fopen').style.display='block';$('#fbox').classList.add('on');$('#fdim').style.display='block';$('#v-home .scr').scrollTop=0;drawPop();drawSug()}
+function closeFinder(){$('#fcard').classList.remove('lift');$('#fclose').style.display='none';$('#fcs').style.display='';$('#fdef').style.display='';$('#fopen').style.display='none';$('#fbox').classList.remove('on');$('#fdim').style.display='none';$('#fq').value='';$('#fq').blur()}
+function esc(t){return t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function drawSug(){const q=$('#fq').value.trim().toLowerCase(),b=$('#fsug');if(!q){b.style.display='none';b.innerHTML='';return}
+ const TERMS=['lip oil','lip liner','self tanner','fridge restock','heatless curls','advent calendar','skincare routine','get ready with me','concealer','water bottle','mini fridge','day in my life','moisturizer'];const base=TERMS.find(t=>t.startsWith(q))||q;const items=[base,base+' swatch',base+' review'];
+ b.innerHTML=items.map((t,i)=>'<div class="sg" data-t="'+esc(t)+'"><span><em>'+esc(q)+'</em>'+esc(t.slice(q.length))+'</span><small>'+(i===0?'breakouts ready':'')+'</small></div>').join('');b.style.display='block';
+ b.querySelectorAll('.sg').forEach(r=>r.onclick=()=>openRes(r.dataset.t))}
+function openRes(t){t=t.trim();if(!t)return;$('#rtitle').textContent='Breakouts for "'+t.toLowerCase()+'"';closeFinder();show('v-res')}
+$('#fq').addEventListener('focus',openFinder);$('#fbox').onclick=openFinder;$('#fq').addEventListener('input',drawSug);
+$('#fq').addEventListener('keydown',e=>{if(e.key==='Enter')openRes($('#fq').value)});
+$('#fgo').onclick=e=>{e.stopPropagation();if($('#fopen').style.display==='block'&&$('#fq').value.trim())openRes($('#fq').value);else{openFinder();$('#fq').focus()}};
+$('#fclose').onclick=e=>{e.stopPropagation();closeFinder()};$('#fdim').onclick=closeFinder;
+$$('#fdef .chip').forEach(c=>c.onclick=()=>openRes(c.textContent));
+$$('.srchl .li').forEach(r=>r.onclick=()=>openRes(r.querySelector('.lt').firstChild.textContent));
+$$('#v-home .sec2 .chips.srch .chip').forEach(c=>c.onclick=()=>openRes(c.textContent));
+$$('#thumbs .th').forEach(t=>t.onclick=()=>toast('Opens that video\'s breakout (not part of this mock)'));
+$('#rback').onclick=()=>show('v-home');
+$$('#hnav span').forEach(s=>s.onclick=()=>toast(s.textContent+': not part of this mock'));
 </script>
 </body></html>
