@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UGCB Script Writer flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F0EC;--ink:#171312;--mute:#6B625E;--line:#E6DFD9;--pink:#FFE6E8;--pinkb:#F7C3C9;--red:#D92D48;--teal:#E1F1F2;--tealb:#B7DCDF;--tealx:#0F7A7C;--ok:#178A4C}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--ink);padding:24px 16px}
+.wrap{display:flex;gap:28px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.side{max-width:330px;font-size:13.5px;line-height:1.5;color:var(--mute)}
+.side h3{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.3px;margin-bottom:6px}
+.side p{margin-bottom:10px}
+.side .lbl{font-size:12px;font-weight:800;color:var(--ink);margin:14px 0 6px}
+.lays{display:flex;flex-wrap:wrap;gap:6px}
+.lays button{font:inherit;font-size:12.5px;font-weight:700;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 8px;cursor:pointer;color:var(--ink)}
+.lays button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.restart{font:inherit;font-size:12.5px;font-weight:700;background:none;border:0;text-decoration:underline;cursor:pointer;color:var(--ink);margin-top:12px}
+.phone{width:390px;max-width:100%;height:min(844px,calc(100dvh - 48px));background:var(--bg);border-radius:36px;border:10px solid #171312;overflow:hidden;position:relative}
+.view{position:absolute;inset:0;display:none}
+.view.on{display:block}
+.scr{height:100%;overflow-y:auto;padding:20px 18px 96px}
+.home .scr{padding-bottom:90px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.pro{background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+.tap{cursor:pointer}
+.writing{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px;text-align:center}
+.spin{width:34px;height:34px;border-radius:50%;border:4px solid var(--tealb);border-top-color:var(--tealx);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.writing b{font-size:18px}.writing span{font-size:13px;color:var(--mute)}
+.toast{position:absolute;left:50%;bottom:86px;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;font-weight:700;padding:8px 14px;border-radius:999px;z-index:9;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+@media (max-width:520px){
+ body{padding:0}
+ .wrap{gap:0}
+ .side{order:2;padding:18px 16px 28px;max-width:none}
+ .phone{width:100%;height:100dvh;border:0;border-radius:0}
+}
+/* home */
+.home .logo{font-weight:800;font-size:17px}
+.home .logo b{color:#1FB2C2;font-weight:800}
+.home .hi{font-size:14px;color:var(--mute);margin-top:10px}
+.home h1{font-size:30px;font-weight:800;letter-spacing:-.8px;line-height:1.08;margin:4px 0 22px}
+.home .card{border-radius:20px;padding:20px;margin-bottom:20px}
+.home .card.p{background:var(--pink);border:1.5px solid var(--pinkb)}
+.home .card.t{background:var(--teal);border:1.5px solid var(--tealb)}
+.home .ct{font-size:20px;font-weight:800;letter-spacing:-.4px}
+.home .cs{font-size:13px;color:var(--mute);margin:4px 0 14px}
+.home .box{background:#fff;border-radius:14px;display:flex;align-items:center;padding:6px 6px 6px 14px;gap:10px;border:1.5px solid #fff}
+.home .box.ton{border-color:var(--tealx)}
+.home .box input{flex:1;min-width:0;font:inherit;font-size:15px;border:0;outline:0;background:transparent;color:var(--ink);font-weight:600}
+.home .box input::placeholder{color:#9A918C;font-weight:400}
+.home .go{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none;cursor:pointer}
+.home .go.r{background:var(--red)}
+.home .go.g{background:var(--tealx)}
+.home .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.home .chip{background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600;padding:6px 10px;border-radius:9px}
+.home .chip.on{background:var(--tealx);color:#fff;border-color:var(--tealx)}
+.home .alt{font-size:12.5px;color:var(--mute);margin-top:12px}
+.home .alt a{color:var(--ink);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.home .sec{margin-top:2px}
+.home .sh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.home .sh h2{font-size:18px;font-weight:800;letter-spacing:-.3px}
+.home .sh span{font-size:12px;color:var(--mute)}
+.home .list{background:#fff;border-radius:16px;border:1px solid var(--line)}
+.home .li{display:flex;align-items:center;gap:10px;padding:11px 14px;border-top:1px solid var(--line)}
+.home .li:first-child{border-top:0}
+.home .n{width:18px;font-size:13px;font-weight:800;color:var(--mute)}
+.home .lt{flex:1;font-size:15px;font-weight:700}
+.home .lm{font-size:12px;color:var(--mute);font-weight:500}
+.home .up{font-size:12px;font-weight:700;color:#178A4C}
+.home .nav{position:absolute;bottom:0;left:0;right:0;height:72px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;font-size:11px;font-weight:600;color:var(--mute);z-index:1}
+.home .nav b{color:var(--ink)}
+.home .sml{font-size:12.5px;font-weight:700;color:var(--mute);margin:14px 2px 6px}
+.home .q2{background:#fff;border-radius:16px;border:1px solid var(--line);padding:14px;margin-bottom:10px}
+.home .qt{font-size:14.5px;font-weight:800;margin-bottom:8px}
+.home .qt i{font-style:normal;font-weight:500;color:var(--mute);font-size:12.5px;margin-left:4px}
+.home .q2 .chips{margin-top:0;gap:6px}
+.home .q2 textarea,.home .q2 input.tx{width:100%;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:none;background:#FBF9F7}
+.home .more{display:flex;justify-content:space-between;font-size:14px;font-weight:700;padding:13px 14px;background:#fff;border-radius:14px;border:1px dashed #CFC6BF;margin-bottom:10px;cursor:pointer}
+.home .btn{flex:1;text-align:center;font-weight:800;font-size:15px;padding:14px;border-radius:14px;cursor:pointer}
+.home .btn.g{background:var(--tealx);color:#fff}
+.home .btn.o{background:#fff;border:1.5px solid var(--ink)}
+.home .dim{position:absolute;inset:0;background:rgba(23,19,18,.42);z-index:2}
+.home .x{font-size:13px;font-weight:700;color:var(--mute);background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
+.home .sheet{position:absolute;left:0;right:0;bottom:0;top:96px;background:var(--bg);border-radius:26px 26px 0 0;z-index:4;padding:10px 18px 0;box-shadow:0 -8px 30px rgba(0,0,0,.18);display:flex;flex-direction:column}
+.home .sbody{flex:1;overflow-y:auto;padding-bottom:12px}
+.home .grab{width:44px;height:5px;border-radius:9px;background:#CFC6BF;margin:0 auto 12px}
+.home .shead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.home .shead h1{font-size:26px;margin:0}
+.home .scta{display:flex;gap:8px;padding:10px 0 22px}
+/* output */
+.out .legend{max-width:1700px;margin:0 auto 26px;font-size:14px;line-height:1.5}
+.out .legend h3{font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px}
+.out .row{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;align-items:flex-start;max-width:1720px;margin:0 auto 40px}
+.out .label{font-size:15px;font-weight:700;margin:0 0 10px 4px}
+.out .note{font-size:13px;color:var(--mute);margin:10px 4px 0;max-width:390px;line-height:1.45}
+.out .note b{color:var(--ink)}
+.out .phone{width:390px;height:min(844px,calc(100dvh - 48px));background:var(--bg);border-radius:36px;border:10px solid #171312;overflow:hidden;position:relative}
+.out .scr{height:100%;overflow:hidden;padding:20px 18px 96px}
+.out .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.out .back{font-size:13px;font-weight:700;color:var(--mute)}
+.out .pro{background:var(--ink);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+.out h1{font-size:26px;font-weight:800;letter-spacing:-.6px;line-height:1.1}
+.out h1 span{font-size:15px;color:var(--mute);font-weight:600}
+.out .meta{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+.out .tag{font-size:12px;font-weight:700;padding:4px 9px;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.out .tag.lay{background:var(--teal);border-color:var(--tealb);color:var(--tealx)}
+.out .tag.len{background:#fff}
+.out .hook{background:var(--ink);color:#fff;border-radius:14px;padding:12px 14px;margin-bottom:12px}
+.out .hook small{display:block;font-size:11px;font-weight:700;color:#B9B0AB;margin-bottom:3px;letter-spacing:.2px}
+.out .hook b{font-size:16px;line-height:1.3}
+.out .blk{background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 26px 11px 13px;margin-bottom:8px;position:relative}
+.out .cols .blk{padding-right:11px}
+.out .t{font-size:11px;font-weight:800;color:var(--mute);letter-spacing:.3px;margin-bottom:3px}
+.out .say{font-size:15.5px;font-weight:700;line-height:1.35}
+.out .shot{font-size:12.5px;color:var(--mute);margin-top:4px;line-height:1.35}
+.out .shot b{color:var(--ink);font-weight:700}
+.out .pen{position:absolute;right:10px;top:9px;font-size:13px;color:#B0A7A2}
+.out .ost{display:inline-block;font-size:13px;font-weight:800;background:var(--pink);border:1px solid var(--pinkb);border-radius:7px;padding:2px 7px;margin-top:5px}
+.out .snd{font-size:12.5px;color:var(--tealx);font-weight:700;margin-top:4px}
+.out .bar{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px 16px;display:flex;gap:8px}
+.out .btn{flex:1;text-align:center;font-weight:800;font-size:14px;padding:12px 6px;border-radius:12px}
+.out .btn.g{background:var(--tealx);color:#fff}
+.out .btn.o{background:#fff;border:1.5px solid var(--ink)}
+.out .from{font-size:12.5px;color:var(--mute);margin:2px 2px 10px}
+.out .from b{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.out .hg{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:8px}
+.out .hg .gh{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--mute);margin-bottom:6px}
+.out .hg .gh span{color:var(--tealx)}
+.out .ho{font-size:14px;font-weight:600;padding:6px 8px;border-radius:9px;border:1px solid var(--line);margin-top:5px;line-height:1.3}
+.out .ho.on{border:1.5px solid var(--tealx);background:var(--teal)}
+.out .menu{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.out .menu div{font-size:12px;font-weight:700;padding:5px 9px;border-radius:8px;background:var(--ink);color:#fff}
+.out .blk.sel{border:1.5px solid var(--tealx)}
+.out .cols{display:flex;gap:8px}
+.out .cols .blk{flex:1}
+.out .cols .t{font-size:12px;color:var(--ink)}
+.out .verdict{background:var(--teal);border:1px solid var(--tealb);border-radius:14px;padding:11px 13px;margin-bottom:8px}
+.out .verdict .say{font-size:15px}
+.out .num{display:flex;gap:10px}
+.out .num .k{width:24px;height:24px;border-radius:7px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;flex:none}
+.out .must{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 13px;margin-bottom:8px}
+.out .must .gh{font-size:12px;font-weight:800;color:var(--mute);margin-bottom:4px}
+.out .mi{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;font-weight:600;padding:4px 0}
+.out .mi .y{color:var(--ok);font-weight:800}
+.out .mi .add{font-size:12px;font-weight:800;color:var(--red);border:1px solid var(--pinkb);background:var(--pink);border-radius:7px;padding:2px 8px}
+.out .mk{font-size:11px;font-weight:800;color:var(--ok);background:#E5F4EA;border-radius:6px;padding:1px 6px;margin-left:6px;vertical-align:2px}
+.out .slide{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:7px;display:flex;gap:10px;align-items:flex-start}
+.out .slide .k{font-size:11px;font-weight:800;color:var(--mute);width:44px;flex:none;padding-top:2px}
+.out .slide .say{font-size:14.5px}
+.out .tele{font-size:12px;font-weight:800;color:var(--tealx);border:1.5px solid var(--tealx);border-radius:9px;padding:4px 9px;display:inline-block;margin-bottom:10px}
+.out .blk{cursor:pointer}
+.out .ho{cursor:pointer}
+.out .gh span{cursor:pointer}
+.out .menu div{cursor:pointer}
+.out .menu div.picked{background:var(--tealx)}
+.out .mi .add{cursor:pointer}
+.out .btn{cursor:pointer}
+.out .back{cursor:pointer}
+.out .hooks{margin-bottom:4px}
+.out .hk-toggle{font-size:12.5px;font-weight:800;color:var(--tealx);margin:0 2px 10px;cursor:pointer}
+</style></head><body>
+<div class="wrap">
+<div class="phone">
+
+<!-- HOME (v5) -->
+<div class="view home on" id="v-home"><div class="scr">
+ <div class="top"><div class="logo">UGC<b>Breakouts</b></div><div class="pro">Pro</div></div>
+ <div class="hi">Hi Veejay</div><h1>What are you filming next?</h1>
+ <div class="card p"><div class="ct">Breakout Finder</div><div class="cs">High views from small accounts, in your niche</div>
+  <div class="box"><input placeholder="Search a product or #hashtag" disabled><div class="go r">→</div></div>
+  <div class="sml" style="margin-top:14px">Suggested searches</div><div class="chips" style="margin-top:8px"><div class="chip">Lip liner</div><div class="chip">Self tanner</div><div class="chip">Heatless curls</div><div class="chip">Fridge restock</div></div></div>
+ <div class="card t"><div class="ct">Write a script</div><div class="cs">Built from your profile</div>
+  <div class="box" id="pbox"><input id="prod" placeholder="What's the product?" autocomplete="off"><div class="go g" id="pgo">→</div></div>
+  <div class="sml" style="margin-top:14px">Suggested products</div><div class="chips" style="margin-top:8px" id="pchips"><div class="chip tap">Moisturizer</div><div class="chip tap">Lip oil</div><div class="chip tap">Water bottle</div><div class="chip tap">Get ready with me</div></div>
+  <div class="alt">Or start from <a>a brand brief</a></div></div>
+ <div class="sec"><div class="sh"><h2>What creators are searching</h2><span>this week</span></div>
+  <div class="list">
+   <div class="li"><div class="n">1</div><div class="lt">lip liner<div class="lm">214 searches</div></div><div class="up">▲ 38%</div></div>
+   <div class="li"><div class="n">2</div><div class="lt">get ready with me<div class="lm">171 searches</div></div><div class="up">▲ 12%</div></div>
+   <div class="li"><div class="n">3</div><div class="lt">self tanner<div class="lm">96 searches</div></div><div class="up">new</div></div>
+  </div></div>
+</div>
+<div class="nav"><b>Home</b><span>Breakouts</span><span>Script</span><span>Library</span></div>
+<div class="dim" id="dim" style="display:none"></div>
+<div class="sheet" id="sheet" style="display:none">
+ <div class="grab"></div>
+ <div class="shead"><h1><span id="stitle">Lip oil</span> script <span style="font-size:15px;color:var(--mute);font-weight:600">✎</span></h1><div class="x" id="sclose">Close</div></div>
+ <div class="sbody">
+  <div class="q2"><div class="qt">How long?</div><div class="chips one" data-q="len"><div class="chip tap">15 s</div><div class="chip tap on">30 s</div><div class="chip tap">45 s</div><div class="chip tap">60 s+</div></div></div>
+  <div class="q2"><div class="qt">How will you film it?<i>pick all that fit</i></div><div class="chips multi" data-q="film"><div class="chip tap on">Hands and product</div><div class="chip tap">Talking to camera</div><div class="chip tap">Voiceover</div><div class="chip tap">Text on screen</div></div></div>
+  <div class="q2"><div class="qt">Is this for a brand deal?</div><div class="chips one" data-q="deal"><div class="chip tap on">No</div><div class="chip tap">Yes, add the brief</div></div>
+   <textarea id="brief" rows="2" placeholder="Paste or upload the brief" style="display:none;margin-top:8px"></textarea></div>
+  <div class="more" id="more"><span>Add more detail</span><span id="moreic">+</span></div>
+  <div id="detail" style="display:none">
+   <div class="q2"><div class="qt">Who is it for?<i>optional</i></div><div class="chips one" data-q="who"><div class="chip tap">Beginners</div><div class="chip tap">Busy moms</div><div class="chip tap">Students</div><div class="chip tap">Type your own</div></div></div>
+   <div class="q2"><div class="qt">Got a hook that works?<i>stays word for word</i></div><input class="tx" placeholder="Paste it here"></div>
+   <div class="q2"><div class="qt">Tone</div><div class="chips one" data-q="tone"><div class="chip tap">Funny</div><div class="chip tap">Calm</div><div class="chip tap">Blunt</div><div class="chip tap">Bubbly</div><div class="chip tap">Expert</div></div></div>
+   <div class="q2"><div class="qt">Opening style the brand wants</div><input class="tx" placeholder="For example, a relatable problem story"></div>
+   <div class="q2"><div class="qt">How does it end?</div><div class="chips one" data-q="end"><div class="chip tap">Link in bio</div><div class="chip tap">TikTok Shop</div><div class="chip tap">"Comment X"</div><div class="chip tap">No CTA</div></div></div>
+   <div class="q2"><div class="qt">Anything from your own experience to add?<i>optional</i></div><textarea rows="2"></textarea></div>
+  </div>
+ </div>
+ <div class="scta"><div class="btn o" id="skip">Skip</div><div class="btn g" style="flex:2" id="write">Write my script</div></div>
+</div>
+</div>
+
+<!-- WRITING -->
+<div class="view" id="v-writing"><div class="writing"><div class="spin"></div><b>Writing your <span id="wprod">lip oil</span> script</b><span id="wsub"></span></div></div>
+
+<!-- OUTPUT -->
+<div class="view out" id="v-out"><div class="scr" id="oscr">
+ <div class="top"><div class="back" id="oback">← Home</div><div class="pro">Pro</div></div>
+ <h1>Lip oil script <span>✎</span></h1>
+ <div class="meta"><div class="tag lay" id="otag"></div><div class="tag len" id="olen"></div></div>
+ <div class="hooks" id="hooks"><div class="from">Built from: <b>your answers</b> · <b>lip oil</b> · <b>hands and product</b></div>
+ <div class="hg"><div class="gh">Spoken hooks <span>↻ 3 new</span></div>
+  <div class="ho on">Watch what one coat does in daylight</div>
+  <div class="ho">I keep this one in every bag</div>
+  <div class="ho">This is the lip oil I reach for first</div></div>
+ <div class="hg"><div class="gh">Visual hooks <span>↻ 3 new</span></div>
+  <div class="ho">Cap off, close to the mic</div>
+  <div class="ho">Bare lips, then one swipe</div>
+  <div class="ho">Swatch on the hand, then the lips</div></div>
+ <div class="hg"><div class="gh">Text only hooks <span>↻ 3 new</span></div>
+  <div class="ho">POV: you found a lip oil that isn't sticky</div>
+  <div class="ho">the only lip step I keep</div>
+  <div class="ho">lip oil, one swipe, daylight</div></div></div>
+ <div id="obody"></div>
+</div><div class="bar" id="obar"></div></div>
+
+<div class="toast" id="toast"></div>
+</div>
+
+<div class="side">
+ <h3>Script Writer flow (clickable)</h3>
+ <p>Tap through it like the user would: type a product in Write a script (or tap a suggested product), answer the pop-up, then Write my script.</p>
+ <p>The script layout follows "How will you film it?": Talking to camera opens layout 1, Voiceover and Hands and product open layout 2 (voiceover over clips), Text on screen opens layout 3 (silent). A brand deal opens layout 10 with the must-say checklist. If more than one is picked, the first in that list wins.</p>
+ <p>On the script: tap a hook to use it, "3 new" swaps a group, tap any line for edit one line. Sample copy only, so the rewrite itself isn't simulated.</p>
+ <div class="lbl">See every layout</div>
+ <div class="lays" id="lays"></div>
+ <button class="restart" id="restart">Start over</button>
+</div>
+</div>
+
+<script>
+const L={"1": {"label": "Talking to camera", "tag": "Talking to camera", "fixedLen": null, "body": "<div class=\"tele\">Open in teleprompter</div>\n <div class=\"hook\"><small>HOOK · SPOKEN</small><b>Watch what one coat of this lip oil does.</b></div>\n <div class=\"blk sel\"><div class=\"say\">My lips get dry by lunch, and most glosses just sit on top.</div><div class=\"shot\">Talking, bare lips</div>\n  <div class=\"menu\"><div>Shorter</div><div>Punchier</div><div>More like me</div><div>Redo</div></div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"say\">This one sinks in. Not sticky, and it still looks glossy.</div><div class=\"shot\">One swipe in the mirror</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"say\">The wand covers my whole lip in one swipe, so it takes two seconds.</div><div class=\"shot\">Wand close up</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"say\">I put it on in the morning and top up after I eat.</div><div class=\"shot\">Product into your bag</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"say\">It's on TikTok Shop, linked below.</div><div class=\"shot\">Product to camera</div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}, "2": {"label": "Voiceover over clips", "tag": "Voiceover over clips", "fixedLen": null, "body": "<div class=\"hook\"><small>HOOK · SPOKEN</small><b>Watch what one coat does in daylight.</b></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">SAY</div><div class=\"say\">My lips get dry fast, so I wanted something that sinks in.</div><div class=\"shot\"><b>Clip:</b> cap off, then bare lips by the window</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">SAY</div><div class=\"say\">One swipe. It feels light and it isn't sticky.</div><div class=\"shot\"><b>Clip:</b> one slow swipe, hands and product only</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">SAY</div><div class=\"say\">It still looks glossy after my coffee, and nothing sticks to my hair.</div><div class=\"shot\"><b>Clip:</b> sip, then lips by the window</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">SAY</div><div class=\"say\">I keep it in my bag so I can top up after lunch. It's linked below if you want to try it.</div><div class=\"shot\"><b>Clip:</b> product and swatch together</div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}, "3": {"label": "Silent or ASMR", "tag": "Silent or ASMR", "fixedLen": "5 shots · 30 s", "body": "<div class=\"hook\"><small>HOOK · TEXT ONLY</small><b>lip oil, one swipe, daylight</b></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">0 TO 4 S</div><div class=\"shot\"><b>Shot:</b> cap off, close to the mic</div><div class=\"ost\">lip oil, one swipe, daylight</div><div class=\"snd\">Keep: the cap click</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">4 TO 12 S</div><div class=\"shot\"><b>Shot:</b> wand out, one slow swipe</div><div class=\"ost\">no sticky feel</div><div class=\"snd\">Keep: the swipe</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">12 TO 20 S</div><div class=\"shot\"><b>Shot:</b> press lips together, close up</div><div class=\"ost\">glossy, not heavy</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">20 TO 26 S</div><div class=\"shot\"><b>Shot:</b> lips by the window</div><div class=\"ost\">this is daylight</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">26 TO 30 S</div><div class=\"shot\"><b>Shot:</b> product and swatch together</div><div class=\"ost\">linked below</div></div>", "bar": "<div class=\"btn g\">Copy script</div>"}, "4": {"label": "Test", "tag": "Test", "fixedLen": null, "body": "<div class=\"hook\"><small>HOOK · SPOKEN</small><b>Does this lip oil last from breakfast to dinner?</b></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">SETUP</div><div class=\"say\">One coat at 8 AM. No top ups. Let's see.</div><div class=\"shot\">Swipe on, show the time on your phone</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">CHECK IN · 12 PM</div><div class=\"say\">After coffee. Still some shine in the middle.</div><div class=\"shot\">Close up by the window</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">CHECK IN · 3 PM</div><div class=\"say\">After lunch. No top up, and my lips still feel soft.</div><div class=\"shot\">Close up, same window</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">CHECK IN · 6 PM</div><div class=\"say\">Mostly gone, but my lips don't feel dry.</div><div class=\"shot\">Close up, same window</div></div>\n <div class=\"verdict\"><div class=\"t\">VERDICT</div><div class=\"say\">Not all day shine, but my lips never felt dry. I'd keep it in my bag.</div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}, "5": {"label": "Side by side", "tag": "Side by side", "fixedLen": null, "body": "<div class=\"hook\"><small>HOOK · VISUAL</small><b>Left side gloss, right side lip oil.</b></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">SAY</div><div class=\"say\">Same lips, same morning, two products. Let's see which one I keep.</div></div>\n <div class=\"cols\">\n  <div class=\"blk\"><div class=\"t\">A · MY USUAL GLOSS</div><div class=\"say\">Shiny, but I can feel it all day.</div><div class=\"shot\">Left half, same angle all day</div></div>\n  <div class=\"blk\"><div class=\"t\">B · THIS LIP OIL</div><div class=\"say\">Shiny, and it sinks in.</div><div class=\"shot\">Right half, same angle all day</div></div></div>\n <div class=\"cols\">\n  <div class=\"blk\"><div class=\"t\">A · AN HOUR LATER</div><div class=\"say\">Sticky at the corners.</div></div>\n  <div class=\"blk\"><div class=\"t\">B · AN HOUR LATER</div><div class=\"say\">Still soft.</div></div></div>\n <div class=\"cols\">\n  <div class=\"blk\"><div class=\"t\">A · AFTER LUNCH</div><div class=\"say\">Gone, and my lips feel dry again.</div></div>\n  <div class=\"blk\"><div class=\"t\">B · AFTER LUNCH</div><div class=\"say\">Less shine, but still soft.</div></div></div>\n <div class=\"verdict\"><div class=\"t\">VERDICT A</div><div class=\"say\">Fine for photos, not for a full day.</div></div>\n <div class=\"verdict\"><div class=\"t\">VERDICT B</div><div class=\"say\">My daily one. It's linked below.</div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}, "6": {"label": "Step by step", "tag": "Step by step", "fixedLen": null, "body": "<div class=\"hook\"><small>HOOK · SPOKEN</small><b>How I get glossy lips that don't feel sticky.</b></div>\n <div class=\"blk num\"><div class=\"k\">1</div><div><div class=\"say\">Start with clean, dry lips, no balm underneath.</div><div class=\"shot\">Wipe with a tissue</div></div></div>\n <div class=\"blk num\"><div class=\"k\">2</div><div><div class=\"say\">One swipe on the bottom lip only, from the middle out.</div><div class=\"shot\">Slow swipe, close up</div></div></div>\n <div class=\"blk num\"><div class=\"k\">3</div><div><div class=\"say\">Press your lips together to spread it to the top lip.</div><div class=\"shot\">Press, then smile</div></div></div>\n <div class=\"blk num\"><div class=\"k\">4</div><div><div class=\"say\">Wait a minute before your coffee so it can sink in.</div><div class=\"shot\">Cup in hand, lips by the window</div></div></div>\n <div class=\"blk num\"><div class=\"k\">5</div><div><div class=\"say\">Top up after you eat. One swipe is enough, and it's linked below.</div><div class=\"shot\">Product to camera</div></div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}, "7": {"label": "List", "tag": "List", "fixedLen": null, "body": "<div class=\"hook\"><small>HOOK · SPOKEN</small><b>3 things I like about this lip oil.</b></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">1 OF 3</div><div class=\"say\">It isn't sticky, so my hair doesn't stick to my lips when it's windy.</div><div class=\"shot\">Hair blowing past your face</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">2 OF 3</div><div class=\"say\">The wand covers my whole lip in one swipe, no mirror needed.</div><div class=\"shot\">Wand close up, one swipe</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">3 OF 3</div><div class=\"say\">It fits in my smallest bag, so I can top up after lunch.</div><div class=\"shot\">Drop it in a mini bag</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">END</div><div class=\"say\">If you want a lip oil that isn't sticky, it's linked below.</div><div class=\"shot\">Product to camera</div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}, "8": {"label": "Story or POV", "tag": "Story or POV", "fixedLen": "4 beats · 30 s", "body": "<div class=\"hook\"><small>HOOK · TEXT ONLY</small><b>POV: you found a lip oil that isn't sticky</b></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">BEAT 1</div><div class=\"shot\"><b>Scene:</b> wind, hair stuck to glossy lips</div><div class=\"ost\">every gloss I've owned</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">BEAT 2</div><div class=\"shot\"><b>Scene:</b> swap the gloss for the lip oil, one swipe</div><div class=\"ost\">then I tried this</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">BEAT 3</div><div class=\"shot\"><b>Scene:</b> same wind, hair blows right past</div><div class=\"ost\">nothing sticks</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">BEAT 4</div><div class=\"shot\"><b>Scene:</b> product in hand, smile</div><div class=\"ost\">linked below</div></div>", "bar": "<div class=\"btn g\">Copy script</div>"}, "9": {"label": "Text slideshow", "tag": "Text slideshow", "fixedLen": "6 slides", "body": "<div class=\"hook\"><small>COVER</small><b>the only lip step I keep</b></div>\n <div class=\"slide\"><div class=\"k\">SLIDE 2</div><div class=\"say\">my lips get dry by lunch</div></div>\n <div class=\"slide\"><div class=\"k\">SLIDE 3</div><div class=\"say\">glosses sat on top and got sticky</div></div>\n <div class=\"slide\"><div class=\"k\">SLIDE 4</div><div class=\"say\">this lip oil sinks in after one swipe</div></div>\n <div class=\"slide\"><div class=\"k\">SLIDE 5</div><div class=\"say\">glossy, not heavy, even by the window</div></div>\n <div class=\"slide\"><div class=\"k\">SLIDE 6</div><div class=\"say\">it's linked below</div></div>", "bar": "<div class=\"btn g\">Copy script</div>"}, "10": {"label": "Brand brief ad", "tag": "Brand brief ad", "fixedLen": null, "body": "<div class=\"must\"><div class=\"gh\">MUST-SAY (FROM THE BRIEF)</div>\n  <div class=\"mi\">Say it's not sticky <span class=\"y\">✓</span></div>\n  <div class=\"mi\">Show the shade name <span class=\"add\">+ add it</span></div>\n  <div class=\"mi\">Don't call it a treatment <span class=\"y\">✓</span></div></div>\n <div class=\"blk\"><div class=\"t\">HOOK</div><div class=\"say\">I stopped wearing gloss because of this lip oil.</div></div>\n <div class=\"blk\"><div class=\"t\">PROBLEM</div><div class=\"say\">Every gloss I tried got sticky by noon, and my lips still felt dry.</div></div>\n <div class=\"blk\"><div class=\"t\">PRODUCT</div><div class=\"say\">This lip oil is glossy and it's not sticky, even after coffee.<span class=\"mk\">must-say ✓</span></div></div>\n <div class=\"blk\"><div class=\"t\">PROOF</div><div class=\"say\">One swipe this morning. Here it is by the window after my coffee.</div><div class=\"shot\">Close up in daylight</div></div>\n <div class=\"blk\"><div class=\"t\">CTA</div><div class=\"say\">If your lips get dry too, tap the orange cart to get yours.</div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}, "11": {"label": "Open (catch-all)", "tag": "Open", "fixedLen": null, "body": "<div class=\"hook\"><small>HOOK · SPOKEN</small><b>I keep this one in every bag.</b></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">BODY</div><div class=\"say\">My lips get dry fast, and gloss always felt sticky. This lip oil sinks in, it isn't sticky, and it still looks glossy after my coffee. One swipe covers my whole lip. I keep it in my bag and top up after lunch.</div><div class=\"shot\">Any shots: swipe, close up, window</div></div>\n <div class=\"blk\"><div class=\"pen\">✎</div><div class=\"t\">CTA</div><div class=\"say\">It's linked below if you want to try it for yourself.</div></div>", "bar": "<div class=\"btn o\">Copy spoken lines</div><div class=\"btn g\">Copy script</div>"}};
+const POOL={spoken:["Watch what one coat does in daylight", "I keep this one in every bag", "This is the lip oil I reach for first", "Does this lip oil last from breakfast to dinner?", "How I get glossy lips that don't feel sticky.", "3 things I like about this lip oil."],visual:["Cap off, close to the mic", "Bare lips, then one swipe", "Swatch on the hand, then the lips", "Left side gloss, right side lip oil.", "Wand out, one slow swipe", "Press lips together, close up"],text:["POV: you found a lip oil that isn't sticky", "the only lip step I keep", "lip oil, one swipe, daylight", "glossy, not heavy", "no sticky feel", "nothing sticks"]};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let product='lip oil',cur=2;
+function show(id){$$('.view').forEach(v=>v.classList.toggle('on',v.id===id))}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1400)}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+// home
+function openSheet(p){product=(p||'lip oil').trim().toLowerCase()||'lip oil';$('#stitle').textContent=cap(product);$('#dim').style.display='block';$('#sheet').style.display='flex'}
+function closeSheet(){$('#dim').style.display='none';$('#sheet').style.display='none'}
+$('#pgo').onclick=()=>openSheet($('#prod').value);
+$('#prod').addEventListener('keydown',e=>{if(e.key==='Enter')openSheet($('#prod').value)});
+$('#prod').addEventListener('focus',()=>$('#pbox').classList.add('ton'));
+$('#prod').addEventListener('blur',()=>$('#pbox').classList.remove('ton'));
+$$('#pchips .chip').forEach(c=>c.onclick=()=>{$('#prod').value=c.textContent;openSheet(c.textContent)});
+$('#sclose').onclick=closeSheet;$('#dim').onclick=closeSheet;
+$$('.chips.one').forEach(g=>g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const was=c.classList.contains('on');g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));if(!(was&&g.dataset.q!=='len'&&g.dataset.q!=='deal'))c.classList.add('on');if(g.dataset.q==='deal')$('#brief').style.display=c.textContent.startsWith('Yes')?'block':'none'}));
+$$('.chips.multi .chip').forEach(c=>c.onclick=()=>c.classList.toggle('on'));
+$('#more').onclick=()=>{const d=$('#detail'),o=d.style.display==='none';d.style.display=o?'block':'none';$('#moreic').textContent=o?'−':'+'};
+function pickLayout(){
+ if($('[data-q=deal] .chip.on')?.textContent.startsWith('Yes'))return 10;
+ const f=$$('[data-q=film] .chip.on').map(c=>c.textContent);
+ if(f.includes('Talking to camera'))return 1;
+ if(f.includes('Voiceover')||f.includes('Hands and product'))return 2;
+ if(f.includes('Text on screen'))return 3;
+ return 11}
+function write(){closeSheet();$('#wprod').textContent=product;show('v-writing');setTimeout(()=>{render(pickLayout());show('v-out')},1600)}
+$('#write').onclick=write;$('#skip').onclick=write;
+// output
+function words(t){return t.replace(/must-say ✓/,'').trim().split(/\s+/).length}
+function lenOf(){const el=$('#obody');let n=0;const says=[...el.querySelectorAll('.blk .say,.verdict .say')].map(s=>s.textContent.trim());says.forEach(t=>n+=words(t));const h=el.querySelector('.hook');if(h&&/SPOKEN/.test(h.querySelector('small').textContent)){const ht=h.querySelector('b').textContent.trim();if(!says.includes(ht))n+=words(ht)}return n}
+function setLen(l){$('#olen').textContent=l.fixedLen||(()=>{const n=lenOf();return n+' words · about '+Math.round(n/2.5)+' s of 30 s'})()}
+function render(n){cur=n;const l=L[n];$('#otag').textContent=l.tag;$('#obody').innerHTML=l.body;$('#obar').innerHTML=l.bar;setLen(l);
+ const p=$('#oscr h1');p.innerHTML=cap(product)+' script <span>✎</span>';
+ const f=$$('[data-q=film] .chip.on').map(c=>c.textContent.toLowerCase());const deal=$('[data-q=deal] .chip.on')?.textContent.startsWith('Yes');
+ $('#hooks .from').innerHTML='Built from: <b>your answers</b> · <b>'+product+'</b>'+(f.length?' · <b>'+f.join(', ')+'</b>':'')+(deal?' · <b>the brief</b>':'');
+ resetHooks();
+ $('#oscr').scrollTop=0;wireOut();$$('#lays button').forEach(b=>b.classList.toggle('on',+b.dataset.n===n))}
+function wireOut(){
+ function pick(m){m.querySelectorAll('div').forEach(o=>o.onclick=()=>{m.querySelectorAll('div').forEach(x=>x.classList.remove('picked'));o.classList.add('picked');toast(o.textContent+': rewrites only this line')})}
+ $$('#obody .menu').forEach(pick);
+ $$('#obody .blk').forEach(b=>b.onclick=e=>{if(e.target.closest('.menu'))return;const open=b.querySelector('.menu');$$('#obody .menu').forEach(m=>m.remove());$$('#obody .blk.sel').forEach(x=>x.classList.remove('sel'));$$('#obody .pen').forEach(x=>x.style.display='');if(open)return;b.classList.add('sel');const pen=b.querySelector('.pen');if(pen)pen.style.display='none';const m=document.createElement('div');m.className='menu';m.innerHTML='<div>Shorter</div><div>Punchier</div><div>More like me</div><div>Redo</div>';(b.classList.contains('num')?b.lastElementChild:b).appendChild(m);pick(m)});
+ $$('#obody .mi .add').forEach(a=>a.onclick=()=>{a.outerHTML='<span class="y">✓</span>';toast('Added to the script')});
+ $$('#obar .btn').forEach(b=>b.onclick=()=>toast('Copied'));
+}
+// hooks
+const groups=$$('#hooks .hg');const keys=['spoken','visual','text'];const off=[0,0,0];
+groups.forEach((g,i)=>{g.querySelector('.gh span').onclick=()=>{off[i]=(off[i]+3)%POOL[keys[i]].length;const hs=g.querySelectorAll('.ho');hs.forEach((h,j)=>{h.textContent=POOL[keys[i]][(off[i]+j)%POOL[keys[i]].length];h.classList.remove('on')})};
+ g.addEventListener('click',e=>{const h=e.target.closest('.ho');if(!h)return;$$('#hooks .ho').forEach(x=>x.classList.remove('on'));h.classList.add('on');const hk=$('#obody .hook');if(hk){hk.querySelector('small').textContent='HOOK · '+['SPOKEN','VISUAL','TEXT ONLY'][i];hk.querySelector('b').textContent=h.textContent;setLen(L[cur])}else{toast('Hook goes to the top of the script')}})});
+function norm(t){return t.trim().replace(/\.$/,'').toLowerCase()}
+function resetHooks(){const hk=$('#obody .hook b');const cur_=hk?norm(hk.textContent):'';groups.forEach((g,i)=>{off[i]=0;g.querySelectorAll('.ho').forEach((h,j)=>{h.textContent=POOL[keys[i]][j];h.classList.toggle('on',!!cur_&&norm(h.textContent)===cur_)})})}
+$('#oback').onclick=()=>{show('v-home')};
+// layout switcher
+const lays=$('#lays');Object.keys(L).forEach(k=>{const b=document.createElement('button');b.dataset.n=k;b.textContent=k+'. '+L[k].label;b.onclick=()=>{render(+k);show('v-out')};lays.appendChild(b)});
+$('#restart').onclick=()=>{closeSheet();$('#prod').value='';show('v-home')};
+</script>
+</body></html>
