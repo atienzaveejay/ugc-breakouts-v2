@@ -591,9 +591,9 @@ function openTP(){const lines=[];const b=$('#obody');const h=b.querySelector('.h
  const tp=document.createElement('div');tp.className='tp';tp.innerHTML='<div class="tph"><span id="tpp">Pause</span><span id="tpx">Close</span></div><div class="tpb">'+lines.map(t=>'<p>'+esc(t)+'</p>').join('')+'</div>';$('#v-out').append(tp);
  const body=tp.querySelector('.tpb');let run=true;const step=()=>{if(!tp.isConnected)return;if(run)body.scrollTop+=0.6;requestAnimationFrame(step)};requestAnimationFrame(step);
  tp.querySelector('#tpp').onclick=()=>{run=!run;tp.querySelector('#tpp').textContent=run?'Pause':'Play'};tp.querySelector('#tpx').onclick=()=>tp.remove()}
-const IDEA={'Sell it':'Show {p} fixing one everyday problem, then where to get it.','Review it':'An honest first take on {p}: what works and what doesn\'t.','How to use it':'Walk through using {p}, step by step.','Before and after':'Show the before, use {p}, then the after.','Unboxing':'Open {p} on camera and try it for the first time.','Compare it':'Put {p} next to what people use now and pick a winner.'};
+const IDEA={'Sell it':'why I switched to {p}','Review it':'honest {p} review','How to use it':'how I use {p}','Before and after':'{p} before and after','Unboxing':'unboxing my {p}','Compare it':'{p} vs what I used before'};
 function fillIng(){const pr=cap(product),d=ans('do');const chips=[BRIEF?'Brand brief':'',pr,ans('len'),ans('film'),ans('tone'),d,ans('cta'),($('#dhookin')?.value.trim())?'Your hook':''].filter(Boolean);
- const idea=BRIEF?'Turn the brand brief into a '+chosenLen()+'s script that covers every must-say.':(IDEA[d||'Sell it']||('A '+chosenLen()+'s video about '+product+': '+d.toLowerCase()+'.')).replace('{p}',product);
+ const idea=BRIEF?product+' brand deal':(IDEA[d||'Sell it']||(product+': '+d.toLowerCase())).replace('{p}',product);
  $('#oing').innerHTML='<div class="oh">What you picked</div><div class="oc">'+chips.map(c=>'<span>'+esc(c)+'</span>').join('')+'</div><div class="oi"><div class="oh" style="margin:0">The idea</div><p>'+esc(idea)+'</p></div>'}
 
 // live (checked 25 Nov): pencil on the hook opens "Change the hook": current hook + 1 Question + 1 Storytime, Rewrite my script uses 1 of 3 rewrites

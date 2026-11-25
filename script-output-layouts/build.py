@@ -39,7 +39,7 @@ def tail(spoken=True,note=''):
     n=f'<p class="lv-note">{E(note)}</p>' if note else ''
     pr=f'<button class="b b2 full-w sc-prac-btn">{IC["prac"]}Practice full screen</button>' if spoken else ''
     return f'</div>{n}{pr}<div class="sc-rw"><b>Not quite right?</b><button class="b b2">Rewrite the whole script</button><small>3 of 3 rewrites left</small></div></div>'
-SELL_IDEA='Show lip oil fixing one everyday problem, then where to get it.'
+SELL_IDEA='why I switched to lip oil'
 def s15_sell():
     return head(SELL_IDEA,'15 s',['Lip oil','15s','Talking to camera','Calm and real'])+hook('0–2s','Watch what one coat of this lip oil does.','Close up, the lip oil by your face')+\
      body('3–11s',[step(1,'the problem','3–7s','My lips get dry by lunch, and most glosses just sit on top.','Talking, bare lips'),step(2,'show it','8–11s','The shine looks natural in daylight, not wet.','Lips by the window')])+\
@@ -52,37 +52,37 @@ def s60_sell(grouped=True):
     for title,items in P:
         if grouped: st.append(part(title))
         for nm,t,s,sh in items: n+=1;st.append(step(n,nm,t,s,sh))
-    return head('One coat, four hours: put it on in the morning and show it still there after lunch.','60 s',['Lip oil','60s','Talking to camera','Calm and real'])+hook('0–3s','Watch what one coat of this lip oil does.','Close up, the lip oil by your face')+\
+    return head('one coat, four hours','60 s',['Lip oil','60s','Talking to camera','Calm and real'])+hook('0–3s','Watch what one coat of this lip oil does.','Close up, the lip oil by your face')+\
      body('3–52s',st)+cta('52–60s',"If your gloss gets sticky too, this is the one. It's on TikTok Shop, tap the orange cart.",'Product to camera')+tail()
 def s15_compare():
-    return head('Put lip oil next to the gloss people use now and pick a winner.','15 s',['Lip oil','15s','Talking to camera','Compare it'])+hook('0–2s','Lip oil or gloss? I wore both for a day.','Hold one in each hand')+\
+    return head('lip oil vs gloss','15 s',['Lip oil','15s','Talking to camera','Compare it'])+hook('0–2s','Lip oil or gloss? I wore both for a day.','Hold one in each hand')+\
      body('3–12s',[step('A','gloss','3–6s','Looked great at 9. By 11 my hair was stuck to it.','Gloss on, hair in the wind'),step('B','lip oil','7–10s','Still shiny at lunch, never sticky.','Lips by the window at noon'),step('✓','verdict','10–12s','Oil wins for me.','You, to camera')])+\
      cta('13–15s','The one I use is in my TikTok Shop.','Product to camera')+tail()
 def s_hands():
-    return head('Show the lip oil going on, filmed from above, with a short voiceover.','15 s',['Lip oil','15s','Hands only','How to use it'])+hook('0–2s','The only lip step I do now.','Hand pulls the wand out, slow, gloss catches the light')+\
+    return head('how I put on lip oil','15 s',['Lip oil','15s','Hands only','How to use it'])+hook('0–2s','The only lip step I do now.','Hand pulls the wand out, slow, gloss catches the light')+\
      body('3–12s',[step(1,'step 1','3–6s','One swipe on the bottom lip.','Wand on the back of your hand, then the lip',shot_first=True),step(2,'step 2','7–9s',"Press, don't rub.",'Fingertip pressing the tint in',shot_first=True),step(3,'step 3','10–12s','Done.','Cap goes back on, product set down',shot_first=True)])+\
      cta('13–15s','Orange cart if you want it.','Product next to your phone, cart button on screen')+tail(note='Hands only: what to film comes first in each step; the voiceover is optional.')
 SLIDES=[('I wore lip oil for 8 hours to see if it lasts','Selfie holding the lip oil'),('9 AM: one coat, no liner','Applying, close up'),('11 AM: coffee. still shiny','Mug and lips in one shot'),('1 PM: after lunch, a little faded, not sticky','Lips by the window'),('5 PM: still there. my gloss never made it past noon','Old gloss next to the oil'),("it's in my TikTok Shop, tap the orange cart",'Product on its own')]
 SKIT=[('Friend','Why do your lips look like that?'),('You','Like what?'),('Friend','Shiny. At 4 PM. Mine have been gone since lunch.'),('You','One coat this morning.'),('Friend',"Okay, that's not fair.")]
 QS=[('5–15s','Which one looks more natural?'),('15–25s','Press your lips together. Which one feels sticky?'),('25–33s','Would you wear this one to work?')]
 def o1_text():
-    return head('A time-stamped photo set showing one coat lasting the day.','6 slides',['Lip oil','Text on screen','Sell it'])+hook('slide 1',SLIDES[0][0],'Behind it: '+SLIDES[0][1],'screen')+\
+    return head('lip oil, 8 hours later','6 slides',['Lip oil','Text on screen','Sell it'])+hook('slide 1',SLIDES[0][0],'Behind it: '+SLIDES[0][1],'screen')+\
      body('slides 2–5',[step(i+2,'slide '+str(i+2),'',t,'Behind it: '+b,'screen') for i,(t,b) in enumerate(SLIDES[1:5])])+cta('slide 6',SLIDES[5][0],'Behind it: '+SLIDES[5][1],'screen')+tail(False,'Same layout: lines become on-screen text, each slide is a step, no teleprompter.')
 def o1_skit():
-    return head('A friend asks why your lips still look good at 4 PM. You play both parts.','30 s',['Lip oil','Skit','Funny'])+hook('0–4s','Friend: Why do your lips look like that?','Bathroom mirror, both in frame')+\
+    return head('the friend who notices','30 s',['Lip oil','Skit','Funny'])+hook('0–4s','Friend: Why do your lips look like that?','Bathroom mirror, both in frame')+\
      body('4–22s',[step(i+1,w.lower(),'',f'{w}: {s}','') for i,(w,s) in enumerate(SKIT[1:])],'Same spot; film each side and cut together')+cta('22–30s',"It's in my TikTok Shop if you want to steal it too.",'You, to camera')+\
      tail(note='Squeezed: who says what is just a prefix, and scene changes and actions have nowhere to go.')
 def o1_street():
-    return head('Ask people outside a cafe to try gloss on one side, oil on the other.','45 s',['Lip oil','Street interview','Compare it'])+hook('0–4s','Can strangers tell lip oil from gloss?','You on the street, holding both up')+\
+    return head('can strangers tell?','45 s',['Lip oil','Street interview','Compare it'])+hook('0–4s','Can strangers tell lip oil from gloss?','You on the street, holding both up')+\
      body('5–33s',[step(i+1,'question '+str(i+1),t,s,'') for i,(t,s) in enumerate(QS)])+cta('40–45s','Linked in my TikTok Shop.','You, to camera')+\
      tail(note='Squeezed: the questions sit where spoken lines go; setup, what to keep and the reveal have no place.')
 def o2_slides():
     cards=''.join(f'<section class="lv-slide{" cover" if i==0 else ""}"><div class="sc-ph"><b>{"Cover" if i==0 else "Slide "+str(i+1)}</b><button class="sc-ed">{IC["pen"]}</button></div><p class="lv-sltx">{E(t)}</p>{dirn("Behind it: "+b)}</section>' for i,(t,b) in enumerate(SLIDES))
-    return head('A time-stamped photo set showing one coat lasting the day.','6 slides',['Lip oil','Text on screen','Slides'])+cards+\
+    return head('lip oil, 8 hours later','6 slides',['Lip oil','Text on screen','Slides'])+cards+\
      '</div><button class="b b2 full-w">'+IC['copy']+'Copy slide text</button><div class="sc-rw"><b>Not quite right?</b><button class="b b2">Rewrite the whole script</button><small>3 of 3 rewrites left</small></div></div>'
 def o2_wall():
     w="things I stopped buying because lip oil does it better:\n\ngloss. sticky by noon, every time.\n\nlip balm. looks flat on camera.\n\nlip liner. one coat is enough tint for me.\n\nlip masks. I just put this on before bed.\n\nthe one I use is in my shop."
-    return head('One long screen of text listing what lip oil replaced.','12 s',['Lip oil','Text on screen','Wall of text'])+\
+    return head('what lip oil replaced','12 s',['Lip oil','Text on screen','Wall of text'])+\
      f'<section class="lv-slide cover">{ph("On screen","keep it up 12 s")}<p class="lv-wall">{E(w).replace(chr(10),"<br>")}</p></section>'+\
      f'<section class="sc-ctac">{ph("Behind the text","whole video",False)}{dirn("One slow shot: applying the oil in a mirror, looped")}<p class="lv-note" style="margin:6px 0 0">Sound: a trending sound, low. No talking.</p></section>'+\
      '</div><button class="b b2 full-w">'+IC['copy']+'Copy the text</button><div class="sc-rw"><b>Not quite right?</b><button class="b b2">Rewrite the whole script</button><small>3 of 3 rewrites left</small></div></div>'
@@ -91,13 +91,13 @@ def scene(n,t,place,lines,act=''):
     a=f'<p class="lv-act">{E(act)}</p>' if act else ''
     return f'<section class="sc-bodyc lv-scene">{ph("Scene "+str(n),t)}{dirn(place)}{"".join(who(w,s) for w,s in lines)}{a}</section>'
 def o2_skit():
-    return head('A friend asks why your lips still look good at 4 PM. You play both parts.','30 s',['Lip oil','Skit','Funny'])+\
+    return head('the friend who notices','30 s',['Lip oil','Skit','Funny'])+\
      '<section class="lv-cast"><b>Who&rsquo;s in it</b><span><i class="who w-y">You</i>calm, already wearing the oil</span><span><i class="who w-f">Friend</i>same outfit with a hoodie on, holding a sticky gloss</span></section>'+\
      scene(1,'0–4s · hook','Bathroom mirror, both in frame (film each side, cut together)',SKIT[0:2])+scene(2,'4–12s','Same spot, close on the friend',[SKIT[2]],'Friend pulls a hair off her sticky gloss')+\
      scene(3,'12–22s','Same spot, wide',SKIT[3:5],'You hand over the oil, friend tries it, checks the mirror')+cta('22–30s',"It's in my TikTok Shop if you want to steal it too.",'You, to camera')+tail()
 def o2_street():
     qs=''.join(f'<div class="sc-step"><div class="sc-sp"><span class="sn">Q{i+1}</span><b>ask</b><span class="tm">{t}</span><button class="sc-ed">{IC["pen"]}</button></div><p class="sc-q2">{q(s)}</p></div>' for i,(t,s) in enumerate(QS))
-    return head('Ask people outside a cafe to try gloss on one side, oil on the other.','45 s',['Lip oil','Street interview','Compare it'])+\
+    return head('can strangers tell?','45 s',['Lip oil','Street interview','Compare it'])+\
      f'<section class="sc-ctac">{ph("Before you go","setup",False)}<p class="lv-note" style="margin:0">Bring the gloss and the oil with labels covered, wipes, and a clip-on mic. Ask first, film only people who say yes.</p></section>'+\
      hook('0–4s','Can strangers tell lip oil from gloss?','You on the street, holding both up')+\
      f'<section class="sc-bodyc">{ph("Questions to ask","5–33s",False)}{qs}<p class="lv-note" style="padding:0 16px 14px">Keep: surprised faces, and anyone who picks the oil without being told.</p></section>'+\
