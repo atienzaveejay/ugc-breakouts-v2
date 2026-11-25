@@ -304,3 +304,10 @@
 
 /* proposal B: longer Change the hook sheet scrolls inside the phone */
 #v-out > .bk.lvs .hm-sheet{max-height:94%;overflow-y:auto}
+
+/* must-say checklist (restored from the brand brief layout) */
+:is(#v-out,#v-hook) .bk .lv-must{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:0 0 6px}
+:is(#v-out,#v-hook) .bk .lv-must .sc-ph{padding:14px 16px 6px}
+:is(#v-out,#v-hook) .bk .lv-mi{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 16px;border-top:1px solid var(--hair);font-size:14px;font-weight:600}
+:is(#v-out,#v-hook) .bk .lv-mi .ok{color:var(--teal);font-size:12.5px;font-weight:700;white-space:nowrap}
+:is(#v-out,#v-hook) .bk .lv-add{background:var(--teal-soft);color:var(--teal);border:0;border-radius:8px;padding:6px 10px;font:700 12.5px var(--sans);cursor:pointer;white-space:nowrap}

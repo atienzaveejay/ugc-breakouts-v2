@@ -658,6 +658,13 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 /* proposal B: longer Change the hook sheet scrolls inside the phone */
 #v-out > .bk.lvs .hm-sheet{max-height:94%;overflow-y:auto}
 
+/* must-say checklist (restored from the brand brief layout) */
+:is(#v-out,#v-hook) .bk .lv-must{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:0 0 6px}
+:is(#v-out,#v-hook) .bk .lv-must .sc-ph{padding:14px 16px 6px}
+:is(#v-out,#v-hook) .bk .lv-mi{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 16px;border-top:1px solid var(--hair);font-size:14px;font-weight:600}
+:is(#v-out,#v-hook) .bk .lv-mi .ok{color:var(--teal);font-size:12.5px;font-weight:700;white-space:nowrap}
+:is(#v-out,#v-hook) .bk .lv-add{background:var(--teal-soft);color:var(--teal);border:0;border-radius:8px;padding:6px 10px;font:700 12.5px var(--sans);cursor:pointer;white-space:nowrap}
+
 </style></head><body>
 <div class="wrap">
 <div class="phone">
@@ -928,13 +935,14 @@ let LVD=null,REF={};
 function lvTxt(e,sel){const x=e&&(sel?e.querySelector(sel):e);return x?x.textContent.replace(/must-say ✓/g,'').replace(/✎/g,'').replace(/\s+/g,' ').trim():''}
 function liveBuild(n){const Y=chosenLen(),p=parts();if(!p.hook||!p.cta)return false;
  const h=Y<=15?2:3,c=Y-Math.max(3,Math.round(Y*0.23)),bs=h+1,be=c-1;
- const hookT=(HOOKSEL&&HOOKSEL.line)||lvTxt(p.hook,'b')||lvTxt(p.hook,'.say'),hookS=lvTxt(p.hook,'.shot');
+ const own=($('#dhookin')?.value||'').trim();const hookT=(HOOKSEL&&HOOKSEL.line)||own||lvTxt(p.hook,'b')||lvTxt(p.hook,'.say'),hookS=lvTxt(p.hook,'.shot');
+ const must=$$('#obody .must .mi').map(mi=>({t:mi.childNodes[0].textContent.trim(),ok:!!mi.querySelector('.y')}));const ms=($$('#detail .q2').find(q=>/Must say/.test(q.textContent))||{}).querySelector?.('input')?.value.trim();if(ms)must.push({t:ms,ok:false});
  const beats=p.body.map(e=>{const says=[...e.querySelectorAll('.say')].map(x=>lvTxt(x)).filter(Boolean);const shot=lvTxt(e,'.shot');return {name:beatName(e),line:says.join(' / ')||shot||lvTxt(e).slice(0,140),shot}});
  const w=beats.map(b=>Math.max(3,b.line.split(/\s+/).length)),tot=w.reduce((a,b)=>a+b,0)||1;let t0=bs;
  beats.forEach((b,i)=>{const span=(be-bs+1)*w[i]/tot;const a=Math.round(t0);b.t=a+'–'+(i===beats.length-1?be:Math.max(a,Math.round(t0+span)-1))+'s';t0+=span});
  const cta={line:lvTxt(p.cta,'.say')||lvTxt(p.cta,'b')||lvTxt(p.cta),shot:lvTxt(p.cta,'.shot')};
  const key=product+'|'+n;if(REW[key]==null)REW[key]=3;
- LVD={n,key,hook:{type:(lvTxt(p.hook,'small').split('·')[1]||'').trim(),line:hookT,shot:hookS,t:'0–'+h+'s'},beats,cta:Object.assign(cta,{t:c+'–'+Y+'s'}),Y};
+ LVD={n,key,must,hook:{type:(lvTxt(p.hook,'small').split('·')[1]||'').trim(),line:hookT,shot:hookS,t:'0–'+h+'s'},beats,cta:Object.assign(cta,{t:c+'–'+Y+'s'}),Y};
  lvPaint();return true}
 const q=t=>'“'+esc(t)+'”';
 const dir=t=>t?'<p class="sc-dir">'+LV.cam+esc(t)+'</p>':'';
@@ -943,6 +951,7 @@ function lvPaint(){const D=LVD,ing=$('#oing').innerHTML;
  $('#obody').innerHTML='<div class="bk"><div class="dpage"><div class="sc-tb2"><button class="ib" id="lvback" aria-label="Back">'+LV.back+'</button><span class="tt">Your script</span></div><div class="sc-pad sc-out">'+
  '<section class="sc-ideac"><div class="sc-ih"><span class="bulb">'+LV.bulb+'</span><b>IDEA</b><span class="len">'+D.Y+' s</span></div><h1>'+esc(idea)+'</h1><div class="lv-ing"><small>What you picked</small><div>'+chips.map(c=>'<span>'+esc(c)+'</span>').join('')+'</div></div></section>'+
  '<div class="sc-act"><button class="sv" id="lvsave">'+LV.save+'<span>Save script</span></button><button id="lvshare">'+LV.share+'<span>Share</span></button><button id="lvcopy">'+LV.copy+'<span>Copy</span></button></div>'+
+ (D.must&&D.must.length?'<section class="lv-must"><div class="sc-ph"><b>Must-say (from the brief)</b></div>'+D.must.map((m,i)=>'<div class="lv-mi"><span>'+esc(m.t)+'</span>'+(m.ok?'<span class="ok">✓ in the script</span>':'<button class="lv-add" data-i="'+i+'">+ add it</button>')+'</div>').join('')+'</section>':'')+
  '<div class="lv-start"><span>Your script starts here</span></div>'+
  '<div class="sc-pts"><section class="sc-hookc"><div class="sc-ph"><b>Hook</b><span class="tm">'+D.hook.t+'</span><button class="sc-ed" data-ed="hook" aria-label="Change the hook">'+LV.pen+'</button></div><p class="sc-q1">'+q(D.hook.line)+'</p>'+dir(D.hook.shot)+'</section>'+
  '<section class="sc-bodyc"><div class="sc-ph"><b>Body</b><span class="tm">'+(D.beats.length?D.beats[0].t.split('–')[0]+'–'+D.beats[D.beats.length-1].t.split('–')[1]:'')+'</span></div>'+dir(D.beats[0]&&D.beats[0].shot)+
@@ -954,6 +963,7 @@ function lvPaint(){const D=LVD,ing=$('#oing').innerHTML;
  $('#lvback').onclick=()=>show('v-home','back');
  $('#lvsave').onclick=()=>{saveScript(D.n);toast('Saved to your Library')};$('#lvshare').onclick=()=>toast("Opens the phone's share sheet (mock)");$('#lvcopy').onclick=()=>toast('Script copied');
  $('#lvprac').onclick=lvTP;
+ $$('#obody .lv-add').forEach(b=>b.onclick=()=>{D.must[+b.dataset.i].ok=true;const sc=$('#oscr'),y=sc.scrollTop;lvPaint();sc.scrollTop=y;toast('Added to the script (sample: the line is not rewritten in this mock)')});
  $('#lvrew').onclick=()=>{if(!REW[D.key])return;REW[D.key]--;const sc=$('#oscr'),y=sc.scrollTop;render(D.n);sc.scrollTop=y;toast('Rewritten (sample script)')};
  $$('#obody .sc-ed').forEach(b=>b.onclick=()=>b.dataset.ed==='hook'?(HKMODE==='B'?lvHookMore():lvHook()):lvRefine(b.dataset.ed))}
 function lvSheet(inner){$$('#v-out > .bk.lvs').forEach(x=>x.remove());const w=document.createElement('div');w.className='bk lvs';w.innerHTML='<button class="scrim" aria-label="Close"></button><div class="hm-sheet sc-sheet"><span class="grab"></span>'+inner+'</div>';$('#v-out').append(w);w.querySelector('.scrim').onclick=()=>w.remove();return w}
