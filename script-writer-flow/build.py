@@ -304,6 +304,17 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
 .out .idea,.out .meta,#hooks .from{display:none}
 .srcl{font-size:12.5px;font-weight:600;color:var(--mute);margin:6px 0 2px}
+/* spacing pass 25 Nov (Veejay): more air on the script page */
+#v-out .srcl{margin:12px 0 6px}
+#v-out h1{margin:0 0 20px}
+#v-out #hooks .hg{padding:16px 16px 14px;margin:0 0 16px}
+#v-out #hooks .gh{margin:0 0 12px}
+#v-out #hooks .ho{padding:12px 14px;margin:0 0 10px}
+#v-out #hooks .ho:last-child{margin-bottom:0}
+#v-out .tele{margin:8px 0 8px}
+#v-out .sech{margin:28px 2px 12px}
+#v-out #obody .blk,#v-out #obody .verdict{margin-bottom:14px}
+#v-out #obody .hook{margin-bottom:16px}
 .idea{display:flex;align-items:center;gap:8px;margin:4px 0 2px}.idea small{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--mute)}.idea b{font-size:12px;font-weight:800;background:var(--ink);color:#fff;border-radius:6px;padding:1px 6px}
 .from2{font-size:13px;color:var(--mute);margin:6px 0}.from2 b{color:var(--ink)}
 .sech{display:flex;align-items:baseline;gap:8px;margin:16px 2px 6px}.sech b{font-size:12px;font-weight:800;letter-spacing:.06em}.sech em{font-style:normal;font-size:12px;font-weight:700;color:var(--mute)}
