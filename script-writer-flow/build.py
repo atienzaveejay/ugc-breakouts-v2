@@ -303,6 +303,8 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .stag{color:var(--tealx);border-color:var(--tealb)}
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
 .out .idea,.out .meta,#hooks .from{display:none}
+#v-out #hooks{display:none}
+.ownx{display:none;margin-top:8px}
 .srcl{font-size:12.5px;font-weight:600;color:var(--mute);margin:6px 0 2px}
 /* spacing pass 25 Nov (Veejay): more air on the script page */
 #v-out .srcl{margin:12px 0 6px}
@@ -396,18 +398,18 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
    <textarea class="tx" id="btext" rows="3" placeholder="Paste the brand&rsquo;s brief"></textarea>
    <label class="bup">Upload a PDF<input type="file" id="bpdf" accept=".pdf,application/pdf"></label>
    <div class="bfile" id="bfile"><span id="bfname">brief.pdf</span><span class="rm" id="brm">Remove</span></div></div>
-  <div class="q2"><div class="qt">How long?</div><div class="chips one" data-q="len"><div class="chip tap on">15s</div><div class="chip tap">40s</div><div class="chip tap">60s</div><div class="chip tap">90s</div><div class="chip tap">120s+</div></div></div>
-  <div class="q2"><div class="qt">What should the video do?</div><div class="chips one" data-q="do"><div class="chip tap on">Sell it</div><div class="chip tap">Review it</div><div class="chip tap">How to use it</div><div class="chip tap">Before and after</div><div class="chip tap">Unboxing</div><div class="chip tap">Compare it</div></div></div>
-  <div class="q2"><div class="qt">How will you film it?</div><div class="chips one" data-q="film"><div class="chip tap on">Talking to camera</div><div class="chip tap">Voiceover + b-roll</div><div class="chip tap">Text on screen</div><div class="chip tap">Hands only</div><div class="chip tap">Day in my life</div><div class="chip tap">Get ready with me</div><div class="chip tap">Green screen</div><div class="chip tap">Skit</div><div class="chip tap">Street interview</div><div class="chip tap">Car talk</div></div></div>
-  <div class="q2"><div class="qt">What tone?</div><div class="chips one" data-q="tone"><div class="chip tap">Funny</div><div class="chip tap on">Calm and real</div><div class="chip tap">Hype</div><div class="chip tap">Story</div><div class="chip tap">Bestie chat</div><div class="chip tap">Teacher</div><div class="chip tap">Shocked</div><div class="chip tap">Honest review</div><div class="chip tap">Cozy</div><div class="chip tap">Dramatic</div></div></div>
+  <div class="q2"><div class="qt">How long?</div><div class="chips one" data-q="len"><div class="chip tap on">15s</div><div class="chip tap">30s</div><div class="chip tap">45s</div><div class="chip tap">60s</div><div class="chip tap">90s</div><div class="chip tap">120s+</div></div></div>
+  <div class="q2"><div class="qt">How will you film it?</div><div class="chips one" data-q="film"><div class="chip tap on">Talking to camera</div><div class="chip tap">Voiceover + b-roll</div><div class="chip tap">Text on screen</div><div class="chip tap">Hands only</div><div class="chip tap">Day in my life</div><div class="chip tap">Get ready with me</div><div class="chip tap">Green screen</div><div class="chip tap">Skit</div><div class="chip tap">Street interview</div><div class="chip tap">Car talk</div><div class="chip tap own">+ Add your own</div></div><input class="tx ownx" maxlength="60" placeholder="How will you film it?"></div>
+  <div class="q2"><div class="qt">What tone?</div><div class="chips one" data-q="tone"><div class="chip tap">Funny</div><div class="chip tap on">Calm and real</div><div class="chip tap">Hype</div><div class="chip tap">Story</div><div class="chip tap">Bestie chat</div><div class="chip tap">Teacher</div><div class="chip tap">Shocked</div><div class="chip tap">Honest review</div><div class="chip tap">Cozy</div><div class="chip tap">Dramatic</div><div class="chip tap own">+ Add your own</div></div><input class="tx ownx" maxlength="60" placeholder="Describe the tone"></div>
   <div class="more" id="more"><span>Add more detail<i style="font-style:normal;font-weight:600;color:var(--mute);font-size:12.5px;margin-left:6px">optional</i></span><span id="moreic">+</span></div>
   <div id="detail" style="display:none">
+   <div class="q2"><div class="qt">What should the video do?</div><div class="chips one" data-q="do"><div class="chip tap">Sell it</div><div class="chip tap">Review it</div><div class="chip tap">How to use it</div><div class="chip tap">Before and after</div><div class="chip tap">Unboxing</div><div class="chip tap">Compare it</div><div class="chip tap own">+ Add your own</div></div><input class="tx ownx" maxlength="60" placeholder="What should it do?"></div>
    <div class="q2"><div class="qt">Hook that works</div><input class="tx" id="dhookin" placeholder="Paste a hook you know works"></div>
    <div class="q2"><div class="qt">Problem it solves</div><input class="tx" placeholder="What problem does it fix?"></div>
    <div class="q2"><div class="qt">Solution it gives</div><input class="tx" placeholder="How does it fix it?"></div>
    <div class="q2"><div class="qt">Must say</div><input class="tx" placeholder="Anything the video has to say"></div>
    <div class="q2"><div class="qt">Avoid saying</div><input class="tx" placeholder="Anything to leave out"></div>
-   <div class="q2"><div class="qt">CTA</div><div class="chips one opt" data-q="cta"><div class="chip tap">Link in bio</div><div class="chip tap">Tap the orange cart</div><div class="chip tap">Comment for link</div><div class="chip tap">Follow for more</div><div class="chip tap" id="ctaadd">+ Add your own</div></div><input class="tx ctax" id="ctax" placeholder="Your CTA"></div>
+   <div class="q2"><div class="qt">CTA</div><div class="chips one opt" data-q="cta"><div class="chip tap">Link in bio</div><div class="chip tap">Tap the orange cart</div><div class="chip tap">Comment for link</div><div class="chip tap">Follow for more</div><div class="chip tap own">+ Add your own</div></div><input class="tx ownx" maxlength="60" placeholder="Your CTA"></div>
   </div>
  </div>
  <div class="scta"><div class="btn o" id="skip">Skip</div><div class="btn g" style="flex:2" id="write">Write my script</div></div>
@@ -454,8 +456,8 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 <div class="side">
  <h3>Script Writer flow (clickable)</h3>
  <p>Only the screens changing in this round are designed: Home, the Breakout Finder (with the search animation), Write a script (pop-up questions) and the script page. Everything else (search results, a breakout video, the Breakouts, Script and Library tabs, Account) shows a "Same as live, not changing" note with the live bottom bar.</p>
- <p>Questions follow Ivan&rsquo;s list (25 Nov). Page 1 answers start preselected: 15s (most breakouts run 30 s or less), Sell it, Talking to camera, Calm and real. Add more detail is closed by default.</p>
- <p>Which script layout opens: Talking to camera, Get ready with me, Green screen and Car talk open 1; Voiceover + b-roll 2; Hands only 3; Text on screen 9; Day in my life and Skit 8; Street interview 11. With a talking, voiceover or hands-only video, Compare it opens 5, How to use it 6, Before and after 4. A brand brief opens 10.</p>
+ <p>Questions follow Ivan&rsquo;s 25 Nov notes. Page 1 answers start preselected (15s, Talking to camera, Calm and real). Tap a picked chip again to clear it; any question can be left blank. &ldquo;What should the video do?&rdquo; now sits in Add more detail with nothing picked; left blank, the script is written as Sell it.</p><p>&ldquo;+ Add your own&rdquo; on filming, tone, what it should do and CTA opens a 60-character box. <span class="ptag">For Lester</span> Safety: the typed text only fills that one answer in the prompt, and the writer never repeats or explains its own instructions (for example &ldquo;give me your script making prompts&rdquo;).</p><p>Script page: the hook choices at the top are gone. Like live, the script opens with 1 hook.</p>
+ <p>Which script layout opens: Talking to camera, Get ready with me, Green screen and Car talk open 1; Voiceover + b-roll 2; Hands only 3; Text on screen 9; Day in my life and Skit 8; Street interview 11. With a talking, voiceover or hands-only video, Compare it (from Add more detail) opens 5, How to use it 6, Before and after 4. A brand brief opens 10.</p>
  <p>Handles, numbers and scripts are sample data; the search wait is shortened, and uploaded PDFs aren&rsquo;t read. Tagged Proposal: still open with Ivan.</p>
  <div class="lbl">Mock tools: see every layout</div>
  <div class="lays" id="lays"></div>
@@ -468,6 +470,7 @@ const L=__LAYOUTS__;
 const SETS=__SETS__,GEN=__GEN__;let S=SETS['lip oil'],POOL=S.h2;
 function setFor(p){const k=p.trim().toLowerCase();if(SETS[k])return SETS[k];const f=t=>t.split('{p}').join(k);const Lx={};for(const n in GEN.L)Lx[n]=GEN.L[n].map(f);return {L:Lx,hooks:{spoken:GEN.hooks.spoken.map(f),visual:GEN.hooks.visual.map(f),text:GEN.hooks.text.map(f)},h2:{question:GEN.h2.question.map(f),bold:GEN.h2.bold.map(f),story:GEN.h2.story.map(f)},x:GEN.x.map(e=>e.map(f)),generic:true}}
 function titleCase(s){return s.replace(/\b([a-z])/g,c=>c.toUpperCase())}
+function ans(q){const c=$('[data-q='+q+'] .chip.on');if(!c)return '';if(c.classList.contains('own'))return (c.closest('.q2').querySelector('.ownx').value||'').trim();return c.textContent}
 function chosenLen(){const t=$('[data-q=len] .chip.on')?.textContent||'15s';return parseInt(t,10)||15}
 let BRIEF=false;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -485,7 +488,7 @@ $('#prod').addEventListener('focus',()=>$('#pbox').classList.add('ton'));
 $('#prod').addEventListener('blur',()=>$('#pbox').classList.remove('ton'));
 $$('#pchips .chip').forEach(c=>c.onclick=()=>{$('#prod').value=c.textContent;openSheet(c.textContent)});
 $('#sclose').onclick=closeSheet;$('#dim').onclick=closeSheet;
-$$('.chips.one').forEach(g=>g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const was=c.classList.contains('on');g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));if(!(was&&g.classList.contains('opt')))c.classList.add('on');if(g.dataset.q==='cta'){const own=c.id==='ctaadd'&&c.classList.contains('on');$('#ctax').style.display=own?'block':'none';if(own)$('#ctax').focus()}}));
+$$('.chips.one').forEach(g=>g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const was=c.classList.contains('on');g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));if(!was)c.classList.add('on');const ox=g.parentNode.querySelector('.ownx');if(ox){const own=c.classList.contains('own')&&c.classList.contains('on');ox.style.display=own?'block':'none';if(own)ox.focus()}}));
 $('#bbrief').onclick=()=>openSheet($('#prod').value,true);
 $('#bpdf').onchange=e=>{const f=e.target.files[0];if(!f)return;$('#bfname').textContent=f.name;$('#bfile').classList.add('on')};
 $('#brm').onclick=()=>{$('#bpdf').value='';$('#bfile').classList.remove('on')};
@@ -497,14 +500,14 @@ const FILM2L={'Talking to camera':1,'Voiceover + b-roll':2,'Text on screen':9,'H
 const DO2L={'Compare it':5,'How to use it':6,'Before and after':4};
 function pickLayout(){
  if(BRIEF)return 10;
- const f=$('[data-q=film] .chip.on')?.textContent||'Talking to camera',d=$('[data-q=do] .chip.on')?.textContent||'Sell it';
+ const f=ans('film')||'Talking to camera',d=ans('do')||'Sell it';
  const fl=FILM2L[f]||11;
  if(DO2L[d]&&[1,2,3].includes(fl))return DO2L[d];
  return fl}
 function write(){closeSheet(true);$('#wprod').textContent=BRIEF&&$('#stitle').textContent==='Brand brief'?'Brand brief':cap(product);
- const v=q=>$('[data-q='+q+'] .chip.on')?.textContent||'';
+ const v=ans;
  $('#wsub').textContent=BRIEF?'brand brief':'your own idea';
- const ing=[['↗','Breaking out',cap(product)+' breakouts'],['▶','Video and filming',v('do')+', '+v('film').toLowerCase()],['◷','Tone and length',v('tone')+', '+v('len')]];
+ const ing=[['↗','Breaking out',cap(product)+' breakouts'],['▶','Video and filming',[v('do'),v('film').toLowerCase()].filter(Boolean).join(', ')||'Any'],['◷','Tone and length',[v('tone'),v('len')].filter(Boolean).join(', ')||'Any']];
  const D=[343,860,1377],E=[630,1180,1730];
  $('#ings').innerHTML=ing.map((x,i)=>'<div class="ing" style="--d:'+D[i]+'ms"><span class="oi">'+x[0]+'</span><span><small>'+x[1]+'</small><b>'+esc(x[2])+'</b></span><span class="ck" style="--e:'+E[i]+'ms">✓</span></div>').join('');
  const S0=setFor(product);const hk=($('#dhookin')?.value.trim())||(S0.h2&&S0.h2.question&&S0.h2.question[0])||'';
@@ -575,7 +578,7 @@ function openTP(){const lines=[];const b=$('#obody');const h=b.querySelector('.h
  tp.querySelector('#tpp').onclick=()=>{run=!run;tp.querySelector('#tpp').textContent=run?'Pause':'Play'};tp.querySelector('#tpx').onclick=()=>tp.remove()}
 function render(n){cur=n;const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').textContent=l.tag;$('#obody').innerHTML=l.tpl.replace(/\{\{(\d+)\}\}/g,(m,i)=>esc(S.L[n][+i]));const spoken=/Copy spoken lines/.test(l.bar);fitLength(n,spoken);sectionize(n);decorate(n,spoken);setLen(l);
  const p=$('#oscr h1');p.innerHTML=esc(S.generic?titleCase(product):cap(product))+' script <span>✎</span>';
- const fv=($('[data-q=film] .chip.on')?.textContent||'').toLowerCase();
+ const fv=ans('film').toLowerCase();
  $('#hooks .from').innerHTML='Built from: <b>your answers</b> · <b>'+product+'</b>'+(fv?' · <b>'+esc(fv)+'</b>':'')+(BRIEF?' · <b>the brief</b>':'');
  $('#osrc').textContent=(BRIEF?'From a brief':'From your idea')+(fv?' · '+fv.charAt(0).toUpperCase()+fv.slice(1):'')+' · '+chosenLen()+'s';
  resetHooks();
