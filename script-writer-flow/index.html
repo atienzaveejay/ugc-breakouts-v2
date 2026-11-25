@@ -299,6 +299,10 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
 .out .idea,.out .meta,#hooks .from{display:none}
 #v-out #hooks{display:none}
+#v-out.lv .top,#v-out.lv #osrc,#v-out.lv #oscr>h1,#v-out.lv #oing,#v-out.lv #oscr>.ostart,#v-out.lv #ofrom,#v-out.lv #obar{display:none!important}
+#v-out.lv #oscr{padding-top:0}
+#v-out .bk .lv-ing{border-top:1px solid #b9dcdc;margin-top:12px;padding-top:10px}#v-out .bk .lv-ing small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--teal);text-transform:uppercase;margin-bottom:6px}#v-out .bk .lv-ing div{display:flex;flex-wrap:wrap;gap:6px}#v-out .bk .lv-ing span{background:#fff;border-radius:7px;padding:4px 8px;font-size:12.5px;font-weight:600}
+#v-out .bk .lv-start{display:flex;align-items:center;gap:10px;margin:6px 0}#v-out .bk .lv-start::before,#v-out .bk .lv-start::after{content:'';flex:1;height:2px;background:var(--ink)}#v-out .bk .lv-start span{font-size:12.5px;font-weight:800}
 .oing{background:#EDE6E0;border-radius:14px;padding:14px;margin:0 0 4px}.oing .oh{font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--mute);text-transform:uppercase;margin-bottom:8px}.oing .oc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.oing .oc span{background:#fff;border-radius:7px;padding:4px 8px;font-size:12.5px;font-weight:600}.oing .oi{border-top:1px solid #DCD3CC;padding-top:10px}.oing .oi p{font-size:15px;font-weight:700;line-height:1.35;margin-top:4px}.ostart{display:flex;align-items:center;gap:10px;margin:18px 0 14px}.ostart::before,.ostart::after{content:'';flex:1;height:2px;background:var(--ink)}.ostart span{font-size:12.5px;font-weight:800}
 .ownx{display:none;margin-top:8px}
 .srcl{font-size:12.5px;font-weight:600;color:var(--mute);margin:6px 0 2px}
@@ -346,6 +350,275 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .out .btn:active,.out .ho:active,.out .back:active{transform:scale(.98)}
 .out .blk:active{transform:scale(.99)}
 .out .ho.sw{animation:rv .3s var(--out) var(--d,0ms) both}
+/* Copied from the live app stylesheet (ugcbreakouts.com app-7BvagYdd.css, 25 Nov), scoped to the script page */
+#v-out .bk{--coral:#ff4f5e;--coral-d:#d8304a;--cyan:#2dd4d8;--gold:#c9a227;--gold-soft:#f7f1de;--teal:#0b7b7f;--teal-soft:#e4f4f4;--paper:#f4f0ec;--ink:#171312;--mid:#766c67;--hair:#e4dcd5;--pill:#eae3dd;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;--sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--paper);min-height:100dvh;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;flex-direction:column;font-size:15px;line-height:1.4;display:flex;position:relative}
+#v-out .bk .tt{letter-spacing:-.02em;font-size:17px;font-weight:800}
+#v-out .bk .ib{width:38px;height:38px;color:var(--ink);cursor:pointer;background:0 0;border:0;border-radius:12px;flex:none;place-items:center;padding:0;display:grid}
+#v-out .bk .ib svg{width:22px;height:22px}
+#v-out .bk .ib.ghost{visibility:hidden}
+#v-out .bk .b{min-height:52px;font:700 16px/1.1 var(--sans);cursor:pointer;text-align:center;border:0;border-radius:14px;justify-content:center;align-items:center;gap:8px;padding:0 18px;text-decoration:none;display:flex}
+#v-out .bk .b1{background:var(--coral);color:#fff;box-shadow:0 10px 22px -12px #ff4f5ebf}
+#v-out .bk .b1:active{transform:translateY(1px)}
+#v-out .bk .b2{color:var(--ink);border:1.5px solid var(--hair);background:#fff}
+#v-out .bk .b2.on{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}
+#v-out .bk .full-w{width:100%}
+#v-out .bk .chips{flex-wrap:wrap;gap:8px;display:flex}
+#v-out .bk .chip{border:1px solid var(--hair);min-height:36px;font:600 14px var(--sans);cursor:pointer;color:var(--ink);background:#fff;border-radius:999px;align-items:center;gap:6px;padding:0 14px;display:inline-flex}
+#v-out .bk .chip.ghost{background:0 0}
+#v-out .bk .chip:hover{border-color:#cfc4bb}
+#v-out .bk .scrim{z-index:20;cursor:pointer;background:#17131261;border:0;width:100%;padding:0;position:fixed;inset:0}
+#v-out .bk .sheet .grab{background:#d6cdc6;border-radius:9px;align-self:center;width:40px;height:5px;margin-bottom:8px}
+#v-out .bk .bn .tx{flex-direction:column;flex:1;gap:1px;min-width:0;display:flex}
+#v-out .bk .bn .tx b{font-size:15px}
+#v-out .bk .bn .tx small{color:var(--mid);font-size:12.5px}
+#v-out .bk .authbar .ttl{justify-content:space-between;align-items:baseline;gap:8px;display:flex}
+#v-out .bk .authbar .ttl b{font-size:15.5px}
+#v-out .bk .authbar .ttl small{color:var(--mid);white-space:nowrap;font-size:12.5px}
+#v-out .bk .ctrls .chip{white-space:nowrap;flex:none;min-height:34px;font-size:13.5px}
+#v-out .bk .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+#v-out .bk .chip svg{width:14px;height:14px}
+#v-out .bk .rh .ib{margin-right:-8px}
+#v-out .bk .rh .ib.on{color:var(--teal)}
+#v-out .bk .ctabox .chip{color:#fff;background:0 0;border-color:#4a413d}
+#v-out .bk .ctabox .b2{color:#fff;background:#2a2320;border-color:#4a413d}
+#v-out .bk .srow2 .ib.on{color:var(--teal)}
+#v-out .bk .snap{color:var(--mid);margin:-8px 0 0;font-size:13px}
+#v-out .bk .snap .lnk{color:var(--coral-d);font-weight:700;text-decoration:none}
+#v-out .bk .tt2{text-align:left;cursor:pointer;font-family:var(--sans);color:var(--ink);background:0 0;border:0;flex-direction:column;gap:7px;min-width:0;padding:0;display:flex;position:relative}
+#v-out .bk .tmeta{flex-direction:column;gap:1px;min-width:0;padding:0 2px;display:flex}
+#v-out .bk .tmeta b{white-space:nowrap;text-overflow:ellipsis;font-size:14.5px;overflow:hidden}
+#v-out .bk .tmeta small{color:var(--mid);white-space:nowrap;text-overflow:ellipsis;font-size:12px;overflow:hidden}
+#v-out .bk .trow .tmeta b{font-size:12.5px}
+#v-out .bk .chip.pick{padding-left:10px}
+#v-out .bk .chip.pick svg{width:15px;height:15px}
+#v-out .bk .chiprow{grid-template-columns:1fr auto;align-items:start;gap:8px;display:grid}
+#v-out .bk .dcard .row .b{white-space:nowrap;min-height:46px;padding:0 14px;font-size:15px}
+#v-out .bk .b[disabled]{opacity:.6;cursor:default}
+#v-out .bk a.b,#v-out .bk a.chip,#v-out .bk a.tt2{text-decoration:none}
+@media (prefers-reduced-motion:no-preference){#v-out .bk{scroll-behavior:smooth}}
+#v-out .bk .b.lcta{white-space:nowrap;border-radius:11px;min-height:38px;padding:0 15px;font-size:14px}
+@media (width<=400px){#v-out .bk .b.lcta{padding:0 11px;font-size:13.5px}#v-out .bk .b.lcta svg{display:none}}
+#v-out .bk .mcta .b{min-height:46px;padding:0 20px;font-size:15px}
+#v-out .bk .sct.cta .mcta .b2{color:#fff;background:#241e1c;border-color:#3a312d}
+#v-out .bk .rs-unlock .b1{box-shadow:none}
+#v-out .bk .rs-again .chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+#v-out .bk .rs .b1,#v-out .bk .rs-sheet .b1,#v-out .bk .dt .b1,#v-out .bk .dt-desk .b1,#v-out .bk .dt-dock .b1{background:var(--coral-d);box-shadow:0 6px 16px #d8304a3d}
+#v-out .bk .rs-sheet .grab{background:var(--hair);border-radius:3px;align-self:center;width:40px;height:5px}
+#v-out .bk .svt{color:var(--teal);font-size:12px;font-weight:700}
+#v-out .bk .rs-tier .rd{border:2px solid var(--hair);border-radius:50%;flex:none;place-items:center;width:22px;height:22px;display:grid}
+#v-out .bk .rs-tier.on .rd{background:var(--ink);border-color:var(--ink)}
+#v-out .bk .rs-tier.on .rd:after{content:"";background:#fff;border-radius:50%;width:8px;height:8px}
+#v-out .bk .dt-next .chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+#v-out .bk .dt-dock .b{white-space:nowrap;min-height:52px;padding:0 14px}
+#v-out .bk .dt-sheet .grab{background:var(--hair);border-radius:3px;align-self:center;width:40px;height:5px}
+#v-out .bk .dt-desk .dt-dock .b{min-width:0;padding:0 10px;font-size:14.5px}
+#v-out .bk .tb-lockcard .b1{background:var(--coral-d);box-shadow:0 6px 16px #d8304a3d}
+#v-out .bk .hm .b1{background:var(--coral-d);box-shadow:0 6px 16px #d8304a3d}
+#v-out .bk .hm-ph .tx{flex-direction:column;flex:1;min-width:0;display:flex}
+#v-out .bk .hm-ph .tx b{letter-spacing:-.025em;text-overflow:ellipsis;white-space:nowrap;font-size:17px;font-weight:800;line-height:1.45;overflow:hidden}
+#v-out .bk .hm-ph .tx small{color:var(--mid);font-size:12.5px}
+#v-out .bk .hm-fix .row>.b{flex:1}
+#v-out .bk .hm-li .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .hm-li .tx b{white-space:nowrap;text-overflow:ellipsis;font-size:15px;font-weight:700;overflow:hidden}
+#v-out .bk .hm-li .tx small{color:var(--mid);white-space:nowrap;text-overflow:ellipsis;font-size:12.5px;overflow:hidden}
+#v-out .bk .hm-run .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .hm-run .tx b{letter-spacing:-.015em;font-size:16px;font-weight:750}
+#v-out .bk .hm-run .tx small{color:var(--mid);font-size:13.5px}
+#v-out .bk .hm-banner .tx{flex:1;min-width:0;font-size:13.5px;line-height:1.3}
+#v-out .bk .hm-banner .tx b{font-weight:700;display:block}
+#v-out .bk .hm-banner .tx small{color:#bdb2ab;font-size:12px;display:block}
+#v-out .bk .hm-l .tx{flex-direction:column;flex:1;min-width:0;display:flex}
+#v-out .bk .hm-l .tx small{color:var(--mid);margin-bottom:1px;font-size:12px;font-weight:500}
+#v-out .bk .hm-l .tx b{font-size:14.5px;font-weight:700}
+#v-out .bk .hm-wc .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .hm-wc .tx>b{-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:14.5px;font-weight:700;line-height:1.3;display:-webkit-box;overflow:hidden}
+#v-out .bk .hm-wc .tx small{color:var(--mid);font-size:12.5px}
+#v-out .bk .hm-sheet{z-index:21;background:var(--paper);max-width:560px;padding:10px 20px calc(24px + env(safe-area-inset-bottom));border-radius:26px 26px 0 0;flex-direction:column;gap:12px;margin:0 auto;animation:.35s cubic-bezier(.2,.8,.2,1) both lv-rs-up;display:flex;position:fixed;bottom:0;left:0;right:0}
+#v-out .bk .hm-sheet .grab{background:var(--hair);border-radius:3px;align-self:center;width:40px;height:5px}
+#v-out .bk .hm-sheet h2{letter-spacing:-.03em;margin:0;font-size:22px;font-weight:800}
+#v-out .bk .hm-sheet .lede{color:var(--mid);margin:0;font-size:14.5px;line-height:1.45}
+#v-out .bk .hm-sheet .sf{padding:6px 16px}
+#v-out .bk{--navh:64px}
+#v-out .bk .lb-tw .tt2{text-decoration:none}
+#v-out .bk .pw .b1{background:var(--coral-d)}
+#v-out .bk .sc .b{width:100%}
+#v-out .bk .ac .plan .b1{white-space:nowrap;padding-left:12px;padding-right:12px;font-size:14px}
+#v-out .bk .shvid .tx{flex-direction:column;gap:3px;min-width:0;display:flex}
+#v-out .bk .shvid .tx>b{font-size:17px;font-weight:700;line-height:1.3}
+#v-out .bk .shvid .tx>span{color:#6f6560;font-size:14px;line-height:1.4}
+#v-out .bk .shcta .b1{color:#fff;letter-spacing:-.01em;background:#d8304a;border-radius:14px;height:52px;min-height:52px;font-size:16px;font-weight:700;box-shadow:0 6px 16px #d8304a3d}
+#v-out .bk .shcta .b1:hover{background:#c92a43}
+#v-out .bk .tp-play .tx{flex-direction:column;flex:1;gap:2px;display:flex}
+#v-out .bk .tp-big .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .tp-big .tx b{font-size:15.5px}
+#v-out .bk .tp-big .tx small{color:var(--mid);font-size:13px}
+#v-out .bk .sc-tb2{align-items:center;gap:6px;padding:2px 14px 6px;display:flex}
+#v-out .bk .sc-tb2 .ib{margin-left:0}
+#v-out .bk .sc-tb2 .tt{letter-spacing:-.01em;font-size:17px;font-weight:750}
+#v-out .bk .sc-gen .tx,#v-out .bk .sc-w .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .sc-lbl{color:var(--mid);font-size:12.5px;font-weight:600}
+#v-out .bk .sc-chips .chip{flex:none}
+#v-out .bk .sc-chips .chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+#v-out .bk .sc-how{border-top:1px solid var(--hair);flex-direction:column;gap:12px;margin-top:4px;padding-top:20px;display:flex}
+#v-out .bk .sc-how ol{flex-direction:column;margin:0;padding:0;list-style:none;display:flex}
+#v-out .bk .sc-how li{gap:12px;padding-bottom:16px;display:flex;position:relative}
+#v-out .bk .sc-how li:last-child{padding-bottom:0}
+#v-out .bk .sc-how li:not(:last-child):before{content:"";background:var(--hair);width:1.5px;position:absolute;top:24px;bottom:0;left:11px}
+#v-out .bk .sc-how .n{border:1.5px solid var(--hair);background:var(--paper);width:24px;height:24px;color:var(--mid);border-radius:50%;flex:none;place-items:center;font-size:12px;font-weight:750;display:grid}
+#v-out .bk .sc-how .tx{flex-direction:column;gap:2px;padding-top:2px;display:flex}
+#v-out .bk .sc-how b{font-size:14.5px}
+#v-out .bk .sc-how small{color:var(--mid);font-size:13px;line-height:1.4}
+#v-out .bk .sc-start.dk>.sc-how{grid-area:4/2;margin-top:0}
+#v-out .bk .sc-pad{flex-direction:column;gap:20px;padding:16px 24px 170px;display:flex}
+#v-out .bk .sc-hks{flex-direction:column;gap:12px;display:flex}
+#v-out .bk .sc-hk{flex-direction:column;gap:10px;transition:opacity .2s;display:flex}
+#v-out .bk .sc-hk.busy{opacity:.5}
+#v-out .bk .sc-ho{text-align:left;cursor:pointer;width:100%;font-family:var(--sans);color:var(--ink);--hc:#b7791f;background:#fff;border:2px solid #0000;border-radius:12px;align-items:center;gap:12px;padding:16px 18px;animation:.3s lv-sc-pg;display:flex;position:relative;overflow:hidden;box-shadow:0 1px 2px #1713120f,0 2px 8px #1713120d}
+#v-out .bk .sc-ho:nth-child(3n+2){--hc:#5b5bd6}
+#v-out .bk .sc-ho:nth-child(3n+3){--hc:#c2410c}
+#v-out .bk .sc-ho:before{content:"";background:var(--hc);width:4px;position:absolute;top:0;bottom:0;left:0}
+#v-out .bk .sc-ho .tx{flex-direction:column;flex:1;gap:4px;min-width:0;display:flex}
+#v-out .bk .sc-ho small{text-transform:uppercase;letter-spacing:.05em;color:var(--hc);font-size:11px;font-weight:700}
+#v-out .bk .sc-ho b{font-size:17px;font-weight:600;line-height:1.35}
+#v-out .bk .sc-ho .os{color:var(--mid);font-size:13px;font-weight:500}
+#v-out .bk .sc-ho .rd{border:2px solid #cfc6bd;border-radius:50%;flex:none;width:20px;height:20px}
+#v-out .bk .sc-ho:not(.on):hover{border-color:var(--hair)}
+#v-out .bk .sc-ho.on{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal);background:#e8f5f3}
+#v-out .bk .sc-ho.on:before{background:var(--teal)}
+#v-out .bk .sc-ho.on small{color:var(--teal)}
+#v-out .bk .sc-ho.on b{color:#0b3f3c;font-weight:700}
+#v-out .bk .sc-ho.on .os{color:#2f6b67}
+#v-out .bk .sc-ho.on .rd{border:6px solid var(--teal)}
+#v-out .bk .sc-ta{box-sizing:border-box;border:1.5px solid var(--hair);width:100%;min-height:80px;font:500 15px/1.45 var(--sans);resize:vertical;color:var(--ink);background:#fff;border-radius:10px;padding:14px 16px}
+#v-out .bk .sc-ta:focus{border-color:var(--ink);outline:none}
+#v-out .bk .sc-cta .b{height:52px}
+#v-out .bk .sc-steps{grid-template-columns:repeat(3,1fr);gap:8px;margin:0;padding:0;list-style:none;display:grid}
+#v-out .bk .sc-steps li{border-top:3px solid var(--hair);color:var(--mid);align-items:center;gap:6px;padding-top:10px;font-size:13.5px;font-weight:600;display:flex}
+#v-out .bk .sc-steps .n{background:var(--pill);border-radius:50%;flex:none;place-items:center;width:18px;height:18px;font-size:11px;font-weight:750;display:grid}
+#v-out .bk .sc-steps .n svg{fill:none;stroke:#fff;stroke-width:3px;stroke-linecap:round;stroke-linejoin:round;width:11px;height:11px}
+#v-out .bk .sc-steps li.now{border-color:var(--ink);color:var(--ink);font-weight:700}
+#v-out .bk .sc-steps li.now .n{background:var(--ink);color:#fff}
+#v-out .bk .sc-steps li.done{border-color:var(--teal);color:var(--ink)}
+#v-out .bk .sc-steps li.done .n{background:var(--teal)}
+#v-out .bk .sc-bowl .sp.b{color:var(--teal);font-size:16px;animation-delay:.35s;top:14%;right:6%}
+@media (prefers-reduced-motion:reduce){#v-out .bk .sc-ho{animation:none}}
+#v-out .bk .sc-out{padding-bottom:110px}
+#v-out .bk .sc-prac{font:650 14px var(--sans);color:var(--ink);cursor:pointer;background:0 0;border:0;align-self:flex-start;align-items:center;gap:6px;margin-top:6px;padding:0;display:inline-flex}
+#v-out .bk .sc-prac svg{fill:currentColor;width:14px;height:14px}
+#v-out .bk .sc-pts{flex-direction:column;gap:12px;display:flex}
+#v-out .bk .sc-pt .ph .tm{color:#ffffffb8;font-size:12.5px;font-weight:600}
+#v-out .bk .sc-rw{border:1.5px dashed var(--hair);text-align:center;border-radius:12px;flex-direction:column;align-items:center;gap:8px;padding:24px 20px;display:flex}
+#v-out .bk .sc-rw b{font-size:15px}
+#v-out .bk .sc-rw .b{min-height:44px;padding:0 18px}
+#v-out .bk .sc-act{z-index:15;padding:14px 20px calc(14px + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--hair);grid-template-columns:2.2fr 1fr 1fr;gap:8px;display:grid;position:fixed;bottom:0;left:0;right:0}
+#v-out .bk.has-nav .sc-act{bottom:calc(var(--navh) + env(safe-area-inset-bottom));padding-bottom:10px}
+#v-out .bk .sc-act button{border:1.5px solid var(--hair);height:54px;font:700 11.5px var(--sans);color:var(--ink);cursor:pointer;background:#fff;border-radius:12px;flex-direction:column;justify-content:center;align-items:center;gap:3px;display:flex}
+#v-out .bk .sc-act button svg{fill:none;stroke:currentColor;stroke-width:1.9px;stroke-linecap:round;stroke-linejoin:round;width:19px;height:19px}
+#v-out .bk .sc-act .sv{background:var(--coral-d);border-color:var(--coral-d);color:#fff;flex-direction:row;gap:8px;font-size:16px}
+#v-out .bk .sc-act .sv svg{width:18px;height:18px}
+#v-out .bk .sc-act .sv.on{background:var(--teal);border-color:var(--teal)}
+#v-out .bk .sc-act .sv.on svg{fill:currentColor}
+#v-out .bk .sc-out>.sc-upd{padding:0}
+#v-out .bk .sc-rw .b{align-items:center;gap:6px;display:inline-flex}
+#v-out .bk .sc-rw .b svg{fill:none;stroke:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;width:16px;height:16px}
+#v-out .bk .sc-rw .b[disabled]{opacity:.5;cursor:default}
+#v-out .bk .sc-rw small{color:var(--mid);font-size:12.5px}
+#v-out .bk .sc-act button.lk{color:#9a908b;cursor:default;position:relative}
+#v-out .bk .sc-sheet{z-index:22;max-height:88vh;overflow:auto}
+#v-out .bk .sc-sheet .lede{color:var(--mid);margin:0;font-size:14.5px;line-height:1.45}
+#v-out .bk .sc-sform{flex-direction:column;gap:10px;display:flex}
+#v-out .bk .sc-sfq{border:1px solid var(--hair);background:#fff;border-radius:12px;flex-direction:column;gap:4px;padding:12px 14px;display:flex}
+#v-out .bk .sc-sfq .tm{color:#9a908b;font-size:12px;font-weight:600}
+#v-out .bk .sc-sfq p{margin:0;font-size:15px;font-weight:650;line-height:1.4}
+#v-out .bk .sc-sfq small{color:var(--mid);font-size:13px}
+#v-out .bk .sc-sft{flex-direction:column;gap:6px;display:flex}
+#v-out .bk .sc-sft span{font-size:14px;font-weight:700}
+#v-out .bk .sc-pick{flex-wrap:wrap;gap:8px;display:flex}
+#v-out .bk .sc-pick .chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+#v-out .bk .sc-fn{color:var(--mid);text-align:center;font-size:12.5px}
+#v-out .bk .sc-sheet .sc-hk{max-height:46vh;padding:2px;overflow:auto}
+#v-out .bk .ac-ttr .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .ac-ttr .tx b{font-size:15.5px}
+#v-out .bk .ac-ttr .tx small{color:var(--mid);font-size:13px}
+#v-out .bk .sc-lock .b{height:52px}
+#v-out .bk .sc-lock .sc-fn{align-self:center}
+#v-out .bk .sc-act .sc-actl{height:54px;font:700 16px var(--sans);background:var(--coral-d);color:#fff;border-radius:12px;justify-content:center;align-items:center;gap:8px;text-decoration:none;display:flex}
+#v-out .bk .sc-act .sc-actl svg{fill:none;stroke:currentColor;stroke-width:1.9px;stroke-linecap:round;stroke-linejoin:round;width:19px;height:19px}
+#v-out .bk .sc-act button[disabled]{opacity:.6;cursor:default}
+#v-out .bk .sc-svd .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .sc-from .tx{flex-direction:column;gap:2px;min-width:0;display:flex}
+#v-out .bk .sc-from .tx>span{color:var(--mid);text-overflow:ellipsis;white-space:nowrap;font-size:13.5px;overflow:hidden}
+#v-out .bk .sc-svs .sp.b{color:var(--teal);animation-delay:.4s;top:-4px;right:-8px}
+#v-out .bk .sc-svs .b{width:100%}
+#v-out .bk .sc-out .sc-pts{gap:16px}
+#v-out .bk .sc-from .tx{flex:1}
+#v-out .bk .sc-from .tx>span{font-size:14.5px}
+#v-out .bk .sc-ideac{background:#d7ecec;border:1.5px solid #b8dddd;border-radius:22px;flex-direction:column;gap:8px;padding:16px 18px 20px;display:flex}
+#v-out .bk .sc-ih{align-items:center;gap:10px;display:flex}
+#v-out .bk .sc-ih .bulb{width:34px;height:34px;color:var(--teal);background:#fff;border-radius:10px;place-items:center;display:grid}
+#v-out .bk .sc-ih .bulb svg{fill:none;stroke:currentColor;stroke-width:1.9px;stroke-linecap:round;stroke-linejoin:round;width:19px;height:19px}
+#v-out .bk .sc-ih b{letter-spacing:.08em;color:var(--teal);font-size:12.5px;font-weight:800}
+#v-out .bk .sc-ih .len{color:var(--mid);margin-left:auto;font-size:14.5px;font-weight:700}
+#v-out .bk .sc-ideac h1{letter-spacing:-.035em;margin:6px 0 0;font-size:27px;font-weight:800;line-height:1.1}
+#v-out .bk .sc-ideac p{letter-spacing:-.01em;margin:0;font-size:17px;line-height:1.35}
+#v-out .bk .sc-hookc{box-shadow:inset 5px 0 0 var(--teal);background:linear-gradient(#f4fafa,#fff 60%);border:1.5px solid #cfe6e6;border-radius:22px;padding:18px 20px 20px 22px}
+#v-out .bk .sc-bodyc,#v-out .bk .sc-ctac{border:1.5px solid var(--hair);background:#fff;border-radius:22px;overflow:hidden}
+#v-out .bk .sc-ctac{padding:18px 20px 20px}
+#v-out .bk .sc-ph{align-items:center;gap:10px;min-height:36px;display:flex}
+#v-out .bk .sc-ph b{letter-spacing:.07em;text-transform:uppercase;color:var(--teal);font-size:13px;font-weight:800}
+#v-out .bk .sc-ph .tm,#v-out .bk .sc-sp .tm{color:var(--mid);font-size:14.5px;font-weight:650}
+#v-out .bk .sc-ed{width:36px;height:36px;color:var(--mid);cursor:pointer;background:0 0;border:0;border-radius:10px;place-items:center;margin-left:auto;padding:0;display:grid}
+#v-out .bk .sc-ed svg{fill:none;stroke:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;width:16px;height:16px}
+#v-out .bk .sc-ed[disabled]{opacity:.35;cursor:default}
+#v-out .bk .sc-q1{letter-spacing:-.035em;margin:12px 0 10px;font-size:26px;font-weight:800;line-height:1.18}
+#v-out .bk .sc-q2{letter-spacing:-.025em;margin:10px 0 0;font-size:21px;font-weight:700;line-height:1.25}
+#v-out .bk .sc-dir{color:var(--mid);align-items:flex-start;gap:9px;margin:0;font-size:15.5px;line-height:1.4;display:flex}
+#v-out .bk .sc-dir svg{fill:none;width:18px;height:18px;stroke:var(--teal);stroke-width:1.9px;stroke-linecap:round;stroke-linejoin:round;flex:none;margin-top:2px}
+#v-out .bk .sc-bodyc>.sc-ph{padding:14px 20px 0}
+#v-out .bk .sc-bodyc>.sc-dir{padding:4px 20px 16px}
+#v-out .bk .sc-step{border-top:1.5px solid var(--hair);padding:14px 20px 20px}
+#v-out .bk .sc-step.fx,#v-out .bk .sc-ctac.fx{box-shadow:inset 0 0 0 2px var(--teal)}
+#v-out .bk .sc-sp{align-items:center;gap:10px;display:flex}
+#v-out .bk .sc-sp .sn{background:var(--teal-soft);width:34px;height:34px;color:var(--teal);border-radius:50%;flex:none;place-items:center;font-size:15px;font-weight:800;display:grid}
+#v-out .bk .sc-sp b{color:var(--teal);letter-spacing:-.01em;font-size:17px;font-weight:750}
+#v-out .bk .sc-step .sc-upd,#v-out .bk .sc-ctac .sc-upd{padding:10px 0 0}
+#v-out .bk .sc-prac-btn{border-radius:18px;min-height:54px;margin-top:4px}
+#v-out .bk .sc-prac-btn svg{width:14px;height:14px;fill:var(--teal);margin-right:6px}
+#v-out .bk .sc-rw{border:0;border-radius:0;gap:10px;padding:4px 0 0}
+#v-out .bk .sc-rw b{font-size:16px;font-weight:750}
+#v-out .bk .sc-rw .b{border-radius:999px;min-height:48px;padding:0 24px}
+#v-out .bk .sc-act button,#v-out .bk .sc-act .sc-actl{border-radius:16px}
+#v-out .bk .hm2-script .chips{flex-wrap:wrap;flex:1;gap:8px;display:flex}
+#v-out .bk .hm2-script .chips span{background:#fff;border-radius:999px;align-items:center;height:32px;padding:0 12px;font-size:13px;font-weight:700;transition:background .3s,color .3s;display:inline-flex}
+#v-out .bk .hm2-prof .who .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+@media (prefers-reduced-motion:no-preference){#v-out .bk .hm2-script .chips span{animation:lv-hm2-typed .5s var(--ease) both,lv-hm2-spot 6s var(--ease) infinite}#v-out .bk .hm2-script .chips span:first-child{animation-delay:.35s,0s}#v-out .bk .hm2-script .chips span:nth-child(2){animation-delay:.55s,2s}#v-out .bk .hm2-script .chips span:nth-child(3){animation-delay:.75s,4s}}
+#v-out .bk .sc2 .idea .tx{flex-direction:column;flex:1;gap:1px;min-width:0;display:flex}
+#v-out .bk .sc2 .chips{scrollbar-width:none;flex-wrap:nowrap;align-items:center;gap:6px;margin:4px -18px 0;padding:0 18px 2px;display:flex;overflow-x:auto}
+#v-out .bk .sc2 .chips::-webkit-scrollbar{display:none}
+#v-out .bk .sc2 .chips .lbl{font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mid);flex:none;margin-right:4px;font-size:11px;font-weight:600}
+#v-out .bk .sc2 .chips button{border:1px solid var(--teal-line);min-height:32px;font:inherit;color:var(--ink);cursor:pointer;background:#fff;border-radius:999px;flex:none;padding:0 12px;font-size:13px;font-weight:600}
+#v-out .bk .sc2 .chips button:hover,#v-out .bk .sc2 .chips button.on{border-color:var(--teal)}
+#v-out .bk .sc2-sc .tx{flex-direction:column;flex:1;gap:3px;min-width:0;display:flex}
+#v-out .bk .sc2-film .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+#v-out .bk .rs-script .tx{flex-direction:column;flex:1;gap:2px;min-width:0;display:flex}
+@keyframes lv-sc-pg{0%{opacity:0;transform:translateY(6px)}}
+@keyframes lv-hm2-typed{0%{opacity:0;transform:translateY(6px)scale(.96)}to{opacity:1;transform:none}}
+/* prototype frame: sheets sit inside the phone, not the browser window */
+#v-out .bk{min-height:0;background:transparent}#v-out .bk .hm-sheet,#v-out .bk .scrim{position:absolute}
+
+@keyframes lv-play{0%{width:0}to{width:100%}}
+@keyframes lv-up{0%{opacity:0;transform:translateY(12px)}}
+@keyframes lv-sheet{0%{opacity:.4;transform:translateY(40%)}}
+@keyframes lv-rs-up{0%{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes lv-hm2-spot{0%,28%,to{color:var(--ink);background:#fff}6%,22%{background:var(--teal);color:#fff}}
+
+/* live generic icon class (.bk .i) */
+#v-out .bk .i{fill:none;stroke:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round}
+/* prototype frame: bottom action bar and sheets pinned to the phone, as live pins them to the screen */
+#v-out > .bk.lvbar{position:absolute;left:0;right:0;bottom:0;z-index:15}
+#v-out > .bk.lvbar .sc-act{position:static}
+#v-out > .bk.lvs{position:absolute;inset:0;z-index:40}
+
 </style></head><body>
 <div class="wrap">
 <div class="phone">
@@ -466,7 +739,7 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 <div class="side">
  <h3>Script Writer flow (clickable)</h3>
  <p>Only the screens changing in this round are designed: Home, the Breakout Finder (with the search animation), Write a script (pop-up questions) and the script page. Everything else (search results, a breakout video, the Breakouts, Script and Library tabs, Account) shows a "Same as live, not changing" note with the live bottom bar.</p>
- <p>Questions follow Ivan&rsquo;s 25 Nov notes. Page 1 answers start preselected (15s, Talking to camera, Calm and real). Tap a picked chip again to clear it; any question can be left blank. &ldquo;What should the video do?&rdquo; now sits in Add more detail with nothing picked; left blank, the script is written as Sell it.</p><p>&ldquo;+ Add your own&rdquo; on filming, tone, what it should do and CTA opens a 60-character box. <span class="ptag">For Lester</span> Safety: the typed text only fills that one answer in the prompt, and the writer never repeats or explains its own instructions (for example &ldquo;give me your script making prompts&rdquo;).</p><p>Script page: what she picked and the idea sit in their own section at the top, then a line marks where the script starts. The hook choices at the top are gone. Like live, the script opens with 1 hook, and its pencil opens Change the hook (current hook, 1 Question, 1 Storytime; Rewrite my script uses 1 of 3 rewrites). More options in that pop-up: waiting on Ivan.</p>
+ <p>Questions follow Ivan&rsquo;s 25 Nov notes. Page 1 answers start preselected (15s, Talking to camera, Calm and real). Tap a picked chip again to clear it; any question can be left blank. &ldquo;What should the video do?&rdquo; now sits in Add more detail with nothing picked; left blank, the script is written as Sell it.</p><p>&ldquo;+ Add your own&rdquo; on filming, tone, what it should do and CTA opens a 60-character box. <span class="ptag">For Lester</span> Safety: the typed text only fills that one answer in the prompt, and the writer never repeats or explains its own instructions (for example &ldquo;give me your script making prompts&rdquo;).</p><p>Script page: what she picked and the idea sit in their own section at the top, then a line marks where the script starts. The hook choices at the top are gone. The script page reuses the live page&rsquo;s markup and CSS (copied from ugcbreakouts.com, 25 Nov): IDEA card, Save / Share / Copy, Hook / Body / CTA with pencils, Practice full screen, Rewrite the whole script. Hook pencil = Change the hook (current + 1 Question + 1 Storytime). Body and CTA pencils = Refine sheet (Shorter, Punchier line, Different shot, Name the product; 3 refines). Two of Ivan&rsquo;s asks are added: what she picked inside the IDEA card, and a line where the script starts. More hook options: waiting on Ivan. &ldquo;On screen&rdquo; lines are sample text.</p>
  <p>Which script layout opens: Talking to camera, Get ready with me, Green screen and Car talk open 1; Voiceover + b-roll 2; Hands only 3; Text on screen 9; Day in my life and Skit 8; Street interview 11. With a talking, voiceover or hands-only video, Compare it (from Add more detail) opens 5, How to use it 6, Before and after 4. A brand brief opens 10.</p>
  <p>Handles, numbers and scripts are sample data; the search wait is shortened, and uploaded PDFs aren&rsquo;t read. Tagged Proposal: still open with Ivan.</p>
  <div class="lbl">Mock tools: see every layout</div>
@@ -588,7 +861,7 @@ function openTP(){const lines=[];const b=$('#obody');const h=b.querySelector('.h
  tp.querySelector('#tpp').onclick=()=>{run=!run;tp.querySelector('#tpp').textContent=run?'Pause':'Play'};tp.querySelector('#tpx').onclick=()=>tp.remove()}
 const IDEA={'Sell it':'Show {p} fixing one everyday problem, then where to get it.','Review it':'An honest first take on {p}: what works and what doesn\'t.','How to use it':'Walk through using {p}, step by step.','Before and after':'Show the before, use {p}, then the after.','Unboxing':'Open {p} on camera and try it for the first time.','Compare it':'Put {p} next to what people use now and pick a winner.'};
 function fillIng(){const pr=cap(product),d=ans('do');const chips=[BRIEF?'Brand brief':'',pr,ans('len'),ans('film'),ans('tone'),d,ans('cta'),($('#dhookin')?.value.trim())?'Your hook':''].filter(Boolean);
- const idea=BRIEF?'Turn the brand brief into a '+chosenLen()+'s script that covers every must-say.':(IDEA[d]||('A '+chosenLen()+'s video about '+product+(d?': '+d.toLowerCase():'')+'.')).replace('{p}',product);
+ const idea=BRIEF?'Turn the brand brief into a '+chosenLen()+'s script that covers every must-say.':(IDEA[d||'Sell it']||('A '+chosenLen()+'s video about '+product+': '+d.toLowerCase()+'.')).replace('{p}',product);
  $('#oing').innerHTML='<div class="oh">What you picked</div><div class="oc">'+chips.map(c=>'<span>'+esc(c)+'</span>').join('')+'</div><div class="oi"><div class="oh" style="margin:0">The idea</div><p>'+esc(idea)+'</p></div>'}
 
 // live (checked 25 Nov): pencil on the hook opens "Change the hook": current hook + 1 Question + 1 Storytime, Rewrite my script uses 1 of 3 rewrites
@@ -603,7 +876,61 @@ function openCH(n){const hk=$('#obody .hook');const curH=hk.querySelector('b').t
  m.onclick=e=>{if(e.target===m)m.remove()};
  m.querySelectorAll('.op').forEach(o=>o.onclick=()=>{pick=+o.dataset.i;m.querySelectorAll('.op').forEach(x=>x.classList.toggle('on',x===o));go.classList.toggle('off',pick===0||!left)});
  go.onclick=()=>{if(pick===0||!left)return;const o=ops[pick];REW[key]=left-1;hk.querySelector('small').textContent='HOOK · '+o[0];hk.querySelector('b').textContent=o[1];const rn=$('#rewn');if(rn)rn.textContent=REW[key]+' of 3 rewrites left';m.remove();setLen(L[cur]);toast('Rewritten with the new hook (sample: only the hook changes in this mock)')}}
-function render(n){cur=n;fillIng();const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').textContent=l.tag;$('#obody').innerHTML=l.tpl.replace(/\{\{(\d+)\}\}/g,(m,i)=>esc(S.L[n][+i]));const spoken=/Copy spoken lines/.test(l.bar);fitLength(n,spoken);sectionize(n);decorate(n,spoken);hookPen(n);setLen(l);
+
+// ===== Script page = the live page (markup, wording, sheets copied from ugcbreakouts.com on 25 Nov) + Ivan's asks (picked + idea in the card, start line)
+const LV={back:'<svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"></path></svg>',bulb:'<svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"></path></svg>',save:'<svg viewBox="0 0 24 24"><path d="M7 4h10v16l-5-3.6L7 20z"></path></svg>',share:'<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"></path></svg>',copy:'<svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"></path></svg>',pen:'<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg>',cam:'<svg viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>',prac:'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>'};
+const OS={QUESTION:'On screen: find out now',STORYTIME:'On screen: watch till the end','BOLD CLAIM':'On screen: see for yourself'};
+let LVD=null,REF={};
+function lvTxt(e,sel){const x=e&&(sel?e.querySelector(sel):e);return x?x.textContent.replace(/must-say ✓/g,'').replace(/✎/g,'').replace(/\s+/g,' ').trim():''}
+function liveBuild(n){const Y=chosenLen(),p=parts();if(!p.hook||!p.cta)return false;
+ const h=Y<=15?2:3,c=Y-Math.max(3,Math.round(Y*0.23)),bs=h+1,be=c-1;
+ const hookT=lvTxt(p.hook,'b')||lvTxt(p.hook,'.say'),hookS=lvTxt(p.hook,'.shot');
+ const beats=p.body.map(e=>{const says=[...e.querySelectorAll('.say')].map(x=>lvTxt(x)).filter(Boolean);const shot=lvTxt(e,'.shot');return {name:beatName(e),line:says.join(' / ')||shot||lvTxt(e).slice(0,140),shot}});
+ const w=beats.map(b=>Math.max(3,b.line.split(/\s+/).length)),tot=w.reduce((a,b)=>a+b,0)||1;let t0=bs;
+ beats.forEach((b,i)=>{const span=(be-bs+1)*w[i]/tot;const a=Math.round(t0);b.t=a+'–'+(i===beats.length-1?be:Math.max(a,Math.round(t0+span)-1))+'s';t0+=span});
+ const cta={line:lvTxt(p.cta,'.say')||lvTxt(p.cta,'b')||lvTxt(p.cta),shot:lvTxt(p.cta,'.shot')};
+ const key=product+'|'+n;if(REW[key]==null)REW[key]=3;
+ LVD={n,key,hook:{type:(lvTxt(p.hook,'small').split('·')[1]||'').trim(),line:hookT,shot:hookS,t:'0–'+h+'s'},beats,cta:Object.assign(cta,{t:c+'–'+Y+'s'}),Y};
+ lvPaint();return true}
+const q=t=>'“'+esc(t)+'”';
+const dir=t=>t?'<p class="sc-dir">'+LV.cam+esc(t)+'</p>':'';
+function lvPaint(){const D=LVD,ing=$('#oing').innerHTML;
+ const idea=($('#oing .oi p')||{}).textContent||'';const chips=[...$$('#oing .oc span')].map(x=>x.textContent);
+ $('#obody').innerHTML='<div class="bk"><div class="dpage"><div class="sc-tb2"><button class="ib" id="lvback" aria-label="Back">'+LV.back+'</button><span class="tt">Your script</span></div><div class="sc-pad sc-out">'+
+ '<section class="sc-ideac"><div class="sc-ih"><span class="bulb">'+LV.bulb+'</span><b>IDEA</b><span class="len">'+D.Y+' s</span></div><h1>'+esc(idea)+'</h1><div class="lv-ing"><small>What you picked</small><div>'+chips.map(c=>'<span>'+esc(c)+'</span>').join('')+'</div></div></section>'+
+ '<div class="sc-act"><button class="sv" id="lvsave">'+LV.save+'<span>Save script</span></button><button id="lvshare">'+LV.share+'<span>Share</span></button><button id="lvcopy">'+LV.copy+'<span>Copy</span></button></div>'+
+ '<div class="lv-start"><span>Your script starts here</span></div>'+
+ '<div class="sc-pts"><section class="sc-hookc"><div class="sc-ph"><b>Hook</b><span class="tm">'+D.hook.t+'</span><button class="sc-ed" data-ed="hook" aria-label="Change the hook">'+LV.pen+'</button></div><p class="sc-q1">'+q(D.hook.line)+'</p>'+dir(D.hook.shot)+'</section>'+
+ '<section class="sc-bodyc"><div class="sc-ph"><b>Body</b><span class="tm">'+(D.beats.length?D.beats[0].t.split('–')[0]+'–'+D.beats[D.beats.length-1].t.split('–')[1]:'')+'</span></div>'+dir(D.beats[0]&&D.beats[0].shot)+
+ D.beats.map((b,i)=>'<div class="sc-step"><div class="sc-sp"><span class="sn">'+(i+1)+'</span><b>'+esc(b.name)+'</b><span class="tm">'+b.t+'</span><button class="sc-ed" data-ed="'+i+'" aria-label="Refine">'+LV.pen+'</button></div><p class="sc-q2">'+q(b.line)+'</p></div>').join('')+'</section>'+
+ '<section class="sc-ctac"><div class="sc-ph"><b>CTA</b><span class="tm">'+D.cta.t+'</span><button class="sc-ed" data-ed="cta" aria-label="Refine">'+LV.pen+'</button></div><p class="sc-q1">'+q(D.cta.line)+'</p>'+dir(D.cta.shot)+'</section></div>'+
+ '<button class="b b2 full-w sc-prac-btn" id="lvprac">'+LV.prac+'Practice full screen</button>'+
+ '<div class="sc-rw"><b>Not quite right?</b><button class="b b2" id="lvrew">Rewrite the whole script</button><small>'+REW[D.key]+' of 3 rewrites left</small></div></div></div></div>';
+ $$('#v-out > .bk.lvbar').forEach(x=>x.remove());const bar=document.createElement('div');bar.className='bk lvbar';bar.append($('#obody .sc-act'));$('#v-out').append(bar);
+ $('#lvback').onclick=()=>show('v-home','back');
+ $('#lvsave').onclick=()=>{saveScript(D.n);toast('Saved to your Library')};$('#lvshare').onclick=()=>toast("Opens the phone's share sheet (mock)");$('#lvcopy').onclick=()=>toast('Script copied');
+ $('#lvprac').onclick=lvTP;
+ $('#lvrew').onclick=()=>{if(!REW[D.key])return;REW[D.key]--;const sc=$('#oscr'),y=sc.scrollTop;render(D.n);sc.scrollTop=y;toast('Rewritten (sample script)')};
+ $$('#obody .sc-ed').forEach(b=>b.onclick=()=>b.dataset.ed==='hook'?lvHook():lvRefine(b.dataset.ed))}
+function lvSheet(inner){$$('#v-out > .bk.lvs').forEach(x=>x.remove());const w=document.createElement('div');w.className='bk lvs';w.innerHTML='<button class="scrim" aria-label="Close"></button><div class="hm-sheet sc-sheet"><span class="grab"></span>'+inner+'</div>';$('#v-out').append(w);w.querySelector('.scrim').onclick=()=>w.remove();return w}
+function lvHook(){const D=LVD,left=REW[D.key];const cur_=D.hook.line;
+ const qh=(POOL.question||[]).find(x=>norm(x)!==norm(cur_))||'',sh=(POOL.story||[]).find(x=>norm(x)!==norm(cur_))||'';
+ const ops=[['Your current hook',cur_,''],['Question',qh,OS.QUESTION],['Storytime',sh,OS.STORYTIME]].filter(o=>o[1]);
+ const w=lvSheet('<h2>Change the hook</h2><p class="lede">A new hook rewrites the whole script. It uses 1 of your 3 rewrites ('+left+' left).</p><form class="sc-sform"><div class="sc-hk">'+ops.map((o,i)=>'<button type="button" class="sc-ho'+(i?'':' on')+'" data-i="'+i+'"><span class="tx"><small>'+o[0]+'</small><b>'+esc(o[1])+'</b>'+(o[2]?'<span class="os">'+esc(o[2])+'</span>':'')+'</span><span class="rd"></span></button>').join('')+'</div><button type="button" class="b b1 full-w" disabled>Rewrite my script</button></form>');
+ let pick=0;const go=w.querySelector('.b1');
+ w.querySelectorAll('.sc-ho').forEach(o=>o.onclick=()=>{pick=+o.dataset.i;w.querySelectorAll('.sc-ho').forEach(x=>x.classList.toggle('on',x===o));go.disabled=pick===0||!left});
+ go.onclick=()=>{if(go.disabled)return;REW[D.key]--;D.hook.line=ops[pick][1];D.hook.type=ops[pick][0].toUpperCase();w.remove();const sc=$('#oscr'),y=sc.scrollTop;lvPaint();sc.scrollTop=y;toast('Rewritten with the new hook (sample: only the hook changes in this mock)')}}
+function lvRefine(k){const D=LVD;if(REF[D.key]==null)REF[D.key]=3;const left=REF[D.key];const it=k==='cta'?D.cta:D.beats[+k];const title=k==='cta'?'Call to action':'Body '+(+k+1);
+ const w=lvSheet('<h2>Refine: '+title+'</h2><div class="sc-sfq"><span class="tm">'+(k==='cta'?it.t.replace('–','-'):it.t.replace('–',' - ').replace('s',' s'))+'</span><p>'+q(it.line)+'</p>'+(it.shot?'<small>'+esc(it.shot)+'</small>':'')+'</div><form class="sc-sform"><label class="sc-sft"><span>What should change?</span><textarea class="sc-ta" rows="2"></textarea></label><small class="sc-lbl">Or tap one</small><div class="sc-pick"><button type="button" class="chip">Shorter</button><button type="button" class="chip">Punchier line</button><button type="button" class="chip">Different shot</button><button type="button" class="chip">Name the product</button></div><button type="button" class="b b1 full-w" disabled>Refine this part</button><small class="sc-fn">Only this part changes. Uses 1 of your 3 refines ('+left+' left).</small></form>');
+ const go=w.querySelector('.b1'),ta=w.querySelector('.sc-ta');let chip=null;
+ const upd=()=>{go.disabled=!left||!(ta.value.trim()||chip)};ta.oninput=upd;
+ w.querySelectorAll('.sc-pick .chip').forEach(c=>c.onclick=()=>{chip=chip===c?null:c;w.querySelectorAll('.sc-pick .chip').forEach(x=>x.classList.toggle('on',x===chip));upd()});
+ go.onclick=()=>{if(go.disabled)return;REF[D.key]--;w.remove();toast('Refined (sample: the line stays the same in this mock)')}}
+function lvTP(){const D=LVD;const lines=[D.hook.line,...D.beats.map(b=>b.line),D.cta.line];
+ const tp=document.createElement('div');tp.className='tp';tp.innerHTML='<div class="tph"><span id="tpp">Pause</span><span id="tpx">Close</span></div><div class="tpb">'+lines.map(t=>'<p>'+esc(t)+'</p>').join('')+'</div>';$('#v-out').append(tp);
+ const body=tp.querySelector('.tpb');let run=true;const step=()=>{if(!tp.isConnected)return;if(run)body.scrollTop+=0.6;requestAnimationFrame(step)};requestAnimationFrame(step);
+ tp.querySelector('#tpp').onclick=()=>{run=!run;tp.querySelector('#tpp').textContent=run?'Pause':'Play'};tp.querySelector('#tpx').onclick=()=>tp.remove()}
+function render(n){cur=n;fillIng();const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').textContent=l.tag;$('#obody').innerHTML=l.tpl.replace(/\{\{(\d+)\}\}/g,(m,i)=>esc(S.L[n][+i]));const spoken=/Copy spoken lines/.test(l.bar);fitLength(n,spoken);const LIVE=liveBuild(n);$('#v-out').classList.toggle('lv',LIVE);if(!LIVE){$$('#v-out > .bk.lvbar').forEach(x=>x.remove());sectionize(n);decorate(n,spoken);hookPen(n)}setLen(l);
  const p=$('#oscr h1');p.innerHTML=esc(S.generic?titleCase(product):cap(product))+' script <span>✎</span>';
  const fv=ans('film').toLowerCase();
  $('#hooks .from').innerHTML='Built from: <b>your answers</b> · <b>'+product+'</b>'+(fv?' · <b>'+esc(fv)+'</b>':'')+(BRIEF?' · <b>the brief</b>':'');
