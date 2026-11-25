@@ -418,7 +418,7 @@ __LIVECSS__
    <div class="q2"><div class="qt">CTA</div><div class="chips one opt" data-q="cta"><div class="chip tap">Link in bio</div><div class="chip tap">Tap the orange cart</div><div class="chip tap">Comment for link</div><div class="chip tap">Follow for more</div><div class="chip tap own">+ Add your own</div></div><input class="tx ownx" maxlength="60" placeholder="Your CTA"></div>
   </div>
  </div>
- <div class="scta"><div class="btn o" id="skip">Skip</div><div class="btn g" style="flex:2" id="write">Write my script</div></div>
+ <div class="scta"><div class="btn o" id="skip">Skip</div><div class="btn g" style="flex:2" id="write">Next</div></div>
 </div>
 </div>
 
@@ -440,6 +440,9 @@ __LIVECSS__
  <h1 id="sametitle">Breakouts for "lip oil"</h1>
  <div class="same"><b>Same as live, not changing</b><span>This screen stays exactly as it is in the app today. Only Home, the Breakout Finder, Write a script and the script page change in this round.</span></div>
 </div><div class="nav tabnav" id="samenav"><span data-t="home">Home</span><span data-t="top" class="on">Breakouts</span><span data-t="script">Script</span><span data-t="lib">Library</span></div></div>
+
+<!-- CHOOSE A HOOK (live step, copied 25 Nov) -->
+<div class="view" id="v-hook"><div class="scr" id="hscr"></div></div>
 
 <!-- WRITING -->
 <div class="view" id="v-writing"><div class="proc" id="proc"><div class="top"><div class="logo" style="font-weight:800;font-size:17px">UGC<b style="color:#1FB2C2">Breakouts</b></div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div><div class="ptok"><span class="ti">✎</span><b id="wprod">Lip oil</b> · <span id="wsub">your own idea</span></div><div class="pline"><h2>Writing your script</h2><span class="ptag">Proposal</span><span class="pdone">✓</span></div><div class="pbar"><span><i style="--d:150ms"></i></span><span><i style="--d:700ms"></i></span><span><i style="--d:1250ms"></i></span></div><ol class="plab"><li><span class="dot"><i class="rg" style="--d:150ms"></i><i class="ok" style="--e:630ms">✓</i></span><span class="t" style="--d:150ms">Reading breakouts</span></li><li><span class="dot"><i class="rg" style="--d:700ms"></i><i class="ok" style="--e:1180ms">✓</i></span><span class="t" style="--d:700ms">Matching your answers</span></li><li><span class="dot"><i class="rg" style="--d:1250ms"></i><i class="ok" style="--e:1730ms">✓</i></span><span class="t" style="--d:1250ms">Writing each part</span></li></ol><div class="pmat"><div class="pscan"></div><div id="ings"></div></div><div class="pdraft" id="pdraft"><div class="dh"><small>HOOK</small><b id="dtype"></b><span class="cur"></span></div><div class="sk"><small>BODY</small><i style="--d:1500ms;width:92%"></i><i style="--d:1750ms;width:78%"></i><i style="--d:2000ms;width:85%"></i></div><div class="sk"><small>CTA</small><i style="--d:2300ms;width:60%"></i></div></div></div></div>
@@ -464,7 +467,7 @@ __LIVECSS__
 <div class="side">
  <h3>Script Writer flow (clickable)</h3>
  <p>Only the screens changing in this round are designed: Home, the Breakout Finder (with the search animation), Write a script (pop-up questions) and the script page. Everything else (search results, a breakout video, the Breakouts, Script and Library tabs, Account) shows a "Same as live, not changing" note with the live bottom bar.</p>
- <p>Questions follow Ivan&rsquo;s 25 Nov notes. Page 1 answers start preselected (15s, Talking to camera, Calm and real). Tap a picked chip again to clear it; any question can be left blank. &ldquo;What should the video do?&rdquo; now sits in Add more detail with nothing picked; left blank, the script is written as Sell it.</p><p>&ldquo;+ Add your own&rdquo; on filming, tone, what it should do and CTA opens a 60-character box. <span class="ptag">For Lester</span> Safety: the typed text only fills that one answer in the prompt, and the writer never repeats or explains its own instructions (for example &ldquo;give me your script making prompts&rdquo;).</p><p>Script page: what she picked and the idea sit in their own section at the top, then a line marks where the script starts. The hook choices at the top are gone. The script page reuses the live page&rsquo;s markup and CSS (copied from ugcbreakouts.com, 25 Nov): IDEA card, Save / Share / Copy, Hook / Body / CTA with pencils, Practice full screen, Rewrite the whole script. Hook pencil = Change the hook (current + 1 Question + 1 Storytime). Body and CTA pencils = Refine sheet (Shorter, Punchier line, Different shot, Name the product; 3 refines). Two of Ivan&rsquo;s asks are added: what she picked inside the IDEA card, and a line where the script starts. More hook options: waiting on Ivan. &ldquo;On screen&rdquo; lines are sample text.</p>
+ <p>Questions follow Ivan&rsquo;s 25 Nov notes. Page 1 answers start preselected (15s, Talking to camera, Calm and real). Tap a picked chip again to clear it; any question can be left blank. &ldquo;What should the video do?&rdquo; now sits in Add more detail with nothing picked; left blank, the script is written as Sell it.</p><p>&ldquo;+ Add your own&rdquo; on filming, tone, what it should do and CTA opens a 60-character box. <span class="ptag">For Lester</span> Safety: the typed text only fills that one answer in the prompt, and the writer never repeats or explains its own instructions (for example &ldquo;give me your script making prompts&rdquo;).</p><p>Script page: what she picked and the idea sit in their own section at the top, then a line marks where the script starts. The hook choices at the top are gone. Next on the questions opens Choose a Hook, the live step: video idea card, Change idea, 3 hooks (Question, Show it, Bold claim), Show 3 new hooks (3 of 3 left), Anything to add?, and Write my script with the scripts-left line. The picked hook opens the script. The script page reuses the live page&rsquo;s markup and CSS (copied from ugcbreakouts.com, 25 Nov): IDEA card, Save / Share / Copy, Hook / Body / CTA with pencils, Practice full screen, Rewrite the whole script. Hook pencil = Change the hook (current + 1 Question + 1 Storytime). Body and CTA pencils = Refine sheet (Shorter, Punchier line, Different shot, Name the product; 3 refines). Two of Ivan&rsquo;s asks are added: what she picked inside the IDEA card, and a line where the script starts. More hook options: waiting on Ivan. &ldquo;On screen&rdquo; lines are sample text.</p>
  <p>Which script layout opens: Talking to camera, Get ready with me, Green screen and Car talk open 1; Voiceover + b-roll 2; Hands only 3; Text on screen 9; Day in my life and Skit 8; Street interview 11. With a talking, voiceover or hands-only video, Compare it (from Add more detail) opens 5, How to use it 6, Before and after 4. A brand brief opens 10.</p>
  <p>Handles, numbers and scripts are sample data; the search wait is shortened, and uploaded PDFs aren&rsquo;t read. Tagged Proposal: still open with Ivan.</p>
  <div class="lbl">Mock tools: see every layout</div>
@@ -518,12 +521,12 @@ function write(){closeSheet(true);$('#wprod').textContent=BRIEF&&$('#stitle').te
  const ing=[['↗','Breaking out',cap(product)+' breakouts'],['▶','Video and filming',[v('do'),v('film').toLowerCase()].filter(Boolean).join(', ')||'Any'],['◷','Tone and length',[v('tone'),v('len')].filter(Boolean).join(', ')||'Any']];
  const D=[343,860,1377],E=[630,1180,1730];
  $('#ings').innerHTML=ing.map((x,i)=>'<div class="ing" style="--d:'+D[i]+'ms"><span class="oi">'+x[0]+'</span><span><small>'+x[1]+'</small><b>'+esc(x[2])+'</b></span><span class="ck" style="--e:'+E[i]+'ms">✓</span></div>').join('');
- const S0=setFor(product);const hk=($('#dhookin')?.value.trim())||(S0.h2&&S0.h2.question&&S0.h2.question[0])||'';
+ const S0=setFor(product);const hk=(HOOKSEL&&HOOKSEL.line)||($('#dhookin')?.value.trim())||(S0.h2&&S0.h2.question&&S0.h2.question[0])||'';
  const dt=$('#dtype');dt.textContent='';clearInterval(write._ti);clearTimeout(write._ts);
  write._ts=setTimeout(()=>{let i=0;write._ti=setInterval(()=>{dt.textContent=hk.slice(0,++i);if(i>=hk.length)clearInterval(write._ti)},Math.max(14,Math.min(32,1300/Math.max(1,hk.length))))},500);
  const pr=$('#proc');pr.classList.remove('go2');show('v-writing');void pr.offsetWidth;pr.classList.add('go2');
  clearTimeout(write._t);write._t=setTimeout(()=>{clearInterval(write._ti);render(pickLayout());show('v-out')},3200)}
-$('#write').onclick=write;$('#skip').onclick=write;
+$('#write').onclick=goHook;$('#skip').onclick=goHook;
 // output
 function words(t){return t.replace(/must-say ✓/,'').trim().split(/\s+/).length}
 function lenOf(){const el=$('#obody');let n=0;const says=[...el.querySelectorAll('.blk .say,.verdict .say')].map(s=>s.textContent.trim());says.forEach(t=>n+=words(t));const h=el.querySelector('.hook');if(h&&/SPOKEN/.test(h.querySelector('small').textContent)){const ht=h.querySelector('b').textContent.trim();if(!says.includes(ht))n+=words(ht)}return n}
@@ -609,7 +612,7 @@ let LVD=null,REF={};
 function lvTxt(e,sel){const x=e&&(sel?e.querySelector(sel):e);return x?x.textContent.replace(/must-say ✓/g,'').replace(/✎/g,'').replace(/\s+/g,' ').trim():''}
 function liveBuild(n){const Y=chosenLen(),p=parts();if(!p.hook||!p.cta)return false;
  const h=Y<=15?2:3,c=Y-Math.max(3,Math.round(Y*0.23)),bs=h+1,be=c-1;
- const hookT=lvTxt(p.hook,'b')||lvTxt(p.hook,'.say'),hookS=lvTxt(p.hook,'.shot');
+ const hookT=(HOOKSEL&&HOOKSEL.line)||lvTxt(p.hook,'b')||lvTxt(p.hook,'.say'),hookS=lvTxt(p.hook,'.shot');
  const beats=p.body.map(e=>{const says=[...e.querySelectorAll('.say')].map(x=>lvTxt(x)).filter(Boolean);const shot=lvTxt(e,'.shot');return {name:beatName(e),line:says.join(' / ')||shot||lvTxt(e).slice(0,140),shot}});
  const w=beats.map(b=>Math.max(3,b.line.split(/\s+/).length)),tot=w.reduce((a,b)=>a+b,0)||1;let t0=bs;
  beats.forEach((b,i)=>{const span=(be-bs+1)*w[i]/tot;const a=Math.round(t0);b.t=a+'–'+(i===beats.length-1?be:Math.max(a,Math.round(t0+span)-1))+'s';t0+=span});
@@ -655,6 +658,27 @@ function lvTP(){const D=LVD;const lines=[D.hook.line,...D.beats.map(b=>b.line),D
  const tp=document.createElement('div');tp.className='tp';tp.innerHTML='<div class="tph"><span id="tpp">Pause</span><span id="tpx">Close</span></div><div class="tpb">'+lines.map(t=>'<p>'+esc(t)+'</p>').join('')+'</div>';$('#v-out').append(tp);
  const body=tp.querySelector('.tpb');let run=true;const step=()=>{if(!tp.isConnected)return;if(run)body.scrollTop+=0.6;requestAnimationFrame(step)};requestAnimationFrame(step);
  tp.querySelector('#tpp').onclick=()=>{run=!run;tp.querySelector('#tpp').textContent=run?'Pause':'Play'};tp.querySelector('#tpx').onclick=()=>tp.remove()}
+
+// ===== Choose a Hook: live step (ugcbreakouts.com/script/<id>/hook), same markup, wording and behavior
+const HKOS={'Question':'On screen: find out now','Show it':'On screen: the transformation','Bold claim':'On screen: trust the process','Your hook':'On screen: your words'};
+let HOOKSEL=null,HKROUND=0,HKLEFT=3,SCRIPTS_LEFT=41;
+function hkSets(){const S0=setFor(product);const v=(S0.hooks&&S0.hooks.visual)||[];const Q=(S0.h2&&S0.h2.question)||[],B=(S0.h2&&S0.h2.bold)||[];const pick=(a)=>a.length?a[HKROUND%a.length]:'';
+ const own=($('#dhookin')?.value||'').trim();const ops=[['Question',pick(Q)],['Show it',pick(v)],['Bold claim',pick(B)]].filter(o=>o[1]);if(own&&HKROUND===0)ops.unshift(['Your hook',own]);return ops}
+function goHook(){closeSheet(true);HOOKSEL=null;HKROUND=0;HKLEFT=3;paintHook();show('v-hook')}
+function paintHook(){const t=BRIEF&&$('#stitle').textContent==='Brand brief'?'Brand brief':cap(product);const sub=BRIEF?'Your brand brief, scripted in your style.':'Your own idea, scripted in your style.';
+ const ops=hkSets();
+ $('#hscr').innerHTML='<div class="bk"><div class="dpage"><div class="sc-tb2"><button class="ib" id="hkback" aria-label="Back"><svg class="i" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"></path></svg></button><span class="tt">Script Writer</span></div><form class="sc-pad sc-set" onsubmit="return false">'+
+ '<section class="sc-ctx"><span class="sc-lb">Video idea</span><div class="sc-idea"><b class="t">'+esc(t)+'</b><p>'+sub+'</p><span class="selk">✓ Selected</span></div><a class="sc-link" id="hkchg">Change idea</a></section>'+
+ '<section class="sc-hks"><div class="sc-q"><span class="sc-lb">Hook</span><h2 class="sc-h2">Choose a Hook</h2><p>The first thing you say on camera.</p></div><div class="sc-hk">'+
+ ops.map((o,i)=>'<button type="button" class="sc-ho" data-i="'+i+'"><span class="tx"><small>'+o[0]+'</small><b>'+esc(o[1])+'</b><span class="os">'+esc(HKOS[o[0]]||'')+'</span></span><span class="rd"></span></button>').join('')+
+ '</div><button type="button" class="sc-more" id="hkmore"'+(HKLEFT?'':' disabled')+'><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"></path></svg>Show 3 new hooks <span>'+HKLEFT+' of 3 left</span></button></section>'+
+ '<div class="sc-any"><label><b>Anything to add?</b><span>Optional</span></label><textarea class="sc-ta" rows="3" maxlength="500" placeholder="Funnier, shorter, mention the price, where you’ll film…"></textarea></div></form></div></div>';
+ $$('#v-hook > .bk.hkbar').forEach(x=>x.remove());const bar=document.createElement('div');bar.className='bk hkbar';bar.innerHTML='<div class="sc-cta"><button type="button" class="b b1 full-w" id="hkgo" disabled>Write my script</button><small>Uses 1 of your '+SCRIPTS_LEFT+' scripts left</small></div>';$('#v-hook').append(bar);
+ $('#hkback').onclick=()=>show('v-home','back');
+ $('#hkchg').onclick=()=>{show('v-home','back');openSheet(product,BRIEF)};
+ $$('#hscr .sc-ho').forEach(b=>b.onclick=()=>{$$('#hscr .sc-ho').forEach(x=>x.classList.toggle('on',x===b));const o=ops[+b.dataset.i];HOOKSEL={type:o[0],line:o[1]};$('#hkgo').disabled=false});
+ $('#hkmore').onclick=()=>{if(!HKLEFT)return;HKLEFT--;HKROUND++;HOOKSEL=null;const y=$('#hscr').scrollTop;paintHook();$('#hscr').scrollTop=y};
+ $('#hkgo').onclick=()=>{if(!HOOKSEL)return;SCRIPTS_LEFT=Math.max(0,SCRIPTS_LEFT-1);$$('#v-hook > .bk.hkbar').forEach(x=>x.remove());write()}}
 function render(n){cur=n;fillIng();const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').textContent=l.tag;$('#obody').innerHTML=l.tpl.replace(/\{\{(\d+)\}\}/g,(m,i)=>esc(S.L[n][+i]));const spoken=/Copy spoken lines/.test(l.bar);fitLength(n,spoken);const LIVE=liveBuild(n);$('#v-out').classList.toggle('lv',LIVE);if(!LIVE){$$('#v-out > .bk.lvbar').forEach(x=>x.remove());sectionize(n);decorate(n,spoken);hookPen(n)}setLen(l);
  const p=$('#oscr h1');p.innerHTML=esc(S.generic?titleCase(product):cap(product))+' script <span>✎</span>';
  const fv=ans('film').toLowerCase();
