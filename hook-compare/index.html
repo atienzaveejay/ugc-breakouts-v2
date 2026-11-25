@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hook: A vs B</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#171312}
+.hd{max-width:900px;margin:0 auto;padding:24px 16px 4px}
+h1{font-size:24px;font-weight:800;letter-spacing:-.4px;margin:0}
+.sub{color:#6B625E;font-size:14.5px;line-height:1.5;margin:6px 0 0}
+.grid{max-width:900px;margin:0 auto;padding:14px 16px 40px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.col h2{font-size:17px;font-weight:800;margin:0 0 6px}
+.col ol{margin:0 0 12px;padding-left:18px;font-size:13.5px;line-height:1.5;color:#3d3633;min-height:120px}
+iframe{display:block;width:390px;max-width:100%;height:844px;border:0;margin:0 auto}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.col ol{min-height:0}}
+</style></head><body>
+<header class="hd"><h1>Hook: A vs B</h1>
+<p class="sub">Same prototype, two hook flows side by side. Type a product (or tap one), answer the questions, then write the script. On the script page, tap the pencil on the hook. Sample copy.</p></header>
+<main class="grid">
+<section class="col"><h2>A. Live as is</h2>
+<ol><li>Questions, then <b>Next</b></li><li><b>Choose a Hook</b>: pick 1 of 3, Show 3 new hooks</li><li>Write my script</li><li>Script opens with that hook</li><li>Pencil on the hook: <b>2 options</b> (Question, Storytime)</li></ol>
+<iframe src="../script-writer-flow/index.html?hook=A&embed=1" title="Version A"></iframe></section>
+<section class="col"><h2>B. More options in Change the hook</h2>
+<ol><li>Questions, then <b>Write my script</b></li><li>No hook step</li><li>Script opens with 1 hook</li><li>Pencil on the hook: <b>4 options</b> (Question, Show it, Bold claim, Storytime)</li><li>Show new hooks to refresh them (3 of 3)</li></ol>
+<iframe src="../script-writer-flow/index.html?hook=B&embed=1" title="Version B"></iframe></section>
+</main></body></html>
