@@ -1,0 +1,191 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Script page options</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F4F0EC;--ink:#171312;--mute:#6B625E;--line:#E6DFD9;--red:#D92D48;--teal:#E1F1F2;--tealb:#B7DCDF;--tealx:#0F7A7C;--ease:cubic-bezier(.2,.8,.2,1);--snap:cubic-bezier(.3,0,.15,1);--sh-2:0 10px 30px rgba(23,19,18,.14)}
+html{background:#E9E3DD}
+body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--ink);padding:28px 32px 48px;overflow-x:hidden}
+button{font-family:inherit;color:inherit;cursor:pointer}
+a{color:var(--tealx);font-weight:700}
+.hd{max-width:1500px;margin:0 auto 18px}
+h1{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.sub{color:var(--mute);font-size:15px;margin:6px 0 14px;max-width:920px;line-height:1.5}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.subm{display:none}
+.tab{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:700;transition:background .2s var(--ease),border-color .2s var(--ease)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tab:active{transform:scale(.98)}
+.grid{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:34px 28px;align-items:start}
+.card{min-width:0}
+.card h3{font-size:19px;font-weight:800;margin:0 0 10px 4px}
+.card.flash .phone{box-shadow:0 0 0 4px var(--tealb)}
+.txt{max-width:390px;font-size:14px;line-height:1.5;margin:12px 4px 0}.txt p{margin-bottom:6px}.txt .m{color:var(--mute)}
+.phone{width:390px;max-width:100%;height:min(844px,calc(100dvh - 40px));min-height:560px;background:var(--bg);border-radius:36px;border:10px solid #171312;overflow:hidden;position:relative;transition:box-shadow .3s var(--ease)}
+.scr{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.pad{padding:18px 16px 0}
+.sp{height:160px}.phone[data-opt="4"] .sp{height:200px}
+.nav{position:absolute;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;font-size:11px;font-weight:600;color:var(--mute);z-index:5}.nav b{color:var(--ink)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.back{font-size:13px;font-weight:700;color:var(--mute)}
+.tr{display:flex;align-items:center;gap:10px}.pro{background:var(--ink);color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:8px}.acct{font-size:12.5px;font-weight:700;color:var(--mute)}
+.srcl{font-size:12.5px;font-weight:600;color:var(--mute);margin:6px 0 2px}
+.ttl{font-size:25px;font-weight:800;letter-spacing:-.5px;margin:2px 0 14px;display:flex;align-items:center;gap:6px}.ttl .pen{color:var(--mute);display:flex}
+.btn-o{display:block;width:100%;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:14px;font-weight:700;margin:16px 0 4px;transition:transform .15s var(--ease)}
+.btn-o.sm{width:auto;display:inline-block;padding:9px 16px;margin:8px 0 6px}
+.btn-o:active,.b-o:active,.b-t:active,.v-save:active,.v-ib:active,.d-go:active,.tb:active,.s-more:active{transform:scale(.98)}
+.rw{text-align:center;margin-top:14px}.rw b{display:block;font-size:14px}.rw small{display:block;font-size:12px;color:var(--mute)}
+.dock{position:absolute;left:0;right:0;bottom:64px;padding:10px 12px;background:var(--bg);border-top:1px solid var(--line);z-index:4}
+.bar3{display:flex;gap:8px}.bar3 button{flex:1;padding:11px 6px;border-radius:11px;font-size:13.5px;font-weight:700;transition:transform .15s var(--ease)}
+.b-o{background:#fff;border:1.5px solid var(--ink)}.b-t{background:var(--tealx);color:#fff;border:0}
+.say{cursor:pointer;border-radius:8px;transition:background .2s var(--ease)}.say:hover{background:rgba(15,122,124,.06)}.say.sel{background:var(--teal)}
+.menu{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px;animation:unroll .34s var(--snap) both}
+.menu button{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:700}
+/* 1 */
+.l-sec{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.l-sh{display:flex;gap:8px;align-items:baseline;margin-bottom:8px}.l-sh b{font-size:12px;letter-spacing:.6px;color:var(--tealx)}.l-sh span{font-size:12px;color:var(--mute);font-weight:600}
+.l-say{font-size:16px;font-weight:700;line-height:1.35}.l-say.big{font-size:20px}
+.l-shot{display:flex;gap:6px;align-items:flex-start;font-size:12.5px;color:var(--mute);margin-top:6px;line-height:1.35}.l-shot svg{flex:none;margin-top:2px}
+.l-beat{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}.l-beat:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.l-bh{display:flex;gap:8px;align-items:center;margin-bottom:4px}.l-n{width:20px;height:20px;border-radius:50%;background:var(--teal);color:var(--tealx);font-size:11px;font-weight:800;display:grid;place-items:center}.l-bn{font-size:13px;font-weight:700;color:var(--tealx)}.l-t{font-size:12px;color:var(--mute);font-weight:600}
+/* 2 */
+.v-top{display:grid;grid-template-columns:30px 1fr 30px;align-items:center;margin-bottom:14px}.v-top b{text-align:center;font-size:17px}.v-back{font-size:26px;line-height:1}
+.v-src{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:12px}.v-ic{flex:none;width:58px;height:58px;border-radius:10px;background:#EDE6E0;display:grid;place-items:center;font-size:20px;color:var(--mute)}.v-src small{display:block;font-size:12px;color:var(--mute)}.v-src b{display:block;font-size:14px}.v-src span{font-size:12px;color:var(--mute)}
+.v-idea{background:var(--teal);border:1px solid var(--tealb);border-radius:16px;padding:14px 16px;margin-bottom:14px}.v-ih{display:flex;align-items:center;gap:8px;margin-bottom:8px}.v-ih b{font-size:12px;letter-spacing:.6px;color:var(--tealx)}.v-ih span:last-child{margin-left:auto;font-size:13px;font-weight:700;color:var(--mute)}.v-bulb{width:26px;height:26px;background:#fff;border-radius:7px;display:grid;place-items:center}.v-idea h2{font-size:22px;font-weight:800;letter-spacing:-.4px}.v-idea p{font-size:14px;line-height:1.4;margin-top:4px}
+.v-hook,.v-cta,.v-body{background:#fff;border:1px solid var(--line);border-radius:16px;margin-bottom:12px}.v-hook{border-left:4px solid var(--tealx);padding:14px 16px}.v-cta{padding:14px 16px}
+.v-sh{display:flex;align-items:center;gap:8px;margin-bottom:8px}.tl{font-size:12px;letter-spacing:.8px;color:var(--tealx)}.v-t{font-size:12.5px;color:var(--mute);font-weight:600}.pen.ed{margin-left:auto;color:var(--mute);display:flex;cursor:pointer;font-style:normal;padding:4px;border-radius:6px}.pen.ed:hover{background:var(--bg)}
+.v-say{font-size:17px;font-weight:700;line-height:1.3}.v-say.xl{font-size:22px;letter-spacing:-.3px}.v-shot{display:flex;gap:6px;font-size:12.5px;color:var(--mute);margin-top:8px;line-height:1.35}.v-shot svg{flex:none;margin-top:2px;color:var(--tealx)}
+.v-bh{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:baseline}
+.v-step{padding:12px 16px;border-bottom:1px solid var(--line)}.v-step:last-child{border-bottom:0}.v-n{width:22px;height:22px;border-radius:50%;background:var(--teal);color:var(--tealx);font-size:11px;font-weight:800;display:grid;place-items:center}.v-step .v-sh b{font-size:14px;color:var(--tealx)}
+.v-bar{display:flex;gap:8px}.v-save{flex:1;background:var(--red);color:#fff;border:0;border-radius:12px;padding:12px;font-size:15px;font-weight:700;transition:transform .15s var(--ease)}.v-ib{width:46px;background:#fff;border:1.5px solid var(--line);border-radius:12px;font-size:16px}
+/* 3 */
+.s-lab{font-size:12px;font-weight:800;letter-spacing:.4px;color:var(--mute);margin:12px 2px 8px;text-transform:uppercase}
+.s-hk{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;font-weight:600;margin-bottom:6px;line-height:1.3;cursor:pointer;transition:background .2s var(--ease),border-color .2s var(--ease)}
+.s-hk .dot{flex:none;width:16px;height:16px;border-radius:50%;border:2px solid var(--line);margin-top:1px;transition:border .2s var(--ease)}.s-hk.on{border-color:var(--tealx);background:var(--teal)}.s-hk.on .dot{border:5px solid var(--tealx)}
+.s-hks.swap .s-hk{animation:rise .3s var(--ease) both}.s-hks.swap .s-hk:nth-child(2){animation-delay:40ms}.s-hks.swap .s-hk:nth-child(3){animation-delay:80ms}
+.s-more{background:none;border:0;font-size:13px;font-weight:700;color:var(--tealx);margin:2px 2px 4px;padding:4px 0}
+.s-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;scroll-margin-top:12px}
+.s-ch{display:flex;gap:8px;align-items:baseline;margin-bottom:8px}.s-k{font-size:11px;font-weight:800;color:#fff;background:var(--ink);padding:3px 7px;border-radius:6px}.s-ch b{font-size:13px}.s-t{margin-left:auto;font-size:12px;font-weight:700;color:var(--tealx)}
+.s-say{font-size:18px;font-weight:800;line-height:1.3;letter-spacing:-.2px}.s-film{display:flex;gap:6px;background:var(--bg);border-radius:9px;padding:8px 10px;margin-top:10px;font-size:12.5px;color:var(--mute);line-height:1.35}.s-film svg{flex:none;margin-top:2px}
+.phone[data-opt="3"] .scr{scroll-snap-type:y proximity}.phone[data-opt="3"] .s-card{scroll-snap-align:start}
+/* 4 */
+.d-h{font-size:12px;font-weight:800;letter-spacing:.6px;color:var(--tealx);text-transform:uppercase;margin:16px 0 6px}
+.d-p{font-size:16px;line-height:1.5;margin-bottom:10px}.d-p.hook{font-size:18px;font-weight:700}
+.d-tm{display:inline-block;font-size:11px;font-weight:700;color:var(--mute);background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;margin-right:6px;vertical-align:2px}
+.d-p em{display:block;font-style:normal;font-weight:500;font-size:12.5px;color:var(--mute);margin-top:2px}
+.d-dock{padding:10px 12px 8px}.d-go{width:100%;background:var(--tealx);color:#fff;border:0;border-radius:12px;padding:13px;font-size:15px;font-weight:700;transition:transform .15s var(--ease)}
+.d-tools{display:flex;justify-content:space-between;margin-top:6px}.tb{background:none;border:0;font-size:12.5px;font-weight:700;color:var(--mute);padding:6px 6px;border-radius:8px}.tb:hover{background:#fff}
+.hsheet{display:none;position:absolute;inset:0;background:rgba(23,19,18,.42);z-index:30;animation:fade .25s both}
+.phone.hson .hsheet{display:block}
+.hs-in{position:absolute;left:0;right:0;bottom:0;background:var(--bg);border-radius:20px 20px 0 0;padding:16px 16px 90px;max-height:80%;overflow-y:auto;animation:up .38s var(--ease) both}
+.hs-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.hs-h b{font-size:17px}.hs-x{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:13px;font-weight:700}
+.d-opt{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;font-size:14px;font-weight:600;margin-bottom:6px;cursor:pointer}.d-opt.on{border-color:var(--tealx);background:var(--teal)}
+/* teleprompter + toast */
+.tp{display:none;position:absolute;inset:0;background:#141110;color:#fff;z-index:40;flex-direction:column;animation:fade .25s both}
+.phone.tpon .tp{display:flex}
+.tph{display:flex;justify-content:space-between;align-items:center;padding:18px 18px 8px;font-size:13px;font-weight:700;color:#bfb6b0}
+.tph button{background:#2a2523;color:#fff;border:0;border-radius:9px;padding:7px 12px;font-size:13px;font-weight:700;margin-left:6px}
+.tpb{flex:1;overflow-y:auto;padding:40% 24px 70%;font-size:28px;font-weight:700;line-height:1.35}.tpb p{margin-bottom:24px}.tpb small{display:block;font-size:12px;letter-spacing:.6px;color:#8d837d;font-weight:800;margin-bottom:4px}
+.toast{position:absolute;left:16px;right:16px;bottom:140px;text-align:center;z-index:60;background:var(--ink);color:#fff;border-radius:12px;padding:11px 16px;font-size:14px;font-weight:650;display:none;box-shadow:var(--sh-2);pointer-events:none}
+.toast.on{display:block;animation:rise .3s var(--ease) both}
+@keyframes up{from{transform:translateY(100%)}}
+@keyframes fade{from{opacity:0}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes unroll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@media (max-width:860px){
+ body{padding:16px 16px 32px}
+ .sub{display:none}.subm{display:block;color:var(--mute);font-size:14px;margin:4px 0 6px}
+ h1{font-size:22px}
+ .tabs{position:sticky;top:0;z-index:10;background:#E9E3DD;padding:8px 0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+ .tab{flex:none}
+ .grid{display:block}.card{display:none}.card.on{display:block;animation:fade .25s both}
+ .card h3{display:none}
+ .phone{margin:0 auto;height:min(844px,calc(100dvh - 120px))}
+ .txt{margin:12px auto 0}
+}
+@media (max-width:430px){.phone{width:100%;border-width:8px;border-radius:30px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style></head><body>
+<header class="hd"><h1>Script page: 4 options</h1><p class="sub">Same 15s lip oil script in each (Sell it, Talking to camera, Calm and real), the one the <a href="../script-writer-flow/">prototype</a> writes by default. Scroll and tap inside each phone: pick a hook, tap a line to edit it, Practice full screen, Save, Share, Copy. Sample copy; rewrites aren't simulated.</p>
+<p class="subm">Scroll and tap inside the phone. Sample copy.</p><nav class="tabs"><button class="tab on" data-k="1">1. Live, cleaned up</button><button class="tab" data-k="2">2. Your Script page v7</button><button class="tab" data-k="3">3. Shoot list</button><button class="tab" data-k="4">4. Simple script</button></nav></header><main class="grid"><section class="card on" id="opt1" data-k="1"><h3>1. Live, cleaned up</h3>
+<div class="phone" data-opt="1"><div class="scr"><div class="pad"><div class="top"><span class="back">← Home</span><span class="tr"><span class="pro">Pro</span><span class="acct">Account</span></span></div><div class="srcl">From your idea · Talking to camera · 15s</div><h2 class="ttl">Lip oil script <span class="pen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></span></h2>
+<div class="l-sec"><div class="l-sh"><b>HOOK</b><span>0–2s</span></div><p class="l-say big say hk" tabindex="0">“Watch what one coat of this lip oil does.”</p><p class="l-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Close up, the lip oil by your face</p></div>
+<div class="l-sec"><div class="l-sh"><b>BODY</b><span>3–11s</span></div><div class="l-beat"><div class="l-bh"><span class="l-n">1</span><span class="l-bn">talking</span><span class="l-t">3–7s</span></div><p class="l-say say" tabindex="0">“My lips get dry by lunch, and most glosses just sit on top.”</p><p class="l-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Talking, bare lips</p></div><div class="l-beat"><div class="l-bh"><span class="l-n">2</span><span class="l-bn">lips by the window</span><span class="l-t">8–11s</span></div><p class="l-say say" tabindex="0">“The shine looks natural in daylight, not wet.”</p><p class="l-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Lips by the window</p></div></div>
+<div class="l-sec"><div class="l-sh"><b>CTA</b><span>12–15s</span></div><p class="l-say say" tabindex="0">“It&#x27;s on TikTok Shop, linked below.”</p><p class="l-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Product to camera</p></div>
+<button class="btn-o prac">▶ Practice full screen</button><div class="rw"><b>Not quite right?</b><button class="btn-o sm rew">Rewrite the whole script</button><small>3 of 3 rewrites left</small></div><div class="sp"></div></div></div><div class="dock bar3"><button class="b-o save">Save script</button><button class="b-o share">Share</button><button class="b-t copy">Copy</button></div><div class="nav"><span>Home</span><span>Breakouts</span><b>Script</b><span>Library</span></div>
+<div class="tp"><div class="tph"><span>Practice</span><span><button class="tp-pp">Pause</button><button class="tp-x">Close</button></span></div><div class="tpb"></div></div><div class="toast"></div></div>
+<div class="txt"><p>The live page with the smallest changes: clear Hook / Body / CTA sections with times, bigger spoken lines, and what to film under each.</p><p>Better: closest to what Lester already built, so it ships fastest.</p><p class="m">Trade-off: still reads like a document, and the hook can&#x27;t be swapped on the page.</p></div></section><section class="card" id="opt2" data-k="2"><h3>2. Your Script page v7</h3>
+<div class="phone" data-opt="2"><div class="scr"><div class="pad"><div class="v-top"><span class="v-back">‹</span><b>Your script</b><span></span></div>
+<div class="v-src"><div class="v-ic">✎</div><div><small>From your idea</small><b>Lip oil</b><span>Sell it · Talking to camera · Calm and real</span></div></div>
+<div class="v-idea"><div class="v-ih"><span class="v-bulb"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0F7A7C" stroke-width="2"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></span><b>IDEA</b><span>15s</span></div><h2>One coat in daylight</h2><p>Show one coat of lip oil by the window, and why it beats sticky gloss.</p></div>
+<div class="v-hook"><div class="v-sh"><b class="tl">HOOK</b><span class="v-t">0–2s</span><i class="pen ed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></i></div><p class="v-say xl say hk" tabindex="0">“Watch what one coat of this lip oil does.”</p><p class="v-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Close up, the lip oil by your face</p></div>
+<div class="v-body"><div class="v-bh"><b class="tl">BODY</b><span class="v-t">3–11s</span></div><div class="v-step"><div class="v-sh"><span class="v-n">1</span><b>Talking</b><span class="v-t">3–7s</span><i class="pen ed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></i></div><p class="v-say say" tabindex="0">“My lips get dry by lunch, and most glosses just sit on top.”</p><p class="v-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Talking, bare lips</p></div><div class="v-step"><div class="v-sh"><span class="v-n">2</span><b>Lips by the window</b><span class="v-t">8–11s</span><i class="pen ed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></i></div><p class="v-say say" tabindex="0">“The shine looks natural in daylight, not wet.”</p><p class="v-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Lips by the window</p></div></div>
+<div class="v-cta"><div class="v-sh"><b class="tl">CTA</b><span class="v-t">12–15s</span><i class="pen ed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></i></div><p class="v-say say" tabindex="0">“It&#x27;s on TikTok Shop, linked below.”</p><p class="v-shot"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Product to camera</p></div>
+<button class="btn-o prac">▶ Practice full screen</button><div class="rw"><b>Not quite right?</b><button class="btn-o sm rew">Rewrite the whole script</button><small>3 of 3 rewrites left</small></div><div class="sp"></div></div></div><div class="dock v-bar"><button class="v-save save">Save script</button><button class="v-ib share" aria-label="Share">⤴</button><button class="v-ib copy" aria-label="Copy">⧉</button></div><div class="nav"><span>Home</span><span>Breakouts</span><b>Script</b><span>Library</span></div>
+<div class="tp"><div class="tph"><span>Practice</span><span><button class="tp-pp">Pause</button><button class="tp-x">Close</button></span></div><div class="tpb"></div></div><div class="toast"></div></div>
+<div class="txt"><p>Your 11 Nov design: source card, Idea card, Hook card, Body with numbered steps, CTA, and a big Save script. Bottom bar kept as live.</p><p>Better: clearest structure, every part has its time and a pencil to change it.</p><p class="m">Trade-off: the longest page to scroll.</p></div></section><section class="card" id="opt3" data-k="3"><h3>3. Shoot list</h3>
+<div class="phone" data-opt="3"><div class="scr"><div class="pad"><div class="top"><span class="back">← Home</span><span class="tr"><span class="pro">Pro</span><span class="acct">Account</span></span></div><div class="srcl">From your idea · Talking to camera · 15s</div><h2 class="ttl">Lip oil script <span class="pen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></span></h2><div class="s-lab">Pick your hook</div><div class="s-hks"><div class="s-hk on" data-i="0" tabindex="0"><span class="dot"></span><span class="hkt">Watch what one coat of this lip oil does.</span></div><div class="s-hk" data-i="1" tabindex="0"><span class="dot"></span><span class="hkt">Does this lip oil last from breakfast to dinner?</span></div><div class="s-hk" data-i="2" tabindex="0"><span class="dot"></span><span class="hkt">POV: you found a lip oil that isn&#x27;t sticky</span></div></div><button class="s-more">↻ 3 new hooks</button>
+<div class="s-lab">Your shots</div><div class="s-card"><div class="s-ch"><span class="s-k">Shot 1 of 4</span><b>Hook</b><span class="s-t">0–2s</span></div><p class="s-say say hk" tabindex="0">“Watch what one coat of this lip oil does.”</p><div class="s-film"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Close up, the lip oil by your face</span></div></div><div class="s-card"><div class="s-ch"><span class="s-k">Shot 2 of 4</span><b>Talking</b><span class="s-t">3–7s</span></div><p class="s-say say" tabindex="0">“My lips get dry by lunch, and most glosses just sit on top.”</p><div class="s-film"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Talking, bare lips</span></div></div><div class="s-card"><div class="s-ch"><span class="s-k">Shot 3 of 4</span><b>Lips by the window</b><span class="s-t">8–11s</span></div><p class="s-say say" tabindex="0">“The shine looks natural in daylight, not wet.”</p><div class="s-film"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Lips by the window</span></div></div><div class="s-card"><div class="s-ch"><span class="s-k">Shot 4 of 4</span><b>CTA</b><span class="s-t">12–15s</span></div><p class="s-say say" tabindex="0">“It&#x27;s on TikTok Shop, linked below.”</p><div class="s-film"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Product to camera</span></div></div><button class="btn-o prac">▶ Practice full screen</button><div class="rw"><b>Not quite right?</b><button class="btn-o sm rew">Rewrite the whole script</button><small>3 of 3 rewrites left</small></div><div class="sp"></div></div></div><div class="dock bar3"><button class="b-o save">Save script</button><button class="b-o share">Share</button><button class="b-t copy">Copy</button></div><div class="nav"><span>Home</span><span>Breakouts</span><b>Script</b><span>Library</span></div>
+<div class="tp"><div class="tph"><span>Practice</span><span><button class="tp-pp">Pause</button><button class="tp-x">Close</button></span></div><div class="tpb"></div></div><div class="toast"></div></div>
+<div class="txt"><p>Pick a hook at the top, then one card per shot in filming order: what to say (big), what to film (small), and the time.</p><p>Better: easiest to film from, one card at a time, and it looks good screen recorded.</p><p class="m">Trade-off: the full script isn&#x27;t one block, so it&#x27;s harder to read top to bottom.</p></div></section><section class="card" id="opt4" data-k="4"><h3>4. Simple script</h3>
+<div class="phone" data-opt="4"><div class="scr"><div class="pad"><div class="top"><span class="back">← Home</span><span class="tr"><span class="pro">Pro</span><span class="acct">Account</span></span></div><div class="srcl">From your idea · Talking to camera · 15s</div><h2 class="ttl">Lip oil script <span class="pen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></span></h2>
+<div class="d-h">Hook</div><p class="d-p hook"><span class="d-tm">0–2s</span><span class="say hk" tabindex="0">Watch what one coat of this lip oil does.</span><em>Close up, the lip oil by your face</em></p>
+<div class="d-h">Body</div><p class="d-p"><span class="d-tm">3–7s</span><span class="say" tabindex="0">My lips get dry by lunch, and most glosses just sit on top.</span><em>Talking, bare lips</em></p><p class="d-p"><span class="d-tm">8–11s</span><span class="say" tabindex="0">The shine looks natural in daylight, not wet.</span><em>Lips by the window</em></p>
+<div class="d-h">CTA</div><p class="d-p"><span class="d-tm">12–15s</span><span class="say" tabindex="0">It&#x27;s on TikTok Shop, linked below.</span><em>Product to camera</em></p><div class="sp"></div></div></div><div class="dock d-dock"><button class="d-go prac">▶ Practice full screen</button><div class="d-tools"><button class="tb hooks">Hooks</button><button class="tb rew">Rewrite</button><button class="tb save">Save</button><button class="tb share">Share</button><button class="tb copy">Copy</button></div></div>
+<div class="hsheet"><div class="hs-in"><div class="hs-h"><b>Pick a hook</b><button class="hs-x">Close</button></div><div class="d-opt" data-h="Does this lip oil last from breakfast to dinner?" tabindex="0">Does this lip oil last from breakfast to dinner?</div><div class="d-opt" data-h="Watch what one coat of this lip oil does." tabindex="0">Watch what one coat of this lip oil does.</div><div class="d-opt" data-h="POV: you found a lip oil that isn&#x27;t sticky" tabindex="0">POV: you found a lip oil that isn&#x27;t sticky</div><div class="d-opt" data-h="Why does every gloss feel sticky by noon?" tabindex="0">Why does every gloss feel sticky by noon?</div><div class="d-opt" data-h="This is the lip oil I reach for first" tabindex="0">This is the lip oil I reach for first</div><div class="d-opt" data-h="I almost gave up on lip products until this" tabindex="0">I almost gave up on lip products until this</div></div></div><div class="nav"><span>Home</span><span>Breakouts</span><b>Script</b><span>Library</span></div>
+<div class="tp"><div class="tph"><span>Practice</span><span><button class="tp-pp">Pause</button><button class="tp-x">Close</button></span></div><div class="tpb"></div></div><div class="toast"></div></div>
+<div class="txt"><p>A plain script like a notes doc, times inline and what to film in grey. One big Practice button; hooks, rewrite, save, share and copy sit in a small bar.</p><p>Better: least to understand, the user reads it in one go.</p><p class="m">Trade-off: hooks and rewrite are one tap away instead of on the page.</p></div></section></main>
+<script>const HOOKS=["Watch what one coat of this lip oil does.", "Does this lip oil last from breakfast to dinner?", "POV: you found a lip oil that isn't sticky"];const MORE=["This is the lip oil I reach for first", "Why does every gloss feel sticky by noon?", "I almost gave up on lip products until this"];(function(){
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const mq=window.matchMedia('(max-width:860px)');
+// tabs: phone = switcher, desktop = jump to the card
+$$('.tab').forEach(t=>t.addEventListener('click',()=>{
+  const k=t.dataset.k;$$('.tab').forEach(x=>x.classList.toggle('on',x===t));
+  $$('.card').forEach(c=>c.classList.toggle('on',c.dataset.k===k));
+  const card=document.getElementById('opt'+k);
+  if(!mq.matches){card.scrollIntoView({behavior:'smooth',block:'start'});card.classList.add('flash');setTimeout(()=>card.classList.toggle('flash',false),900)}
+  else window.scrollTo({top:0});
+}));
+function toast(ph,msg){const t=ph.querySelector('.toast');t.textContent=msg;t.classList.toggle('on',false);void t.offsetWidth;t.classList.add('on');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.toggle('on',false),1800)}
+function closeMenus(ph){$$('.menu',ph).forEach(m=>m.parentNode.removeChild(m));$$('.say.sel',ph).forEach(s=>s.classList.toggle('sel',false))}
+function openEdit(ph,say){
+  const host=say.closest('.d-p')||say;
+  const open=host.nextElementSibling&&host.nextElementSibling.classList.contains('menu');
+  closeMenus(ph);if(open)return;
+  say.classList.add('sel');
+  const m=document.createElement('div');m.className='menu';
+  ['Shorter','Punchier','More like me','Redo'].forEach(l=>{const b=document.createElement('button');b.textContent=l;b.addEventListener('click',e=>{e.stopPropagation();toast(ph,l+': rewrites this line only (not simulated in this mock)')});m.appendChild(b)});
+  host.after(m);
+}
+function lines(ph){return $$('.say',ph).filter(s=>!s.closest('.hsheet')).map(s=>s.textContent.replace(/[“”]/g,''))}
+function setHook(ph,h){$$('.say.hk',ph).forEach(s=>{s.textContent=s.closest('.d-p')?h:'“'+h+'”'})}
+$$('.phone').forEach(ph=>{
+  const scr=ph.querySelector('.scr'),tpb=ph.querySelector('.tpb');
+  // wheel anywhere over the phone scrolls whatever is open in it
+  ph.addEventListener('wheel',e=>{
+    const tgt=ph.classList.contains('tpon')?tpb:ph.classList.contains('hson')?ph.querySelector('.hs-in'):scr;
+    tgt.scrollTop+=e.deltaY;e.preventDefault();
+  },{passive:false});
+  $$('.say',ph).forEach(s=>{const host=s.closest('.d-p');(host||s).addEventListener('click',()=>openEdit(ph,s))});
+  $$('.pen.ed',ph).forEach(p=>p.addEventListener('click',()=>{const box=p.closest('.v-hook,.v-step,.v-cta');openEdit(ph,box.querySelector('.say'))}));
+  const on=(sel,fn)=>$$(sel,ph).forEach(b=>b.addEventListener('click',fn));
+  on('.save',()=>toast(ph,'Saved to your Library'));
+  on('.share',()=>toast(ph,'Share link copied'));
+  on('.copy',()=>toast(ph,'Script copied'));
+  on('.rew',()=>toast(ph,'Rewrites the whole script (not simulated in this mock)'));
+  // practice full screen
+  let raf=null,paused=false;
+  function run(){if(!paused)tpb.scrollTop+=0.6;raf=requestAnimationFrame(run)}
+  on('.prac',()=>{const ts=ph.querySelector('.toast');clearTimeout(ts._h);ts.classList.toggle('on',false);closeMenus(ph);tpb.innerHTML=lines(ph).map(l=>'<p>'+l.replace(/</g,'&lt;')+'</p>').join('');tpb.scrollTop=0;paused=false;ph.querySelector('.tp-pp').textContent='Pause';ph.classList.add('tpon');cancelAnimationFrame(raf);if(!matchMedia('(prefers-reduced-motion:reduce)').matches)raf=requestAnimationFrame(run)});
+  on('.tp-pp',()=>{paused=!paused;ph.querySelector('.tp-pp').textContent=paused?'Play':'Pause'});
+  on('.tp-x',()=>{ph.classList.toggle('tpon',false);cancelAnimationFrame(raf)});
+  // option 3: pick a hook, 3 new hooks
+  const sets=[HOOKS,MORE];let si=0;
+  function wireHooks(){$$('.s-hk',ph).forEach(h=>h.addEventListener('click',()=>{$$('.s-hk',ph).forEach(x=>x.classList.toggle('on',x===h));setHook(ph,h.querySelector('.hkt').textContent)}))}
+  wireHooks();
+  on('.s-more',()=>{si=(si+1)%sets.length;const box=ph.querySelector('.s-hks');box.innerHTML=sets[si].map((h,i)=>'<div class="s-hk'+(i===0?' on':'')+'" tabindex="0"><span class="dot"></span><span class="hkt">'+h+'</span></div>').join('');box.classList.toggle('swap',false);void box.offsetWidth;box.classList.add('swap');wireHooks();setHook(ph,sets[si][0])});
+  // option 4: hooks sheet
+  on('.hooks',()=>{const cur=(ph.querySelector('.say.hk')||{}).textContent;$$('.d-opt',ph).forEach(o=>o.classList.toggle('on',o.dataset.h===cur));ph.classList.add('hson')});
+  on('.hs-x',()=>ph.classList.toggle('hson',false));
+  on('.hsheet',e=>{if(e.target.classList.contains('hsheet'))ph.classList.toggle('hson',false)});
+  $$('.d-opt',ph).forEach(o=>o.addEventListener('click',()=>{setHook(ph,o.dataset.h);ph.classList.toggle('hson',false);toast(ph,'Hook updated')}));
+});
+})();
+</script></body></html>
