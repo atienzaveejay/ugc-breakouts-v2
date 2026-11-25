@@ -110,6 +110,22 @@ def phone(key,variants):
     sw=''.join(f'<button class="sw{" on" if j==0 else ""}" data-v="{j}">{E(n)}</button>' for j,(n,_) in enumerate(variants))
     pads=''.join(f'<div class="v{" on" if j==0 else ""}" data-v="{j}"><div class="bk"><div class="dpage">{h}</div></div></div>' for j,(_,h) in enumerate(variants))
     return f'<div class="sws">{sw}</div><div class="phone lvp" id="{key}"><div class="scr">{pads}</div>{BAR}<div class="toast"></div></div>'
+FMAP=[('Talking to camera','Main','spoken lines lead, short shot note under each'),
+ ('Voiceover + b-roll','Main','spoken line, the clip to show under it'),
+ ('Get ready with me','Main','one beat per routine step'),
+ ('Green screen','Main','shot note = what is on the screen behind you'),
+ ('Car talk','Main','one shot, so shot notes only on the hook'),
+ ('Day in my life','Main','one beat per scene, by time of day'),
+ ('Hands only','Main','what to film first, voiceover optional'),
+ ('Text on screen','Text on screen','slides, or one wall of text; no spoken lines'),
+ ('Skit','Skit','cast, scenes, who says what, actions'),
+ ('Street interview','Street interview','setup, questions to ask, what to keep, reveal')]
+GMAP=[('Sell it','problem / show it / proof'),('Review it','first take / good / not so good / verdict'),('How to use it','step 1, 2, 3'),('Before and after','before / the switch / after'),('Unboxing','in the box / first look / first try'),('Compare it','A / B / verdict')]
+MAP=('<details class="map" open><summary>Which layout each format falls under</summary><table><tr><th>How you film it</th><th>Layout</th><th>What changes</th></tr>'
+ +''.join(f'<tr class="{"m" if l=="Main" else "c"}"><td>{E(f)}</td><td><b>{E(l)}</b></td><td>{E(w)}</td></tr>' for f,l,w in FMAP)
+ +'</table><p class="mapn">Inside Main, &ldquo;what should the video do&rdquo; names the body beats:</p><table class="g">'
+ +''.join(f'<tr><td>{E(g)}</td><td>{E(b)}</td></tr>' for g,b in GMAP)
+ +'</table><p class="mapn">Length sets how many beats: 15s = 2, 30 to 45s = 3 to 4, 60s+ = grouped into parts.</p></details>')
 CSS=open(D+'page.css').read()
 page=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Script output options</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>{LIVE}
@@ -118,7 +134,7 @@ page=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 <p class="sub">Both use the live script page as it is today (IDEA card, Hook / Body / CTA, pencils, Save / Share / Copy), plus what she picked and the &ldquo;script starts here&rdquo; line. Same lip oil product in every example. Tap the chips above each phone to switch format. Sample copy.</p></header>
 <main class="grid">
 <section class="col"><h2>Option 1 · One layout that flexes</h2><p class="how">Always Hook / Body / CTA. Length sets how many beats, &ldquo;what should the video do&rdquo; names them, and no-talking formats swap spoken lines for on-screen text. Simplest to build; skits and street interviews get squeezed.</p>{phone("p1",OPT1)}</section>
-<section class="col"><h2>Option 2 · 1 main + 3 custom</h2><p class="how">The main layout covers 7 of the 10 filming styles (talking to camera, voiceover + b-roll, GRWM, green screen, car talk, day in my life, hands only). Text on screen, skit and street interview get their own page. 60s+ is grouped into parts.</p>{phone("p2",OPT2)}</section>
+<section class="col"><h2>Option 2 · 1 main + 3 custom</h2><p class="how">The main layout covers 7 of the 10 filming styles (talking to camera, voiceover + b-roll, GRWM, green screen, car talk, day in my life, hands only). Text on screen, skit and street interview get their own page. 60s+ is grouped into parts.</p>{MAP}{phone("p2",OPT2)}</section>
 </main>
 <script>{open(D+'app.js').read()}</script></body></html>'''
 open(D+'index.html','w').write(page)
