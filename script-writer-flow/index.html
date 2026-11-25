@@ -297,6 +297,8 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .ptag,.stag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);border:1px solid var(--line);border-radius:6px;padding:1px 5px;margin-left:6px;vertical-align:middle;font-style:normal}
 .stag{color:var(--tealx);border-color:var(--tealb)}
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.out .idea,.out .meta,#hooks .from{display:none}
+.srcl{font-size:12.5px;font-weight:600;color:var(--mute);margin:6px 0 2px}
 .idea{display:flex;align-items:center;gap:8px;margin:4px 0 2px}.idea small{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--mute)}.idea b{font-size:12px;font-weight:800;background:var(--ink);color:#fff;border-radius:6px;padding:1px 6px}
 .from2{font-size:13px;color:var(--mute);margin:6px 0}.from2 b{color:var(--ink)}
 .sech{display:flex;align-items:baseline;gap:8px;margin:16px 2px 6px}.sech b{font-size:12px;font-weight:800;letter-spacing:.06em}.sech em{font-style:normal;font-size:12px;font-weight:700;color:var(--mute)}
@@ -422,6 +424,7 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 <div class="view out" id="v-out"><div class="scr" id="oscr">
  <div class="top"><div class="back" id="oback">← Home</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
  <div class="idea"><small>IDEA</small><b id="oidea">30s</b></div>
+ <div class="srcl" id="osrc">From your idea</div>
  <h1>Lip oil script <span>✎</span></h1>
  <div class="meta"><div class="tag lay" id="otag"></div><span class="ptag">Proposal</span><div class="tag len" id="olen"></div><span class="stag">Sample script</span></div>
  <div class="from2" id="ofrom" style="display:none"></div>
@@ -570,6 +573,7 @@ function render(n){cur=n;const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').tex
  const p=$('#oscr h1');p.innerHTML=esc(S.generic?titleCase(product):cap(product))+' script <span>✎</span>';
  const fv=($('[data-q=film] .chip.on')?.textContent||'').toLowerCase();
  $('#hooks .from').innerHTML='Built from: <b>your answers</b> · <b>'+product+'</b>'+(fv?' · <b>'+esc(fv)+'</b>':'')+(BRIEF?' · <b>the brief</b>':'');
+ $('#osrc').textContent=(BRIEF?'From a brief':'From your idea')+(fv?' · '+fv.charAt(0).toUpperCase()+fv.slice(1):'')+' · '+chosenLen()+'s';
  resetHooks();
  $('#oscr').scrollTop=0;wireOut();$$('#lays button').forEach(b=>b.classList.toggle('on',+b.dataset.n===n));
  [...$('#hooks').children,...$('#obody').children].forEach((el,i)=>{el.classList.remove('rv');el.style.setProperty('--d',Math.min(120+i*60,700)+'ms');void el.offsetWidth;el.classList.add('rv')})}
