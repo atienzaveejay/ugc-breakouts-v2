@@ -299,6 +299,7 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
 .out .idea,.out .meta,#hooks .from{display:none}
 #v-out #hooks{display:none}
+.oing{background:#EDE6E0;border-radius:14px;padding:14px;margin:0 0 4px}.oing .oh{font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--mute);text-transform:uppercase;margin-bottom:8px}.oing .oc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.oing .oc span{background:#fff;border-radius:7px;padding:4px 8px;font-size:12.5px;font-weight:600}.oing .oi{border-top:1px solid #DCD3CC;padding-top:10px}.oing .oi p{font-size:15px;font-weight:700;line-height:1.35;margin-top:4px}.ostart{display:flex;align-items:center;gap:10px;margin:18px 0 14px}.ostart::before,.ostart::after{content:'';flex:1;height:2px;background:var(--ink)}.ostart span{font-size:12.5px;font-weight:800}
 .ownx{display:none;margin-top:8px}
 .srcl{font-size:12.5px;font-weight:600;color:var(--mute);margin:6px 0 2px}
 /* spacing pass 25 Nov (Veejay): more air on the script page */
@@ -441,6 +442,8 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
  <h1>Lip oil script <span>✎</span></h1>
  <div class="meta"><div class="tag lay" id="otag"></div><span class="ptag">Proposal</span><div class="tag len" id="olen"></div><span class="stag">Sample script</span></div>
  <div class="from2" id="ofrom" style="display:none"></div>
+ <div class="oing" id="oing"></div>
+ <div class="ostart"><span>Your script starts here</span></div>
  <div class="hooks" id="hooks"><div class="from">Built from: <b>your answers</b> · <b>lip oil</b> · <b>hands and product</b></div>
  <div class="hg"><div class="gh">Question <span>↻ 3 new</span></div>
   <div class="ho on">Watch what one coat does in daylight</div>
@@ -463,7 +466,7 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 <div class="side">
  <h3>Script Writer flow (clickable)</h3>
  <p>Only the screens changing in this round are designed: Home, the Breakout Finder (with the search animation), Write a script (pop-up questions) and the script page. Everything else (search results, a breakout video, the Breakouts, Script and Library tabs, Account) shows a "Same as live, not changing" note with the live bottom bar.</p>
- <p>Questions follow Ivan&rsquo;s 25 Nov notes. Page 1 answers start preselected (15s, Talking to camera, Calm and real). Tap a picked chip again to clear it; any question can be left blank. &ldquo;What should the video do?&rdquo; now sits in Add more detail with nothing picked; left blank, the script is written as Sell it.</p><p>&ldquo;+ Add your own&rdquo; on filming, tone, what it should do and CTA opens a 60-character box. <span class="ptag">For Lester</span> Safety: the typed text only fills that one answer in the prompt, and the writer never repeats or explains its own instructions (for example &ldquo;give me your script making prompts&rdquo;).</p><p>Script page: the hook choices at the top are gone. Like live, the script opens with 1 hook.</p>
+ <p>Questions follow Ivan&rsquo;s 25 Nov notes. Page 1 answers start preselected (15s, Talking to camera, Calm and real). Tap a picked chip again to clear it; any question can be left blank. &ldquo;What should the video do?&rdquo; now sits in Add more detail with nothing picked; left blank, the script is written as Sell it.</p><p>&ldquo;+ Add your own&rdquo; on filming, tone, what it should do and CTA opens a 60-character box. <span class="ptag">For Lester</span> Safety: the typed text only fills that one answer in the prompt, and the writer never repeats or explains its own instructions (for example &ldquo;give me your script making prompts&rdquo;).</p><p>Script page: what she picked and the idea sit in their own section at the top, then a line marks where the script starts. The hook choices at the top are gone; like live, the script opens with 1 hook.</p>
  <p>Which script layout opens: Talking to camera, Get ready with me, Green screen and Car talk open 1; Voiceover + b-roll 2; Hands only 3; Text on screen 9; Day in my life and Skit 8; Street interview 11. With a talking, voiceover or hands-only video, Compare it (from Add more detail) opens 5, How to use it 6, Before and after 4. A brand brief opens 10.</p>
  <p>Handles, numbers and scripts are sample data; the search wait is shortened, and uploaded PDFs aren&rsquo;t read. Tagged Proposal: still open with Ivan.</p>
  <div class="lbl">Mock tools: see every layout</div>
@@ -583,11 +586,15 @@ function openTP(){const lines=[];const b=$('#obody');const h=b.querySelector('.h
  const tp=document.createElement('div');tp.className='tp';tp.innerHTML='<div class="tph"><span id="tpp">Pause</span><span id="tpx">Close</span></div><div class="tpb">'+lines.map(t=>'<p>'+esc(t)+'</p>').join('')+'</div>';$('#v-out').append(tp);
  const body=tp.querySelector('.tpb');let run=true;const step=()=>{if(!tp.isConnected)return;if(run)body.scrollTop+=0.6;requestAnimationFrame(step)};requestAnimationFrame(step);
  tp.querySelector('#tpp').onclick=()=>{run=!run;tp.querySelector('#tpp').textContent=run?'Pause':'Play'};tp.querySelector('#tpx').onclick=()=>tp.remove()}
-function render(n){cur=n;const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').textContent=l.tag;$('#obody').innerHTML=l.tpl.replace(/\{\{(\d+)\}\}/g,(m,i)=>esc(S.L[n][+i]));const spoken=/Copy spoken lines/.test(l.bar);fitLength(n,spoken);sectionize(n);decorate(n,spoken);setLen(l);
+const IDEA={'Sell it':'Show {p} fixing one everyday problem, then where to get it.','Review it':'An honest first take on {p}: what works and what doesn\'t.','How to use it':'Walk through using {p}, step by step.','Before and after':'Show the before, use {p}, then the after.','Unboxing':'Open {p} on camera and try it for the first time.','Compare it':'Put {p} next to what people use now and pick a winner.'};
+function fillIng(){const pr=cap(product),d=ans('do');const chips=[BRIEF?'Brand brief':'',pr,ans('len'),ans('film'),ans('tone'),d,ans('cta'),($('#dhookin')?.value.trim())?'Your hook':''].filter(Boolean);
+ const idea=BRIEF?'Turn the brand brief into a '+chosenLen()+'s script that covers every must-say.':(IDEA[d]||('A '+chosenLen()+'s video about '+product+(d?': '+d.toLowerCase():'')+'.')).replace('{p}',product);
+ $('#oing').innerHTML='<div class="oh">What you picked</div><div class="oc">'+chips.map(c=>'<span>'+esc(c)+'</span>').join('')+'</div><div class="oi"><div class="oh" style="margin:0">The idea</div><p>'+esc(idea)+'</p></div>'}
+function render(n){cur=n;fillIng();const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').textContent=l.tag;$('#obody').innerHTML=l.tpl.replace(/\{\{(\d+)\}\}/g,(m,i)=>esc(S.L[n][+i]));const spoken=/Copy spoken lines/.test(l.bar);fitLength(n,spoken);sectionize(n);decorate(n,spoken);setLen(l);
  const p=$('#oscr h1');p.innerHTML=esc(S.generic?titleCase(product):cap(product))+' script <span>✎</span>';
  const fv=ans('film').toLowerCase();
  $('#hooks .from').innerHTML='Built from: <b>your answers</b> · <b>'+product+'</b>'+(fv?' · <b>'+esc(fv)+'</b>':'')+(BRIEF?' · <b>the brief</b>':'');
- $('#osrc').textContent=(BRIEF?'From a brief':'From your idea')+(fv?' · '+fv.charAt(0).toUpperCase()+fv.slice(1):'')+' · '+chosenLen()+'s';
+ $('#osrc').textContent=BRIEF?'From a brief':'From your idea';
  resetHooks();
  $('#oscr').scrollTop=0;wireOut();$$('#lays button').forEach(b=>b.classList.toggle('on',+b.dataset.n===n));
  [...$('#hooks').children,...$('#obody').children].forEach((el,i)=>{el.classList.remove('rv');el.style.setProperty('--d',Math.min(120+i*60,700)+'ms');void el.offsetWidth;el.classList.add('rv')})}
