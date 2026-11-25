@@ -1,0 +1,44 @@
+*{box-sizing:border-box}
+html,body{margin:0;background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:#171312}
+.hd{max-width:1000px;margin:0 auto;padding:28px 20px 6px}
+.hd h1{font-size:26px;font-weight:800;letter-spacing:-.5px;margin:0}
+.sub{color:#6B625E;font-size:15px;line-height:1.5;margin:8px 0 0}
+.grid{max-width:1000px;margin:0 auto;padding:12px 20px 48px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.col h2{font-size:19px;font-weight:800;margin:10px 0 6px}
+.how{font-size:14px;line-height:1.5;color:#3d3633;margin:0 0 12px;min-height:84px}
+.sws{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;min-height:108px;align-content:flex-start}
+.sw{background:#fff;border:1.5px solid #E6DFD9;border-radius:9px;padding:6px 10px;font:700 12.5px "Plus Jakarta Sans",sans-serif;cursor:pointer;color:#171312}
+.sw.on{background:#171312;color:#fff;border-color:#171312}
+.phone{width:390px;max-width:100%;height:min(844px,calc(100dvh - 40px));min-height:600px;background:#f4f0ec;border-radius:36px;border:10px solid #171312;overflow:hidden;position:relative;margin:0 auto}
+.phone .scr{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain}
+.phone .v{display:none}.phone .v.on{display:block}
+.lvp .bk .sc-pad{padding:12px 16px 120px}
+.lvp > .bk.lvbar{position:absolute;left:0;right:0;bottom:0;z-index:15}
+.lvp > .bk.lvbar .sc-act{position:static}
+/* additions on top of the live CSS */
+.lvp .bk .lv-ing{border-top:1px solid #b9dcdc;margin-top:12px;padding-top:10px}
+.lvp .bk .lv-ing small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.5px;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+.lvp .bk .lv-ing div{display:flex;flex-wrap:wrap;gap:6px}.lvp .bk .lv-ing span{background:#fff;border-radius:7px;padding:4px 8px;font-size:12.5px;font-weight:600}
+.lvp .bk .lv-start{display:flex;align-items:center;gap:10px;margin:6px 0}
+.lvp .bk .lv-start::before,.lvp .bk .lv-start::after{content:"";flex:1;height:2px;background:var(--ink)}
+.lvp .bk .lv-start span{font-size:12.5px;font-weight:800}
+.lvp .bk .lv-part{font-size:11.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--ink);background:var(--pill);padding:7px 16px;border-top:1px solid var(--hair)}
+.lvp .bk .os-line{font-style:normal}
+.lvp .bk .ostag{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:var(--teal);background:var(--teal-soft);border-radius:6px;padding:2px 6px;margin-right:8px;vertical-align:3px}
+.lvp .bk .lv-note{font-size:13px;line-height:1.45;color:var(--mid);margin:0}
+.lvp .bk .lv-slide{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:14px 16px}
+.lvp .bk .lv-slide.cover{border:2px solid var(--ink)}
+.lvp .bk .lv-sltx{font-size:19px;font-weight:800;line-height:1.3;letter-spacing:-.2px;margin:6px 0 4px}
+.lvp .bk .lv-wall{font-size:15.5px;font-weight:700;line-height:1.45;margin:8px 0 0}
+.lvp .bk .lv-cast{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:12px 16px;font-size:13.5px;line-height:1.6;display:flex;flex-direction:column}
+.lvp .bk .lv-cast b{font-size:12px;letter-spacing:.4px;text-transform:uppercase;color:var(--mid)}
+.lvp .bk .who{font-style:normal;font-size:11.5px;font-weight:800;padding:2px 7px;border-radius:6px;margin-right:8px;flex:none}
+.lvp .bk .w-y{background:var(--teal-soft);color:var(--teal)}.lvp .bk .w-f{background:#F7E3E6;color:#A3243A}
+.lvp .bk .lv-line{display:flex;align-items:flex-start;gap:4px;padding:6px 16px}
+.lvp .bk .lv-line .who{margin-top:4px}
+.lvp .bk .lv-line .sc-q2{margin:0}
+.lvp .bk .lv-act{font-size:13px;font-style:italic;color:var(--mid);padding:4px 16px 12px;margin:0}
+.toast{position:absolute;left:16px;right:16px;bottom:96px;text-align:center;z-index:60;background:#171312;color:#fff;border-radius:12px;padding:11px 16px;font-size:14px;font-weight:650;display:none}
+.toast.on{display:block}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.how,.sws{min-height:0}.hd{padding:20px 16px 4px}.grid{padding:12px 16px 40px}}
+@media (max-width:430px){.phone{width:100%;border-width:8px;border-radius:30px}}
