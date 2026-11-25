@@ -559,3 +559,65 @@ GENERIC['extra'] = [["I keep this {p} where I can see it.", "Product on the shel
            ["I noticed I reach for it more than my old one.", "Old one next to the new one"],
            ["It still looks good after a few weeks.", "Product close up"],
            ["If I had to pick one thing from my routine, it's this.", "Product to camera"]]
+
+# ---- LONG extras (25 Nov, Ivan's 90 s / 120 s+ lengths): more body lines per set, same [say, shot] format
+LIP['extra'] += [
+ ["I keep one in my bag and one by the door so I never forget it.", "Two of them, bag and door"],
+ ["The color is sheer, so it works with whatever makeup I'm wearing.", "Swipe over bare skin, then over makeup"],
+ ["Even on days I skip everything else, this is the one step I keep.", "Bathroom shelf, grab it"],
+ ["My friend asked what I had on, which never happens with gloss.", "Laughing, close up"],
+ ["I put it on before bed too, and my mouth feels softer in the morning.", "Night routine, mirror"],
+ ["It doesn't have a strong smell, which matters to me.", "Cap off, smell test"],
+ ["The tube is clear, so I can see when I'm running low.", "Hold it up to the light"],
+ ["It layers fine over a matte color when I want more shine.", "Matte color, then one swipe"],
+ ["I stopped carrying three different glosses because this covers it.", "Old glosses in a pile"],
+ ["If you hate sticky gloss, this is the one I'd tell you to try.", "Product to camera"],
+]
+MOISTURIZER['extra'] += [
+ ["A little goes a long way, so one jar lasts me a while.", "Small scoop on a fingertip"],
+ ["It doesn't have a strong smell, which my skin likes.", "Lid off, smell test"],
+ ["I use it morning and night, so it had to feel light.", "Morning light, then lamp light"],
+ ["My makeup goes on smoother when I start with this.", "Moisturizer, then foundation"],
+ ["It soaks in fast, so I'm not waiting around to get dressed.", "Pat in, reach for a shirt"],
+ ["My skin doesn't feel tight by lunch anymore.", "Touch your cheek, midday"],
+ ["I keep a small one in my bag for flights and long days.", "Travel size into the bag"],
+ ["It works under a mask without feeling greasy.", "Mask on, mask off"],
+ ["My partner started using it too, which says a lot.", "Two hands, one jar"],
+ ["If your skin feels dry by afternoon, this is where I'd start.", "Product to camera"],
+]
+WATER_BOTTLE['extra'] += [
+ ["I set little goals, like finishing one bottle before lunch.", "Bottle next to a sticky note"],
+ ["It doesn't make my water taste like plastic.", "Sip, nod"],
+ ["The lid lock means I can toss it in my bag without thinking.", "Toss it in, zip the bag"],
+ ["It fits in my car's cup holder, which my old one didn't.", "Into the cup holder"],
+ ["I can fit ice through the opening, which matters in summer.", "Ice going in"],
+ ["The color hasn't scratched off after weeks in my bag.", "Close up on the side"],
+ ["I take it to the gym and to my desk, same bottle all day.", "Gym bag, then desk"],
+ ["Drinking more water was the easiest habit I picked up this year.", "Sip by the window"],
+ ["My coworkers keep asking where I got it.", "Bottle on a shared desk"],
+ ["If you keep forgetting to drink water, carry one you like.", "Product to camera"],
+]
+GRWM['extra'] += [
+ ["I keep everything on one tray so the routine stays short.", "Tray of products, top down"],
+ ["Music on, coffee next to me, that's the whole vibe.", "Phone, coffee, mirror"],
+ ["I do my skin first, then decide how much makeup I want.", "Skin first, then makeup bag"],
+ ["On busy days I skip steps, and it still looks put together.", "Fast version, sped up"],
+ ["I lay my outfit out the night before so mornings are easier.", "Outfit on a chair"],
+ ["Hair is the last thing, usually just a quick brush.", "Brush, mirror"],
+ ["I check the light by the window before I leave.", "Face by the window"],
+ ["This is the part of the morning that's just for me.", "Sitting down, deep breath"],
+ ["Shoes on, bag packed, out the door.", "Shoes, bag, door"],
+ ["Tell me one step you never skip and I'll try it.", "Product to camera"],
+]
+GENERIC['extra'] += [
+ ["I didn't expect much from this {p}, but it stuck.", "Unboxing, quick"],
+ ["It's simple to use, which is why I keep using it.", "Using it once, close up"],
+ ["I've had it a while now, and it still holds up.", "Product close up"],
+ ["It fits the way I already do things, so there's no learning curve.", "Daily routine, quick cuts"],
+ ["I noticed the difference in the first week.", "Before and after, same spot"],
+ ["It's the kind of thing I'd buy again without thinking.", "Reorder on the phone"],
+ ["My friends noticed it on my shelf and asked about it.", "Shelf, friend's hand reaches in"],
+ ["It looks nice enough that I leave it out.", "Product on the counter"],
+ ["I take it with me when I travel now.", "Into a travel bag"],
+ ["If you're on the fence about this {p}, this is my honest take.", "Product to camera"],
+]

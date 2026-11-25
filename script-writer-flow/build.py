@@ -125,6 +125,43 @@ h1{font-size:30px;font-weight:800;letter-spacing:-.8px;line-height:1.08;margin:4
 .card.p.lift{box-shadow:var(--sh-2)}
 .pin{animation:s3pop .35s ease both;animation-delay:calc(var(--k,0)*40ms)}
 .ris{animation:rise .3s var(--ease) both}
+.tabnav span{cursor:pointer;padding:8px 6px}.tabnav span.on{color:var(--ink);font-weight:800}
+.bbrief{display:flex;align-items:center;gap:12px;margin-top:12px;background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:11px 12px;cursor:pointer}
+.bbrief .bi{width:36px;height:36px;border-radius:8px;background:var(--tsoft);color:var(--tealx);display:grid;place-items:center;font-size:11px;font-weight:800;flex:none}
+.bbrief b{display:block;font-size:15px}.bbrief small{display:block;font-size:12.5px;color:var(--mute);font-weight:600;margin-top:1px}.bbrief .chev{margin-left:auto;font-weight:800;color:var(--mute)}
+.bbrief:active{transform:scale(.98)}
+.bblock{background:var(--tsoft);border-radius:12px;padding:12px;margin-bottom:12px}
+.bblock textarea{width:100%;box-sizing:border-box}
+.bup{display:inline-block;margin-top:8px;font-size:13px;font-weight:700;text-decoration:underline;cursor:pointer;position:relative}.bup input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.bfile{display:none;margin-top:8px;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:13px;font-weight:600}
+.bfile.on{display:inline-flex}.bfile .rm{color:var(--mute);cursor:pointer;font-weight:700}
+.ctax{display:none;margin-top:8px}
+.same{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.same b{display:block;font-size:18px;font-weight:800}.same span{display:block;margin-top:6px;font-size:14px;color:var(--mute);line-height:1.45}
+.qrow{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:14px;color:var(--mute);font-weight:600}.qrow b{color:var(--ink)}.qrow .qel{margin-left:auto;font-variant-numeric:tabular-nums}
+.qh{font-size:28px;line-height:1.12;letter-spacing:-.025em;font-weight:800;margin:10px 0 12px}
+.qsteps{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:8px}
+.qsteps li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--soft)}
+.qsteps li .d{width:18px;height:18px;border-radius:50%;border:2px solid #D6CDC5;display:grid;place-items:center;font-size:10px;color:#fff;flex:none;transition:all .2s var(--ease)}
+.qsteps li.qon{color:var(--ink)}.qsteps li.qon .d{border-color:var(--tealx)}
+.qsteps li.qok{color:var(--ink)}.qsteps li.qok .d{background:var(--tealx);border-color:var(--tealx)}
+.qstats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.qstats div{background:#fff;border:1px solid var(--hair);border-radius:10px;padding:10px}
+.qstats b{display:block;font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}.qstats small{font-size:12.5px;color:var(--mute);font-weight:600}
+.qfeedw{position:relative;height:250px;overflow:hidden;border-radius:12px;background:#fff;border:1px solid var(--hair)}
+.qfeedw:after{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,#fff);pointer-events:none}
+.qfeed{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:8px;animation:qscroll 6s linear infinite}
+@keyframes qscroll{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.qtile{position:relative;height:96px;border-radius:8px;transition:opacity .3s var(--ease),box-shadow .3s var(--ease)}
+.qtile i{position:absolute;left:6px;bottom:6px;right:22px;height:5px;border-radius:3px;background:rgba(255,255,255,.7)}
+.qtile.no{opacity:.28}
+.qtile.hit{box-shadow:0 0 0 3px var(--tealx)}
+.qtile .ok{position:absolute;top:5px;right:5px;width:18px;height:18px;border-radius:50%;background:var(--tealx);color:#fff;font-size:10px;font-weight:800;display:grid;place-items:center;opacity:0;transform:scale(.6)}
+.qtile.hit .ok{animation:settle .16s var(--out) both}
+.qscan{position:absolute;left:0;right:0;height:2px;background:var(--tealx);box-shadow:0 0 10px 2px rgba(11,123,127,.35);z-index:3;animation:qline 1.4s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes qline{0%{top:0;opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
+.qdone{display:none;margin-top:14px}.qdone.on{display:block;animation:rise .3s var(--ease) both}
+.qdone h3{margin:0 0 10px;font-size:22px;font-weight:800}
 #detail .q2{animation:rise .35s var(--ease) both;animation-delay:calc(var(--k,0)*40ms)}
 #brief{animation:rise .3s var(--ease) both}
 .lift{position:relative;z-index:3}
@@ -238,6 +275,13 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .ing b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ing .ck{width:22px;height:22px;border-radius:50%;background:var(--tealx);color:#fff;display:grid;place-items:center;opacity:0;transform:scale(.5);font-size:12px;font-weight:800}
 .go2 .ing .ck{animation:settle .16s var(--out) var(--e) both}
+.pdraft{margin-top:12px;background:#fff;border:1px solid var(--hair);border-radius:8px;padding:10px 12px;display:grid;gap:10px}
+.pdraft small{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--mute)}
+.pdraft .dh b{font-size:16px;font-weight:800}.pdraft .cur{display:inline-block;width:2px;height:16px;background:var(--tealx);vertical-align:-2px;margin-left:1px;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.pdraft .sk i{display:block;height:8px;border-radius:4px;background:var(--track);margin-top:6px;transform-origin:0 50%;transform:scaleX(0)}
+.go2 .pdraft .sk i{animation:fill .5s cubic-bezier(.45,0,.25,1) var(--d) both}
+.go2 .pdone{animation-delay:2700ms!important}
 .toast{position:absolute;left:16px;right:16px;bottom:86px;justify-content:center;text-align:center;z-index:60;background:var(--ink);color:#fff;border-radius:12px;padding:11px 16px;font-size:14px;font-weight:650;display:none;gap:8px;align-items:center;box-shadow:var(--sh-2);pointer-events:none}
 .toast.on{display:flex;animation:rise .3s var(--ease) both}
 .rv{animation:rv .3s var(--out) var(--d,0ms) both}
@@ -275,113 +319,6 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
 .tp .tpb{flex:1;overflow-y:auto;padding:30vh 24px 50vh;scroll-behavior:auto}
 .tp .tpb p{font-size:26px;line-height:1.35;font-weight:800;margin:0 0 22px}
 .multi3 .chip.off{opacity:.45}
-.tabnav span{cursor:pointer}.tabnav span.on{color:var(--ink);font-weight:800}
-.tabv .scr{padding-bottom:96px}
-.logo{font-weight:800;font-size:17px;letter-spacing:-.2px}.logo b{color:#1BA3AE}
-.rh1{font-size:24px;font-weight:800;letter-spacing:-.4px;margin:6px 0 4px;line-height:1.15}
-.kick{display:block;font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--mute);text-transform:uppercase;margin-top:8px}
-.kickrow{display:flex;justify-content:space-between;align-items:baseline}.sleft{font-size:12px;font-weight:700;color:var(--mute)}
-.cs2{font-size:13px;color:var(--mute);margin-bottom:10px}
-.sh2{display:block;font-size:17px;font-weight:800;margin:22px 0 8px}.sh2row{display:flex;justify-content:space-between;align-items:baseline}.sh2row .sh2{margin-bottom:8px}
-.sa{font-size:12.5px;font-weight:800;color:var(--tealx);cursor:pointer}
-.wide{display:block;width:100%;flex:none;margin-top:12px}
-.btn.off{opacity:.45;pointer-events:none}
-.lnk{font-size:13px;font-weight:800;color:var(--tealx);cursor:pointer}
-.pro.sm{font-size:10px;padding:2px 6px;vertical-align:middle}
-/* home live sections */
-.livesec{margin-top:6px}
-.nudge{display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:18px 0 4px;font-size:13.5px}
-.nbw{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.nbc{cursor:pointer}.nbc .tth{position:relative;height:150px;border-radius:12px}.nbc b{display:block;font-size:13px;line-height:1.3;margin-top:6px}.nbc small{display:block;font-size:11.5px;color:var(--mute)}
-.ttk{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}.ttk b{display:block;font-size:15px}.ttk small{display:block;font-size:13px;color:var(--mute);margin-top:4px}
-/* search wait */
-.elap{display:flex;align-items:baseline;gap:6px;margin:8px 0}.elap b{font-size:22px;font-weight:800}.elap small{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--mute)}
-.qsub{font-size:14px;color:var(--mute);margin:4px 0 14px}
-.qsteps{list-style:none;padding:0;margin:0 0 12px}.qsteps li{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--soft);padding:8px 0}
-.qsteps .qd{width:18px;height:18px;border-radius:50%;border:2px solid #D6CDC5;display:grid;place-items:center;font-size:10px;color:#fff;font-weight:800}
-.qsteps li.run{color:var(--ink)}.qsteps li.run .qd{border-color:var(--tealx);border-top-color:transparent;animation:bspin .8s linear infinite}
-.qsteps li.done{color:var(--ink)}.qsteps li.done .qd{background:var(--tealx);border-color:var(--tealx);animation:none}
-.qnote{display:block;font-size:12.5px;color:var(--mute)}
-/* results (live) */
-.rmeta{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--mute);font-weight:600;margin:4px 0 12px}
-.sortl{display:flex;align-items:center;gap:6px}
-.sortl select{font:inherit;font-size:13px;font-weight:700;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:5px 8px;background:#fff}
-.mkcard{display:flex;align-items:center;gap:10px;background:var(--tsoft);border:1px solid var(--tealb);border-radius:14px;padding:12px 14px;margin-bottom:12px;cursor:pointer;transition:transform .15s var(--ease)}
-.mkcard b{display:block;font-size:15px}.mkcard small{display:block;font-size:12.5px;color:var(--mute);margin-top:2px}.chev{margin-left:auto;font-size:22px;color:var(--tealx);font-weight:700}
-.rc{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:10px;cursor:pointer;transition:transform .15s var(--ease)}
-.rth{position:relative;width:92px;flex:none;border-radius:10px;min-height:150px}
-.rk{position:absolute;left:6px;top:6px;background:rgba(23,19,18,.78);color:#fff;font-size:11px;font-weight:800;padding:2px 6px;border-radius:6px}
-.rsv{position:absolute;right:6px;top:6px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;font-size:13px;cursor:pointer}
-.rsv.on{background:var(--ink);color:#fff}
-.pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.85);display:grid;place-items:center;font-size:11px}
-.scb{position:absolute;left:6px;bottom:6px;display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.92);border-radius:8px;padding:3px 6px}
-.scb i{font-style:normal;font-weight:800;font-size:14px;color:var(--tealx)}.scb small{font-size:8.5px;line-height:1.05;font-weight:700;color:var(--mute)}
-.rbd{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
-.hk{font-size:14px;font-weight:700;line-height:1.3;margin:0}
-.who{display:flex;align-items:baseline;gap:6px;font-size:13px}.who small{color:var(--mute)}
-.vs b{font-size:20px;font-weight:800}.vs small{font-size:12px;color:var(--mute);margin-left:4px}
-.vu{font-size:12px;color:var(--mute)}.vu b{color:var(--ink)}
-.eng{font-size:11.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px 10px}
-.anz{align-self:flex-start;font-size:12px;font-weight:800;border-radius:9px;padding:6px 8px;border:1px solid var(--line);cursor:pointer;margin-top:2px}
-.anz.rdy{background:var(--tsoft);border-color:var(--tealb);color:var(--tealx)}
-.again{margin-top:22px}.again .chips{margin-top:8px}
-/* video page */
-.vcov{position:relative;height:300px;border-radius:16px;margin:8px 0 12px}
-.vcov .pl{width:46px;height:46px;font-size:16px}
-.smp{position:absolute;right:10px;top:10px;font-size:10.5px;font-weight:700;color:#fff;background:rgba(23,19,18,.55);border-radius:6px;padding:2px 6px}
-.vhk{font-size:18px;font-weight:800;line-height:1.3;margin:0 0 6px}
-.vstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
-.vstats div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 10px}.vstats b{display:block;font-size:16px;font-weight:800}.vstats small{font-size:11.5px;color:var(--mute)}
-.anb{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px}
-.anb>b{display:flex;align-items:baseline;gap:8px;font-size:15px}.anb>b i{font-style:normal;width:22px;height:22px;border-radius:7px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px}.anb>b em{font-style:normal;font-size:12px;color:var(--mute);margin-left:auto}
-.anb p,.anb li{font-size:13.5px;line-height:1.45;color:var(--ink);margin:6px 0 0}.anb ol{padding-left:18px;margin:0}
-.nextb{margin:16px 0 4px}.nextb b{display:block;font-size:16px}.nextb small{display:block;font-size:13px;color:var(--mute);margin:2px 0 8px}
-.vflow{margin-top:16px}
-.videa{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px}
-.videa small{font-size:10.5px;font-weight:800;letter-spacing:.06em;color:var(--mute)}.videa b{display:block;font-size:15px;margin:2px 0}.videa span{font-size:12.5px;color:var(--mute)}
-.hopts{display:flex;flex-direction:column;gap:8px}
-.hopt{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;font-weight:700;cursor:pointer;transition:transform .15s var(--ease),border-color .2s}
-.hopt small{display:block;font-size:11px;font-weight:700;color:var(--mute);letter-spacing:.04em;margin-bottom:2px}.hopt.on{border-color:var(--tealx);background:var(--tsoft)}
-#vnew{display:inline-block;margin-top:8px}
-/* tiles, top breakouts */
-.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tile{cursor:pointer;transition:transform .15s var(--ease)}.tile .tth{position:relative;height:190px;border-radius:12px}
-.tile .tag{position:absolute;left:6px;bottom:6px;font-size:11px;font-weight:700;color:#fff;background:rgba(0,0,0,.55);padding:2px 6px;border-radius:6px}
-.tile b{display:block;font-size:13px;margin-top:6px}.tile small{font-size:12px;color:var(--mute)}
-#tcats{margin:8px 0 12px}
-.tb{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:10px;cursor:pointer;transition:transform .15s var(--ease)}
-.tb .tbh{display:flex;gap:10px}.tb .tth{position:relative;width:84px;height:120px;border-radius:10px;flex:none}
-.tb .tsc{display:flex;align-items:baseline;gap:6px}.tb .tsc b{font-size:22px;font-weight:800;color:var(--tealx)}.tb .tsc small{font-size:11px;font-weight:700;color:var(--mute)}
-.tb .wis{display:block;font-size:11.5px;font-weight:800;color:var(--tealx);margin-top:2px;cursor:pointer}
-.tb .tst{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:8px 0 2px}.tb .tst b{display:block;font-size:13px}.tb .tst small{font-size:10.5px;color:var(--mute)}
-.tb .twho{font-size:12px;color:var(--mute)}.tb .tcap{font-size:13.5px;font-weight:700;line-height:1.3;margin:4px 0 0}
-/* script tab, library, brief */
-.start{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}.start b{display:block;font-size:15px}.start small{display:block;font-size:12.5px;color:var(--mute);margin:2px 0 8px}
-.how{padding-left:18px;margin:0}.how li{margin-bottom:10px}.how b{display:block;font-size:14px}.how small{display:block;font-size:12.5px;color:var(--mute)}
-.ltabs{display:flex;gap:4px;margin:0 0 12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px}
-.ltabs span{flex:1;text-align:center;font-size:12.5px;font-weight:800;color:var(--mute);padding:8px 2px;border-radius:9px;cursor:pointer}.ltabs span.on{background:var(--ink);color:#fff}
-.srow{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;cursor:pointer;transition:transform .15s var(--ease)}
-.srow .si{width:38px;height:38px;border-radius:10px;background:var(--tsoft);color:var(--tealx);display:grid;place-items:center;font-weight:800;flex:none}
-.srow .sx{flex:1;min-width:0}.srow b{display:block;font-size:14px;line-height:1.3}.srow small{display:block;font-size:12px;color:var(--mute);margin-top:2px}
-.srow .st{font-size:11px;font-weight:800;border:1px solid var(--line);border-radius:6px;padding:2px 6px;color:var(--mute);flex:none}
-.srow .del{font-size:16px;color:var(--soft);padding:4px 6px;cursor:pointer;flex:none}
-.empty{text-align:center;color:var(--mute);font-size:13px;padding:24px 8px}
-.rc:active,.tb:active,.srow:active,.tile:active,.mkcard:active,.hopt:active,.nbc:active{transform:scale(.99)}
-.bsteps{display:flex;gap:6px;margin:6px 0 4px}.bsteps span{font-size:12px;font-weight:800;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 10px}.bsteps span.on{color:#fff;background:var(--ink);border-color:var(--ink)}
-.blinks{font-size:13px;color:var(--mute);margin-top:6px}
-.bup{position:relative}.bup input{position:absolute;width:1px;height:1px;opacity:0;left:0;top:0}
-.fchip{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-top:8px;font-size:13px}
-.fchip .fn{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fchip small{color:var(--mute)}
-.frm{margin-left:auto;font-weight:800;color:var(--red);cursor:pointer;font-size:12.5px}
-.bread{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;font-size:13px;font-weight:700;color:var(--mute)}
-.bread .bbar{flex-basis:100%;height:6px;border-radius:3px;background:var(--track);overflow:hidden}
-.bread .bbar i{display:block;height:100%;background:var(--tealx);transform:scaleX(0);transform-origin:0 50%;animation:fill 1.1s cubic-bezier(.45,0,.25,1) forwards}
-.spin{width:14px;height:14px;border-radius:50%;border:2px solid var(--tealb);border-top-color:var(--tealx);animation:bspin .8s linear infinite}
-@keyframes bspin{to{transform:rotate(360deg)}}
-.bcheck{margin-top:10px}
-.bi{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-top:6px;font-size:13.5px;font-weight:600;cursor:pointer}
-.bi .bx{width:20px;height:20px;border-radius:6px;border:2px solid var(--tealx);display:grid;place-items:center;color:#fff;font-size:11px;font-weight:800;flex:none}
-.bi.on .bx{background:var(--tealx)}.bi .bk{font-size:10.5px;font-weight:800;color:var(--mute);letter-spacing:.04em;margin-left:auto}.bi:not(.on){color:var(--soft)}
 .phone{overscroll-behavior:contain}
 .out .blk{cursor:pointer}
 .out .ho{cursor:pointer}
@@ -415,7 +352,7 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
  <div class="card t"><div class="ct">Write a script</div><div class="cs">Built from your profile</div>
   <div class="box" id="pbox"><input id="prod" placeholder="What's the product?" autocomplete="off"><div class="go g" id="pgo">→</div></div>
   <div class="sml s" style="margin-top:14px">Suggested products <span class="ptag">Proposal</span></div><div class="chips" style="margin-top:8px" id="pchips"><div class="chip tap">Moisturizer</div><div class="chip tap">Lip oil</div><div class="chip tap">Water bottle</div><div class="chip tap">Get ready with me</div></div>
-  <div class="alt">Or start from <a>a brand brief</a></div></div>
+  <div class="bbrief" id="bbrief"><span class="bi">PDF</span><span><b>Start from a brand brief</b><small>Paste it or upload a PDF</small></span><span class="chev">›</span></div></div>
  <div class="sec2"><div class="sh"><h2>What creators are searching</h2><span>this week</span></div>
   <div class="list srchl">
    <div class="li"><div class="n">1</div><div class="lt">lip liner<div class="lm">214 searches</div></div><div class="up">▲ 38%</div></div>
@@ -434,127 +371,57 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
  <div class="sec2"><div class="sh"><h2>Searched by creators like you</h2></div>
   <div class="chips srch" style="margin-top:0"><div class="chip">Lip oil</div><div class="chip">Concealer</div><div class="chip">Water bottle</div><div class="chip">Mini fridge</div><div class="chip">Day in my life</div></div>
   <div class="hnote">"Like you" = same niche and a similar follower count. Each chip starts a search.</div></div>
- <div class="livesec" id="livesec">
-  <div class="nudge" id="hnudge"><span>Your last search was &lsquo;<b id="hlast">lip oil</b>&rsquo;</span><b class="lnk" id="htry">Try Collagen powder next</b></div>
-  <div class="sec2"><div class="sh"><h2>New Breakouts this week</h2></div><div class="nbw" id="hnew"></div></div>
-  <div class="sec2"><div class="sh"><h2>Your TikTok</h2></div><div class="ttk"><b>No TikTok connected</b><small>Connect it and we&rsquo;ll find your breakouts. Searches work now.</small><div class="btn o wide" id="httk">Connect TikTok</div></div></div>
-  <div class="sec2"><div class="sh"><h2>Recent searches</h2><span class="sa" data-lt="searches">See all</span></div><div id="hrs"></div></div>
-  <div class="sec2"><div class="sh"><h2>Recent analyses</h2><span class="sa" data-lt="an">See all</span></div><div id="hra"></div></div>
-  <div class="sec2"><div class="sh"><h2>Recent scripts</h2><span class="sa" data-lt="scripts">See all</span></div><div id="hrsc"></div></div>
- </div>
 </div>
 <div class="dim" id="fdim" style="display:none"></div>
 <div class="nav tabnav" id="hnav"><span data-t="home" class="on">Home</span><span data-t="top">Breakouts</span><span data-t="script">Script</span><span data-t="lib">Library</span></div>
-
+<div class="dim" id="dim" style="display:none"></div>
+<div class="sheet" id="sheet" style="display:none">
+ <div class="grab"></div>
+ <div class="shead"><h1><span id="stitle">Lip oil</span> script <span style="font-size:15px;color:var(--mute);font-weight:600">✎</span></h1><div class="x" id="sclose">Close</div></div>
+ <div class="sbody">
+  <div class="bblock" id="bblock" style="display:none"><div class="qt">Brand brief</div>
+   <textarea class="tx" id="btext" rows="3" placeholder="Paste the brand&rsquo;s brief"></textarea>
+   <label class="bup">Upload a PDF<input type="file" id="bpdf" accept=".pdf,application/pdf"></label>
+   <div class="bfile" id="bfile"><span id="bfname">brief.pdf</span><span class="rm" id="brm">Remove</span></div></div>
+  <div class="q2"><div class="qt">How long?</div><div class="chips one" data-q="len"><div class="chip tap on">15s</div><div class="chip tap">40s</div><div class="chip tap">60s</div><div class="chip tap">90s</div><div class="chip tap">120s+</div></div></div>
+  <div class="q2"><div class="qt">What should the video do?</div><div class="chips one" data-q="do"><div class="chip tap on">Sell it</div><div class="chip tap">Review it</div><div class="chip tap">How to use it</div><div class="chip tap">Before and after</div><div class="chip tap">Unboxing</div><div class="chip tap">Compare it</div></div></div>
+  <div class="q2"><div class="qt">How will you film it?</div><div class="chips one" data-q="film"><div class="chip tap on">Talking to camera</div><div class="chip tap">Voiceover + b-roll</div><div class="chip tap">Text on screen</div><div class="chip tap">Hands only</div><div class="chip tap">Day in my life</div><div class="chip tap">Get ready with me</div><div class="chip tap">Green screen</div><div class="chip tap">Skit</div><div class="chip tap">Street interview</div><div class="chip tap">Car talk</div></div></div>
+  <div class="q2"><div class="qt">What tone?</div><div class="chips one" data-q="tone"><div class="chip tap">Funny</div><div class="chip tap on">Calm and real</div><div class="chip tap">Hype</div><div class="chip tap">Story</div><div class="chip tap">Bestie chat</div><div class="chip tap">Teacher</div><div class="chip tap">Shocked</div><div class="chip tap">Honest review</div><div class="chip tap">Cozy</div><div class="chip tap">Dramatic</div></div></div>
+  <div class="more" id="more"><span>Add more detail<i style="font-style:normal;font-weight:600;color:var(--mute);font-size:12.5px;margin-left:6px">optional</i></span><span id="moreic">+</span></div>
+  <div id="detail" style="display:none">
+   <div class="q2"><div class="qt">Hook that works</div><input class="tx" id="dhookin" placeholder="Paste a hook you know works"></div>
+   <div class="q2"><div class="qt">Problem it solves</div><input class="tx" placeholder="What problem does it fix?"></div>
+   <div class="q2"><div class="qt">Solution it gives</div><input class="tx" placeholder="How does it fix it?"></div>
+   <div class="q2"><div class="qt">Must say</div><input class="tx" placeholder="Anything the video has to say"></div>
+   <div class="q2"><div class="qt">Avoid saying</div><input class="tx" placeholder="Anything to leave out"></div>
+   <div class="q2"><div class="qt">CTA</div><div class="chips one opt" data-q="cta"><div class="chip tap">Link in bio</div><div class="chip tap">Tap the orange cart</div><div class="chip tap">Comment for link</div><div class="chip tap">Follow for more</div><div class="chip tap" id="ctaadd">+ Add your own</div></div><input class="tx ctax" id="ctax" placeholder="Your CTA"></div>
+  </div>
+ </div>
+ <div class="scta"><div class="btn o" id="skip">Skip</div><div class="btn g" style="flex:2" id="write">Write my script</div></div>
+</div>
 </div>
 
-<!-- SEARCH WAIT (live, shortened in the mock) -->
-<div class="view home" id="v-search"><div class="scr">
- <div class="top"><div class="back" id="qback">&#8592; Back</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <div id="qwait">
-  <div class="elap"><b id="qel">0:00</b><small>ELAPSED</small></div>
-  <h1 class="rh1">Searching <span id="qq">lip oil</span></h1>
-  <div class="qsub">Finding your Viral Breakouts</div>
-  <ol class="qsteps"><li data-s="0"><span class="qd"></span>Searching</li><li data-s="1"><span class="qd"></span>Calculating Breakout Score</li><li data-s="2"><span class="qd"></span>Building strategy</li></ol>
-  <small class="qnote">Usually ~1-2 mins.</small>
-  <div class="btn o wide" id="qbrowse">Browse while you wait</div>
- </div>
- <div id="qready" style="display:none">
-  <h1 class="rh1">Breakouts ready</h1>
-  <p class="qsub" id="qrtxt"></p>
-  <div class="btn g wide" id="qsee">See breakouts</div>
- </div>
-</div></div>
-
-<!-- RESULTS (live) -->
-<div class="view home" id="v-res"><div class="scr">
- <div class="top"><div class="back" id="rback">&#8592; Back</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <h1 class="rh1" id="rtitle">Breakouts for lip oil</h1>
- <div class="rmeta"><span id="rsum">Showing 9 breakouts</span><label class="sortl">Sort <select id="rsort"><option value="score">Score</option><option value="views">Views</option><option value="new">Newest</option></select></label></div>
- <div class="mkcard" id="rmk"><div><b>Make a script from this search</b><small>We find what the top breakouts share and write it in your style</small></div><span class="chev">&#8250;</span></div>
- <div id="rlist"></div>
- <div class="btn o wide" id="rmore">Add 3 more breakouts</div>
- <div class="again"><div class="qt">Search again <span class="pro sm">Pro</span></div><div class="chips" id="ragain"><div class="chip">Collagen powder</div><div class="chip">Shoes</div><div class="chip">GRWM</div><div class="chip">Storytime</div></div></div>
-</div></div>
-
-<!-- VIDEO / BREAKOUT PAGE (live) -->
-<div class="view home" id="v-vid"><div class="scr" id="vscr">
- <div class="top"><div class="back" id="vback">&#8592; Back</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <div class="vcov" id="vcov"><span class="pl">&#9654;</span><span class="smp">sample video</span></div>
- <p class="vhk" id="vhk"></p>
- <div class="who"><b id="vh"></b><small id="vf"></small></div>
- <div class="vstats" id="vstats"></div>
- <div class="anl"><div class="sech"><b>ANALYSIS</b><span class="stag">Sample</span></div>
-  <div class="anb"><b><i>1</i>The hook <em>0:00 to 0:03</em></b><p id="anhook"></p></div>
-  <div class="anb"><b><i>2</i>Why it worked</b><ol id="anwhy"></ol></div>
-  <div class="anb"><b><i>3</i>What could be improved</b><ol id="animp"></ol></div></div>
- <div class="nextb"><b>Let&rsquo;s find your next breakout video</b><small>Search another product or format.</small><div class="chips" id="vchips"></div></div>
- <div class="btn g wide" id="vmk">Make a script with this</div>
- <div class="vflow" id="vflow" style="display:none">
-  <div class="videa"><small>VIDEO IDEA</small><b id="videa"></b><span>Same structure as their video. Your words, your product.</span></div>
-  <div class="q2"><div class="qt">Choose a Hook</div><div class="hopts" id="vhooks"></div><div class="lnk" id="vnew">Show 3 new hooks</div></div>
-  <div class="q2"><div class="qt">Anything to add?<i>Optional</i></div><textarea class="tx" id="vadd" rows="2"></textarea></div>
-  <div class="btn g wide" id="vwrite">Write my script</div>
- </div>
-</div></div>
-
-<!-- MOST SAVED, see all (v5 approved) -->
-<div class="view home" id="v-saved"><div class="scr">
- <div class="top"><div class="back" id="sback">&#8592; Back</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <h1 class="rh1">Most saved videos this week</h1>
- <div class="tgrid" id="sgrid"></div>
-</div></div>
-
-<!-- BRIEF BUDDY (live) -->
-<div class="view home" id="v-bb"><div class="scr">
- <div class="top"><div class="back" id="bbback">&#8592; Back</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <div class="bsteps"><span class="on" data-st="1">1 Brief</span><span data-st="2">2 Check</span><span data-st="3">3 Script</span></div>
- <h1 class="rh1">Brief Buddy</h1>
- <div class="bwrap" data-b="bb">
-  <div class="qt">Paste the brand&rsquo;s brief</div>
-  <div class="cs2">We pull out the must-say points, then write it in your style.</div>
-  <textarea class="tx bt" rows="6"></textarea>
-  <div class="blinks"><label class="lnk bup">Upload a PDF<input type="file" class="bfile" accept=".pdf,application/pdf"></label> &middot; <span class="lnk bsample">Try a sample brief</span></div>
-  <div class="fchip" style="display:none"><span>&#128196;</span><span class="fn"></span><small class="fsz"></small><span class="frm">Remove</span></div>
-  <div class="bread" style="display:none"><span class="spin"></span><span>Reading the brief...</span><div class="bbar"><i></i></div></div>
-  <div class="bcheck" style="display:none"><div class="qt">Check before it writes<i>tap to turn one off</i></div><div class="blist"></div></div>
- </div>
- <div class="btn g wide off" id="bbgo">Paste a brief first</div>
-</div></div>
-
-<!-- BREAKOUTS TAB (live Top Breakouts) -->
-<div class="view home tabv" id="v-top"><div class="scr">
- <div class="top"><div class="logo">UGC<b>Breakouts</b></div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <small class="kick">Breakouts</small><h1 class="rh1">Top Breakouts</h1>
- <div class="chips" id="tcats"></div>
- <div id="tlist"></div>
+<!-- SEARCH PROCESSING (Ivan 6:18 AM: more entertaining) -->
+<div class="view home" id="v-srch"><div class="scr">
+ <div class="top"><div class="x" id="qback">← Home</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
+ <div class="qrow"><span>Searching</span><b id="qterm">lip oil</b><span class="qel" id="qel">0:00</span></div>
+ <h2 class="qh" id="qh">Finding your Viral Breakouts</h2>
+ <ol class="qsteps" id="qsteps"><li><span class="d">✓</span>Finding your Viral Breakouts</li><li><span class="d">✓</span>Calculating Breakout Score</li><li><span class="d">✓</span>Building strategy</li></ol>
+ <div class="qstats"><div><b id="qn">0</b><small>videos checked</small></div><div><b id="qk">0</b><small>breakouts found</small></div></div>
+ <div class="qfeedw"><div class="qscan"></div><div class="qfeed" id="qfeed"></div></div>
+ <div class="qdone" id="qdone"><h3>Breakouts ready</h3><div class="btn g" id="qsee">See breakouts</div></div>
+ <div class="hnote">Usually ~1-2 mins. Shortened in this mock.</div>
 </div><div class="nav tabnav"><span data-t="home">Home</span><span data-t="top" class="on">Breakouts</span><span data-t="script">Script</span><span data-t="lib">Library</span></div></div>
 
-<!-- SCRIPT TAB (live) -->
-<div class="view home tabv" id="v-script"><div class="scr">
- <div class="top"><div class="logo">UGC<b>Breakouts</b></div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <div class="kickrow"><small class="kick">Script writer</small><small class="sleft" id="sleft">41 of 50 scripts left</small></div>
- <h1 class="rh1">Let&rsquo;s make your next viral video</h1>
- <div class="qt" style="margin:10px 0 8px">Start here</div>
- <div class="start"><b>Start with your idea</b><small>Already know what you want to film? Type it and get a script.</small><input class="tx" id="sidea" placeholder="Your idea"><div class="btn g wide" id="sgo">Write a script</div></div>
- <div class="start"><b>Brief Buddy</b><small>Paste a brief, or upload a file, and we write the script.</small><div class="btn o wide" id="sbb">Write from brief</div></div>
- <div class="start"><b>Search for videos</b><small>Search a niche, pick a breakout, then script from it.</small><input class="tx" id="sniche" placeholder="Search a niche"><div class="btn o wide" id="sfind">Find breakouts</div></div>
- <div class="sh2row"><span class="sh2">Your scripts</span><span class="sa" data-lt="scripts">See all</span></div>
- <div id="srecent"></div>
- <div class="sh2">How it works</div>
- <ol class="how"><li><b>Pick a starting point</b><small>Your idea, a brief, or a breakout video.</small></li><li><b>We write the script</b><small>A hook, the body, and a call to action.</small></li><li><b>Refine any part</b><small>Shorter, punchier, or a different shot. The rest stays as it is.</small></li></ol>
-</div><div class="nav tabnav"><span data-t="home">Home</span><span data-t="top">Breakouts</span><span data-t="script" class="on">Script</span><span data-t="lib">Library</span></div></div>
+<!-- SCREENS WE ARE NOT CHANGING (Ivan 6:18 AM) -->
+<div class="view home" id="v-same"><div class="scr">
+ <div class="top"><div class="x" id="sback">← Back</div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
+ <h1 id="sametitle">Breakouts for "lip oil"</h1>
+ <div class="same"><b>Same as live, not changing</b><span>This screen stays exactly as it is in the app today. Only Home, the Breakout Finder, Write a script and the script page change in this round.</span></div>
+</div><div class="nav tabnav" id="samenav"><span data-t="home">Home</span><span data-t="top" class="on">Breakouts</span><span data-t="script">Script</span><span data-t="lib">Library</span></div></div>
 
-<!-- LIBRARY TAB (live) -->
-<div class="view home tabv" id="v-lib"><div class="scr">
- <div class="top"><div class="logo">UGC<b>Breakouts</b></div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div>
- <small class="kick">SAVED BY YOU</small><h1 class="rh1">Library</h1>
- <input class="tx" id="lsearch" placeholder="Search your Library" style="margin:6px 0 10px">
- <div class="ltabs" id="ltabs"><span data-l="an" class="on">Analyzed</span><span data-l="saved">Saved</span><span data-l="searches">Searches</span><span data-l="scripts">Scripts</span></div>
- <div id="llist"></div>
-</div><div class="nav tabnav"><span data-t="home">Home</span><span data-t="top">Breakouts</span><span data-t="script">Script</span><span data-t="lib" class="on">Library</span></div></div>
 <!-- WRITING -->
-<div class="view" id="v-writing"><div class="proc" id="proc"><div class="top"><div class="logo" style="font-weight:800;font-size:17px">UGC<b style="color:#1FB2C2">Breakouts</b></div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div><div class="ptok"><span class="ti">✎</span><b id="wprod">Lip oil</b> · <span id="wsub">your own idea</span></div><div class="pline"><h2>Writing your script</h2><span class="ptag">Proposal</span><span class="pdone">✓</span></div><div class="pbar"><span><i style="--d:150ms"></i></span><span><i style="--d:700ms"></i></span><span><i style="--d:1250ms"></i></span></div><ol class="plab"><li><span class="dot"><i class="rg" style="--d:150ms"></i><i class="ok" style="--e:630ms">✓</i></span><span class="t" style="--d:150ms">Reading breakouts</span></li><li><span class="dot"><i class="rg" style="--d:700ms"></i><i class="ok" style="--e:1180ms">✓</i></span><span class="t" style="--d:700ms">Matching your answers</span></li><li><span class="dot"><i class="rg" style="--d:1250ms"></i><i class="ok" style="--e:1730ms">✓</i></span><span class="t" style="--d:1250ms">Writing each part</span></li></ol><div class="pmat"><div class="pscan"></div><div id="ings"></div></div></div></div>
+<div class="view" id="v-writing"><div class="proc" id="proc"><div class="top"><div class="logo" style="font-weight:800;font-size:17px">UGC<b style="color:#1FB2C2">Breakouts</b></div><div class="tr"><div class="pro">Pro</div><span class="acct">Account</span></div></div><div class="ptok"><span class="ti">✎</span><b id="wprod">Lip oil</b> · <span id="wsub">your own idea</span></div><div class="pline"><h2>Writing your script</h2><span class="ptag">Proposal</span><span class="pdone">✓</span></div><div class="pbar"><span><i style="--d:150ms"></i></span><span><i style="--d:700ms"></i></span><span><i style="--d:1250ms"></i></span></div><ol class="plab"><li><span class="dot"><i class="rg" style="--d:150ms"></i><i class="ok" style="--e:630ms">✓</i></span><span class="t" style="--d:150ms">Reading breakouts</span></li><li><span class="dot"><i class="rg" style="--d:700ms"></i><i class="ok" style="--e:1180ms">✓</i></span><span class="t" style="--d:700ms">Matching your answers</span></li><li><span class="dot"><i class="rg" style="--d:1250ms"></i><i class="ok" style="--e:1730ms">✓</i></span><span class="t" style="--d:1250ms">Writing each part</span></li></ol><div class="pmat"><div class="pscan"></div><div id="ings"></div></div><div class="pdraft" id="pdraft"><div class="dh"><small>HOOK</small><b id="dtype"></b><span class="cur"></span></div><div class="sk"><small>BODY</small><i style="--d:1500ms;width:92%"></i><i style="--d:1750ms;width:78%"></i><i style="--d:2000ms;width:85%"></i></div><div class="sk"><small>CTA</small><i style="--d:2300ms;width:60%"></i></div></div></div></div>
 
 <!-- OUTPUT -->
 <div class="view out" id="v-out"><div class="scr" id="oscr">
@@ -567,44 +434,16 @@ body{background:#E9E3DD;font-family:"Plus Jakarta Sans",system-ui,sans-serif;col
  <div id="obody"></div>
 </div><div class="bar" id="obar"></div></div>
 
-<div class="home sheetlayer" style="display:contents">
-<div class="dim" id="dim" style="display:none"></div>
-<div class="sheet" id="sheet" style="display:none">
- <div class="grab"></div>
- <div class="shead"><h1><span id="stitle">Lip oil</span> script <span style="font-size:15px;color:var(--mute);font-weight:600">✎</span></h1><div class="x" id="sclose">Close</div></div>
- <div class="sbody">
-  <div class="q2"><div class="qt">How long?</div><div class="chips one" data-q="len"><div class="chip tap">15 s</div><div class="chip tap on">30 s</div><div class="chip tap">45 s</div><div class="chip tap">60 s+</div></div></div>
-  <div class="q2"><div class="qt">How will you film it?<i>pick all that fit</i></div><div class="chips multi" data-q="film"><div class="chip tap on">Hands and product</div><div class="chip tap">Talking to camera</div><div class="chip tap">Voiceover</div><div class="chip tap">Text on screen</div></div></div>
-  <div class="q2"><div class="qt">Is this for a brand deal?</div><div class="chips one" data-q="deal"><div class="chip tap on">No</div><div class="chip tap">Yes, add the brief</div></div>
-   <div class="bwrap" id="briefwrap" style="display:none;margin-top:8px" data-b="pop">
-   <textarea class="tx bt" rows="2" placeholder="Paste the brand&rsquo;s brief"></textarea>
-   <div class="blinks"><label class="lnk bup">Upload a PDF<input type="file" class="bfile" accept=".pdf,application/pdf"></label> &middot; <span class="lnk bsample">Try a sample brief</span></div>
-   <div class="fchip" style="display:none"><span>&#128196;</span><span class="fn"></span><small class="fsz"></small><span class="frm">Remove</span></div>
-   <div class="bread" style="display:none"><span class="spin"></span><span>Reading the brief...</span><div class="bbar"><i></i></div></div>
-   <div class="bcheck" style="display:none"><div class="qt">Check before it writes<i>tap to turn one off</i></div><div class="blist"></div></div>
-  </div></div>
-  <div class="more" id="more"><span>Add more detail</span><span id="moreic">+</span></div>
-  <div id="detail" style="display:none">
-   <div class="q2"><div class="qt">Who is it for?<i>optional</i><span class="ptag">Proposal</span></div><div class="chips one" data-q="who"><div class="chip tap">Beginners</div><div class="chip tap">Busy moms</div><div class="chip tap">Students</div><div class="chip tap">Type your own</div></div></div>
-   <div class="q2"><div class="qt">Got a hook that works?<i>stays word for word</i></div><input class="tx" placeholder="Paste it here"></div>
-   <div class="q2"><div class="qt">Tone<i>up to 3</i></div><div class="chips multi3" data-q="tone"><div class="chip tap">Funny</div><div class="chip tap">Calm</div><div class="chip tap">Blunt</div><div class="chip tap">Bubbly</div><div class="chip tap">Expert</div></div></div>
-   <div class="q2"><div class="qt">Opening style the brand wants</div><input class="tx" placeholder="For example, a relatable problem story"></div>
-   <div class="q2"><div class="qt">How does it end?</div><div class="chips one" data-q="end"><div class="chip tap">Link in bio</div><div class="chip tap">TikTok Shop</div><div class="chip tap">"Comment X"</div><div class="chip tap">No CTA</div></div></div>
-   <div class="q2"><div class="qt">Anything from your own experience to add?<i>optional</i></div><textarea rows="2"></textarea></div>
-  </div>
- </div>
- <div class="scta"><div class="btn o" id="skip">Skip</div><div class="btn g" style="flex:2" id="write">Write my script</div></div>
-</div>
-</div>
 <div class="toast" id="toast"></div>
 </div>
 
 <div class="side">
  <h3>Script Writer flow (clickable)</h3>
- <p>Tap through it like the user would: search in the Breakout Finder, write a script from Home, the Script tab, a breakout video or a brief, and open Breakouts and Library from the bottom nav.</p>
- <p>Screens follow the live app (25 Nov), plus the changes agreed with Ivan. Every handle, number, video and script here is sample data. The search wait is shortened to a few seconds, and uploaded briefs aren&rsquo;t read: the check list shows sample items.</p>
- <p><b>Open with Ivan</b> (tagged Proposal): the 11 script layouts, &ldquo;Suggested products&rdquo;, &ldquo;Who is it for?&rdquo; in Add more detail, the writing screen, and where the live Home sections go.</p>
- <div class="lbl">Mock tools</div>
+ <p>Only the screens changing in this round are designed: Home, the Breakout Finder (with the search animation), Write a script (pop-up questions) and the script page. Everything else (search results, a breakout video, the Breakouts, Script and Library tabs, Account) shows a "Same as live, not changing" note with the live bottom bar.</p>
+ <p>Questions follow Ivan&rsquo;s list (25 Nov). Page 1 answers start preselected: 15s (most breakouts run 30 s or less), Sell it, Talking to camera, Calm and real. Add more detail is closed by default.</p>
+ <p>Which script layout opens: Talking to camera, Get ready with me, Green screen and Car talk open 1; Voiceover + b-roll 2; Hands only 3; Text on screen 9; Day in my life and Skit 8; Street interview 11. With a talking, voiceover or hands-only video, Compare it opens 5, How to use it 6, Before and after 4. A brand brief opens 10.</p>
+ <p>Handles, numbers and scripts are sample data; the search wait is shortened, and uploaded PDFs aren&rsquo;t read. Tagged Proposal: still open with Ivan.</p>
+ <div class="lbl">Mock tools: see every layout</div>
  <div class="lays" id="lays"></div>
  <button class="restart" id="restart">Start over</button>
 </div>
@@ -615,7 +454,8 @@ const L=__LAYOUTS__;
 const SETS=__SETS__,GEN=__GEN__;let S=SETS['lip oil'],POOL=S.h2;
 function setFor(p){const k=p.trim().toLowerCase();if(SETS[k])return SETS[k];const f=t=>t.split('{p}').join(k);const Lx={};for(const n in GEN.L)Lx[n]=GEN.L[n].map(f);return {L:Lx,hooks:{spoken:GEN.hooks.spoken.map(f),visual:GEN.hooks.visual.map(f),text:GEN.hooks.text.map(f)},h2:{question:GEN.h2.question.map(f),bold:GEN.h2.bold.map(f),story:GEN.h2.story.map(f)},x:GEN.x.map(e=>e.map(f)),generic:true}}
 function titleCase(s){return s.replace(/\b([a-z])/g,c=>c.toUpperCase())}
-function chosenLen(){const t=$('[data-q=len] .chip.on')?.textContent||'30 s';return parseInt(t,10)||30}
+function chosenLen(){const t=$('[data-q=len] .chip.on')?.textContent||'15s';return parseInt(t,10)||15}
+let BRIEF=false;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 let product='lip oil',cur=2;
 function show(id,dir){$$('.view').forEach(v=>{const on=v.id===id;v.classList.toggle('on',on);v.classList.remove('enter','back');if(on){void v.offsetWidth;v.classList.add(dir==='back'?'back':'enter')}})}
@@ -623,7 +463,7 @@ function toast(t){const e=$('#toast');e.textContent=t;e.classList.remove('on');v
 function stagger(list){[...list].forEach((el,i)=>{el.style.setProperty('--k',i);el.classList.remove('pin');void el.offsetWidth;el.classList.add('pin')})}
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 // home
-function openSheet(p){product=(p||'lip oil').trim().toLowerCase()||'lip oil';FROMV=null;setDeal(false);$('#stitle').textContent=cap(product);const d=$('#dim'),s=$('#sheet');d.classList.remove('closing');s.classList.remove('closing');d.style.display='block';s.style.display='flex';s.querySelector('.sbody').scrollTop=0}
+function openSheet(p,brief){BRIEF=!!brief;$('#bblock').style.display=BRIEF?'block':'none';product=(p||'lip oil').trim().toLowerCase()||'lip oil';$('#stitle').textContent=BRIEF&&!(p||'').trim()?'Brand brief':cap(product);if(BRIEF&&!(p||'').trim())product='lip oil';const d=$('#dim'),s=$('#sheet');d.classList.remove('closing');s.classList.remove('closing');d.style.display='block';s.style.display='flex';s.querySelector('.sbody').scrollTop=0}
 function closeSheet(now){const d=$('#dim'),s=$('#sheet');if(s.style.display==='none')return;if(now===true){d.style.display='none';s.style.display='none';return}d.classList.add('closing');s.classList.add('closing');clearTimeout(s._t);s._t=setTimeout(()=>{d.style.display='none';s.style.display='none';d.classList.remove('closing');s.classList.remove('closing')},260)}
 $('#pgo').onclick=()=>openSheet($('#prod').value);
 $('#prod').addEventListener('keydown',e=>{if(e.key==='Enter')openSheet($('#prod').value)});
@@ -631,25 +471,33 @@ $('#prod').addEventListener('focus',()=>$('#pbox').classList.add('ton'));
 $('#prod').addEventListener('blur',()=>$('#pbox').classList.remove('ton'));
 $$('#pchips .chip').forEach(c=>c.onclick=()=>{$('#prod').value=c.textContent;openSheet(c.textContent)});
 $('#sclose').onclick=closeSheet;$('#dim').onclick=closeSheet;
-$$('.chips.one').forEach(g=>g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const was=c.classList.contains('on');g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));if(!(was&&g.dataset.q!=='len'&&g.dataset.q!=='deal'))c.classList.add('on');if(g.dataset.q==='deal')$('#briefwrap').style.display=c.textContent.startsWith('Yes')?'block':'none'}));
+$$('.chips.one').forEach(g=>g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const was=c.classList.contains('on');g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));if(!(was&&g.classList.contains('opt')))c.classList.add('on');if(g.dataset.q==='cta'){const own=c.id==='ctaadd'&&c.classList.contains('on');$('#ctax').style.display=own?'block':'none';if(own)$('#ctax').focus()}}));
+$('#bbrief').onclick=()=>openSheet($('#prod').value,true);
+$('#bpdf').onchange=e=>{const f=e.target.files[0];if(!f)return;$('#bfname').textContent=f.name;$('#bfile').classList.add('on')};
+$('#brm').onclick=()=>{$('#bpdf').value='';$('#bfile').classList.remove('on')};
 $$('.chips.multi .chip').forEach(c=>c.onclick=()=>c.classList.toggle('on'));
 $$('.chips.multi3').forEach(g=>g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{if(!c.classList.contains('on')&&g.querySelectorAll('.chip.on').length>=3)return;c.classList.toggle('on');const full=g.querySelectorAll('.chip.on').length>=3;g.querySelectorAll('.chip').forEach(x=>x.classList.toggle('off',full&&!x.classList.contains('on')))}));
 $('#more').onclick=()=>{const d=$('#detail'),o=d.style.display==='none';d.style.display=o?'block':'none';$('#moreic').textContent=o?'−':'+';if(o){[...d.children].forEach((q,i)=>{q.style.setProperty('--k',i);q.style.animation='none';void q.offsetWidth;q.style.animation=''});setTimeout(()=>{const sb=$('#sheet .sbody'),m=$('#more');sb.scrollTo({top:m.offsetTop-sb.offsetTop-8,behavior:'smooth'})},60)}};
+// film / video-do -> layout (sample mapping, noted in the side panel)
+const FILM2L={'Talking to camera':1,'Voiceover + b-roll':2,'Text on screen':9,'Hands only':3,'Day in my life':8,'Get ready with me':1,'Green screen':1,'Skit':8,'Street interview':11,'Car talk':1};
+const DO2L={'Compare it':5,'How to use it':6,'Before and after':4};
 function pickLayout(){
- if($('[data-q=deal] .chip.on')?.textContent.startsWith('Yes')||BST.bb.ready&&curView()==='v-bb')return 10;
- const f=$$('[data-q=film] .chip.on').map(c=>c.textContent);
- if(f.includes('Talking to camera'))return 1;
- if(f.includes('Voiceover')||f.includes('Hands and product'))return 2;
- if(f.includes('Text on screen'))return 3;
- return 11}
-function write(){closeSheet(true);$('#wprod').textContent=cap(product);
- const f=$$('[data-q=film] .chip.on').map(c=>c.textContent);const len=$('[data-q=len] .chip.on')?.textContent||'30 s';const deal=$('[data-q=deal] .chip.on')?.textContent.startsWith('Yes');
- $('#wsub').textContent=deal?'brand deal':'your own idea';
- const ing=[['↗','Breaking out',cap(product)+' breakouts'],['▶','How you film',f.length?f.join(', '):'Any way'],['◷','Length',len]];
+ if(BRIEF)return 10;
+ const f=$('[data-q=film] .chip.on')?.textContent||'Talking to camera',d=$('[data-q=do] .chip.on')?.textContent||'Sell it';
+ const fl=FILM2L[f]||11;
+ if(DO2L[d]&&[1,2,3].includes(fl))return DO2L[d];
+ return fl}
+function write(){closeSheet(true);$('#wprod').textContent=BRIEF&&$('#stitle').textContent==='Brand brief'?'Brand brief':cap(product);
+ const v=q=>$('[data-q='+q+'] .chip.on')?.textContent||'';
+ $('#wsub').textContent=BRIEF?'brand brief':'your own idea';
+ const ing=[['↗','Breaking out',cap(product)+' breakouts'],['▶','Video and filming',v('do')+', '+v('film').toLowerCase()],['◷','Tone and length',v('tone')+', '+v('len')]];
  const D=[343,860,1377],E=[630,1180,1730];
  $('#ings').innerHTML=ing.map((x,i)=>'<div class="ing" style="--d:'+D[i]+'ms"><span class="oi">'+x[0]+'</span><span><small>'+x[1]+'</small><b>'+esc(x[2])+'</b></span><span class="ck" style="--e:'+E[i]+'ms">✓</span></div>').join('');
- const pr=$('#proc');pr.classList.remove('go2');const cv=curView();if(cv!=='v-writing'&&cv!=='v-out')HIST.push(cv);show('v-writing');void pr.offsetWidth;pr.classList.add('go2');
- clearTimeout(write._t);SLEFT=Math.max(0,SLEFT-1);write._t=setTimeout(()=>{const n=pickLayout();render(n);SCRIPTS.unshift({p:product,n,when:'Just now',src:FROMV?'Breakout':(BST.pop.ready&&n===10?'Brief':'Your idea'),status:'Ready'});show('v-out')},2250)}
+ const S0=setFor(product);const hk=($('#dhookin')?.value.trim())||(S0.h2&&S0.h2.question&&S0.h2.question[0])||'';
+ const dt=$('#dtype');dt.textContent='';clearInterval(write._ti);clearTimeout(write._ts);
+ write._ts=setTimeout(()=>{let i=0;write._ti=setInterval(()=>{dt.textContent=hk.slice(0,++i);if(i>=hk.length)clearInterval(write._ti)},Math.max(14,Math.min(32,1300/Math.max(1,hk.length))))},500);
+ const pr=$('#proc');pr.classList.remove('go2');show('v-writing');void pr.offsetWidth;pr.classList.add('go2');
+ clearTimeout(write._t);write._t=setTimeout(()=>{clearInterval(write._ti);render(pickLayout());show('v-out')},3200)}
 $('#write').onclick=write;$('#skip').onclick=write;
 // output
 function words(t){return t.replace(/must-say ✓/,'').trim().split(/\s+/).length}
@@ -713,18 +561,17 @@ function openTP(){const lines=[];const b=$('#obody');const h=b.querySelector('.h
  tp.querySelector('#tpp').onclick=()=>{run=!run;tp.querySelector('#tpp').textContent=run?'Pause':'Play'};tp.querySelector('#tpx').onclick=()=>tp.remove()}
 function render(n){cur=n;const l=L[n];S=setFor(product);POOL=S.h2;$('#otag').textContent=l.tag;$('#obody').innerHTML=l.tpl.replace(/\{\{(\d+)\}\}/g,(m,i)=>esc(S.L[n][+i]));const spoken=/Copy spoken lines/.test(l.bar);fitLength(n,spoken);sectionize(n);decorate(n,spoken);setLen(l);
  const p=$('#oscr h1');p.innerHTML=esc(S.generic?titleCase(product):cap(product))+' script <span>✎</span>';
- const f=$$('[data-q=film] .chip.on').map(c=>c.textContent.toLowerCase());const deal=$('[data-q=deal] .chip.on')?.textContent.startsWith('Yes');
- $('#hooks .from').innerHTML='Built from: <b>your answers</b> · <b>'+product+'</b>'+(f.length?' · <b>'+f.join(', ')+'</b>':'')+(deal?' · <b>the brief</b>':'');
+ const fv=($('[data-q=film] .chip.on')?.textContent||'').toLowerCase();
+ $('#hooks .from').innerHTML='Built from: <b>your answers</b> · <b>'+product+'</b>'+(fv?' · <b>'+esc(fv)+'</b>':'')+(BRIEF?' · <b>the brief</b>':'');
  resetHooks();
  $('#oscr').scrollTop=0;wireOut();$$('#lays button').forEach(b=>b.classList.toggle('on',+b.dataset.n===n));
- if(PENDING_HOOK){const hk=$('#obody .hook');if(hk){hk.querySelector('b').textContent=PENDING_HOOK.t;hk.querySelector('small').textContent='HOOK · '+PENDING_HOOK.g;$$('#hooks .ho').forEach(h=>h.classList.toggle('on',norm(h.textContent)===norm(PENDING_HOOK.t)));setLen(l)}PENDING_HOOK=null}
- if(n===10){const bs=BST.pop.ready?BST.pop:(BST.bb.ready?BST.bb:null);if(bs)$$('#obody .mi').forEach((r,k)=>{if(k<3&&!bs.on[k])r.style.display='none'})}
- [...$('#hooks').children,...$('#obody').children].forEach((el,i)=>{el.classList.remove('rv');el.style.setProperty('--d',(120+Math.min(i,8)*60)+'ms');void el.offsetWidth;el.classList.add('rv')})}
+ [...$('#hooks').children,...$('#obody').children].forEach((el,i)=>{el.classList.remove('rv');el.style.setProperty('--d',Math.min(120+i*60,700)+'ms');void el.offsetWidth;el.classList.add('rv')})}
 function wireOut(){
  function pick(m){m.querySelectorAll('div').forEach(o=>o.onclick=()=>{m.querySelectorAll('div').forEach(x=>x.classList.remove('picked'));o.classList.add('picked');toast(o.textContent+': rewrites only this line')})}
  $$('#obody .menu').forEach(pick);
  $$('#obody .blk').forEach(b=>b.onclick=e=>{if(e.target.closest('.menu'))return;const open=b.querySelector('.menu');$$('#obody .menu').forEach(m=>m.remove());$$('#obody .blk.sel').forEach(x=>x.classList.remove('sel'));$$('#obody .pen').forEach(x=>x.style.display='');if(open)return;b.classList.add('sel');const pen=b.querySelector('.pen');if(pen)pen.style.display='none';const m=document.createElement('div');m.className='menu';m.innerHTML='<div>Shorter</div><div>Punchier</div><div>More like me</div><div>Redo</div>';(b.classList.contains('num')?b.lastElementChild:b).appendChild(m);pick(m)});
  $$('#obody .mi .add').forEach(a=>a.onclick=()=>{a.outerHTML='<span class="y">✓</span>';toast('Added to the script')});
+ $$('#obar .btn').forEach(b=>b.onclick=()=>toast('Copied'));
 }
 // hooks
 const groups=$$('#hooks .hg');const keys=['question','bold','story'];const off=[0,0,0];
@@ -732,158 +579,10 @@ groups.forEach((g,i)=>{g.querySelector('.gh span').onclick=()=>{off[i]=(off[i]+3
  g.addEventListener('click',e=>{const h=e.target.closest('.ho');if(!h)return;$$('#hooks .ho').forEach(x=>x.classList.remove('on'));h.classList.add('on');const hk=$('#obody .hook');if(hk){hk.querySelector('small').textContent='HOOK · '+['QUESTION','BOLD CLAIM','STORYTIME'][i];hk.querySelector('b').textContent=h.textContent;setLen(L[cur])}else{toast('Hook goes to the top of the script')}})});
 function norm(t){return t.trim().replace(/\.$/,'').toLowerCase()}
 function resetHooks(){const hk=$('#obody .hook b');const cur_=hk?norm(hk.textContent):'';groups.forEach((g,i)=>{off[i]=0;g.querySelectorAll('.ho').forEach((h,j)=>{h.textContent=POOL[keys[i]][j];h.classList.toggle('on',!!cur_&&norm(h.textContent)===cur_)})})}
-$('#oback').onclick=()=>{const p=HIST.length?HIST[HIST.length-1]:null;if(p&&p!=='v-home'){goBack();return}HIST.length=0;show('v-home','back')};
+$('#oback').onclick=()=>{show('v-home','back')};
 // layout switcher
 const lays=$('#lays');Object.keys(L).forEach(k=>{const b=document.createElement('button');b.dataset.n=k;b.textContent=k+'. '+L[k].label;b.onclick=()=>{render(+k);show('v-out')};lays.appendChild(b)});
-$('#restart').onclick=()=>{clearTimeout(write._t);clearInterval(SRCH.t);closeSheet(true);closeFinder();$('#prod').value='';HIST.length=0;FROMV=null;drawHomeLive();show('v-home','back')};
-// ================= navigation history
-const HIST=[];
-function go(id,from){if(from)HIST.push(from);show(id)}
-function goBack(){const id=HIST.pop()||'v-home';show(id,'back')}
-function curView(){const v=$$('.view').find(v=>v.classList.contains('on'));return v?v.id:'v-home'}
-function goTab(t){HIST.length=0;closeSheet(true);closeFinder();const id={home:'v-home',top:'v-top',script:'v-script',lib:'v-lib'}[t];if(t==='home')drawHomeLive();if(t==='top')drawTop();if(t==='script')drawScriptTab();if(t==='lib')drawLib();show(id)}
-$$('.tabnav span').forEach(sp=>sp.onclick=()=>goTab(sp.dataset.t));
-$$('.acct').forEach(a=>a.onclick=()=>toast('Account (mock)'));
-// ================= sample data: every handle and number is sample data
-const COL=['#C9B8AE','#B9C7C2','#C7B9CF','#D3C4B2','#B8C2CF','#CFC0C6','#BFCBB8','#D8CBBE','#BCC6C9','#CBB9B0','#C2C9BC','#D1C2CC'];
-const FOL=['5.4K','1.1K','1.7K','923','6.1K','2.4K','847','697','1.2K','3.3K','16.6K','4.1K'];
-const VIEWS=[[392,'392K'],[2600,'2.6M'],[1400,'1.4M'],[660,'660K'],[693,'693K'],[154,'154K'],[43.5,'43.5K'],[36,'36K'],[56.2,'56.2K'],[311,'311K'],[1100,'1.1M'],[208,'208K']];
-const MULT=['73x their 5.4K followers','2501x their 1.1K followers','75x the usual 18.4K views','715x their 923 followers','60x the usual 11.6K views','64x their 2.4K followers','51x their 847 followers','52x their 697 followers','9x the usual 6.5K views','94x their 3.3K followers','66x the usual 16.6K views','51x their 4.1K followers'];
-const AGE=[47,300,180,365,300,60,90,90,60,12,25,7];
-const ENG=[['42.7K','701','16.4K','8.1K','15.3%'],['287K','2K','77.8K','31K','13.9%'],['219K','1.2K','10.8K','12K','16.6%'],['110K','1.8K','5.4K','6.2K','17.8%'],['111K','542','25.1K','9.9K','19.7%'],['21.2K','113','2K','1.4K','15.1%'],['9.6K','5','659','480','23.6%'],['3.6K','46','322','210','11.1%'],['8.6K','72','465','390','16.3%'],['40.2K','390','6.1K','3.3K','15.0%'],['130K','1.4K','12.2K','9.1K','12.9%'],['27.5K','210','3.3K','2.2K','14.9%']];
-const SCORE=[92,90,90,90,90,90,90,89,89,88,87,86];
-const CATS={Beauty:['lip oil','concealer','moisturizer','self tanner','lip liner','skincare routine','heatless curls','serum'],Food:['protein bar','iced coffee','air fryer','snack box','smoothie','meal prep','hot sauce','granola'],Home:['fridge restock','candle','mini fridge','organizer','water bottle','cleaning spray','desk setup','laundry'],Fashion:['jeans','tote bag','sneakers','hoodie','jewelry','sunglasses','dress','belt'],Fitness:['protein powder','resistance band','gym bag','yoga mat','pre workout','foam roller','leggings','water bottle'],Tech:['phone case','earbuds','ring light','phone stand','power bank','keyboard','webcam','charger']};
-function catOf(q){for(const k in CATS)if(CATS[k].includes(q))return k;return q==='get ready with me'||q==='grwm'?'Beauty':'Other'}
-function ageTxt(d){return d>=365?Math.round(d/365)+'y ago':d>=60?Math.round(d/30)+'mo ago':d+'d ago'}
-function vidsFor(q){const st=setFor(q),hk=[...st.h2.question,...st.h2.bold,...st.h2.story];
- return SCORE.map((sc,i)=>({i,q,hook:hk[(i*5)%hk.length].replace(/\.$/,''),h:'@sample.creator'+(i+1),f:FOL[i],v:VIEWS[i],x:MULT[i],age:AGE[i],e:ENG[i],sc,col:COL[i]}))}
-const SAVEDV=[];const ANAL=[];const SEARCHES=[{q:'lip oil',n:205},{q:'review',n:23},{q:'no talking',n:101}];
-function vkey(v){return v.q+'|'+v.h}
-// ================= search wait (live wording, shortened)
-const SRCH={t:null};
-function openSearch(t){t=(t||'').trim().toLowerCase();if(!t)return;closeFinder();RQ=t;$('#qq').textContent=t;$('#qwait').style.display='';$('#qready').style.display='none';
- const steps=$$('#qwait .qsteps li');steps.forEach(li=>li.className='');let el=0;$('#qel').textContent='0:00';clearInterval(SRCH.t);
- go('v-search',curView());const t0=Date.now();
- SRCH.t=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);$('#qel').textContent='0:'+String(s).padStart(2,'0');const k=Math.min(3,Math.floor((Date.now()-t0)/900));
-  steps.forEach((li,i)=>{li.className=i<k?'done':(i===k?'run':'');li.querySelector('.qd').textContent=i<k?'✓':''});
-  if(Date.now()-t0>=2900){clearInterval(SRCH.t);addSearch(t);if(curView()==='v-search'){$('#qwait').style.display='none';const r=$('#qready');r.style.display='';r.classList.remove('ris');void r.offsetWidth;r.classList.add('ris');$('#qrtxt').textContent='We ranked '+t+' clips by Breakout Score. Choose a video to build your creative strategy.'}else toast('Breakouts ready: '+t)}},150)}
-function addSearch(q){const i=SEARCHES.findIndex(x=>x.q===q);if(i>=0)SEARCHES.splice(i,1);SEARCHES.unshift({q,n:12});drawHomeLive()}
-$('#qsee').onclick=()=>{HIST.pop();openResults(RQ,true)};
-$('#qbrowse').onclick=()=>{goBack()};
-$('#qback').onclick=()=>{clearInterval(SRCH.t);goBack()};
-// ================= results (live)
-let RQ='lip oil',RV=[],RSHOW=9,RSORT='score';
-function openResults(q,replace){RQ=q.toLowerCase();RV=vidsFor(RQ);RSHOW=9;RSORT='score';$('#rsort').value='score';$('#rtitle').textContent='Breakouts for '+RQ;drawRes(true);$('#v-res .scr').scrollTop=0;go('v-res',replace?null:curView())}
-function sorted(){const a=RV.slice();if(RSORT==='views')a.sort((x,y)=>y.v[0]-x.v[0]);else if(RSORT==='new')a.sort((x,y)=>x.age-y.age);return a}
-function card(v,rank){const sv=SAVEDV.some(x=>vkey(x)===vkey(v)),an=ANAL.some(x=>vkey(x)===vkey(v));
- return '<div class="rc" data-i="'+v.i+'"><div class="rth" style="background:'+v.col+'"><span class="rk">#'+rank+'</span><span class="rsv'+(sv?' on':'')+'" title="Save">&#9873;</span><span class="pl">&#9654;</span><span class="scb"><i>'+v.sc+'</i><small>Breakout<br>Score</small></span></div><div class="rbd"><p class="hk">&ldquo;'+esc(v.hook)+'&rdquo;</p><div class="who"><b>'+v.h+'</b><small>'+v.f+' followers</small></div><div class="vs"><b>'+v.v[1]+'</b><small>views</small></div><small class="vu"><b>'+v.x.split(' ')[0]+'</b> '+v.x.split(' ').slice(1).join(' ')+' · '+ageTxt(v.age)+'</small><div class="eng"><span>&#9829; '+v.e[0]+'</span><span>&#128172; '+v.e[1]+'</span><span>&#8599; '+v.e[2]+'</span><span>'+v.e[4]+' eng.</span></div><span class="anz'+(an?' rdy':'')+'">'+(an?'Analysis ready':'Analyze this video')+'</span></div></div>'}
-function drawRes(all,from){const list=sorted().slice(0,RSHOW),box=$('#rlist');const start=all?0:from;
- if(all)box.innerHTML='';box.insertAdjacentHTML('beforeend',list.slice(start).map((v,k)=>card(v,start+k+1)).join(''));
- [...box.children].slice(start).forEach((c,k)=>{c.style.setProperty('--d',((all?80:0)+k*60)+'ms');c.classList.add('rv')});
- $('#rsum').textContent='Showing '+RSHOW+' breakouts';const more=RSHOW<RV.length;$('#rmore').style.display=more?'':'none';$('#rmore').textContent='Add '+Math.min(3,RV.length-RSHOW)+' more breakouts';
- box.querySelectorAll('.rc').forEach(c=>{const v=RV[+c.dataset.i];
-  c.querySelector('.rsv').onclick=e=>{e.stopPropagation();const i=SAVEDV.findIndex(x=>vkey(x)===vkey(v));if(i>=0){SAVEDV.splice(i,1);toast('Removed from saved')}else{SAVEDV.unshift(v);toast('Saved to your Library')}e.target.classList.toggle('on',i<0)};
-  c.querySelector('.anz').onclick=e=>{e.stopPropagation();const a=e.target;if(a.classList.contains('rdy')){openVid(v);return}a.textContent='Analyzing...';setTimeout(()=>{if(!ANAL.some(x=>vkey(x)===vkey(v)))ANAL.unshift(v);a.textContent='Analysis ready';a.classList.add('rdy')},1200)};
-  c.onclick=()=>openVid(v)})}
-$('#rmore').onclick=()=>{const from=RSHOW;RSHOW=Math.min(RV.length,RSHOW+3);drawRes(false,from)};
-$('#rsort').onchange=e=>{RSORT=e.target.value;drawRes(true)};
-$('#rmk').onclick=()=>openSheet(RQ);
-$('#rback').onclick=()=>goBack();
-$$('#ragain .chip').forEach(c=>c.onclick=()=>openSearch(c.textContent));
-// ================= video page (live)
-let VV=null,VHOFF=0,VHPICK=null;
-const VPOOL=v=>{const st=setFor(v.q);return [...st.h2.question.slice(0,3).map(t=>[t,'QUESTION']),...st.h2.bold.slice(0,3).map(t=>[t,'BOLD CLAIM']),...st.h2.story.slice(0,3).map(t=>[t,'STORYTIME']),...st.h2.question.slice(3).map(t=>[t,'QUESTION']),...st.h2.bold.slice(3).map(t=>[t,'BOLD CLAIM']),...st.h2.story.slice(3).map(t=>[t,'STORYTIME'])]};
-const VORD=[0,3,6,1,4,7,2,5,8,9,12,15,10,13,16,11,14,17];
-function openVid(v){VV=v;$('#vcov').style.background=v.col;$('#vhk').innerHTML='&ldquo;'+esc(v.hook)+'&rdquo;';$('#vh').textContent=v.h;$('#vf').textContent=v.f+' followers';
- $('#vstats').innerHTML=[[v.v[1],'views'],[v.sc,'Breakout Score'],[v.e[0],'likes'],[v.e[2],'shares'],[v.e[3],'saves'],[v.e[4],'engagement']].map(x=>'<div><b>'+x[0]+'</b><small>'+x[1]+'</small></div>').join('');
- $('#anhook').textContent='It opens on "'+v.hook+'" so the viewer knows what they get right away.';
- $('#anwhy').innerHTML=['It shows the product in use, close up.','It speaks to one problem the viewer already has.','It ends on one clear next step.'].map(t=>'<li>'+t+'</li>').join('');
- $('#animp').innerHTML=['Show the product a little sooner.','Add on-screen text for people watching without sound.','Cut the pause before the last line.'].map(t=>'<li>'+t+'</li>').join('');
- const vc=$('#vchips');vc.innerHTML=[v.q+' review',v.q+' unboxing','get ready with me','day in my life'].filter((t,i,a)=>a.indexOf(t)===i).map(t=>'<div class="chip">'+esc(t)+'</div>').join('');vc.querySelectorAll('.chip').forEach(c=>c.onclick=()=>openSearch(c.textContent));
- if(!ANAL.some(x=>vkey(x)===vkey(v)))ANAL.unshift(v);
- $('#vflow').style.display='none';$('#vmk').style.display='';VHOFF=0;VHPICK=null;$('#vadd').value='';$('#vscr').scrollTop=0;go('v-vid',curView())}
-function drawVHooks(){const pool=VPOOL(VV),box=$('#vhooks');
- box.innerHTML=[0,1,2].map(k=>{const j=VORD[(VHOFF+k)%VORD.length];const h=pool[j];return '<div class="hopt'+(VHPICK&&VHPICK.t===h[0]?' on':'')+'" data-j="'+j+'"><small>'+h[1]+'</small>'+esc(h[0])+'</div>'}).join('');
- box.querySelectorAll('.hopt').forEach((h,k)=>{h.style.setProperty('--d',(k*60)+'ms');h.classList.add('rv');h.onclick=()=>{const p=pool[+h.dataset.j];VHPICK={t:p[0],g:p[1]};box.querySelectorAll('.hopt').forEach(x=>x.classList.remove('on'));h.classList.add('on')}})}
-function startVidScript(){$('#vmk').style.display='none';const f=$('#vflow');f.style.display='block';f.classList.remove('ris');void f.offsetWidth;f.classList.add('ris');$('#videa').textContent=VV.h+"'s breakout";drawVHooks();setTimeout(()=>{$('#vscr').scrollTo({top:f.offsetTop-80,behavior:'smooth'})},60)}
-$('#vmk').onclick=startVidScript;$('#vnew').onclick=()=>{VHOFF+=3;drawVHooks()};
-$('#vback').onclick=()=>goBack();
-$('#vwrite').onclick=()=>{product=VV.q;setDeal(false);FROMV=VV;PENDING_HOOK=VHPICK;write()};
-// ================= most saved (v5 approved), see all
-const MSAVED=[['lip liner',0],['skincare',1],['get ready with me',2],['fridge restock',3],['heatless curls',4],['moisturizer',5],['water bottle',6],['self tanner',7],['advent calendar',8]];
-function msVid(k){const [q,i]=MSAVED[k];return vidsFor(q)[i]}
-$$('#thumbs .th').forEach((t,k)=>t.onclick=()=>openVid(msVid(k)));
-(function(){const sa=[...$$('#v-home .sec2 .sh span')].find(x=>x.textContent.trim()==='see all');if(sa){sa.style.cursor='pointer';sa.onclick=()=>{drawSaved();go('v-saved','v-home')}}})();
-function drawSaved(){const g=$('#sgrid');g.innerHTML=MSAVED.map((m,k)=>{const v=msVid(k);return '<div class="tile"><div class="tth" style="background:'+v.col+'"><span class="pl">&#9654;</span><span class="tag">&#9654; '+esc(m[0])+'</span></div><b>'+v.h+'</b><small>'+v.v[1]+' views · '+v.x.split(' ')[0]+' usual</small></div>'}).join('');
- g.querySelectorAll('.tile').forEach((t,k)=>{t.style.setProperty('--d',(k*45)+'ms');t.classList.add('rv');t.onclick=()=>openVid(msVid(k))})}
-$('#sback').onclick=()=>goBack();
-// ================= Home live sections
-function drawHomeLive(){const last=SEARCHES[0]?SEARCHES[0].q:'lip oil';$('#hlast').textContent=last;
- const nb=vidsFor(last).slice(0,4);$('#hnew').innerHTML=nb.map(v=>'<div class="nbc"><div class="tth" style="background:'+v.col+'"><span class="pl">&#9654;</span></div><b>&ldquo;'+esc(v.hook)+'&rdquo;</b><small>'+v.h+' · '+esc(v.q)+'</small><small>'+v.v[1]+' · '+v.x.split(' ')[0]+' usual</small></div>').join('');
- $('#hnew').querySelectorAll('.nbc').forEach((c,k)=>c.onclick=()=>openVid(nb[k]));
- $('#hrs').innerHTML=SEARCHES.slice(0,3).map(x=>'<div class="srow"><span class="si">&#8981;</span><div class="sx"><b>'+esc(x.q)+'</b><small>'+x.n+' breakouts · all open</small></div></div>').join('');
- $('#hrs').querySelectorAll('.srow').forEach((r,k)=>r.onclick=()=>openResults(SEARCHES[k].q));
- const an=(ANAL.length?ANAL:[msVid(0),msVid(1),msVid(2)]).slice(0,3);$('#hra').innerHTML=an.map(v=>'<div class="srow"><div class="sx"><b>&ldquo;'+esc(v.hook)+'&rdquo;</b><small>'+v.h+' · '+v.x.split(' ')[0]+' usual</small></div></div>').join('');
- $('#hra').querySelectorAll('.srow').forEach((r,k)=>r.onclick=()=>openVid(an[k]));
- $('#hrsc').innerHTML=SCRIPTS.slice(0,3).map(scriptRow).join('');$('#hrsc').querySelectorAll('.srow').forEach((r,k)=>r.onclick=()=>openScript(SCRIPTS[k]))}
-$('#htry').onclick=()=>openSearch('collagen powder');
-$('#httk').onclick=()=>toast('Opens TikTok sign in (mock)');
-$$('.sa[data-lt]').forEach(a=>a.onclick=()=>{LTAB=a.dataset.lt;goTab('lib')});
-// ================= scripts (Script tab + Library + Home)
-let SLEFT=41;
-const SCRIPTS=[{p:'moisturizer',n:6,when:'Yesterday',src:'Your idea',status:'Ready'},{p:'water bottle',n:2,when:'2 days ago',src:'Breakout',status:'Draft'}];
-function scriptHook(x){const st=setFor(x.p);return (st.L[x.n]&&st.L[x.n][x.n===10?3:0])||titleOf(x.p)}
-function titleOf(p){const st=setFor(p);return st.generic?titleCase(p):cap(p)}
-function scriptRow(x){return '<div class="srow"><span class="si">&#9998;</span><div class="sx"><b>&ldquo;'+esc(scriptHook(x))+'&rdquo;</b><small>'+(x.src==='Breakout'?'Breakout · 30 seconds':x.src)+' · '+x.when+'</small></div><span class="st">'+x.status+'</span></div>'}
-function drawScriptTab(){$('#sleft').textContent=SLEFT+' of 50 scripts left';const b=$('#srecent');b.innerHTML=SCRIPTS.slice(0,3).map(scriptRow).join('')||'<div class="empty">No scripts yet.</div>';
- b.querySelectorAll('.srow').forEach((r,k)=>{r.style.setProperty('--d',(k*50)+'ms');r.classList.add('rv');r.onclick=()=>openScript(SCRIPTS[k])})}
-function openScript(x){product=x.p;FROMV=null;render(x.n);go('v-out',curView())}
-$('#sgo').onclick=()=>openSheet($('#sidea').value);$('#sidea').addEventListener('keydown',e=>{if(e.key==='Enter')openSheet($('#sidea').value)});
-$('#sfind').onclick=()=>openSearch($('#sniche').value);$('#sniche').addEventListener('keydown',e=>{if(e.key==='Enter')openSearch($('#sniche').value)});
-$('#sbb').onclick=()=>{resetBrief('bb');setBBStep(1);go('v-bb',curView())};
-$('#bbback').onclick=()=>goBack();
-// ================= Breakouts tab (live Top Breakouts)
-let TCAT='All';
-function drawTop(){const c=$('#tcats');c.innerHTML=['All',...Object.keys(CATS)].map(k=>'<div class="chip'+(k===TCAT?' on':'')+'">'+k+'</div>').join('');c.querySelectorAll('.chip').forEach(ch=>ch.onclick=()=>{TCAT=ch.textContent;drawTop()});
- const qs=TCAT==='All'?Object.values(CATS).map(a=>a[0]).concat(Object.values(CATS).map(a=>a[1])):CATS[TCAT];
- const rows=qs.slice(0,8).map((q,k)=>vidsFor(q)[k%12]);const l=$('#tlist');
- l.innerHTML=rows.map(v=>'<div class="tb"><div class="tbh"><div class="tth" style="background:'+v.col+'"><span class="pl">&#9654;</span></div><div style="flex:1;min-width:0"><div class="tsc"><b>'+v.sc+'</b><small>Breakout Score</small></div><span class="wis">What is the Breakout Score?</span><div class="tst"><div><b>'+v.v[1]+'</b><small>Views</small></div><div><b>'+v.e[0]+'</b><small>Likes</small></div><div><b>'+v.e[1]+'</b><small>Comments</small></div><div><b>'+v.e[2]+'</b><small>Shares</small></div></div></div></div><div class="twho">'+v.h+' · '+v.f+' followers · '+ageTxt(v.age)+'</div><p class="tcap">&ldquo;'+esc(v.hook)+'&rdquo;</p><span class="anz">Analyze video</span></div>').join('');
- l.querySelectorAll('.tb').forEach((t,k)=>{t.style.setProperty('--d',(k*45)+'ms');t.classList.add('rv');t.querySelector('.wis').onclick=e=>{e.stopPropagation();toast('Opens the Breakout Score explainer (mock)')};t.onclick=()=>openVid(rows[k])})}
-// ================= Library (live)
-let LTAB='an';
-function drawLib(){$$('#ltabs span').forEach(sp=>sp.classList.toggle('on',sp.dataset.l===LTAB));const q=$('#lsearch').value.trim().toLowerCase();const b=$('#llist');let html='',items=[];
- const vrow=(v,del)=>'<div class="srow"><div class="sx"><b>&ldquo;'+esc(v.hook)+'&rdquo;</b><small>'+v.h+' · '+catOf(v.q)+' · '+v.x.split(' ')[0]+' usual</small></div>'+(del?'<span class="del" title="Delete">&#215;</span>':'')+'</div>';
- if(LTAB==='an'){items=ANAL.filter(v=>!q||(v.hook+v.h+v.q).toLowerCase().includes(q));html=items.map(v=>vrow(v,true)).join('')||'<div class="empty">Videos you analyze show up here.</div>'}
- if(LTAB==='saved'){items=SAVEDV.filter(v=>!q||(v.hook+v.h+v.q).toLowerCase().includes(q));html=items.map(v=>vrow(v,false)).join('')||'<div class="empty">Videos you save show up here.</div>'}
- if(LTAB==='searches'){items=SEARCHES.filter(x=>!q||x.q.includes(q));html=items.map(x=>'<div class="srow"><span class="si">&#8981;</span><div class="sx"><b>'+esc(x.q)+'</b><small>'+x.n+' breakouts · all open</small></div></div>').join('')}
- if(LTAB==='scripts'){items=SCRIPTS.filter(x=>!q||(scriptHook(x)+x.p).toLowerCase().includes(q));html=items.map(x=>{const parts=(setFor(x.p).L[x.n]||[]).length?Math.max(3,Math.min(6,Math.round(((setFor(x.p).L[x.n]||[]).length)/2))):4;return '<div class="srow"><span class="si">&#9998;</span><div class="sx"><b>&ldquo;'+esc(scriptHook(x))+'&rdquo;</b><small>'+(x.src==='Breakout'?'From a breakout':x.src)+' · 0:30 · '+parts+' parts</small></div></div>'}).join('')||'<div class="empty">No scripts yet.</div>'}
- b.innerHTML=html;[...b.children].forEach((c,k)=>{c.style.setProperty('--d',(k*50)+'ms');c.classList.add('rv')});
- b.querySelectorAll('.srow').forEach((r,k)=>{const it=items[k];if(!it)return;const del=r.querySelector('.del');if(del)del.onclick=e=>{e.stopPropagation();const i=ANAL.indexOf(it);if(i>=0)ANAL.splice(i,1);toast('Analysis deleted');drawLib()};
-  r.onclick=()=>{if(LTAB==='searches')openResults(it.q);else if(LTAB==='scripts')openScript(it);else openVid(it)}})}
-$$('#ltabs span').forEach(sp=>sp.onclick=()=>{LTAB=sp.dataset.l;drawLib()});
-$('#lsearch').addEventListener('input',drawLib);
-// ================= brief: pop-up (Brand deal = Yes) and Brief Buddy page share one flow
-const BST={pop:{ready:false,on:[true,true,true]},bb:{ready:false,on:[true,true,true]}};
-function broot(w){return $('[data-b='+w+']')}
-function resetBrief(w){const r=broot(w);BST[w]={ready:false,on:[true,true,true]};r.querySelector('.fchip').style.display='none';r.querySelector('.bread').style.display='none';r.querySelector('.bcheck').style.display='none';r.querySelector('.bfile').value='';r.querySelector('.bt').value='';r.querySelector('.bt').style.display='';r.querySelector('.blinks').style.display='';if(w==='bb')setBBStep(1)}
-function setDeal(on){const g=$('[data-q=deal]');g.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',on?c.textContent.startsWith('Yes'):c.textContent==='No'));$('#briefwrap').style.display=on?'block':'none';if(!on)resetBrief('pop')}
-function briefItems(){const L10=setFor(product).L[10];return [[L10[0],'MUST-SAY'],[L10[1],'MUST-SAY'],[L10[2],"DON'T"]]}
-function readBrief(w){const r=broot(w);r.querySelector('.bcheck').style.display='none';const rd=r.querySelector('.bread');rd.style.display='flex';const bar=rd.querySelector('.bbar i');bar.style.animation='none';void bar.offsetWidth;bar.style.animation='';clearTimeout(readBrief['_'+w]);
- readBrief['_'+w]=setTimeout(()=>{rd.style.display='none';BST[w].ready=true;drawCheck(w);if(w==='bb')setBBStep(2)},1200)}
-function drawCheck(w){const r=broot(w),l=r.querySelector('.blist');l.innerHTML=briefItems().map((x,k)=>'<div class="bi'+(BST[w].on[k]?' on':'')+'"><span class="bx">'+(BST[w].on[k]?'&#10003;':'')+'</span><span>'+esc(x[0])+'</span><span class="bk">'+x[1]+'</span></div>').join('');
- r.querySelector('.bcheck').style.display='block';l.querySelectorAll('.bi').forEach((b,k)=>{b.style.setProperty('--d',(k*60)+'ms');b.classList.add('rv');b.onclick=()=>{BST[w].on[k]=!BST[w].on[k];drawCheck(w)}})}
-function fmtSize(n){return n>1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB'}
-function gotFile(w,f){if(!f)return;const r=broot(w);r.querySelector('.fn').textContent=f.name;r.querySelector('.fsz').textContent=f.size?fmtSize(f.size):'';r.querySelector('.fchip').style.display='flex';r.querySelector('.bt').style.display='none';r.querySelector('.blinks').style.display='none';readBrief(w)}
-function sampleBrief(){const L10=setFor(product).L[10];return 'Sample brief: a 30 second UGC video for our '+product+'. '+L10[0]+'. '+L10[1]+'. '+L10[2]+'.'}
-['pop','bb'].forEach(w=>{const r=broot(w);
- r.querySelector('.bfile').addEventListener('change',e=>gotFile(w,e.target.files[0]));
- r.querySelector('.frm').onclick=()=>resetBrief(w);
- r.querySelector('.bsample').onclick=()=>{r.querySelector('.bt').value=sampleBrief();readBrief(w)};
- r.querySelector('.bt').addEventListener('input',()=>{clearTimeout(r._p);if(w==='bb')setBBStep(1);if(r.querySelector('.bt').value.trim().length>=12)r._p=setTimeout(()=>readBrief(w),600)})});
-function setBBStep(n){$$('#v-bb .bsteps span').forEach(sp=>sp.classList.toggle('on',+sp.dataset.st===n));const b=$('#bbgo');if(n>=2&&BST.bb.ready){b.classList.remove('off');b.textContent='Write my script'}else{b.classList.add('off');b.textContent='Paste a brief first'}}
-$('#bbgo').onclick=()=>{if(!BST.bb.ready)return;setBBStep(3);product=product||'lip oil';FROMV=null;BST.pop={ready:false,on:[true,true,true]};$$('[data-q=deal] .chip').forEach(c=>c.classList.toggle('on',c.textContent.startsWith('Yes')));write()};
-$$('.alt a').forEach(a=>{a.style.cursor='pointer';a.onclick=()=>{openSheet($('#prod').value||'lip oil');setDeal(true);setTimeout(()=>{const sb=$('#sheet .sbody'),w=$('#briefwrap');sb.scrollTop=w.offsetTop-120},80)}});
-drawHomeLive();
+$('#restart').onclick=()=>{clearTimeout(write._t);clearInterval(SRCH.i);clearInterval(SRCH.c);clearTimeout(SRCH.t);closeSheet(true);closeFinder();$('#prod').value='';show('v-home','back')};
 // finder (in place)
 const POP=[["Lip liner","Get ready with me","Self tanner","Fridge restock","Heatless curls","Advent calendar","Skincare routine"],["Lip oil","Concealer","Water bottle","Mini fridge","Day in my life","Moisturizer"]];let popi=0;
 function drawPop(){const f=$('#fpop');f.innerHTML=POP[popi].map(t=>'<div class="chip">'+t+'</div>').join('')+'<div class="chip add" id="fmore">↻ More</div>';
@@ -895,7 +594,30 @@ function drawSug(){const q=$('#fq').value.trim().toLowerCase(),b=$('#fsug');if(!
  const TERMS=['lip oil','lip liner','self tanner','fridge restock','heatless curls','advent calendar','skincare routine','get ready with me','concealer','water bottle','mini fridge','day in my life','moisturizer'];const base=TERMS.find(t=>t.startsWith(q))||q;const items=[base,base+' swatch',base+' review'];
  b.innerHTML=items.map((t,i)=>'<div class="sg" data-t="'+esc(t)+'"><span><em>'+esc(q)+'</em>'+esc(t.slice(q.length))+'</span><small>'+(i===0?'breakouts ready':'')+'</small></div>').join('');b.style.display='block';
  b.querySelectorAll('.sg').forEach(r=>r.onclick=()=>openRes(r.dataset.t));if(!b._shown){b._shown=1;b.classList.remove('ris');void b.offsetWidth;b.classList.add('ris')}}
-function openRes(t){openSearch(t)}
+let PREV='v-home';
+function curView(){return ($$('.view').find(v=>v.classList.contains('on'))||{}).id||'v-home'}
+function setNav(nav,t){nav.querySelectorAll('span').forEach(x=>x.classList.toggle('on',x.dataset.t===t))}
+function openSame(title,tab){const c=curView();if(c!=='v-same')PREV=c==='v-srch'?'v-home':c;$('#sametitle').textContent=title;setNav($('#samenav'),tab||'');show('v-same')}
+const TABT={top:'Breakouts',script:'Script',lib:'Library'};
+let SRCH={};
+function openRes(t){t=t.trim();if(!t)return;closeFinder();clearInterval(SRCH.i);clearInterval(SRCH.c);clearTimeout(SRCH.t);
+ $('#qterm').textContent=t.toLowerCase();$('#qdone').classList.remove('on');$('#qn').textContent='0';$('#qk').textContent='0';$('#qel').textContent='0:00';$('#qh').textContent='Finding your Viral Breakouts';
+ const st=$$('#qsteps li');st.forEach(x=>x.classList.remove('qon','qok'));st[0].classList.add('qon');
+ const C=['#C9B8AE','#B9C7C2','#C7B9CF','#D6C6B0','#BCC8D6','#CBBFB3','#B7C4B5','#D2BCC2','#C4C0D4'];
+ const tiles=[];for(let i=0;i<18;i++)tiles.push('<div class="qtile" style="background:'+C[i%9]+'"><i></i><span class="ok">✓</span></div>');
+ const fd=$('#qfeed');fd.innerHTML=tiles.join('')+tiles.join('');
+ const T=[...fd.children];let k=0,n=0,hits=0;const t0=Date.now();
+ SRCH.c=setInterval(()=>{const sec=Math.floor((Date.now()-t0)/1000);$('#qel').textContent='0:'+String(sec).padStart(2,'0')},250);
+ SRCH.i=setInterval(()=>{const el=T[k%18],el2=T[k%18+18];const hit=[2,7,11,16].includes(k%18);[el,el2].forEach(e=>e.classList.add(hit?'hit':'no'));if(hit)hits++;n+=37+((k*53)%41);$('#qn').textContent=n.toLocaleString();$('#qk').textContent=hits;k++;
+  const el_=Date.now()-t0;if(el_>1300&&!st[1].classList.contains('qon')&&!st[1].classList.contains('qok')){st[0].classList.replace('qon','qok');st[1].classList.add('qon');$('#qh').textContent='Calculating Breakout Score'}
+  if(el_>2600&&!st[2].classList.contains('qon')&&!st[2].classList.contains('qok')){st[1].classList.replace('qon','qok');st[2].classList.add('qon');$('#qh').textContent='Building strategy'}},150);
+ SRCH.t=setTimeout(()=>{clearInterval(SRCH.i);clearInterval(SRCH.c);st.forEach(x=>{x.classList.remove('qon');x.classList.add('qok')});$('#qh').textContent='Breakouts ready';$('#qdone').classList.add('on')},3800);
+ $('#qsee').onclick=()=>{PREV='v-home';openSame('Breakouts for "'+t.toLowerCase()+'"','top')};
+ show('v-srch')}
+$('#qback').onclick=()=>{clearInterval(SRCH.i);clearInterval(SRCH.c);clearTimeout(SRCH.t);show('v-home','back')};
+$('#sback').onclick=()=>show(PREV||'v-home','back');
+$$('.tabnav').forEach(nv=>nv.querySelectorAll('span').forEach(sp=>sp.onclick=()=>{const t=sp.dataset.t;if(t==='home'){clearInterval(SRCH.i);clearInterval(SRCH.c);clearTimeout(SRCH.t);show('v-home','back');return}PREV='v-home';openSame(TABT[t],t)}));
+$$('.acct').forEach(a=>a.onclick=()=>openSame('Account',''));
 $('#fq').addEventListener('focus',openFinder);$('#fbox').onclick=openFinder;$('#fq').addEventListener('input',drawSug);
 $('#fq').addEventListener('keydown',e=>{if(e.key==='Enter')openRes($('#fq').value)});
 $('#fgo').onclick=e=>{e.stopPropagation();if($('#fopen').style.display==='block'&&$('#fq').value.trim())openRes($('#fq').value);else{openFinder();$('#fq').focus()}};
@@ -903,7 +625,7 @@ $('#fclose').onclick=e=>{e.stopPropagation();closeFinder()};$('#fdim').onclick=c
 $$('#fdef .chip').forEach(c=>c.onclick=()=>openRes(c.textContent));
 $$('.srchl .li').forEach(r=>r.onclick=()=>openRes(r.querySelector('.lt').firstChild.textContent));
 $$('#v-home .sec2 .chips.srch .chip').forEach(c=>c.onclick=()=>openRes(c.textContent));
-
+$$('#thumbs .th').forEach(t=>t.onclick=()=>openSame('Breakout video','top'));
 (function(){const ph=document.querySelector('.phone');if(!ph)return;
  function activeScroller(){const sh=$('#sheet');if(sh&&getComputedStyle(sh).display!=='none')return sh.querySelector('.sbody');
   const v=[...document.querySelectorAll('.view')].find(v=>getComputedStyle(v).display!=='none');return v?v.querySelector('.scr'):null}
@@ -911,7 +633,6 @@ $$('#v-home .sec2 .chips.srch .chip').forEach(c=>c.onclick=()=>openRes(c.textCon
  ph.addEventListener('wheel',e=>{const tgt=activeScroller();if(!tgt)return;if(tgt.classList.contains('flock')){e.preventDefault();return}
   let n=e.target;while(n&&n!==ph){if(n!==tgt&&canScroll(n,e.deltaY)&&/(auto|scroll)/.test(getComputedStyle(n).overflowY))return;if(n===tgt){if(!canScroll(tgt,e.deltaY)&&modalOpen())e.preventDefault();return}n=n.parentElement}
   e.preventDefault();tgt.scrollTop+=e.deltaMode===1?e.deltaY*16:e.deltaY},{passive:false});
- // while a pop-up, the open Finder or the teleprompter is up, swipes never scroll the page behind the phone
  function modalOpen(){return getComputedStyle($('#sheet')).display!=='none'||!!document.querySelector('.tp')||$('#fopen').style.display==='block'}
  let ty=0;ph.addEventListener('touchstart',e=>{ty=e.touches[0].clientY},{passive:true});
  ph.addEventListener('touchmove',e=>{if(!modalOpen())return;const dy=ty-e.touches[0].clientY;let n=e.target;while(n&&n!==ph){if(canScroll(n,dy)&&/(auto|scroll)/.test(getComputedStyle(n).overflowY))return;n=n.parentElement}e.preventDefault()},{passive:false});
