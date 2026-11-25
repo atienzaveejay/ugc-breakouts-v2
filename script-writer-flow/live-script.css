@@ -279,10 +279,10 @@
 #v-hook .bk .sc-hks{flex-direction:column;gap:12px;display:flex}
 #v-hook .bk .sc-q{flex-direction:column;gap:6px;display:flex}
 #v-hook .bk .sc-q p{color:var(--mid);margin:0;font-size:15px;line-height:1.45}
-#v-hook .bk .sc-more{border:1.5px solid var(--hair);font:650 14px var(--sans);color:var(--ink);cursor:pointer;background:#fff;border-radius:10px;align-self:flex-start;align-items:center;gap:6px;padding:8px 12px;display:inline-flex}
-#v-hook .bk .sc-more svg{fill:none;stroke:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;width:15px;height:15px}
-#v-hook .bk .sc-more span{color:var(--mid);font-weight:500}
-#v-hook .bk .sc-more[disabled]{opacity:.5;cursor:default}
+:is(#v-out,#v-hook) .bk .sc-more{border:1.5px solid var(--hair);font:650 14px var(--sans);color:var(--ink);cursor:pointer;background:#fff;border-radius:10px;align-self:flex-start;align-items:center;gap:6px;padding:8px 12px;display:inline-flex}
+:is(#v-out,#v-hook) .bk .sc-more svg{fill:none;stroke:currentColor;stroke-width:2px;stroke-linecap:round;stroke-linejoin:round;width:15px;height:15px}
+:is(#v-out,#v-hook) .bk .sc-more span{color:var(--mid);font-weight:500}
+:is(#v-out,#v-hook) .bk .sc-more[disabled]{opacity:.5;cursor:default}
 #v-hook .bk .sc-any{flex-direction:column;gap:8px;display:flex}
 #v-hook .bk .sc-any label{justify-content:space-between;align-items:baseline;display:flex}
 #v-hook .bk .sc-any label b{font-size:17px}
@@ -301,3 +301,6 @@
 #v-hook > .bk.hkbar{position:absolute;left:0;right:0;bottom:0;z-index:15}
 #v-hook > .bk.hkbar .sc-cta{position:static}
 #v-hook .bk .sc-set{padding-bottom:190px}
+
+/* proposal B: longer Change the hook sheet scrolls inside the phone */
+#v-out > .bk.lvs .hm-sheet{max-height:94%;overflow-y:auto}
