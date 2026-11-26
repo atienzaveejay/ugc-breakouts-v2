@@ -103,8 +103,8 @@ def o2_street():
      f'<section class="sc-bodyc">{ph("Questions to ask","5–33s",False)}{qs}<p class="lv-note" style="padding:0 16px 14px">Keep: surprised faces, and anyone who picks the oil without being told.</p></section>'+\
      f'<section class="sc-ctac">{ph("The reveal","34–40s")}<p class="sc-q1">{q("It is the oil. This one.")}</p>{dirn("Uncover the label, product close up")}</section>'+\
      cta('40–45s','Linked in my TikTok Shop.','You, to camera')+tail(False)
-OPT1=[('15s · Sell it',s15_sell()),('60s · Sell it',s60_sell(False)),('15s · Compare it',s15_compare()),('Text on screen',o1_text()),('Skit',o1_skit()),('Street interview',o1_street())]
-OPT2=[('Main · 15s Sell it',s15_sell()),('Main · 60s Sell it',s60_sell(True)),('Main · Compare it',s15_compare()),('Main · Hands only',s_hands()),('Text · Slides',o2_slides()),('Text · Wall of text',o2_wall()),('Skit',o2_skit()),('Street interview',o2_street())]
+OPT1=[('15s · Sell it',s15_sell()),('60s · Sell it',s60_sell(False)),('15s · Compare it',s15_compare()),('Text on screen',o1_text()),('Skit',o1_skit())]
+OPT2=[('Main · 15s Sell it',s15_sell()),('Main · 60s Sell it',s60_sell(True)),('Main · Compare it',s15_compare()),('Main · Hands only',s_hands()),('Text · Slides',o2_slides()),('Text · Wall of text',o2_wall()),('Skit',o2_skit())]
 BAR=f'<div class="bk lvbar"><div class="sc-act"><button class="sv">{IC["save"]}<span>Save script</span></button><button>{IC["share"]}<span>Share</span></button><button>{IC["copy"]}<span>Copy</span></button></div></div>'
 def phone(key,variants):
     sw=''.join(f'<button class="sw{" on" if j==0 else ""}" data-v="{j}">{E(n)}</button>' for j,(n,_) in enumerate(variants))
@@ -119,7 +119,7 @@ FMAP=[('Talking to camera','Main','spoken lines lead, short shot note under each
  ('Hands only','Main','what to film first, voiceover optional'),
  ('Text on screen','Text on screen','slides, or one wall of text; no spoken lines'),
  ('Skit','Skit','cast, scenes, who says what, actions'),
- ('Street interview','Street interview','setup, questions to ask, what to keep, reveal')]
+ ('Street interview','Skit','you and the people you ask are the cast; questions are the lines, the reveal is the last scene')]
 GMAP=[('Sell it','problem / show it / proof'),('Review it','first take / good / not so good / verdict'),('How to use it','step 1, 2, 3'),('Before and after','before / the switch / after'),('Unboxing','in the box / first look / first try'),('Compare it','A / B / verdict')]
 MAP=('<details class="map" open><summary>Which layout each format falls under</summary><table><tr><th>How you film it</th><th>Layout</th><th>What changes</th></tr>'
  +''.join(f'<tr class="{"m" if l=="Main" else "c"}"><td>{E(f)}</td><td><b>{E(l)}</b></td><td>{E(w)}</td></tr>' for f,l,w in FMAP)
@@ -133,8 +133,8 @@ page=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="
 <header class="hd"><h1>Script output: 2 options</h1>
 <p class="sub">Both use the live script page as it is today (IDEA card, Hook / Body / CTA, pencils, Save / Share / Copy), plus what she picked and the &ldquo;script starts here&rdquo; line. Same lip oil product in every example. Tap the chips above each phone to switch format. Sample copy.</p></header>
 <main class="grid">
-<section class="col"><h2>Option 1 · One layout that flexes</h2><p class="how">Always Hook / Body / CTA. Length sets how many beats, &ldquo;what should the video do&rdquo; names them, and no-talking formats swap spoken lines for on-screen text. Simplest to build; skits and street interviews get squeezed.</p>{phone("p1",OPT1)}</section>
-<section class="col"><h2>Option 2 · 1 main + 3 custom</h2><p class="how">The main layout covers 7 of the 10 filming styles (talking to camera, voiceover + b-roll, GRWM, green screen, car talk, day in my life, hands only). Text on screen, skit and street interview get their own page. 60s+ is grouped into parts.</p>{MAP}{phone("p2",OPT2)}</section>
+<section class="col"><h2>Option 1 · One layout that flexes</h2><p class="how">Always Hook / Body / CTA. Length sets how many beats, &ldquo;what should the video do&rdquo; names them, and no-talking formats swap spoken lines for on-screen text. Simplest to build; skits get squeezed.</p>{phone("p1",OPT1)}</section>
+<section class="col"><h2>Option 2 · 1 main + 2 custom</h2><p class="how">The main layout covers 7 of the 10 filming styles (talking to camera, voiceover + b-roll, GRWM, green screen, car talk, day in my life, hands only). Text on screen and skit get their own page (street interviews use the skit page). 60s+ is grouped into parts.</p>{MAP}{phone("p2",OPT2)}</section>
 </main>
 <script>{open(D+'app.js').read()}</script></body></html>'''
 open(D+'index.html','w').write(page)
