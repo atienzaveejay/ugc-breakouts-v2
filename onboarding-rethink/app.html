@@ -67,13 +67,13 @@ button.rt-task:hover{background:#fcfaf8}
 .rt-start{flex:none;min-height:34px;padding:0 12px;border-radius:9px;background:var(--coral-d);color:#fff;font:700 13.5px var(--sans);display:grid;place-items:center}
 .rt-alldone{padding:12px 16px 14px;border-top:1px solid var(--hair);font-size:14px;color:var(--mid)}
 
-/* subtle glow for features not tried yet */
-@keyframes rt-ring{from{box-shadow:0 0 0 2px rgba(var(--g),.10),0 0 6px 0 rgba(var(--g),.08)}to{box-shadow:0 0 0 2px rgba(var(--g),.30),0 0 14px 2px rgba(var(--g),.20)}}
-.rt-glow{--g:216,48,74;animation:rt-ring 2.6s ease-in-out infinite alternate}
-.rt-glow.t{--g:11,123,127}
+/* notification dot for features not tried yet (Ivan, 27 Nov call: "unread" style) */
+.rt-glow{position:relative;overflow:visible}
+.rt-glow::after{content:"";position:absolute;top:-4px;right:-4px;width:11px;height:11px;border-radius:50%;background:#e5484d;box-shadow:0 0 0 2px #fff;pointer-events:none}
 .pnav-i .rt-ic{display:grid;place-items:center;width:34px;height:28px;border-radius:9px}
-.pnav-i .rt-ic.rt-glow{--g:216,48,74}
-@media (prefers-reduced-motion:reduce){.rt-glow{animation:none;box-shadow:0 0 0 2px rgba(var(--g),.28),0 0 12px 1px rgba(var(--g),.18)}}
+.pnav-i .rt-ic.rt-glow::after{top:-1px;right:2px}
+.rt-ready{background:var(--teal)!important;border-color:var(--teal)!important;color:#fff!important}
+.rt-ready svg{fill:none!important;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;width:16px;height:16px}
 
 /* breakout cards */
 .rt-list{display:flex;flex-direction:column;gap:16px}
@@ -312,7 +312,9 @@ function card(r, rank, opts){
     '<div class="rt-meta"><div class="rt-stat"><b>' + fmtViews(views) + '</b>views <span class="rt-x">' + r[4] + "x usual</span></div>" +
     (opts.compact ? "" : '<div class="rt-prod">' + esc(r[1]) + "</div>") +
     '<div class="rt-who"><span class="rt-blur" aria-hidden="true">' + handle(rank, r[0].length) + "</span>" + esc(r[2]) + " · " + r[6] + "d ago</div>" +
-    (opts.compact ? "" : '<button type="button" class="b b2' + (!S.tasks.analyze && rank === 1 ? " rt-glow t" : "") + '" data-a="analyze" data-i="' + (rank-1) + '">' + IC.scan + "Analyze video</button>") +
+    (opts.compact ? "" : (S.tasks.analyze && (S.ai || 0) === rank-1
+      ? '<button type="button" class="b b1 rt-ready" data-a="analyze" data-i="' + (rank-1) + '">' + IC.check + "Analysis ready · open</button>" /* Ivan: "analysis is ready, it's very hidden" */
+      : '<button type="button" class="b b2' + (!S.tasks.analyze && rank === 1 ? " rt-glow t" : "") + '" data-a="analyze" data-i="' + (rank-1) + '">' + IC.scan + "Analyze video</button>")) +
     "</div></article>";
 }
 
@@ -526,6 +528,7 @@ function jump(id){
   else if (id === "browse-ready") { past(); S.scr = "browse"; }
   else if (id === "home-ready") { past(); S.scr = "home"; }
   else if (id === "results") { past(); S.scr = "results"; }
+  else if (id === "results-analyzed") { past(); S.seen = true; S.tasks.analyze = 1; S.ai = 0; S.scr = "results"; }
   else if (id === "home-after") { past(); S.seen = true; S.tasks.analyze = 1; S.scr = "home"; }
   else if (id === "analyze") { past(); S.seen = true; S.scr = "analyze"; }
   else if (id === "library") { past(); S.seen = true; S.scr = "library"; S.lib = "searches"; }

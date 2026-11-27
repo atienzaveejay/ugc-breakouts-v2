@@ -43,6 +43,7 @@ html,body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 'Plus 
 <button type="button" data-jump="browse-ready">Results ready</button>
 <button type="button" data-jump="results">Your results</button>
 <button type="button" data-jump="analyze">Analyze</button>
+<button type="button" data-jump="results-analyzed">Results, analysis ready</button>
 <button type="button" data-jump="home-after">Home, checklist</button>
 <button type="button" data-jump="library">Library</button>
 <button type="button" data-jump="library-locked">Library, Saved tab</button>
@@ -59,11 +60,11 @@ var NOTES = {
   ob: ["Steps 2 to 7: same as live", null,
     "These run the live flow code from the 25 Nov capture, unchanged. The search keeps running in the pill at the top. Finish or skip to land on Home."],
   home: ["Home", "user has nothing to do while the first search is processing / have a 'task' checklist / add glowing button to features they haven't done?",
-    "While the search runs, the top block points to the Breakouts page with one button. Below it, the Get started checklist: 2 setup steps already ticked, then Search, Script, Analyze, Connect. The next step has the one Start button. Features not tried yet (Write a script card, Script tab, the avatar for Connect) carry a soft pulsing ring, not a neon glow."],
+    "While the search runs, the top block points to the Breakouts page with one button. Below it, the Get started checklist: 2 setup steps already ticked, then Search, Script, Analyze, Connect. The next step has the one Start button. Features not tried yet (Write a script card, Script tab, the avatar for Connect) carry a small red notification dot, like an unread badge (Ivan, 27 Nov call). Once a video is analyzed, its card swaps "Analyze video" for a teal "Analysis ready · open" button, so a finished analysis is easy to find."],
   browse: ["Breakouts while the search runs", "let's make breakouts available (top 5-10 for them to browse), prompt them to goto that page while search processes",
     "Six top breakouts for the same topic as her search, ready instantly. The bar at the top shows the search time; when it finishes it turns dark with See results, so she goes back to her results in one tap. In this prototype the search finishes 15 seconds after she opens this page."],
   results: ["Her first results", "5 videos that are given arent the very best videos",
-    "The 5 strongest for the topic come first (hand-picked per chip, then the rest of the search). The bar at the bottom gives the one next step: Analyze #1. The Analyze button on #1 has the soft ring because she hasn't tried it."],
+    "The 5 strongest for the topic come first (hand-picked per chip, then the rest of the search). The bar at the bottom gives the one next step: Analyze #1. The Analyze button on #1 has the red dot because she hasn't tried it. After she analyzes a video, that card shows a teal "Analysis ready · open" button (Ivan: analysis ready is "very hidden")."],
   analyze: ["Analyze (stand-in)", "each screen should have a clear path to what we want the user to see",
     "Analysis itself is unchanged. The stand-in shows the next step after it: write a script. The task ticks on Home."],
   script: ["Script (stand-in)", null, "Unchanged Script Writer. Opening it ticks Write your first script."],
