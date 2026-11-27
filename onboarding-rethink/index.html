@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UGCB Onboarding rethink</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171312;--mid:#6f6560;--paper:#ebe5df;--hair:#d9d0c8;--teal:#0b7b7f}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 'Plus Jakarta Sans',system-ui,sans-serif}
+.jump{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;white-space:nowrap;padding:8px 16px;background:#171312;color:#f6f2ee;font:500 12px/1.3 'Plus Jakarta Sans',system-ui,sans-serif}
+.jump::-webkit-scrollbar{display:none}
+.jump .t{margin-right:6px;color:#c9bfb8}
+.jump button{flex:none;font:inherit;color:#f6f2ee;background:transparent;border:1px solid #4a423e;border-radius:6px;padding:4px 8px;cursor:pointer}
+.jump button.cur{background:#f6f2ee;color:#171312;border-color:#f6f2ee}
+.stage{display:flex;justify-content:center;align-items:flex-start;gap:40px;padding:28px 24px 48px}
+.dev{width:390px;height:844px;flex:none;border:1px solid var(--hair);border-radius:22px;overflow:hidden;background:#f4f0ec}
+.dev iframe{width:390px;height:844px;border:0;display:block}
+.side{max-width:360px;padding-top:4px}
+.side h1{font-size:22px;line-height:1.2;letter-spacing:-.02em;margin:0 0 6px}
+.side .lede{color:var(--mid);margin:0 0 20px}
+.side h2{font-size:16px;margin:0 0 6px}
+.side p{margin:0 0 10px;color:var(--mid)}
+.side .ask{border-left:3px solid var(--ink);padding:2px 0 2px 12px;margin:0 0 12px;color:var(--ink)}
+.side .foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--hair);font-size:13px;color:var(--mid)}
+.side a{color:var(--teal);font-weight:700}
+@media (min-width:761px){.jump{flex-wrap:wrap}}
+@media (max-width:760px){
+  .stage{padding:0;display:block}
+  .dev{width:100%;height:calc(100dvh - 41px);border:0;border-radius:0}
+  .dev iframe{width:100%;height:100%}
+  .side{max-width:none;padding:20px 16px 32px}
+}
+</style>
+</head>
+<body>
+<nav class="jump" aria-label="Jump to a screen"><span class="t">Onboarding rethink, Ivan 27 Nov</span>
+<button type="button" data-jump="q1">1 Search</button>
+<button type="button" data-jump="q1-picked">1 Chip picked</button>
+<button type="button" data-jump="ob2">2 to 7 (same as live)</button>
+<button type="button" data-jump="home-run">Home, searching</button>
+<button type="button" data-jump="browse-run">Breakouts while you wait</button>
+<button type="button" data-jump="browse-ready">Results ready</button>
+<button type="button" data-jump="results">Your results</button>
+<button type="button" data-jump="analyze">Analyze</button>
+<button type="button" data-jump="home-after">Home, checklist</button>
+<button type="button" data-jump="library">Library</button>
+<button type="button" data-jump="library-locked">Library, locked tab</button>
+<button type="button" data-jump="home-done">Checklist done</button>
+</nav>
+<div class="stage">
+  <div class="dev"><iframe id="app" src="app.html" title="UGC Breakouts prototype"></iframe></div>
+  <aside class="side" id="side"></aside>
+</div>
+<script>
+var NOTES = {
+  q1: ["Page 1: what are you filming next", "page 1 chips - should be better thought out - each should have AMAZING top 5 results (aha moment)",
+    "Same live screen. Only the chips change: 6 formats and 4 products, each backed by a hand-picked top 5 (see NOTES.md for why each one). The Hashtags row is dropped for now: broad tags like #UGCcreator mostly return videos about doing UGC, which makes a strong top 5 hard to pick. Two tags can come back if Ivan wants them. Tap a chip, then Start my search."],
+  ob: ["Steps 2 to 7: same as live", null,
+    "These run the live flow code from the 25 Nov capture, unchanged. The search keeps running in the pill at the top. Finish or skip to land on Home."],
+  home: ["Home", "user has nothing to do while the first search is processing / have a 'task' checklist / add glowing button to features they haven't done?",
+    "While the search runs, the top block points to the Breakouts page with one button. Below it, the Get started checklist: 2 setup steps already ticked, then Search, Script, Analyze, Connect. The next step has the one Start button. Features not tried yet (Write a script card, Script tab, the avatar for Connect) carry a soft pulsing ring, not a neon glow."],
+  browse: ["Breakouts while the search runs", "let's make breakouts available (top 5-10 for them to browse), prompt them to goto that page while search processes",
+    "Six top breakouts for the same topic as her search, ready instantly. The bar at the top shows the search time; when it finishes it turns dark with See results, so she goes back to her results in one tap. In this prototype the search finishes 15 seconds after she opens this page."],
+  results: ["Her first results", "5 videos that are given arent the very best videos",
+    "The 5 strongest for the topic come first (hand-picked per chip, then the rest of the search). The bar at the bottom gives the one next step: Analyze #1. The Analyze button on #1 has the soft ring because she hasn't tried it."],
+  analyze: ["Analyze (stand-in)", "each screen should have a clear path to what we want the user to see",
+    "Analysis itself is unchanged. The stand-in shows the next step after it: write a script. The task ticks on Home."],
+  script: ["Script (stand-in)", null, "Unchanged Script Writer. Opening it ticks Write your first script."],
+  connect: ["Connect your TikTok (from the checklist)", null, "The live step 7 screen, opened from the checklist or the avatar. Finishing ticks Connect your TikTok."],
+  library: ["Library", "library - move searches to left > unlock searches only (should we unlock all library)",
+    "Searches is now the first tab and open on the free plan. Analyzed, Saved and Scripts keep a small lock and show the live lock card. Whether to unlock the whole Library is an open question, with options in NOTES.md."]
+};
+var frame = document.getElementById("app"), side = document.getElementById("side");
+function show(scr){
+  var k = /^ob/.test(scr) ? "ob" : scr, n = NOTES[k] || NOTES.q1;
+  side.innerHTML = "<h1>Onboarding rethink</h1><p class=\"lede\">Clickable prototype of Ivan’s 27 Nov notes. Tap through, or jump with the bar above.</p>" +
+    "<h2>" + n[0] + "</h2>" + (n[1] ? "<p class=\"ask\">Ivan: “" + n[1] + "”</p>" : "") + "<p>" + n[2] + "</p>" +
+    "<p class=\"foot\">Videos, view counts and handles are sample data; handles are blurred. Open questions (unlock all Library, extra free features) are written up in NOTES.md, not built.</p>";
+}
+window.addEventListener("message", function(e){
+  if (!e.data || !e.data.rt) return;
+  show(e.data.scr);
+});
+document.querySelectorAll("[data-jump]").forEach(function(b){
+  b.onclick = function(){
+    document.querySelectorAll("[data-jump]").forEach(function(x){ x.classList.toggle("cur", x === b); });
+    frame.contentWindow.postMessage({ jump: b.dataset.jump }, "*");
+  };
+});
+document.querySelector('[data-jump="q1"]').classList.add("cur");
+show("q1");
+</script>
+</body></html>

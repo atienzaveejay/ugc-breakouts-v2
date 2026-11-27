@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UGCB onboarding rethink (app)</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800|jetbrains-mono:500,600&display=swap" rel="stylesheet">
+<!-- live.css = the live ugcbreakouts.com stylesheet as captured in ugcb-onboarding-live.html (25 Nov 2026). Untouched. -->
+<link rel="stylesheet" href="live.css">
+<style>
+/* Only the new pieces. Everything else uses live classes (obf-*, hm2-*, hm-*, lb-*, tb-*, pnav, tabs, b, b1, b2, list, toast). */
+html,body{margin:0}
+.bk .bk-main{min-height:100dvh}
+.bk.has-nav .bk-main{padding-bottom:calc(var(--navh) + 12px)}
+.rt-pg{display:flex;flex-direction:column;gap:18px;padding:6px 16px 28px}
+.rt-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 4px;min-height:52px}
+.rt-top .av{width:36px;height:36px;font-size:14px;border:0;cursor:pointer;font-family:var(--sans)}
+.rt-h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.rt-h2{margin:0;font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.rt-sub{margin:4px 0 0;color:var(--mid);font-size:14px;line-height:1.45}
+.rt-back{display:inline-flex;align-items:center;gap:4px;align-self:flex-start;background:0 0;border:0;padding:6px 0;margin:-4px 0 -8px;font:700 14px var(--sans);color:var(--mid);cursor:pointer}
+.rt-back svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* search running / ready block */
+.rt-wait{background:#fff;border:1px solid var(--hair);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 2px #1713120f,0 2px 8px #1713120d}
+.rt-wait-h{display:flex;align-items:center;gap:10px}
+.rt-wait-h b{flex:1;min-width:0;font-size:16px;font-weight:750;letter-spacing:-.015em;line-height:1.3}
+.rt-t{font:600 13px var(--sans);color:var(--mid);font-variant-numeric:tabular-nums}
+.rt-prog{height:4px;border-radius:2px;background:var(--pill);overflow:hidden}
+.rt-prog i{display:block;height:100%;width:0;background:var(--teal);transition:width 1s linear}
+.rt-wait p{margin:0;color:var(--mid);font-size:14px;line-height:1.45}
+.rt-wait p b{color:var(--ink)}
+.rt-wait.ready{border-color:var(--ink)}
+.rt-ok{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;flex:none}
+.rt-ok svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* status strip on the Breakouts page */
+.rt-strip{position:sticky;top:0;z-index:20;margin:0 -16px;padding:10px 16px;background:var(--paper);border-bottom:1px solid var(--hair);display:flex;flex-direction:column;gap:8px}
+.rt-strip .row{display:flex;align-items:center;gap:10px}
+.rt-strip .row span.tx{flex:1;min-width:0;font-size:13.5px;line-height:1.3}
+.rt-strip .row span.tx b{display:block;font-weight:700}
+.rt-strip .row span.tx small{color:var(--mid);font-size:12.5px}
+.rt-strip.ready{background:var(--ink);color:#fff;border-bottom-color:var(--ink)}
+.rt-strip.ready small{color:#cfc5be}
+.rt-strip .b{min-height:38px;padding:0 14px;font-size:14px;border-radius:10px;flex:none}
+
+/* checklist */
+.rt-ck{background:#fff;border:1px solid var(--hair);border-radius:14px;overflow:hidden}
+.rt-ck-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:14px 16px 10px}
+.rt-ck-h h2{margin:0;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.rt-ck-h span{font-size:13px;color:var(--mid);font-weight:600;font-variant-numeric:tabular-nums}
+.rt-seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;padding:0 16px 8px}
+.rt-seg i{height:4px;border-radius:2px;background:var(--pill)}
+.rt-seg i.on{background:var(--teal)}
+.rt-ck ol{list-style:none;margin:0;padding:0}
+.rt-task{width:100%;display:flex;align-items:center;gap:12px;padding:11px 16px;border:0;border-top:1px solid var(--hair);background:#fff;text-align:left;font-family:var(--sans);color:var(--ink)}
+button.rt-task{cursor:pointer}
+button.rt-task:hover{background:#fcfaf8}
+.rt-task .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.rt-task .tx b{font-size:15px;font-weight:700}
+.rt-task .tx small{font-size:12.5px;color:var(--mid)}
+.rt-task.done .tx b{color:var(--mid);font-weight:600}
+.rt-dot{width:22px;height:22px;border-radius:50%;border:2px solid #d6cdc5;flex:none;display:grid;place-items:center}
+.rt-task.done .rt-dot{background:var(--teal);border-color:var(--teal);color:#fff}
+.rt-dot svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.rt-task.run .rt-dot{border:0}
+.rt-task .chev{width:16px;height:16px;color:#9a908b;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.rt-start{flex:none;min-height:34px;padding:0 12px;border-radius:9px;background:var(--coral-d);color:#fff;font:700 13.5px var(--sans);display:grid;place-items:center}
+.rt-alldone{padding:12px 16px 14px;border-top:1px solid var(--hair);font-size:14px;color:var(--mid)}
+
+/* subtle glow for features not tried yet */
+@keyframes rt-ring{from{box-shadow:0 0 0 2px rgba(var(--g),.10),0 0 6px 0 rgba(var(--g),.08)}to{box-shadow:0 0 0 2px rgba(var(--g),.30),0 0 14px 2px rgba(var(--g),.20)}}
+.rt-glow{--g:216,48,74;animation:rt-ring 2.6s ease-in-out infinite alternate}
+.rt-glow.t{--g:11,123,127}
+.pnav-i .rt-ic{display:grid;place-items:center;width:34px;height:28px;border-radius:9px}
+.pnav-i .rt-ic.rt-glow{--g:216,48,74}
+@media (prefers-reduced-motion:reduce){.rt-glow{animation:none;box-shadow:0 0 0 2px rgba(var(--g),.28),0 0 12px 1px rgba(var(--g),.18)}}
+
+/* breakout cards */
+.rt-list{display:flex;flex-direction:column;gap:16px}
+.rt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rt-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 2px #1713120f,0 2px 8px #1713120d;display:flex;flex-direction:column}
+.rt-th{position:relative;aspect-ratio:1/1;background:#ddd center/cover no-repeat}
+.rt-grid .rt-th{aspect-ratio:3/4}
+.rt-th:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18) 0,transparent 28%,transparent 52%,rgba(0,0,0,.62) 100%)}
+.rt-th>*{position:absolute;z-index:1}
+.rt-rank{top:10px;left:10px;min-width:28px;height:28px;padding:0 8px;border-radius:8px;background:var(--ink);color:#fff;font:800 14px var(--sans);display:grid;place-items:center}
+.rt-save{top:8px;right:8px;width:34px;height:34px;border-radius:9px;background:rgba(23,19,18,.55);color:#fff;border:0;display:grid;place-items:center}
+.rt-save svg,.rt-play svg{fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;width:17px;height:17px}
+.rt-play{top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(23,19,18,.72);color:#fff;display:grid;place-items:center}
+.rt-play svg{fill:#fff;stroke:none;width:20px;height:20px;margin-left:3px}
+.rt-grid .rt-play{width:40px;height:40px}.rt-grid .rt-play svg{width:15px;height:15px}
+.rt-cap{left:12px;right:12px;bottom:12px;margin:0;color:#fff;font-weight:750;font-size:17px;line-height:1.25;text-shadow:0 1px 3px rgba(0,0,0,.5);letter-spacing:-.01em}
+.rt-grid .rt-cap{font-size:13.5px;left:9px;right:9px;bottom:30px}
+.rt-len{right:10px;bottom:12px;font:700 12px var(--sans);color:#fff;background:rgba(23,19,18,.6);padding:3px 6px;border-radius:6px}
+.rt-card .rt-cap{right:60px}
+.rt-grid .rt-len{bottom:8px;right:8px}
+.rt-grid .rt-card .rt-cap{right:9px}
+.rt-meta{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px}
+.rt-grid .rt-meta{padding:9px 10px 11px;gap:4px}
+.rt-stat{display:flex;align-items:baseline;gap:8px;font-size:14px;color:var(--mid);flex-wrap:wrap}
+.rt-stat b{color:var(--ink);font-size:17px;font-weight:800;letter-spacing:-.01em}
+.rt-x{color:var(--teal);font-weight:800}
+.rt-grid .rt-stat{font-size:12.5px;gap:6px}.rt-grid .rt-stat b{font-size:14.5px}
+.rt-who{font-size:13px;color:var(--mid);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.rt-grid .rt-who{font-size:12px}
+.rt-blur{filter:blur(4.5px);user-select:none;color:var(--ink);font-weight:600}
+.rt-prod{font-size:14px;color:var(--ink);font-weight:600}
+.rt-card .b{min-height:46px;font-size:15px;margin-top:6px}
+.rt-card .b2{color:var(--teal);border-color:#b9dfe0;background:#f3fafa}
+.rt-card .b2 svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+
+/* next-step note */
+.rt-next{display:flex;gap:12px;align-items:flex-start;background:var(--teal-soft);border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.45}
+.rt-next b{display:block}
+.rt-next .rt-ok{margin-top:1px}
+
+/* same-as-live stand-in */
+.rt-same{background:#fff;border:1px dashed #d6cdc5;border-radius:14px;padding:16px;font-size:14px;color:var(--mid);line-height:1.5}
+.rt-same b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.rt-same a{color:var(--teal);font-weight:700}
+
+/* library */
+.lb-tabs button svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.lb-sf svg,.hm-li svg{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hm-li>svg{width:16px;height:16px}
+.rt-empty{font-size:14px;color:var(--mid)}
+.rt-meterline{font-size:13px;color:var(--mid);margin:-6px 2px 0}
+.rt-lockwrap{position:relative;min-height:520px}
+.rt-lockwrap .tb-lockcard{top:40px}
+.rt-lockwrap .tb-lockcard .b{width:100%}
+
+.toast{position:fixed}
+.rt-dock{position:fixed;left:12px;right:12px;bottom:calc(var(--navh) + 10px + env(safe-area-inset-bottom));z-index:15;max-width:536px;margin:0 auto;background:#fff;border:1px solid var(--hair);border-radius:14px;padding:10px 10px 10px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 28px -10px #17131240}
+.rt-dock .tx{flex:1;min-width:0;font-size:13.5px;line-height:1.35;color:var(--mid)}
+.rt-dock .tx b{display:block;color:var(--ink);font-size:14.5px}
+.rt-dock .b{min-height:42px;padding:0 14px;font-size:14.5px;border-radius:11px;flex:none}
+.has-dock .rt-pg{padding-bottom:96px}
+</style>
+</head>
+<body class="bk-body">
+<div class="bk" id="bk"><main class="bk-main"><div id="app"></div></main><div id="navslot"></div><div id="toastslot"></div></div>
+<script src="data.js"></script>
+<script>
+(function(){
+/* Prototype of Ivan's 27 Nov onboarding notes. Live onboarding steps 2 to 7 are the live flow.js (25 Nov capture) as is. */
+var IMG = "../top-breakouts/assets/";
+var SEARCH_SECS = 90;           /* live note: "It takes 1 to 2 minutes" */
+var WAIT_AFTER_BROWSE = 15;     /* prototype only: the search finishes 15 s after she opens Breakouts */
+
+function fresh(){ return { scr:"q1", step:1, q:"", search:null, vals:{}, others:{}, tt:"intro", handle:"", left:3, err:null, nf:false,
+  tasks:{ account:1, setup:0, search:0, script:0, analyze:0, connect:0 }, seen:false, lib:"searches", back:null }; }
+var S = fresh();
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function $(s){ return document.querySelector(s); }
+var IC = {
+  search:'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="i" cx="11" cy="11" r="7"></circle><path class="i" d="m20 20-3.5-3.5"></path></svg>',
+  arrow:'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="i" d="M5 12h14M13 6l6 6-6 6"></path></svg>',
+  info:'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="i" d="M12 11v6M12 7.5h.01" stroke-width="2.6"></path></svg>',
+  back:'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="i" d="M15 5l-7 7 7 7"></path></svg>',
+  tiktok:'<svg class="obf-tt-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.4 2.6 2.2 4.4 5 4.7"></path></svg>',
+  trend:'<svg viewBox="0 0 24 24"><path d="M4 16l5-5 4 4 7-7M15 8h5v5"></path></svg>',
+  pen:'<svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4L15 5z"></path></svg>',
+  home:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z"></path></svg>',
+  flame:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-3.9 0-6.5-2.6-6.5-6.2 0-3.4 2.4-5.4 3.6-8.3.3 2 1.4 3.2 2.6 3.6C12.5 7.4 13.6 5 13.2 3c3.4 2.4 5.3 6.2 5.3 10.3 0 4.4-2.7 7.7-6.5 7.7z"></path></svg>',
+  pen2:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l4 4L8 20H4v-4L15 5z"></path></svg>',
+  mark:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v17l-6-4-6 4z"></path></svg>',
+  check:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>',
+  chev:'<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>',
+  play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15L19.5 12z"></path></svg>',
+  lock:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>',
+  scan:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m20 20-4-4"></path></svg>'
+};
+var PERKS = [
+  ["trend","Your profile check","Your usual views, your breakouts and your best day to post, as a short story you can share."],
+  ["pen","Scripts that sound like you","Built from what already works on your account: your hooks, your length, your style."],
+  ["search","Breakouts for accounts your size","So the ideas fit where you are now."]
+];
+var OUT_MSG = "That’s all the usernames we can check for now. Skip for now and connect your TikTok from Home later.";
+
+/* ---------- search clock ---------- */
+function mmss(s){ s = Math.max(0, Math.floor(s)); return Math.floor(s/60) + ":" + String(s%60).padStart(2,"0"); }
+function el(){ return S.search ? (Date.now() - S.search.t0)/1000 : 0; }
+function done(){ return !!S.search && el() >= SEARCH_SECS; }
+function setFor(q){
+  var k = String(q).toLowerCase(), map = [["review","Product review"],["unbox","Unboxing"],["grwm","GRWM"],["get ready","GRWM"],["before","Before and after"],["after","Before and after"],["day in","Day in my life"],["story","Storytime"],["lip","Lip liner"],["tan","Self-tanner"],["band","Resistance bands"],["workout","Resistance bands"],["closet","Closet organizer"],["organiz","Closet organizer"]];
+  for (var i = 0; i < map.length; i++) if (k.indexOf(map[i][0]) >= 0) return map[i][1];
+  return CH[q] ? q : "Product review"; /* typed queries with no hand-picked set fall back to a sample set */
+}
+function startSearch(q){ if (!S.search) S.search = { q:q, set:setFor(q), t0:Date.now() }; }
+
+/* ---------- live onboarding (flow.js, 25 Nov), unchanged except the chips ---------- */
+function pill(){
+  if (!S.search) return "";
+  var t = el(), run = t < SEARCH_SECS;
+  return '<span class="obf-pill' + (run ? "" : " done") + '" role="status"><span class="obf-spin" aria-hidden="true"></span><span id="pilltxt">' +
+    (run ? "Searching ‘" + esc(S.search.q) + "’ · " + mmss(t) : "Results ready for ‘" + esc(S.search.q) + "’") + "</span></span>";
+}
+function obTop(){
+  var n = D.stepCount, e = S.step, h = '<header class="obf-top">' +
+    (e === 1 ? '<span class="lp-logo"><span class="ugc-brand" aria-label="UGC Breakouts" role="img"><span class="ugc-brand-dot" aria-hidden="true"></span><span aria-hidden="true">UGC <b>Breakouts</b></span></span></span>'
+      : '<button type="button" class="obf-back" aria-label="Back" data-a="back">' + IC.back + "</button>") +
+    '<span class="obf-count">' + e + " of " + n + (e === n ? '<b class="obf-last"> · Last step</b>' : "") + "</span></header>";
+  h += '<div class="obf-bar" aria-hidden="true">';
+  for (var i = 0; i < n; i++) h += '<i class="' + (i < e ? "on" : "") + '"></i>';
+  return h + "</div>";
+}
+function step1(){
+  var ok = S.q.trim().length >= 2, h = '<form class="obf-form" data-f="search"><div class="obf-q"><span class="obf-hi">Hi Maya</span><h1 class="lp-h1 obf-title">What are you filming next?</h1><p class="lp-lede">A product, a format or a #hashtag. Your first search starts right away.</p></div>';
+  h += '<div class="obf-body obf-body-q1"><div class="obf-field">' + IC.search + '<input id="q" value="' + esc(S.q) + '" placeholder="Product or #hashtag" autocomplete="off" maxlength="120" aria-label="What are you filming next?"><button type="submit" class="obf-go" aria-label="Start search"' + (ok ? "" : " disabled") + ">" + IC.arrow + "</button></div>";
+  h += '<div class="obf-or"><span>or tap an idea</span></div>';
+  Object.keys(D.ideas).forEach(function(g){
+    h += '<div class="obf-group"><span class="obf-label">' + esc(g) + '</span><div class="obf-chips">' +
+      D.ideas[g].map(function(c){ return '<button type="button" class="obf-chip' + (S.q === c ? " on" : "") + '" data-idea="' + esc(c) + '">' + esc(c) + "</button>"; }).join("") + "</div></div>";
+  });
+  var m = D.meter, used = S.search ? 1 : 0;
+  h += '<div class="obf-note">' + IC.info + "<div><b>This is search " + Math.min(m.next + used, m.limit) + " of " + m.limit + " free searches</b>It takes 1 to 2 minutes. Answer 5 quick questions while we scan TikTok.</div></div></div>";
+  return h + '<div class="obf-foot"><button type="submit" class="lp-btn lp-btn-p"' + (ok ? "" : " disabled") + ">Start my search</button></div></form>";
+}
+function hasOther(q){ return q.options.indexOf(D.other) >= 0; }
+function val(q){ var v = S.vals[q.column]; return q.max > 1 ? (v || []) : (v == null ? null : v); }
+function picked(q, o){ var v = val(q); return q.max > 1 ? v.indexOf(o) >= 0 : v === o; }
+function answered(q){ return q.max > 1 ? val(q).length > 0 : !!val(q); }
+function stepQ(){
+  var qs = D.questions[S.step] || [], one = qs.length === 1, head = D.pageTitles[S.step];
+  var title = one ? qs[0].title : head[0], lede = one ? qs[0].lede : head[1];
+  var h = '<div class="obf-q"><h1 class="lp-h1 obf-title">' + esc(title) + "</h1>" + (lede ? '<p class="lp-lede">' + esc(lede) + "</p>" : "") + "</div>";
+  h += '<div class="obf-body' + (one ? "" : " obf-multi") + '">';
+  qs.forEach(function(q){
+    h += '<section class="obf-sec" aria-label="' + esc(q.title) + '">';
+    if (!one) h += '<div class="obf-sec-h"><h2>' + esc(q.title) + (q.required ? '<span class="obf-req" aria-label="required"> *</span>' : "") + "</h2>" + (q.lede ? "<small>" + esc(q.lede) + "</small>" : "") + "</div>";
+    if (q.max > 1) {
+      var full = val(q).length >= q.max;
+      h += '<div class="obf-chips obf-chips-lg">' + q.options.map(function(o){
+        var on = picked(q, o);
+        return '<button type="button" class="obf-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '"' + (!on && full ? " disabled" : "") + ' data-col="' + q.column + '" data-opt="' + esc(o) + '">' + esc(o) + "</button>";
+      }).join("") + "</div>";
+    } else {
+      h += '<div class="obf-opts" role="radiogroup" aria-label="' + esc(q.title) + '">' + q.options.map(function(o){
+        var on = picked(q, o);
+        return '<button type="button" role="radio" aria-checked="' + on + '" class="obf-opt' + (on ? " on" : "") + '" data-col="' + q.column + '" data-opt="' + esc(o) + '"><span class="obf-rd" aria-hidden="true"></span><span>' + esc(o) + "</span></button>";
+      }).join("") + "</div>";
+    }
+    if (hasOther(q) && picked(q, D.other)) {
+      var w = q.column === "wont_do";
+      h += '<input class="obf-other" data-other="' + q.column + '" value="' + esc(S.others[q.column] || "") + '" placeholder="' + (w ? "What else won’t you do?" : "Type your own") + '" maxlength="' + (w ? D.noteMax : D.otherMax) + '" aria-label="' + esc(q.title) + ' Other">';
+    }
+    h += "</section>";
+  });
+  h += "</div>";
+  var ok = qs.every(function(q){ return !q.required || answered(q); }), allOpt = qs.every(function(q){ return !q.required; });
+  var tapOne = one && qs[0].max === 1 && !hasOther(qs[0]);
+  h += '<div class="obf-foot">' + (tapOne ? '<p class="obf-fine">Tap one to continue</p>' :
+    '<button type="button" class="lp-btn lp-btn-p" data-a="next"' + (ok ? "" : " disabled") + ">" + (ok ? "Next" : one ? "Pick at least 1" : "Answer the questions marked *") + "</button>" +
+    (allOpt ? '<button type="button" class="obf-skip" data-a="skip">Skip</button>' : "")) + "</div>";
+  return h;
+}
+function ttCard(){
+  var s = S.tt, hd = esc(S.handle), left = S.left > 0 ? '<small class="tt-left">' + S.left + " change" + (S.left === 1 ? "" : "s") + " left</small>" : "";
+  if (s === "loading") return '<div class="tt-card tt-load" role="status" aria-live="polite"><span class="tt-av tt-sk"></span><span class="tt-handle">@' + hd + '</span><span class="tt-sk tt-sk-line"></span><div class="tt-stats" aria-hidden="true">' +
+    ["Following","Followers","Likes"].map(function(x){ return '<span><b class="tt-sk tt-sk-num"></b><small>' + x + "</small></span>"; }).join("") + '</div><p class="tt-note">Reading your profile. Usually under a minute.</p></div>';
+  if (s === "failed") return '<div class="tt-card" role="status"><span class="tt-av tt-av-empty" aria-hidden="true">' + IC.tiktok + '</span><span class="tt-handle">@' + hd + '</span><p class="tt-note">We couldn’t load a preview right now. You can still continue, we’ll read your videos in the background.</p>' +
+    (S.left > 0 ? '<button type="button" class="tt-change" data-a="change">Change username</button>' : "") + left + "</div>";
+  return '<div class="tt-card" aria-label="TikTok profile @' + hd + '"><span class="tt-av tt-av-empty" aria-hidden="true">' + hd.slice(0,1).toUpperCase() + '</span><span class="tt-handle">@' + hd + '</span><span class="tt-name">Maya</span><div class="tt-stats"><span><b>312</b><small>Following</small></span><span><b>2.4K</b><small>Followers</small></span><span><b>48.1K</b><small>Likes</small></span></div>' +
+    '<span class="tt-videos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"></rect><path d="M10 9l5 3-5 3z"></path></svg>86 videos</span>' +
+    (S.left > 0 ? '<button type="button" class="tt-change" data-a="change">Not you? Change username</button>' : '<p class="tt-note tt-out">That was your last username check. Not you? Skip for now and connect from Home.</p>') + left + "</div>";
+}
+function step7(){
+  var s = S.tt, W = s === "loading" || s === "preview" || s === "failed", hd = S.handle.trim().replace(/^@+/, "");
+  var lede = { loading:"Reading your public profile.", preview:"We read your public profile. Check it’s the right account.", failed: S.nf ? "We couldn’t read @" + esc(hd) + ". Your account is either private or we had an issue fetching your videos. If the spelling is right, continue and we’ll try again later." : "Check your username, or continue and we’ll read it later." }[s] || "It’s what makes everything fit you.";
+  var h = '<form class="obf-form" data-f="tt" novalidate><div class="obf-q"><h1 class="lp-h1 obf-title">' + (W ? "Is this you?" : "Connect your TikTok") + '</h1><p class="lp-lede">' + lede + "</p></div>";
+  h += '<div class="obf-body obf-tt-body">' + (W ? ttCard() : '<ul class="obf-perks">' + PERKS.map(function(p){
+    return '<li><span class="obf-perk-ic" aria-hidden="true">' + IC[p[0]] + "</span><div><b>" + p[1] + "</b><span>" + p[2] + "</span></div></li>";
+  }).join("") + "</ul>");
+  h += '<div class="obf-tt-connect">';
+  var err = S.err || (s === "input" && hd.length >= 2 && S.left <= 0 ? OUT_MSG : null);
+  if (s === "input") h += '<div class="obf-field obf-field-tt' + (err ? " err" : "") + '"><span class="obf-at" aria-hidden="true">@</span><input id="tth" value="' + esc(S.handle) + '" placeholder="yourusername" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="120" aria-label="Your TikTok username"></div>' + (err ? '<p class="obf-err" role="alert">' + esc(err) + "</p>" : "");
+  if (s === "intro") h += '<button type="button" class="lp-btn lp-btn-g obf-tt" data-a="ttopen">' + IC.tiktok + "Continue with TikTok</button>";
+  if (!W) h += '<p class="obf-fine obf-tt-fine">We only read your public videos. We never post.</p><button type="button" class="obf-later" data-a="finish">Can’t connect right now? Finish later</button>';
+  h += "</div></div>";
+  var U = { input:"Confirm", loading:"Looking you up…", preview:"That’s me", failed:"Continue as @" + esc(hd) }[s];
+  if (U) {
+    var dis = hd.length < 2 || s === "loading" || (s === "input" && S.left <= 0);
+    h += '<div class="obf-foot"><button type="submit" class="lp-btn ' + (s === "preview" ? "tt-go" : "lp-btn-p") + '"' + (dis ? " disabled" : "") + ">" + U + "</button>" +
+      (s === "preview" || s === "failed" ? '<button type="button" class="obf-skip" data-a="finish">Skip for now</button>' : "") + "</div>";
+  }
+  return h + "</form>";
+}
+
+/* ---------- app chrome ---------- */
+function topbar(){
+  return '<header class="rt-top"><span class="ugc-brand" aria-label="UGC Breakouts" role="img"><span aria-hidden="true">UGC<b>Breakouts</b></span></span>' +
+    '<button type="button" class="av' + (S.tasks.connect ? "" : " rt-glow") + '" data-go="connect" aria-label="Account">M</button></header>';
+}
+function nav(cur){
+  var items = [["home","Home",IC.home],["browse","Breakouts",IC.flame],["script","Script",IC.pen2],["library","Library",IC.mark]];
+  return '<nav class="pnav" aria-label="Main">' + items.map(function(it){
+    var glow = it[0] === "script" && !S.tasks.script;
+    var run = it[0] === "browse" && S.search && !done();
+    return '<button type="button" class="pnav-i" data-go="' + it[0] + '"' + (cur === it[0] ? ' aria-current="page"' : "") + '><span class="rt-ic' + (glow ? " rt-glow" : "") + '">' + it[2] + "</span>" + it[1] + (run ? '<span class="pnav-run" aria-label="Search running"></span>' : "") + "</button>";
+  }).join("") + "</nav>";
+}
+function fmtViews(k){ var v = k * 1000; return v >= 1e6 ? (v/1e6).toFixed(1).replace(/\.0$/,"") + "M" : Math.round(v/1000) + "K"; }
+function handle(i, j){ var a = ["mara.makes","jo.films","the.dani.diary","kels.ugc","rhea.reviews","nina.at.home","tess.tries","ava.everyday"]; return "@" + a[(i*3 + j) % a.length]; }
+function card(r, rank, opts){
+  opts = opts || {};
+  var views = r[4] * r[5], pos = ["center","30% 40%","70% 30%","50% 70%","20% 60%","80% 50%"][rank % 6];
+  /* sample data: see data.js header */
+  return '<article class="rt-card"><div class="rt-th" style="background-image:url(' + IMG + r[3] + '.jpg);background-position:' + pos + '">' +
+    '<span class="rt-rank">' + rank + '</span><button type="button" class="rt-save" aria-label="Save" data-toast="Saving is on Creator and Pro, same as live">' + IC.mark + '</button>' +
+    '<span class="rt-play" aria-hidden="true">' + IC.play + '</span><p class="rt-cap">' + esc(r[0]) + '</p><span class="rt-len">' + r[7] + "</span></div>" +
+    '<div class="rt-meta"><div class="rt-stat"><b>' + fmtViews(views) + '</b>views <span class="rt-x">' + r[4] + "x usual</span></div>" +
+    (opts.compact ? "" : '<div class="rt-prod">' + esc(r[1]) + "</div>") +
+    '<div class="rt-who"><span class="rt-blur" aria-hidden="true">' + handle(rank, r[0].length) + "</span>" + esc(r[2]) + " · " + r[6] + "d ago</div>" +
+    (opts.compact ? "" : '<button type="button" class="b b2' + (!S.tasks.analyze && rank === 1 ? " rt-glow t" : "") + '" data-a="analyze" data-i="' + (rank-1) + '">' + IC.scan + "Analyze video</button>") +
+    "</div></article>";
+}
+
+/* ---------- checklist ---------- */
+var TASKS = [
+  ["account","Create your account",null,null],
+  ["setup","Tell us what you film","The questions after your first search","q1"],
+  ["search","Search for breakouts","Find videos that beat their usual views","home"],
+  ["script","Write your first script","From a breakout or your own idea","script"],
+  ["analyze","Analyze a video","See why a breakout worked","results"],
+  ["connect","Connect your TikTok","Scripts and breakouts that fit your account","connect"]
+];
+function checklist(){
+  var n = 0, nextKey = null;
+  TASKS.forEach(function(t){ if (S.tasks[t[0]]) n++; });
+  if (!(S.search && (!done() || !S.seen))) TASKS.forEach(function(t){ if (!nextKey && !S.tasks[t[0]] && !(t[0] === "search" && S.search)) nextKey = t[0]; }); /* one primary action per screen: the search block wins while it shows */
+  var h = '<section class="rt-ck" aria-label="Get started"><div class="rt-ck-h"><h2>Get started</h2><span>' + n + " of " + TASKS.length + " done</span></div>";
+  h += '<div class="rt-seg" aria-hidden="true">' + TASKS.map(function(t){ return '<i class="' + (S.tasks[t[0]] ? "on" : "") + '"></i>'; }).join("") + "</div><ol>";
+  TASKS.forEach(function(t){
+    var k = t[0];
+    if (S.tasks[k]) { h += '<li><div class="rt-task done"><span class="rt-dot">' + IC.check + '</span><span class="tx"><b>' + t[1] + "</b></span></div></li>"; return; }
+    if (k === "search" && S.search) { h += '<li><div class="rt-task run"><span class="rt-dot"><span class="hm-spn"></span></span><span class="tx"><b>' + t[1] + "</b><small>Searching ‘" + esc(S.search.q) + "’ now</small></span></div></li>"; return; }
+    var go = k === "analyze" ? (S.search && done() ? "results" : "browse") : t[3];
+    h += '<li><button type="button" class="rt-task" data-go="' + go + '"><span class="rt-dot"></span><span class="tx"><b>' + t[1] + "</b><small>" + t[2] + "</small></span>" +
+      (k === nextKey ? '<span class="rt-start">Start</span>' : IC.chev) + "</button></li>";
+  });
+  h += "</ol>" + (n === TASKS.length ? '<div class="rt-alldone">All done. This list hides after today.</div>' : "") + "</section>";
+  return h;
+}
+
+/* ---------- screens ---------- */
+function waitBlock(){
+  if (!S.search) return "";
+  var set = S.search.set;
+  if (!done()) return '<section class="rt-wait"><div class="rt-wait-h"><span class="hm-spn" aria-hidden="true"></span><b>Searching for ‘' + esc(S.search.q) + '’</b><span class="rt-t" data-tick>' + mmss(el()) + '</span></div>' +
+    '<div class="rt-prog"><i data-prog style="width:' + Math.min(100, el()/SEARCH_SECS*100) + '%"></i></div>' +
+    "<p>Takes 1 to 2 minutes. While you wait, the top <b>" + esc(set) + "</b> breakouts this week are ready to watch. We’ll bring you back to your results.</p>" +
+    '<button type="button" class="b b1" data-go="browse">Watch top breakouts while you wait</button></section>';
+  if (!S.seen) return '<section class="rt-wait ready"><div class="rt-wait-h"><span class="rt-ok">' + IC.check + '</span><b>Your results for ‘' + esc(S.search.q) + '’ are ready</b></div>' +
+    "<p>" + CH[set].n + " breakouts. The 5 strongest are at the top.</p>" + '<button type="button" class="b b1" data-go="results">See my results</button></section>';
+  return "";
+}
+function home(){
+  var h = '<div class="hm hm2"><header><div class="hm2-hello"><p>Hi Maya</p></div><h1>What are you filming next?</h1></header>';
+  h += waitBlock() + checklist();
+  h += '<div class="hm2-core"><button type="button" class="hm2-hero hm2-finder" data-go="browse"><span class="tile">' + IC.search.replace(/class="i"/g,"") + '</span><span class="t">Breakout Finder</span><span class="s">High views from small accounts, in your niche</span>' +
+    '<span class="foot"><span class="fake">' + IC.search + '<span class="ft" data-empty></span></span><span class="go">' + IC.arrow + "</span></span></button>";
+  h += '<button type="button" class="hm2-hero hm2-script' + (S.tasks.script ? "" : " rt-glow t") + '" data-go="script"><span class="tile">' + IC.pen + '</span><span class="t">Write a script</span><span class="s">Built from your profile</span>' +
+    '<span class="foot"><span class="chips"><span>Moisturizer</span><span>Lip oil</span><span>Water bottle</span></span></span></button></div>';
+  return topbar() + h + "</div>";
+}
+function browse(){
+  var set = S.search ? S.search.set : "Product review", rows = CH[set].b;
+  var h = topbar() + '<div class="rt-pg">';
+  if (S.search && !done()) h += '<div class="rt-strip" role="status"><div class="row"><span class="hm-spn" aria-hidden="true"></span><span class="tx"><b>Searching for ‘' + esc(S.search.q) + '’</b><small>Your results open from here when it’s done · <span data-tick>' + mmss(el()) + '</span></small></span></div><div class="rt-prog"><i data-prog style="width:' + Math.min(100, el()/SEARCH_SECS*100) + '%"></i></div></div>';
+  else if (S.search && !S.seen) h += '<div class="rt-strip ready" role="status"><div class="row"><span class="rt-ok">' + IC.check + '</span><span class="tx"><b>Your results are ready</b><small>' + CH[set].n + " breakouts for ‘" + esc(S.search.q) + '’</small></span><button type="button" class="b b1" data-go="results">See results</button></div></div>';
+  h += '<div><h1 class="rt-h1">Breakouts</h1></div>';
+  h += '<div><h2 class="rt-h2">Top ' + esc(set) + ' breakouts this week</h2><p class="rt-sub">Ranked by views over each creator’s usual. Tap one to watch.</p></div>';
+  h += '<div class="rt-grid">' + rows.map(function(r, i){ return card(r, i+1, { compact:true }); }).join("") + "</div>";
+  if (S.search && S.seen) h += '<button type="button" class="b b2" data-go="results">Back to your ‘' + esc(S.search.q) + "’ results</button>";
+  return h + "</div>";
+}
+function results(){
+  if (!S.search) startSearch("Product review"), S.search.t0 -= SEARCH_SECS*1000;
+  S.seen = true; S.tasks.search = 1;
+  var set = S.search.set, c = CH[set];
+  var h = topbar() + '<div class="rt-pg"><button type="button" class="rt-back" data-go="browse">' + IC.back + "Breakouts</button>";
+  h += '<div><h1 class="rt-h1">' + esc(S.search.q) + '</h1><p class="rt-sub">' + c.n + " breakouts from the last 30 days. The 5 strongest first.</p></div>";
+  h += '<div class="rt-list">' + c.r.map(function(r, i){ return card(r, i+1); }).join("") + "</div>";
+  h += '<button type="button" class="b b2" data-toast="Opens the full results list, same as live">See all ' + c.n + " breakouts</button>";
+  h += "</div>";
+  if (!S.tasks.analyze) h += '<div class="rt-dock" role="note"><span class="tx"><b>First search done</b>Next, see why #1 beat its usual views.</span><button type="button" class="b b1" data-a="analyze" data-i="0">Analyze #1</button></div>';
+  else if (!S.tasks.script) h += '<div class="rt-dock" role="note"><span class="tx"><b>Next: your own version</b>Write a script from what you saw.</span><button type="button" class="b b1" data-go="script">Write a script</button></div>';
+  return h;
+}
+function analyze(){
+  S.tasks.analyze = 1;
+  var r = S.search ? CH[S.search.set].r[S.ai || 0] : CH["Product review"].r[0];
+  var h = topbar() + '<div class="rt-pg"><button type="button" class="rt-back" data-go="results">' + IC.back + "Results</button>";
+  h += '<div><h1 class="rt-h1">“' + esc(r[0]) + '”</h1><p class="rt-sub">' + esc(r[1]) + " · " + r[4] + "x usual</p></div>";
+  h += '<div class="rt-same"><b>Video analysis, same as live</b>This screen does not change in this round. The task “Analyze a video” is now ticked on Home.</div>';
+  h += '<div class="rt-next"><span class="rt-ok">' + IC.check + '</span><div><b>Analyzed.</b>Next, write your own version of it.</div></div>';
+  h += '<button type="button" class="b b1' + (S.tasks.script ? "" : " rt-glow") + '" data-go="script">Write a script</button>';
+  return h + "</div>";
+}
+function script(){
+  S.tasks.script = 1;
+  var h = topbar() + '<div class="rt-pg"><div><h1 class="rt-h1">Script</h1></div>';
+  h += '<div class="rt-same"><b>Script Writer, same as the approved flow</b>Nothing changes here in this round. See the <a href="../script-writer-flow/" target="_blank" rel="noopener">Script Writer prototype</a>. For this prototype, “Write your first script” counts as done once she opens it.</div>';
+  h += '<button type="button" class="b b1" data-go="home">Back to Home</button>';
+  return h + "</div>";
+}
+function library(){
+  var tabs = [["searches","Searches",false],["analyzed","Analyzed",true],["saved","Saved",true],["scripts","Scripts",true]];
+  var h = topbar() + '<div class="rt-pg"><div class="lb-head"><span class="lb-lbl">Saved by you</span><h1 class="lb-h">Library</h1></div>';
+  h += '<label class="sf lb-sf">' + IC.search.replace(/class="i"/g,"") + '<input placeholder="Search your Library" aria-label="Search your Library"></label>';
+  h += '<div class="tabs lb-tabs" role="tablist">' + tabs.map(function(t){ return '<button type="button" role="tab" aria-selected="' + (S.lib === t[0]) + '" data-lib="' + t[0] + '">' + (t[2] ? IC.lock : "") + t[1] + "</button>"; }).join("") + "</div>";
+  if (S.lib === "searches") {
+    if (S.search) {
+      var c = CH[S.search.set];
+      h += '<div class="hm-list"><button type="button" class="hm-li" style="border:0;background:#fff;font:inherit;cursor:pointer;text-align:left" data-go="' + (done() ? "results" : "browse") + '"><span class="tx"><b>' + esc(S.search.q) + "</b><small>" + (done() ? c.n + " breakouts · today" : "Searching now") + "</small></span>" + (done() ? IC.chev.replace('class="chev"', "") : '<span class="hm-spn"></span>') + "</button></div>";
+      h += '<p class="rt-meterline">You have 2 free searches left. Each one is kept here.</p>';
+    } else h += '<p class="rt-empty">No searches yet.</p>';
+    h += '<button type="button" class="b b2" data-go="home">New search</button>';
+  } else {
+    h += '<div class="tb-locked rt-lockwrap"><div class="tb-veil" aria-hidden="true"><div class="list">' + [0,1,2].map(function(i){
+      return '<div class="li" style="border-radius:0"><span class="th" style="background-image:url(' + IMG + ["palette","oil","closet"][i] + '.jpg)"></span><span class="t"><b>Sample saved item</b>Beauty · 52x usual</span></div>'; }).join("") + "</div></div>" +
+      '<div class="tb-lockcard"><span class="tb-lkic">' + IC.lock.replace("<svg", '<svg fill="none" stroke="currentColor" stroke-width="2.2"') + "</span><h2>Your Library is on Creator and Pro</h2><p>Save breakouts and come back to every script.</p>" +
+      '<button type="button" class="b b1" data-toast="Opens plans, same as live">See plans · from $40/mo</button></div></div>';
+  }
+  return h + "</div>";
+}
+
+/* ---------- render ---------- */
+var APP = { home:home, browse:browse, results:results, analyze:analyze, script:script, library:library };
+var TAB = { home:"home", browse:"browse", results:"browse", analyze:"browse", script:"script", library:"library" };
+function render(focusId){
+  var s = S.scr, h, onb = s === "q1" || s === "ob" || s === "connect";
+  if (s === "q1") { S.step = 1; h = '<div class="lp obf"><div class="obf-col">' + obTop() + step1() + "</div></div>"; }
+  else if (s === "ob") h = '<div class="lp obf"><div class="obf-col">' + obTop() + pill() + (S.step === 7 ? step7() : stepQ()) + "</div></div>";
+  else if (s === "connect") h = '<div class="lp obf"><div class="obf-col"><header class="obf-top"><button type="button" class="obf-back" aria-label="Back" data-go="home">' + IC.back + "</button></header>" + step7() + "</div></div>";
+  else h = APP[s]();
+  document.getElementById("app").innerHTML = h;
+  document.getElementById("bk").classList.toggle("has-nav", !onb);
+  document.getElementById("bk").classList.toggle("has-dock", !!document.querySelector(".rt-dock"));
+  document.getElementById("navslot").innerHTML = onb ? "" : nav(TAB[s]);
+  if (focusId) { var f = document.getElementById(focusId); if (f) { f.focus(); var l = f.value.length; f.setSelectionRange(l, l); } }
+  try { parent.postMessage({ rt:1, scr: s === "ob" ? "ob" + S.step : s, ready: done(), seen: S.seen, lib: S.lib }, "*"); } catch (e) {}
+}
+function go(scr, keepScroll){
+  if (scr === "browse" && S.search && !done()) { var left = SEARCH_SECS - el(); if (left > WAIT_AFTER_BROWSE) S.search.t0 -= (left - WAIT_AFTER_BROWSE) * 1000; }
+  S.scr = scr; S.err = null; render(); if (!keepScroll) window.scrollTo(0, 0);
+}
+function goStep(n){ S.scr = "ob"; S.step = n; S.err = null; render(); window.scrollTo(0, 0); }
+function finishOnboarding(connected){ S.tasks.setup = 1; if (connected) S.tasks.connect = 1; go("home"); }
+function toast(t){ var s = document.getElementById("toastslot"); s.innerHTML = '<div class="toast" role="status">' + esc(t) + "</div>"; clearTimeout(toast.k); toast.k = setTimeout(function(){ s.innerHTML = ""; }, 2400); }
+
+setInterval(function(){
+  if (!S.search) return;
+  var t = el();
+  document.querySelectorAll("[data-tick]").forEach(function(e){ e.textContent = mmss(t); });
+  document.querySelectorAll("[data-prog]").forEach(function(e){ e.style.width = Math.min(100, t/SEARCH_SECS*100) + "%"; });
+  var p = document.getElementById("pilltxt");
+  if (p) { if (t < SEARCH_SECS) p.textContent = "Searching ‘" + S.search.q + "’ · " + mmss(t); else if (!p.parentNode.classList.contains("done")) { p.parentNode.classList.add("done"); p.textContent = "Results ready for ‘" + S.search.q + "’"; } }
+  if (t >= SEARCH_SECS && !S.search.fired) { S.search.fired = true; S.tasks.search = 1; if (S.scr !== "q1" && S.scr !== "ob" && S.scr !== "connect") { var y = window.scrollY; render(); window.scrollTo(0, y); } }
+}, 1000);
+
+function lookUp(){
+  var hd = S.handle.trim().replace(/^@+/, "");
+  if (hd.length < 2 || S.tt === "loading") return;
+  if (S.left <= 0) { S.err = OUT_MSG; render(); return; }
+  S.handle = hd; S.err = null; S.tt = "loading"; S.left -= 1; render();
+  setTimeout(function(){ if (S.tt !== "loading") return; S.nf = /private/i.test(hd); S.tt = /private|fail/i.test(hd) ? "failed" : "preview"; render(); }, 1800);
+}
+document.addEventListener("input", function(ev){
+  var t = ev.target;
+  if (t.id === "q") { S.q = t.value; render("q"); }
+  else if (t.id === "tth") { S.handle = t.value.replace(/^@+/, ""); S.err = null; render("tth"); }
+  else if (t.dataset.other) S.others[t.dataset.other] = t.value;
+});
+document.addEventListener("submit", function(ev){
+  ev.preventDefault();
+  var f = ev.target.dataset.f;
+  if (f === "search") { if (S.q.trim().length >= 2) { startSearch(S.q.trim()); goStep(2); } }
+  else if (f === "tt") { if (S.tt === "input") lookUp(); else if (S.tt === "preview" || S.tt === "failed") finishOnboarding(true); }
+});
+document.addEventListener("click", function(ev){
+  var b = ev.target.closest("button,[data-go]"); if (!b || b.disabled) return;
+  if (b.dataset.toast) { toast(b.dataset.toast); return; }
+  if (b.dataset.go) { if (b.dataset.go === "connect") { S.tt = "intro"; } if (b.dataset.go === "q1") { toast("Setup questions run right after the first search"); return; } go(b.dataset.go); return; }
+  if (b.dataset.lib) { S.lib = b.dataset.lib; render(); return; }
+  if (b.dataset.idea) { S.q = b.dataset.idea; render(); return; }
+  if (b.dataset.col) {
+    var q = (D.questions[S.step] || []).filter(function(x){ return x.column === b.dataset.col; })[0], o = b.dataset.opt, qs = D.questions[S.step];
+    if (q.max > 1) { var v = val(q).slice(), i = v.indexOf(o); if (i >= 0) v.splice(i, 1); else if (v.length < q.max) v.push(o); S.vals[q.column] = v; render(); }
+    else if (qs.length === 1 && !hasOther(q)) { S.vals[q.column] = o; render(); setTimeout(function(){ goStep(S.step + 1); }, 250); }
+    else { S.vals[q.column] = S.vals[q.column] === o ? null : o; render(); }
+    return;
+  }
+  var a = b.dataset.a;
+  if (a === "back") { if (S.step === 7 && S.tt !== "intro") S.tt = "intro"; if (S.step - 1 <= 1) { S.scr = "q1"; render(); } else goStep(S.step - 1); }
+  else if (a === "next") goStep(S.step + 1);
+  else if (a === "skip") { (D.questions[S.step] || []).forEach(function(q){ S.vals[q.column] = q.max > 1 ? [] : null; S.others[q.column] = ""; }); goStep(S.step + 1); }
+  else if (a === "ttopen") { S.tt = "input"; render("tth"); }
+  else if (a === "change") { S.tt = "input"; S.err = null; render("tth"); }
+  else if (a === "finish") { if (S.scr === "connect") go("home"); else finishOnboarding(false); }
+  else if (a === "analyze") { S.ai = +b.dataset.i || 0; go("analyze"); }
+});
+
+/* review jumps: from the shell (postMessage) or a #hash when app.html is opened on its own */
+function jump(id){
+  var q = "Product review";
+  S = fresh();
+  var past = function(){ startSearch(q); S.search.t0 -= (SEARCH_SECS + 5) * 1000; S.search.fired = true; S.tasks.search = 1; S.tasks.setup = 1; };
+  var running = function(sec){ startSearch(q); S.search.t0 -= sec * 1000; S.tasks.setup = 1; };
+  if (id === "q1") { S.scr = "q1"; }
+  else if (id === "q1-picked") { S.scr = "q1"; S.q = q; }
+  else if (/^ob[2-7]$/.test(id)) { startSearch(q); S.scr = "ob"; S.step = +id.slice(2); }
+  else if (id === "home-run") { running(52); S.scr = "home"; }
+  else if (id === "browse-run") { running(60); S.scr = "browse"; }
+  else if (id === "browse-ready") { past(); S.scr = "browse"; }
+  else if (id === "home-ready") { past(); S.scr = "home"; }
+  else if (id === "results") { past(); S.scr = "results"; }
+  else if (id === "home-after") { past(); S.seen = true; S.tasks.analyze = 1; S.scr = "home"; }
+  else if (id === "analyze") { past(); S.seen = true; S.scr = "analyze"; }
+  else if (id === "library") { past(); S.seen = true; S.scr = "library"; S.lib = "searches"; }
+  else if (id === "library-locked") { past(); S.seen = true; S.scr = "library"; S.lib = "saved"; }
+  else if (id === "home-done") { past(); S.seen = true; S.tasks.analyze = 1; S.tasks.script = 1; S.tasks.connect = 1; S.scr = "home"; }
+  else { S.scr = "q1"; }
+  render(); window.scrollTo(0, 0);
+}
+window.addEventListener("message", function(e){ if (e.data && e.data.jump) jump(e.data.jump); });
+if (location.hash.length > 1) jump(location.hash.slice(1)); else render();
+})();
+</script>
+</body></html>
