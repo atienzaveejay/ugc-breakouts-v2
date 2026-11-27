@@ -8,7 +8,7 @@ Built only from Ivan's 27 Nov notes. Steps 2 to 7 run the live flow code from th
 
 | Ivan wrote | Prototype |
 |---|---|
-| Q1: page 1 chips should be better thought out, each with an amazing top 5 | Same live page 1. The chips are now 6 formats and 4 products, each with its own hand-picked top 5 (sample data). The Hashtags row is dropped for now (see the chip list below). |
+| Q1: page 1 chips should be better thought out, each with an amazing top 5 | Same live page 1. The chips are now 6 formats and 4 products, each with its own hand-picked top 5 (sample data). The live Hashtags row stays, and each of its 8 tags gets its own top 5 too. |
 | "product review": the 5 videos given aren't the very best | Tapping Product review ends on a results page whose first 5 are the strongest for that topic, with the rest of the search after them ("See all 48"). |
 | User has nothing to do while the first search runs: make top 5 to 10 breakouts available and prompt them to go there | After the questions, Home shows the running search with one button: "Watch top breakouts while you wait". It opens Breakouts with the top 6 for the same topic, ready right away. |
 | (same point) make sure those videos are extremely relevant | The 6 shown match the topic of her search, not the general Top Breakouts list. |
@@ -49,7 +49,7 @@ Rule used: a chip stays only if it is something a UGC creator can film this week
 | Resistance bands | Products | Adds a fitness product so the products aren't all beauty. | `top-breakouts/app-data.json` (Fitness sample) |
 | Closet organizer | Products | Adds a home product; "My closet is 4 feet wide" is already in the sample set. | `top-breakouts/app-data.json` (Home sample) |
 
-Dropped from live: Moisturizer, Collagen powder, Shoes, Green screen, POV, and the whole Hashtags row (#UGCcreator, #TikTokMadeMeBuyIt, #TikTokShop, #SkinTok, #CleanTok, #MomTok, #FoodTok, #GymTok). Reason: they are broad, and broad tags like #UGCcreator mostly return videos about doing UGC, which makes a strong top 5 hard to pick. This is my call, not Ivan's. Two hashtags (for example #TikTokMadeMeBuyIt and #CleanTok) can come back if he wants them.
+Dropped from live: Moisturizer, Collagen powder, Shoes, Green screen and POV, to make room for the new formats and products. The Hashtags row stays exactly as live (#UGCcreator, #TikTokMadeMeBuyIt, #TikTokShop, #SkinTok, #CleanTok, #MomTok, #FoodTok, #GymTok), each with its own sample top 5. One thing to watch when picking the real top 5: #UGCcreator mostly returns videos about doing UGC, so its picks should be creator how-tos, not product videos.
 
 How the real top 5 could work (for Lester, not built): for each chip, someone runs the search, picks the 5 with the highest multiple over usual views that are clearly filmable, and pins them. Refresh weekly.
 
