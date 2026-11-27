@@ -13,19 +13,18 @@ Built only from Ivan's 27 Nov notes. Steps 2 to 7 run the live flow code from th
 | User has nothing to do while the first search runs: make top 5 to 10 breakouts available and prompt them to go there | After the questions, Home shows the running search with one button: "Watch top breakouts while you wait". It opens Breakouts with the top 6 for the same topic, ready right away. |
 | (same point) make sure those videos are extremely relevant | The 6 shown match the topic of her search, not the general Top Breakouts list. |
 | Return to results when the search is done | A bar at the top of Breakouts shows the search time. When it finishes it turns dark with "See results". Home shows the same "Your results are ready" block. |
-| Library: move Searches to the left, unlock Searches only | Library tabs are now Searches, Analyzed, Saved, Scripts. Searches opens first and works on the free plan. The other three keep a small lock and show the live lock card. |
+| Library: move Searches to the left, unlock Searches only (call 27 Nov: unlock them all) | Library tabs are now Searches, Analyzed, Saved, Scripts, all unlocked. Each keeps what she made for free; the limit is on making more (searches, analyses, scripts), and Saved says saving is on Creator and Pro. |
 | Not a clear path from start to all features: each screen needs one clear next step | Each screen has one primary action: Start my search, then Watch top breakouts, then See results, then Analyze #1 (bar at the bottom of results), then Write a script, then the checklist's next task. |
 | Task checklist: search, create script, analyze video, connect account, plus a few already-done steps | "Get started" on Home: Create your account (ticked), Tell us what you film (ticked after the questions), Search for breakouts, Write your first script, Analyze a video, Connect your TikTok. Count and segment bar at the top. The next task gets the one Start button. |
 | Glowing button on features they haven't tried? | A soft pulsing ring (no neon, no bounce) on the Write a script card, the Script tab, the Analyze button on result #1, and the avatar (Connect). It goes away once the feature is used. Reduced motion shows a still ring. |
 
-## Open questions (options only, not built)
+## Decided on the 27 Nov call
 
-**"Should we unlock all Library?"**
-1. Unlock Searches only (what the prototype shows). Free users keep the searches they paid for with their 3 free credits. Analyzed, Saved and Scripts stay as reasons to upgrade.
-2. Unlock all four tabs and keep the paywall on actions (searches, scripts, analyses). The Library then only holds what the free plan already let her make, so nothing is given away, and she never meets a locked screen in her own stuff.
-3. Unlock Searches and Analyzed (both come out of free actions she already took), keep Saved and Scripts locked.
+**Library:** unlock all four tabs and limit the actions instead (Ivan: "unlock them all and then maybe like more analysis more save more searches"). Built.
 
-**"What other free features can we add? (light dev lift)"**
+**New features:** paused. Ivan: "no features... Pause for now. Log ideas." Marketing and ads come first. Usability fixes to what exists are fine. The ideas below are logged for later, not proposed.
+
+**Logged ideas: free features with a light dev lift (paused)**
 1. Hooks only, free: from any breakout, show the 3 hook options from the Script Writer's Choose a Hook step without writing the full script. Reuses an existing step.
 2. Weekly Top Breakouts for her niche, free: the Breakouts page already ranks videos; filter it by the topics from onboarding step 2.
 3. One free analysis per search: let her analyze the #1 result of each free search, so the checklist's Analyze step never hits a paywall.

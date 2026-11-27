@@ -406,7 +406,7 @@ function script(){
   return h + "</div>";
 }
 function library(){
-  var tabs = [["searches","Searches",false],["analyzed","Analyzed",true],["saved","Saved",true],["scripts","Scripts",true]];
+  var tabs = [["searches","Searches",false],["analyzed","Analyzed",false],["saved","Saved",false],["scripts","Scripts",false]]; /* Ivan, 27 Nov call: unlock the whole Library, limit the actions instead */
   var h = topbar() + '<div class="rt-pg"><div class="lb-head"><span class="lb-lbl">Saved by you</span><h1 class="lb-h">Library</h1></div>';
   h += '<label class="sf lb-sf">' + IC.search.replace(/class="i"/g,"") + '<input placeholder="Search your Library" aria-label="Search your Library"></label>';
   h += '<div class="tabs lb-tabs" role="tablist">' + tabs.map(function(t){ return '<button type="button" role="tab" aria-selected="' + (S.lib === t[0]) + '" data-lib="' + t[0] + '">' + (t[2] ? IC.lock : "") + t[1] + "</button>"; }).join("") + "</div>";
@@ -417,11 +417,21 @@ function library(){
       h += '<p class="rt-meterline">You have 2 free searches left. Each one is kept here.</p>';
     } else h += '<p class="rt-empty">No searches yet.</p>';
     h += '<button type="button" class="b b2" data-go="home">New search</button>';
+  } else if (S.lib === "analyzed") {
+    if (S.tasks.analyze) {
+      var r = S.search ? CH[S.search.set].r[S.ai || 0] : CH["Product review"].r[0];
+      h += '<div class="hm-list"><button type="button" class="hm-li" style="border:0;background:#fff;font:inherit;cursor:pointer;text-align:left" data-go="analyze"><span class="tx"><b>' + esc(r[0]) + "</b><small>" + esc(r[1]) + " · today</small></span>" + IC.chev.replace('class="chev"', "") + "</button></div>";
+    } else h += '<p class="rt-empty">No analyses yet.</p>';
+    h += '<p class="rt-meterline">Every analysis you run is kept here. More analyses are on Creator and Pro.</p>';
+    h += '<button type="button" class="b b2" data-go="' + (S.search && done() ? "results" : "browse") + '">Analyze a breakout</button>';
+  } else if (S.lib === "saved") {
+    h += '<p class="rt-empty">Nothing saved yet.</p><p class="rt-meterline">Saving breakouts is on Creator and Pro. Your searches, analyses and scripts are kept here for free.</p>';
+    h += '<button type="button" class="b b2" data-toast="Opens plans, same as live">See plans · from $40/mo</button>';
   } else {
-    h += '<div class="tb-locked rt-lockwrap"><div class="tb-veil" aria-hidden="true"><div class="list">' + [0,1,2].map(function(i){
-      return '<div class="li" style="border-radius:0"><span class="th" style="background-image:url(' + IMG + ["palette","oil","closet"][i] + '.jpg)"></span><span class="t"><b>Sample saved item</b>Beauty · 52x usual</span></div>'; }).join("") + "</div></div>" +
-      '<div class="tb-lockcard"><span class="tb-lkic">' + IC.lock.replace("<svg", '<svg fill="none" stroke="currentColor" stroke-width="2.2"') + "</span><h2>Your Library is on Creator and Pro</h2><p>Save breakouts and come back to every script.</p>" +
-      '<button type="button" class="b b1" data-toast="Opens plans, same as live">See plans · from $40/mo</button></div></div>';
+    if (S.tasks.script) h += '<div class="hm-list"><button type="button" class="hm-li" style="border:0;background:#fff;font:inherit;cursor:pointer;text-align:left" data-go="script"><span class="tx"><b>Your first script</b><small>today</small></span>' + IC.chev.replace('class="chev"', "") + "</button></div>";
+    else h += '<p class="rt-empty">No scripts yet.</p>';
+    h += '<p class="rt-meterline">Every script you write is kept here. More scripts are on Creator and Pro.</p>';
+    h += '<button type="button" class="b b2" data-go="script">Write a script</button>';
   }
   return h + "</div>";
 }

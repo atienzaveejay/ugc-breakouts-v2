@@ -45,7 +45,7 @@ html,body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 'Plus 
 <button type="button" data-jump="analyze">Analyze</button>
 <button type="button" data-jump="home-after">Home, checklist</button>
 <button type="button" data-jump="library">Library</button>
-<button type="button" data-jump="library-locked">Library, locked tab</button>
+<button type="button" data-jump="library-locked">Library, Saved tab</button>
 <button type="button" data-jump="home-done">Checklist done</button>
 </nav>
 <div class="stage">
@@ -69,14 +69,14 @@ var NOTES = {
   script: ["Script (stand-in)", null, "Unchanged Script Writer. Opening it ticks Write your first script."],
   connect: ["Connect your TikTok (from the checklist)", null, "The live step 7 screen, opened from the checklist or the avatar. Finishing ticks Connect your TikTok."],
   library: ["Library", "library - move searches to left > unlock searches only (should we unlock all library)",
-    "Searches is now the first tab and open on the free plan. Analyzed, Saved and Scripts keep a small lock and show the live lock card. Whether to unlock the whole Library is an open question, with options in NOTES.md."]
+    "Searches is now the first tab. The whole Library is unlocked (Ivan, 27 Nov call): every search, analysis and script she makes is kept here for free, and the limit sits on making more of them, not on seeing her own stuff. Saved explains that saving is on Creator and Pro, without a lock screen."]
 };
 var frame = document.getElementById("app"), side = document.getElementById("side");
 function show(scr){
   var k = /^ob/.test(scr) ? "ob" : scr, n = NOTES[k] || NOTES.q1;
   side.innerHTML = "<h1>Onboarding rethink</h1><p class=\"lede\">Clickable prototype of Ivan’s 27 Nov notes. Tap through, or jump with the bar above.</p>" +
     "<h2>" + n[0] + "</h2>" + (n[1] ? "<p class=\"ask\">Ivan: “" + n[1] + "”</p>" : "") + "<p>" + n[2] + "</p>" +
-    "<p class=\"foot\">Videos, view counts and handles are sample data; handles are blurred. Open questions (unlock all Library, extra free features) are written up in NOTES.md, not built.</p>";
+    "<p class=\"foot\">Videos, view counts and handles are sample data; handles are blurred. No new features in this round (Ivan, 27 Nov call); free feature ideas are logged in NOTES.md for later.</p>";
 }
 window.addEventListener("message", function(e){
   if (!e.data || !e.data.rt) return;
